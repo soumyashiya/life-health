@@ -74,8 +74,8 @@ export function Projects() {
           </h2>
         </div>
         <p className="lead">
-          Research-grade peptides and supplement formulations. Documentation
-          and batch data available on request.
+          Research-grade peptide reference materials. Documentation and batch
+          data available on request.
         </p>
       </div>
 

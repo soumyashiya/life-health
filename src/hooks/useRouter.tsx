@@ -7,31 +7,42 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { policies, type PolicySlug } from "../data/policies";
 
 export type View =
   | { name: "home" }
+  | { name: "shop" }
   | { name: "product"; id: string }
+  | { name: "policy"; slug: PolicySlug }
   | { name: "cart" }
   | { name: "checkout" }
   | { name: "login"; redirect?: string }
   | { name: "account" }
-  | { name: "track"; order?: string };
+  | { name: "track"; order?: string }
+  | { name: "payment-capture"; token: string };
 
 type RouterContextValue = {
   view: View;
   navigate: (next: View) => void;
 };
 
-const parse = (hash: string): View => {
+export const parse = (hash: string): View => {
+  if (/^#\/shop\b/.test(hash)) return { name: "shop" };
   if (/^#\/cart\b/.test(hash)) return { name: "cart" };
   if (/^#\/checkout\b/.test(hash)) return { name: "checkout" };
   if (/^#\/account\b/.test(hash)) return { name: "account" };
   const track = hash.match(/^#\/track(?:\/([^/?]+))?/);
   if (track) return { name: "track", order: track[1] ? decodeURIComponent(track[1]) : undefined };
+  const paymentCapture = hash.match(/^#\/payment-capture\/([^/?]+)/);
+  if (paymentCapture) return { name: "payment-capture", token: decodeURIComponent(paymentCapture[1]) };
   const login = hash.match(/^#\/login(?:\?redirect=([^&]+))?/);
   if (login) return { name: "login", redirect: login[1] ? decodeURIComponent(login[1]) : undefined };
   const product = hash.match(/^#\/product\/([^/?]+)/);
   if (product) return { name: "product", id: product[1] };
+  const policy = hash.match(/^#\/policies\/([^/?]+)/);
+  if (policy && policy[1] in policies) {
+    return { name: "policy", slug: policy[1] as PolicySlug };
+  }
   return { name: "home" };
 };
 
@@ -59,8 +70,14 @@ export function RouterProvider({ children }: { children: ReactNode }) {
       case "home":
         hash = "";
         break;
+      case "shop":
+        hash = "#/shop";
+        break;
       case "product":
         hash = `#/product/${next.id}`;
+        break;
+      case "policy":
+        hash = `#/policies/${next.slug}`;
         break;
       case "cart":
         hash = "#/cart";
@@ -78,6 +95,9 @@ export function RouterProvider({ children }: { children: ReactNode }) {
         hash = next.order
           ? `#/track/${encodeURIComponent(next.order)}`
           : "#/track";
+        break;
+      case "payment-capture":
+        hash = `#/payment-capture/${encodeURIComponent(next.token)}`;
         break;
     }
     if (hash === "") {

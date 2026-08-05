@@ -47,10 +47,13 @@ const STATUS_ORDER: OrderStatus[] = [
   "delivered",
 ];
 
+// Neutral, research-supply fulfilment labels. The underlying status keys are
+// internal-only (never rendered raw), so display copy carries no medical or
+// dispensing connotations.
 const STATUS_LABEL: Record<OrderStatus, string> = {
-  "clinician review": "Clinician review",
+  "clinician review": "Order review",
   approved: "Approved",
-  dispensing: "Dispensing",
+  dispensing: "Preparing",
   dispatched: "Dispatched",
   delivered: "Delivered",
 };
@@ -248,7 +251,7 @@ export function AccountPage() {
           <span className="mono eyebrow">Account</span>
           <h1 className="account__title">Please sign in</h1>
           <p className="account__lede">
-            Sign in to view your orders, treatment history and account details.
+            Sign in to view your orders, order history and account details.
           </p>
           <div className="account-signin-actions">
             <button
@@ -295,7 +298,7 @@ export function AccountPage() {
               onClick={browseTreatments}
               data-cursor
             >
-              Browse treatments
+              Browse catalogue
             </button>
             <button
               type="button"
@@ -588,7 +591,7 @@ export function AccountPage() {
               onClick={browseTreatments}
               data-cursor
             >
-              Browse treatments
+              Browse catalogue
             </button>
           </div>
         ) : (

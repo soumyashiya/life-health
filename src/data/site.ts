@@ -68,21 +68,21 @@ export const heroCopy = {
   headlineTop: "Purity",
   headlineBottom: "First.",
   intro:
-    "Research-grade peptides and supplement formulations, sourced from verified suppliers and packed to exacting standards — so every kit delivers the purity, potency, and consistency your work depends on.",
+    "Research-grade peptide reference materials, sourced from verified suppliers and packed to exacting standards — so every research kit delivers the purity, consistency, and documentation your laboratory work depends on.",
   available: "Independently lab tested",
 };
 
 export const aboutCopy = {
   heading: "Advancing modern research with smarter formulations.",
   paragraph:
-    "We're committed to advancing high-quality peptide and supplement research through clean, reliable, and precisely developed formulations. Every product is sourced from verified suppliers and carefully packed to preserve consistency, purity, and integrity — from our facility to your bench.",
+    "We're committed to advancing high-quality peptide research through clean, reliable, and precisely characterised reference materials. Every product is sourced from verified suppliers and carefully packed to preserve consistency, purity, and integrity — from our facility to your bench.",
   stats: [
     { value: 99, suffix: "%+", label: "Formulation purity" },
     { value: 1000, suffix: "+", label: "Researchers served" },
     { value: 24, suffix: " h", label: "WhatsApp response" },
   ],
   signals: [
-    { label: "Range", value: "Peptides · Supplements" },
+    { label: "Range", value: "Peptides · Reference materials" },
     { label: "Sourcing", value: "Verified suppliers" },
     { label: "Support", value: "Fast WhatsApp" },
   ],
@@ -107,7 +107,7 @@ export const whyUs = [
     number: "03",
     title: "Reliable service",
     description:
-      "Every step — from order to handover — is designed to provide a smooth, dependable customer experience.",
+      "Every step — from enquiry to order confirmation — is designed to provide a smooth, dependable customer experience.",
     image: whyService,
   },
   {
@@ -165,7 +165,7 @@ export const projects = [
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
       { label: "Form", value: "Pre-filled research pen" },
-      { label: "Dose", value: "20 mg total" },
+      { label: "Total content", value: "20 mg total" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
     labAnalysis: {
@@ -195,7 +195,7 @@ export const projects = [
     year: "USD 329",
     price: 329,
     summary:
-      "Skin, hair and cellular-repair blend pairing GHK-Cu with BPC-157 and TB-500 in a single pre-filled research device.",
+      "Multi-peptide research blend pairing GHK-Cu with BPC-157 and TB-500 in a single pre-filled research reference device.",
     description:
       "A 70mg Glow formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -206,7 +206,7 @@ export const projects = [
     specs: [
       { label: "Purity", value: "≥98% HPLC" },
       { label: "Form", value: "Pre-filled research pens" },
-      { label: "Dose", value: "2 × 35 mg pens" },
+      { label: "Total content", value: "2 × 35 mg pens" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
     labAnalysis: {
@@ -239,7 +239,7 @@ export const projects = [
     year: "USD 629",
     price: 629,
     summary:
-      "Higher-dose triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 40 mg research device for extended metabolic protocols.",
+      "Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 40 mg research reference device for extended metabolic-pathway research.",
     description:
       "A 40mg Retatrutide formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -250,7 +250,7 @@ export const projects = [
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
       { label: "Form", value: "Pre-filled research pen" },
-      { label: "Dose", value: "40 mg total" },
+      { label: "Total content", value: "40 mg total" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
     labAnalysis: {
@@ -291,7 +291,7 @@ export const projects = [
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
       { label: "Form", value: "Pre-filled research pen" },
-      { label: "Dose", value: "40 mg total" },
+      { label: "Total content", value: "40 mg total" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
     labAnalysis: {
@@ -321,7 +321,7 @@ export const projects = [
     year: "USD 269",
     price: 269,
     summary:
-      "Recovery and repair pairing of BPC-157 and TB-500 supplied at 40 mg in a pre-filled research device.",
+      "Peptide research pairing of BPC-157 and TB-500 supplied at 40 mg in a pre-filled research reference device.",
     description:
       "A 40mg BPC-157 & TB-500 formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -332,7 +332,7 @@ export const projects = [
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
       { label: "Form", value: "Pre-filled research pen" },
-      { label: "Dose", value: "20 mg BPC-157 + 20 mg TB-500" },
+      { label: "Total content", value: "20 mg BPC-157 + 20 mg TB-500" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
     labAnalysis: {
@@ -363,7 +363,7 @@ export const projects = [
     year: "USD 249",
     price: 249,
     summary:
-      "Focus, brain cellular-repair and anti-aging research compound supplied at 1,000 mg total across two pre-filled research pens.",
+      "NAD+ (Nicotinamide Adenine Dinucleotide) research compound supplied at 1,000 mg total across two pre-filled research reference pens.",
     description:
       "NAD+ (Nicotinamide Adenine Dinucleotide) research formulation for laboratory analysis and in vitro studies only. Provided exclusively for controlled laboratory R&D applications.",
     safetyProtocol:
@@ -374,7 +374,7 @@ export const projects = [
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
       { label: "Form", value: "Pre-filled research pens" },
-      { label: "Dose", value: "2 × 500 mg pens" },
+      { label: "Total content", value: "2 × 500 mg pens" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
     packageContents: [
@@ -393,14 +393,14 @@ export const testimonials = [
     quote:
       "Fast support, reliable products, and a smooth ordering experience. The team truly delivers dependable quality every time.",
     name: "Ethan Carter",
-    role: "Wellness Consultant",
+    role: "Lab Procurement Specialist",
     avatar: review1,
   },
   {
     quote:
       "Everything arrived securely, communication was excellent, and the overall service exceeded expectations for a premium brand.",
     name: "Samuel Bennett",
-    role: "Fitness Coordinator",
+    role: "Research Operations Lead",
     avatar: review2,
   },
   {

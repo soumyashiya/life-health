@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "../data/site";
-import { useRouter } from "../hooks/useRouter";
+import { policyList } from "../data/policies";
+import { parse, useRouter } from "../hooks/useRouter";
 import { ApiError, subscribeNewsletter } from "../lib/api";
 
 type SubscribeStatus = "idle" | "loading" | "success" | "error";
@@ -58,6 +59,11 @@ export function Footer() {
   };
 
   const goToSection = (href: string) => {
+    if (href.startsWith("#/")) {
+      navigate(parse(href));
+      return;
+    }
+
     const scrollToTarget = () => {
       if (href === "#home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -158,6 +164,18 @@ export function Footer() {
           <div className="footer__col">
             <h4 className="footer__col-title mono">Quick Links</h4>
             <ul className="footer__links">
+              <li>
+                <a
+                  href="#/shop"
+                  data-cursor
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate({ name: "shop" });
+                  }}
+                >
+                  Shop
+                </a>
+              </li>
               {site.navLinks.map((link) => (
                 <li key={link.href}>
                   <a
@@ -208,6 +226,26 @@ export function Footer() {
               <li>
                 <span>{site.location}</span>
               </li>
+            </ul>
+          </div>
+
+          <div className="footer__col">
+            <h4 className="footer__col-title mono">Policies</h4>
+            <ul className="footer__links">
+              {policyList.map((policy) => (
+                <li key={policy.slug}>
+                  <a
+                    href={`#/policies/${policy.slug}`}
+                    data-cursor
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate({ name: "policy", slug: policy.slug });
+                    }}
+                  >
+                    {policy.navLabel}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

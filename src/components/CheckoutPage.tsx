@@ -94,14 +94,14 @@ export function CheckoutPage() {
         <span className="mono eyebrow">Checkout</span>
         <h1 className="checkout__title">Nothing to check out</h1>
         <p className="checkout__lede">
-          Your basket is empty. Add a treatment before you continue.
+          Your basket is empty. Add a research product before you continue.
         </p>
         <button
           type="button"
           className="btn btn--primary"
           onClick={() => navigate({ name: "cart" })}
         >
-          Browse treatments
+          Browse catalogue
         </button>
       </section>
     );
@@ -290,7 +290,7 @@ export function CheckoutPage() {
                 id="co-phone"
                 type="tel"
                 autoComplete="tel"
-                placeholder="+971 …"
+                placeholder="Phone number"
                 value={form.phone}
                 onChange={(e) => setField("phone", e.target.value)}
                 aria-invalid={!!errors.phone}
@@ -450,6 +450,17 @@ export function CheckoutPage() {
               <dd>{formatUsd(total)}</dd>
             </div>
           </dl>
+          <div className="checkout__compliance">
+            <p>
+              By proceeding with this purchase, you acknowledge that these
+              products are intended solely for laboratory research purposes and
+              are not intended for human or veterinary use.
+            </p>
+            <p>
+              These products are not intended to diagnose, treat, cure, or
+              prevent any disease.
+            </p>
+          </div>
           <button
             type="submit"
             form="checkout-form"
@@ -507,8 +518,8 @@ export function CheckoutPage() {
             Thank you, {placed.address.firstName}
           </h2>
           <p className="order-modal__lede">
-            Your order is with our clinician team for review. A confirmation has
-            been sent to {placed.contact.email}.
+            Your order has been received and is being processed. A confirmation
+            has been sent to {placed.contact.email}.
           </p>
 
           <dl className="order-modal__meta">

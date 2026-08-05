@@ -13,12 +13,15 @@ import { Footer } from "./components/Footer";
 import { CustomCursor } from "./components/CustomCursor";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { ProductDetail } from "./components/ProductDetail";
+import { ShopPage } from "./components/ShopPage";
+import { PolicyPage } from "./components/PolicyPage";
 import { CartDrawer } from "./components/CartDrawer";
 import { CartPage } from "./components/CartPage";
 import { CheckoutPage } from "./components/CheckoutPage";
 import { LoginPage } from "./components/LoginPage";
 import { AccountPage } from "./components/AccountPage";
 import { OrderTracking } from "./components/OrderTracking";
+import { PaymentCapturePage } from "./components/PaymentCapturePage";
 import { CartProvider } from "./hooks/useCart";
 import { RouterProvider, useRouter } from "./hooks/useRouter";
 import { AuthProvider } from "./hooks/useAuth";
@@ -58,9 +61,19 @@ function AppShell() {
         <FAQ />
         <Contact />
       </main>
+      {view.name === "shop" && (
+        <main className="view view--page">
+          <ShopPage />
+        </main>
+      )}
       {view.name === "product" && (
         <main className="view view--product">
           <ProductDetail id={view.id} />
+        </main>
+      )}
+      {view.name === "policy" && (
+        <main className="view view--page">
+          <PolicyPage slug={view.slug} />
         </main>
       )}
       {view.name === "cart" && (
@@ -86,6 +99,11 @@ function AppShell() {
       {view.name === "track" && (
         <main className="view view--page">
           <OrderTracking />
+        </main>
+      )}
+      {view.name === "payment-capture" && (
+        <main className="view view--page">
+          <PaymentCapturePage token={view.token} />
         </main>
       )}
       <Footer />

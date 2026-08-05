@@ -16,6 +16,9 @@ const formatUsd = (n: number) =>
 
 type TabKey = "package" | "storage" | "supply";
 
+const RESEARCH_DISCLAIMER =
+  "FOR RESEARCH PURPOSES ONLY. Not intended for human or veterinary use. Not intended to diagnose, treat, cure, or prevent any disease. Products are supplied strictly for laboratory and analytical research conducted by qualified professionals.";
+
 export function ProductDetail({ id }: Props) {
   const product = projects.find((p) => p.id === id);
   const { navigate } = useRouter();
@@ -236,6 +239,10 @@ export function ProductDetail({ id }: Props) {
               </p>
             )}
 
+            <p className="pdp__disclaimer" role="note">
+              {RESEARCH_DISCLAIMER}
+            </p>
+
             {labAnalysis && (
               <>
                 <button
@@ -392,6 +399,10 @@ export function ProductDetail({ id }: Props) {
                 <span>{added ? "Added to cart" : "Add to cart"}</span>
               </button>
             </div>
+
+            <p className="pdp__disclaimer pdp__disclaimer--buy" role="note">
+              {RESEARCH_DISCLAIMER}
+            </p>
           </div>
         </div>
 
@@ -436,6 +447,11 @@ export function ProductDetail({ id }: Props) {
             ))}
           </div>
         </section>
+
+        <footer className="pdp__footer-disclaimer">
+          <span className="mono">Compliance</span>
+          <p role="note">{RESEARCH_DISCLAIMER}</p>
+        </footer>
       </div>
 
       {analysisOpen && labAnalysis && (

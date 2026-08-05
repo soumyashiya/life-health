@@ -31,7 +31,8 @@ export function CartPage() {
           <span className="mono eyebrow">Cart</span>
           <h1 className="cart-page__title">No items yet</h1>
           <p className="cart-page__lede">
-            Your Liora Healthcare cart is empty. Add a treatment to continue.
+            Your Liora Healthcare cart is empty. Add a research product to
+            continue.
           </p>
         </header>
         <div className="cart-page__actions">
@@ -46,7 +47,7 @@ export function CartPage() {
               }, 80);
             }}
           >
-            Browse treatments
+            Browse catalogue
           </button>
         </div>
       </section>
@@ -146,6 +147,10 @@ export function CartPage() {
           >
             Proceed to checkout
           </button>
+          <p className="compliance-note">
+            All items are supplied strictly for laboratory research purposes and
+            are not intended for human or veterinary use.
+          </p>
           <button
             type="button"
             className="cart-page__continue"

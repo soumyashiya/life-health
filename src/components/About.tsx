@@ -130,7 +130,7 @@ export function About() {
               <img
                 className="about__photo-img"
                 src={aboutImageSrc}
-                alt={`${site.name} — research-grade peptide and supplement laboratory facility in ${site.location}`}
+                alt={`${site.name} — research-grade peptide reference-material laboratory facility in ${site.location}`}
                 onLoad={() => setImageLoaded(true)}
                 onError={() => setImageFailed(true)}
                 style={{ opacity: imageLoaded ? 1 : 0 }}

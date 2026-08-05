@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { site } from "../data/site";
 import { useCart } from "../hooks/useCart";
 import { useAuth } from "../hooks/useAuth";
-import { useRouter } from "../hooks/useRouter";
+import { parse, useRouter } from "../hooks/useRouter";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -12,10 +12,28 @@ export function Navbar() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const targetIndex = hoverIndex !== null ? hoverIndex : activeIndex;
   const { totalQty, open: openCart } = useCart();
-  const { account } = useAuth();
+  const { account, logout } = useAuth();
   const { view, navigate } = useRouter();
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const accountMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!accountMenuOpen) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (!accountMenuRef.current?.contains(e.target as Node)) {
+        setAccountMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [accountMenuOpen]);
 
   const goToSection = (href: string) => {
+    if (href.startsWith("#/")) {
+      navigate(parse(href));
+      return;
+    }
+
     const scrollToTarget = () => {
       if (href === "#home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -180,36 +198,90 @@ export function Navbar() {
 
         <div className="nav__actions">
           <button
-            className="nav__account"
-            onClick={() =>
-              navigate({ name: account ? "account" : "login" })
-            }
-            aria-label={account ? "Your account" : "Sign in"}
-            data-cursor
-            data-cursor-text={account ? "Account" : "Sign in"}
             type="button"
+            className="nav__shop"
+            onClick={() => navigate({ name: "shop" })}
+            data-cursor
+            data-cursor-text="Shop"
           >
-            <svg
-              className="nav__account-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden
-            >
-              <circle
-                cx="12"
-                cy="8.5"
-                r="3.75"
-                stroke="currentColor"
-                strokeWidth="1.4"
-              />
-              <path
-                d="M4.75 20.25c0-3.59 3.25-6.5 7.25-6.5s7.25 2.91 7.25 6.5"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-              />
-            </svg>
+            Shop
           </button>
+
+          <div className="nav__account-wrap" ref={accountMenuRef}>
+            <button
+              className="nav__account"
+              onClick={() => {
+                if (account) {
+                  setAccountMenuOpen((v) => !v);
+                } else {
+                  navigate({ name: "login" });
+                }
+              }}
+              aria-label={account ? "Your account" : "Sign in"}
+              aria-expanded={account ? accountMenuOpen : undefined}
+              data-cursor
+              data-cursor-text={account ? "Account" : "Sign in"}
+              type="button"
+            >
+              <svg
+                className="nav__account-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden
+              >
+                <circle
+                  cx="12"
+                  cy="8.5"
+                  r="3.75"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                />
+                <path
+                  d="M4.75 20.25c0-3.59 3.25-6.5 7.25-6.5s7.25 2.91 7.25 6.5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+
+            {account && accountMenuOpen && (
+              <div className="nav__account-menu" role="menu">
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    setAccountMenuOpen(false);
+                    navigate({ name: "account" });
+                  }}
+                >
+                  My Orders
+                </button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    setAccountMenuOpen(false);
+                    navigate({ name: "track" });
+                  }}
+                >
+                  Track Order
+                </button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  className="nav__account-menu-danger"
+                  onClick={() => {
+                    setAccountMenuOpen(false);
+                    logout();
+                    navigate({ name: "home" });
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
 
           <button
             className="nav__cart"
@@ -264,6 +336,18 @@ export function Navbar() {
           ×
         </button>
         <ul className="nav__drawer-list">
+          <li>
+            <a
+              href="#/shop"
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen(false);
+                navigate({ name: "shop" });
+              }}
+            >
+              Shop
+            </a>
+          </li>
           {site.navLinks.map((link) => (
             <li key={link.href}>
               <a
