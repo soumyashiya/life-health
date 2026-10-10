@@ -9,9 +9,9 @@ export function PolicyPage({ slug }: Props) {
   const { navigate } = useRouter();
 
   useEffect(() => {
-    document.title = `${policy.metaTitle} — Liora Healthcare`;
+    document.title = `${policy.metaTitle} — Lyfe Health`;
     return () => {
-      document.title = "Liora Healthcare";
+      document.title = "Lyfe Health";
     };
   }, [policy]);
 

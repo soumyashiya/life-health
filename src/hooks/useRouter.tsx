@@ -8,10 +8,15 @@ import {
   type ReactNode,
 } from "react";
 import { policies, type PolicySlug } from "../data/policies";
+import { isResearchAreaId, type ResearchVisualKey } from "../data/research";
+import { isScienceSection, type ScienceSection } from "../data/science";
 
 export type View =
   | { name: "home" }
-  | { name: "shop" }
+  | { name: "shop"; research?: ResearchVisualKey }
+  | { name: "science"; section?: ScienceSection }
+  | { name: "about" }
+  | { name: "find" }
   | { name: "product"; id: string }
   | { name: "policy"; slug: PolicySlug }
   | { name: "cart" }
@@ -27,7 +32,18 @@ type RouterContextValue = {
 };
 
 export const parse = (hash: string): View => {
-  if (/^#\/shop\b/.test(hash)) return { name: "shop" };
+  if (/^#\/shop\b/.test(hash)) {
+    const research = hash.match(/[?&]research=([^&]+)/);
+    const id = research ? decodeURIComponent(research[1]) : "";
+    return isResearchAreaId(id) ? { name: "shop", research: id } : { name: "shop" };
+  }
+  if (/^#\/science\b/.test(hash)) {
+    const section = hash.match(/[?&]s=([^&]+)/);
+    const id = section ? decodeURIComponent(section[1]) : "";
+    return isScienceSection(id) ? { name: "science", section: id } : { name: "science" };
+  }
+  if (/^#\/about\b/.test(hash)) return { name: "about" };
+  if (/^#\/find\b/.test(hash)) return { name: "find" };
   if (/^#\/cart\b/.test(hash)) return { name: "cart" };
   if (/^#\/checkout\b/.test(hash)) return { name: "checkout" };
   if (/^#\/account\b/.test(hash)) return { name: "account" };
@@ -71,7 +87,16 @@ export function RouterProvider({ children }: { children: ReactNode }) {
         hash = "";
         break;
       case "shop":
-        hash = "#/shop";
+        hash = next.research ? `#/shop?research=${next.research}` : "#/shop";
+        break;
+      case "science":
+        hash = next.section ? `#/science?s=${next.section}` : "#/science";
+        break;
+      case "about":
+        hash = "#/about";
+        break;
+      case "find":
+        hash = "#/find";
         break;
       case "product":
         hash = `#/product/${next.id}`;

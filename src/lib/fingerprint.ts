@@ -19,6 +19,8 @@ async function computeCanvasHash(): Promise<string | undefined> {
     ctx.fillStyle = "#f60";
     ctx.fillRect(0, 0, 240, 60);
     ctx.fillStyle = "#069";
+    // Seed string, not a label — editing it changes every hash this produces
+    // and detaches new readings from the ones already collected.
     ctx.fillText("liora-fp", 2, 15);
     ctx.fillStyle = "rgba(102,204,0,0.7)";
     ctx.fillText("liora-fp", 4, 17);

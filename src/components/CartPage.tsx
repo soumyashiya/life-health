@@ -31,7 +31,7 @@ export function CartPage() {
           <span className="mono eyebrow">Cart</span>
           <h1 className="cart-page__title">No items yet</h1>
           <p className="cart-page__lede">
-            Your Liora Healthcare cart is empty. Add a research product to
+            Your Lyfe Health cart is empty. Add a research product to
             continue.
           </p>
         </header>
@@ -60,7 +60,7 @@ export function CartPage() {
         <span className="mono eyebrow">Cart</span>
         <h1 className="cart-page__title">Your cart</h1>
         <p className="cart-page__lede">
-          Review the items in your Liora Healthcare cart before checkout.
+          Review the items in your Lyfe Health cart before checkout.
         </p>
       </header>
 

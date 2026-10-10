@@ -14,6 +14,9 @@ import { CustomCursor } from "./components/CustomCursor";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { ProductDetail } from "./components/ProductDetail";
 import { ShopPage } from "./components/ShopPage";
+import { SciencePage } from "./components/SciencePage";
+import { AboutPage } from "./components/AboutPage";
+import { ProductFinder } from "./components/ProductFinder";
 import { PolicyPage } from "./components/PolicyPage";
 import { CartDrawer } from "./components/CartDrawer";
 import { CartPage } from "./components/CartPage";
@@ -63,7 +66,22 @@ function AppShell() {
       </main>
       {view.name === "shop" && (
         <main className="view view--page">
-          <ShopPage />
+          <ShopPage research={view.research} />
+        </main>
+      )}
+      {view.name === "science" && (
+        <main className="view view--page view--flush">
+          <SciencePage section={view.section} />
+        </main>
+      )}
+      {view.name === "about" && (
+        <main className="view view--page view--flush">
+          <AboutPage />
+        </main>
+      )}
+      {view.name === "find" && (
+        <main className="view view--page">
+          <ProductFinder />
         </main>
       )}
       {view.name === "product" && (

@@ -2,7 +2,7 @@ export const API_BASE_URL =
   "https://www.microservices.tech"; // production
   // "http://localhost:5003"; // TESTING — local user-order-service
 
-// liora is a static Vite SPA, not Next.js — it has no server-side API routes
+// Lyfe Health is a static Vite SPA, not Next.js — it has no server-side API routes
 // of its own. Order confirmation email is sent by a tiny companion server
 // (see /server) that this frontend calls after the order is created; that
 // server forwards to the shared order-confirmation email module. In
@@ -12,6 +12,8 @@ const EMAIL_BASE_URL =
   ""; // production (same-origin, proxied by nginx)
   // "http://localhost:4003"; // TESTING — local companion email server
 
+// Pre-rebrand prefix, kept deliberately — renaming it signs out every visitor
+// holding a live session. Same applies to the other liora.* storage keys.
 const TOKEN_KEY = "liora.auth.token";
 
 export function getToken(): string | null {

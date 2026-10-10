@@ -1,0 +1,151 @@
+- generic [ref=e2]:
+  - banner [ref=e11]:
+    - generic [ref=e12]:
+      - link "Lyfe Health" [ref=e13]:
+        - /url: "#home"
+        - generic [ref=e21]:
+          - generic [ref=e22]: Lyfe
+          - generic [ref=e24]: Health
+      - generic [ref=e25]:
+        - button "Search products" [ref=e26] [cursor=pointer]
+        - button "Sign in" [ref=e31] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=e35] [cursor=pointer]
+        - button "Open menu" [ref=e40]
+  - text: → → → → → →
+  - main [ref=e42]:
+    - generic [ref=e44]:
+      - generic [ref=e45]: Step 04 / 04
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - heading "What scale are you working at?" [level=1] [ref=e186]
+          - paragraph [ref=e55]: Used to order your matches, not to rule anything out.
+        - group "What scale are you working at?" [ref=e187]:
+          - generic [ref=e188] [cursor=pointer]:
+            - radio "Pilot run Under $300 per unit."
+            - generic [aria-hidden] [ref=e189]: A
+            - generic [ref=e190]:
+              - generic [ref=e191]: Pilot run
+              - generic [ref=e192]: Under $300 per unit.
+          - generic [ref=e193] [cursor=pointer]:
+            - radio "Standard protocol $300 – $450 per unit."
+            - generic [aria-hidden] [ref=e194]: B
+            - generic [ref=e195]:
+              - generic [ref=e196]: Standard protocol
+              - generic [ref=e197]: $300 – $450 per unit.
+          - generic [ref=e198] [cursor=pointer]:
+            - radio "Extended programme $450 and above."
+            - generic [aria-hidden] [ref=e199]: C
+            - generic [ref=e200]:
+              - generic [ref=e201]: Extended programme
+              - generic [ref=e202]: $450 and above.
+          - generic [ref=e169] [cursor=pointer]:
+            - radio "No preference Rank on application alone."
+            - generic [aria-hidden] [ref=e170]: D
+            - generic [ref=e171]:
+              - generic [ref=e172]: No preference
+              - generic [ref=e173]: Rank on application alone.
+        - generic [ref=e83]:
+          - button "← Back" [ref=e84] [cursor=pointer]
+          - button "See matches →" [disabled] [ref=e203]
+      - paragraph [ref=e86]: This finder orders the catalogue against your protocol. It is not advice. All products are supplied strictly for laboratory research and educational use — not for human or veterinary consumption.
+  - contentinfo [ref=e87]:
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - generic [ref=e92]: Lyfe
+            - generic [ref=e93]: Health
+          - paragraph [ref=e94]: Research-grade peptide supply
+          - generic [ref=e95]:
+            - heading "Stay updated" [level=4] [ref=e96]
+            - generic [ref=e97]:
+              - textbox "Email address" [ref=e98]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=e99]
+            - paragraph [ref=e100]: Research updates and restock alerts. No spam.
+        - generic [ref=e101]:
+          - heading "Quick Links" [level=4] [ref=e102]
+          - list [ref=e103]:
+            - listitem [ref=e104]:
+              - link "Shop" [ref=e105] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=e106]:
+              - link "Home" [ref=e107] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=e108]:
+              - link "About" [ref=e109] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=e110]:
+              - link "Products" [ref=e111] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=e112]:
+              - link "Why Us" [ref=e113] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=e114]:
+              - link "FAQ" [ref=e115] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=e116]:
+              - link "Contact" [ref=e117] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=e118]:
+              - link "Track order" [ref=e119] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=e120]:
+          - heading "Contact" [level=4] [ref=e121]
+          - list [ref=e122]:
+            - listitem [ref=e123]:
+              - link "hello@lyfehealth.com" [ref=e124] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=e125]:
+              - link "+1 000 000 0000" [ref=e126] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=e127]:
+              - generic [ref=e128]: Global research supply
+        - generic [ref=e129]:
+          - heading "Policies" [level=4] [ref=e130]
+          - list [ref=e131]:
+            - listitem [ref=e132]:
+              - link "Press Release" [ref=e133] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=e134]:
+              - link "Refund Policy" [ref=e135] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=e136]:
+              - link "Shipping Policy" [ref=e137] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=e138]:
+              - link "Privacy Policy" [ref=e139] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=e140]:
+              - link "Terms Of Service" [ref=e141] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=e142]:
+          - heading "Follow" [level=4] [ref=e143]
+          - list [ref=e144]:
+            - listitem [ref=e145]:
+              - link "WhatsApp" [ref=e146]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=e147]:
+              - link "Instagram" [ref=e148]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=e149]:
+              - link "Email" [ref=e150]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=e152]:
+        - generic [ref=e153]: © 2026 Lyfe Health
+        - generic [ref=e154]: Global research supply
+      - paragraph [ref=e155]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=e156]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

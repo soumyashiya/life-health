@@ -31,14 +31,14 @@ export const policies: Record<PolicySlug, PolicyContent> = {
     navLabel: "Press Release",
     metaTitle: "Press Release — Official Statement",
     eyebrow: "Official statement",
-    title: "Official statement from Liora Healthcare",
+    title: "Official statement from Lyfe Health",
     intro:
       "This statement clarifies who we are, how we operate, and how to verify that you're dealing with our official channels.",
     sections: [
       {
         heading: "1. Who we are",
         paragraphs: [
-          "Liora Healthcare supplies research-grade peptide reference materials to laboratories and qualified researchers. Every product is sourced from verified suppliers and packed to preserve purity, consistency, and documentation from our facility to your bench.",
+          "Lyfe Health supplies research-grade peptide reference materials to laboratories and qualified researchers. Every product is sourced from verified suppliers and packed to preserve purity, consistency, and documentation from our facility to your bench.",
         ],
       },
       {
@@ -56,8 +56,8 @@ export const policies: Record<PolicySlug, PolicyContent> = {
       {
         heading: "4. Official channels",
         paragraphs: [
-          `Liora Healthcare is only reachable through the channels listed on this website: ${contactLine}. We do not authorise resellers, distributors, or third-party accounts to sell on our behalf, and we do not solicit payment through direct messages on social platforms.`,
-          "If you're contacted by anyone claiming to represent Liora Healthcare outside of these official channels, or asked to pay through an unlisted method, please do not proceed and verify directly with us first.",
+          `Lyfe Health is only reachable through the channels listed on this website: ${contactLine}. We do not authorise resellers, distributors, or third-party accounts to sell on our behalf, and we do not solicit payment through direct messages on social platforms.`,
+          "If you're contacted by anyone claiming to represent Lyfe Health outside of these official channels, or asked to pay through an unlisted method, please do not proceed and verify directly with us first.",
         ],
       },
       {
@@ -80,12 +80,12 @@ export const policies: Record<PolicySlug, PolicyContent> = {
     eyebrow: "Policy",
     title: "Refund policy",
     intro:
-      "Thank you for choosing Liora Healthcare. We take great pride in delivering premium-quality research-use-only products. Please read the following carefully to understand our returns and refund process.",
+      "Thank you for choosing Lyfe Health. We take great pride in delivering premium-quality research-use-only products. Please read the following carefully to understand our returns and refund process.",
     sections: [
       {
         heading: "Research-use products",
         paragraphs: [
-          "All items sold by Liora Healthcare, including peptide reference kits and supporting materials, are intended strictly for research and development purposes. As such, they are not intended for human consumption, diagnosis, or treatment. By purchasing, you agree to these terms.",
+          "All items sold by Lyfe Health, including peptide reference kits and supporting materials, are intended strictly for research and development purposes. As such, they are not intended for human consumption, diagnosis, or treatment. By purchasing, you agree to these terms.",
         ],
       },
       {
@@ -221,7 +221,7 @@ export const policies: Record<PolicySlug, PolicyContent> = {
       {
         heading: "Introduction",
         paragraphs: [
-          `This Privacy Policy explains how Liora Healthcare ("we", "us", "our") collects, uses, and protects your personal information when you visit or make a purchase from this website.`,
+          `This Privacy Policy explains how Lyfe Health ("we", "us", "our") collects, uses, and protects your personal information when you visit or make a purchase from this website.`,
           "We are committed to safeguarding your privacy and complying with applicable data protection laws, including GDPR where applicable.",
         ],
       },
@@ -308,7 +308,7 @@ export const policies: Record<PolicySlug, PolicyContent> = {
     eyebrow: "Policy",
     title: "Terms of service",
     intro:
-      `You are using the official website of Liora Healthcare ("we", "us", "our"). By using this site, you agree to comply with the following terms. Please read them carefully — if you do not agree with any part of these terms, please do not use our website or services.`,
+      `You are using the official website of Lyfe Health ("we", "us", "our"). By using this site, you agree to comply with the following terms. Please read them carefully — if you do not agree with any part of these terms, please do not use our website or services.`,
     sections: [
       {
         heading: "General",
@@ -349,13 +349,13 @@ export const policies: Record<PolicySlug, PolicyContent> = {
       {
         heading: "Disclaimer",
         paragraphs: [
-          "All products are sold solely for laboratory R&D. Liora Healthcare does not accept or condone misuse, including but not limited to human consumption, veterinary use, or resale.",
+          "All products are sold solely for laboratory R&D. Lyfe Health does not accept or condone misuse, including but not limited to human consumption, veterinary use, or resale.",
         ],
       },
       {
         heading: "Limitation of liability",
         paragraphs: [
-          "By using this site, you agree to indemnify and hold harmless Liora Healthcare, its team, and affiliates from any claims, damages, or liabilities arising from product use or misuse outside the terms stated here.",
+          "By using this site, you agree to indemnify and hold harmless Lyfe Health, its team, and affiliates from any claims, damages, or liabilities arising from product use or misuse outside the terms stated here.",
         ],
       },
       {
@@ -367,13 +367,13 @@ export const policies: Record<PolicySlug, PolicyContent> = {
       {
         heading: "Intellectual property",
         paragraphs: [
-          "All trademarks, logos, and content displayed on this site are owned or licensed by Liora Healthcare. You may not reproduce, distribute, or commercially exploit any content without prior written consent.",
+          "All trademarks, logos, and content displayed on this site are owned or licensed by Lyfe Health. You may not reproduce, distribute, or commercially exploit any content without prior written consent.",
         ],
       },
       {
         heading: "Governing law",
         paragraphs: [
-          "These Terms are governed by the laws of the jurisdiction in which Liora Healthcare is registered, without regard to conflict-of-law principles. Any disputes arising will be subject to the exclusive jurisdiction of the courts of that jurisdiction.",
+          "These Terms are governed by the laws of the jurisdiction in which Lyfe Health is registered, without regard to conflict-of-law principles. Any disputes arising will be subject to the exclusive jurisdiction of the courts of that jurisdiction.",
         ],
       },
       {

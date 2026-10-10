@@ -40,19 +40,19 @@ import review5 from "../assets/review5-seo.webp";
 import review6 from "../assets/review6-seo.webp";
 
 export const site = {
-  name: "Liora Healthcare",
-  brandMark: "Liora",
-  brandSub: "Healthcare",
+  name: "Lyfe Health",
+  brandMark: "Lyfe",
+  brandSub: "Health",
   aboutImage: aboutImg,
   role: "Research-grade peptide supply",
   location: "Global research supply",
-  email: "hello@liorahealthcare.com",
+  email: "hello@lyfehealth.com",
   phone: "+1 000 000 0000",
   whatsapp: "https://wa.me/10000000000",
   socials: [
     { label: "WhatsApp", href: "https://wa.me/10000000000" },
-    { label: "Instagram", href: "https://instagram.com/liorahealthcare" },
-    { label: "Email", href: "mailto:hello@liorahealthcare.com" },
+    { label: "Instagram", href: "https://instagram.com/lyfehealth" },
+    { label: "Email", href: "mailto:hello@lyfehealth.com" },
   ],
   navLinks: [
     { label: "Home", href: "#home" },

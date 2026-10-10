@@ -1,0 +1,190 @@
+- generic [ref=f28e2]:
+  - banner [ref=f28e11]:
+    - generic [ref=f28e12]:
+      - link "Liora Healthcare" [ref=f28e13]:
+        - /url: "#home"
+        - generic [ref=f28e21]:
+          - generic [ref=f28e22]: Liora
+          - generic [ref=f28e24]: Healthcare
+      - navigation "Primary" [ref=f28e25]:
+        - list [ref=f28e26]:
+          - listitem [ref=f28e27]:
+            - button "Research" [ref=f28e28] [cursor=pointer]
+          - listitem [ref=f28e29]:
+            - button "Shop" [ref=f28e30] [cursor=pointer]
+          - listitem [ref=f28e31]:
+            - button "Science" [ref=f28e32] [cursor=pointer]
+          - listitem [ref=f28e33]:
+            - link "About" [ref=f28e34] [cursor=pointer]:
+              - /url: "#/about"
+      - generic [ref=f28e35]:
+        - button "Search products" [ref=f28e36] [cursor=pointer]
+        - button "Sign in" [ref=f28e41] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f28e45] [cursor=pointer]
+        - link "Find your product" [ref=f28e50]:
+          - /url: "#/find"
+  - text: → → → → → →
+  - main [ref=f28e52]:
+    - generic [ref=f28e54]:
+      - generic [ref=f28e55]: Your matches
+      - generic [ref=f28e61]:
+        - generic [ref=f28e62]:
+          - heading "Your closest matches." [level=1] [ref=f28e201]
+          - paragraph [ref=f28e64]: Ranked against your answers. Every match is supplied for laboratory research only.
+        - generic [ref=f28e202]:
+          - article [ref=f28e203]:
+            - generic [ref=f28e204]: Best match
+            - link [ref=f28e205]:
+              - /url: "#/product/p1"
+              - img "Retatrutide 20mg" [ref=f28e206]
+            - generic [ref=f28e207]:
+              - generic [ref=f28e208]: Compound Analysis
+              - link "Retatrutide 20mg" [ref=f28e209]:
+                - /url: "#/product/p1"
+              - paragraph [ref=f28e210]: Triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 20 mg research device for metabolic and energy-pathway studies.
+              - list [ref=f28e211]:
+                - listitem [ref=f28e212]: Metabolic research
+                - listitem [ref=f28e213]: Single device
+                - listitem [ref=f28e214]: Standard protocol
+              - generic [ref=f28e215]:
+                - generic [ref=f28e216]: $350
+                - button "Add Retatrutide 20mg to cart" [ref=f28e217]: Add to cart
+          - article [ref=f28e218]:
+            - link [ref=f28e219]:
+              - /url: "#/product/p4"
+              - img "Tirzepatide 40mg" [ref=f28e220]
+            - generic [ref=f28e221]:
+              - generic [ref=f28e222]: Compound Analysis
+              - link "Tirzepatide 40mg" [ref=f28e223]:
+                - /url: "#/product/p4"
+              - paragraph [ref=f28e224]: Dual agonist of GLP-1 and GIP receptors. Supplied as a pre-filled 40 mg research device for glucose-regulation and metabolic studies.
+              - list [ref=f28e225]:
+                - listitem [ref=f28e226]: Metabolic research
+                - listitem [ref=f28e227]: Single device
+                - listitem [ref=f28e228]: Standard protocol
+              - generic [ref=f28e229]:
+                - generic [ref=f28e230]: $399
+                - button "Add Tirzepatide 40mg to cart" [ref=f28e231]: Add to cart
+          - article [ref=f28e232]:
+            - link [ref=f28e233]:
+              - /url: "#/product/p6"
+              - img "Retatrutide 40mg" [ref=f28e234]
+            - generic [ref=f28e235]:
+              - generic [ref=f28e236]: Compound Analysis
+              - link "Retatrutide 40mg" [ref=f28e237]:
+                - /url: "#/product/p6"
+              - paragraph [ref=f28e238]: Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 40 mg research reference device for extended metabolic-pathway research.
+              - list [ref=f28e239]:
+                - listitem [ref=f28e240]: Metabolic research
+                - listitem [ref=f28e241]: Single device
+              - generic [ref=f28e242]:
+                - generic [ref=f28e243]: $629
+                - button "Add Retatrutide 40mg to cart" [ref=f28e244]: Add to cart
+        - generic [ref=f28e92]:
+          - button "← Change answers" [ref=f28e245] [cursor=pointer]
+          - generic [ref=f28e246]:
+            - button "Start over" [ref=f28e247] [cursor=pointer]
+            - link "View full catalogue" [ref=f28e248] [cursor=pointer]:
+              - /url: "#/shop"
+      - paragraph [ref=f28e95]: This finder orders the catalogue against your protocol. It is not advice. All products are supplied strictly for laboratory research and educational use — not for human or veterinary consumption.
+  - contentinfo [ref=f28e96]:
+    - generic [ref=f28e97]:
+      - generic [ref=f28e98]:
+        - generic [ref=f28e99]:
+          - generic [ref=f28e100]:
+            - generic [ref=f28e101]: Liora
+            - generic [ref=f28e102]: Healthcare
+          - paragraph [ref=f28e103]: Research-grade peptide supply
+          - generic [ref=f28e104]:
+            - heading "Stay updated" [level=4] [ref=f28e105]
+            - generic [ref=f28e106]:
+              - textbox "Email address" [ref=f28e107]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f28e108]
+            - paragraph [ref=f28e109]: Research updates and restock alerts. No spam.
+        - generic [ref=f28e110]:
+          - heading "Quick Links" [level=4] [ref=f28e111]
+          - list [ref=f28e112]:
+            - listitem [ref=f28e113]:
+              - link "Shop" [ref=f28e114] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f28e115]:
+              - link "Home" [ref=f28e116] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f28e117]:
+              - link "About" [ref=f28e118] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f28e119]:
+              - link "Products" [ref=f28e120] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f28e121]:
+              - link "Why Us" [ref=f28e122] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f28e123]:
+              - link "FAQ" [ref=f28e124] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f28e125]:
+              - link "Contact" [ref=f28e126] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f28e127]:
+              - link "Track order" [ref=f28e128] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f28e129]:
+          - heading "Contact" [level=4] [ref=f28e130]
+          - list [ref=f28e131]:
+            - listitem [ref=f28e132]:
+              - link "hello@liorahealthcare.com" [ref=f28e133] [cursor=pointer]:
+                - /url: mailto:hello@liorahealthcare.com
+            - listitem [ref=f28e134]:
+              - link "+1 000 000 0000" [ref=f28e135] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f28e136]:
+              - generic [ref=f28e137]: Global research supply
+        - generic [ref=f28e138]:
+          - heading "Policies" [level=4] [ref=f28e139]
+          - list [ref=f28e140]:
+            - listitem [ref=f28e141]:
+              - link "Press Release" [ref=f28e142] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f28e143]:
+              - link "Refund Policy" [ref=f28e144] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f28e145]:
+              - link "Shipping Policy" [ref=f28e146] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f28e147]:
+              - link "Privacy Policy" [ref=f28e148] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f28e149]:
+              - link "Terms Of Service" [ref=f28e150] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f28e151]:
+          - heading "Follow" [level=4] [ref=f28e152]
+          - list [ref=f28e153]:
+            - listitem [ref=f28e154]:
+              - link "WhatsApp" [ref=f28e155]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f28e156]:
+              - link "Instagram" [ref=f28e157]:
+                - /url: https://instagram.com/liorahealthcare
+            - listitem [ref=f28e158]:
+              - link "Email" [ref=f28e159]:
+                - /url: mailto:hello@liorahealthcare.com
+      - generic [ref=f28e161]:
+        - generic [ref=f28e162]: © 2026 Liora Healthcare
+        - generic [ref=f28e163]: Global research supply
+      - paragraph [ref=f28e164]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f28e165]: Liora Healthcare
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

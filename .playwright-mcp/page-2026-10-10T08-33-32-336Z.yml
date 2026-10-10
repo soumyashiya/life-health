@@ -1,0 +1,176 @@
+- generic [ref=f4e2]:
+  - banner [ref=f4e11]:
+    - generic [ref=f4e12]:
+      - link "Lyfe Health" [ref=f4e13]:
+        - /url: "#home"
+        - generic [ref=f4e21]: Lyfe
+      - generic [ref=f4e35]:
+        - button "Search products" [ref=f4e36] [cursor=pointer]
+        - button "Sign in" [ref=f4e41] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f4e45] [cursor=pointer]
+        - button "Open menu" [ref=f4e364]
+  - text: → → → → → →
+  - main [ref=f4e52]:
+    - generic [ref=f4e54]:
+      - generic [ref=f4e55]: Your matches
+      - generic [ref=f4e62]:
+        - generic [ref=f4e63]:
+          - heading "Your closest matches." [level=1] [ref=f4e445]
+          - paragraph [ref=f4e65]: Ranked against your answers. Every match is supplied for laboratory research only.
+        - generic [ref=f4e446]:
+          - article [ref=f4e447]:
+            - generic [ref=f4e448]: Best match
+            - link [ref=f4e449]:
+              - /url: "#/product/p3"
+              - img "BPC-157 & TB-500 40mg" [ref=f4e450]
+            - generic [ref=f4e451]:
+              - generic [ref=f4e452]: Compound Analysis
+              - link "BPC-157 & TB-500 40mg" [ref=f4e453]:
+                - /url: "#/product/p3"
+              - paragraph [ref=f4e454]: Peptide research pairing of BPC-157 and TB-500 supplied at 40 mg in a pre-filled research reference device.
+              - list [ref=f4e455]:
+                - listitem [ref=f4e456]: Recovery research
+                - listitem [ref=f4e457]: 2-compound combination
+                - listitem [ref=f4e458]: Published lot assay
+                - listitem [ref=f4e459]: Pilot run
+              - generic [ref=f4e460]:
+                - generic [ref=f4e461]: $269
+                - button "Add BPC-157 & TB-500 40mg to cart" [ref=f4e462]: Add to cart
+          - article [ref=f4e463]:
+            - link [ref=f4e464]:
+              - /url: "#/product/p2"
+              - img "Glow 70mg" [ref=f4e465]
+            - generic [ref=f4e466]:
+              - generic [ref=f4e467]: Compound Analysis
+              - link "Glow 70mg" [ref=f4e468]:
+                - /url: "#/product/p2"
+              - paragraph [ref=f4e469]: Multi-peptide research blend pairing GHK-Cu with BPC-157 and TB-500 in a single pre-filled research reference device.
+              - list [ref=f4e470]:
+                - listitem [ref=f4e471]: Recovery research
+                - listitem [ref=f4e472]: 3-compound combination
+                - listitem [ref=f4e473]: Published lot assay
+              - generic [ref=f4e474]:
+                - generic [ref=f4e475]: $329
+                - button "Add Glow 70mg to cart" [ref=f4e476]: Add to cart
+          - article [ref=f4e477]:
+            - link [ref=f4e478]:
+              - /url: "#/product/p1"
+              - img "Retatrutide 20mg" [ref=f4e479]
+            - generic [ref=f4e480]:
+              - generic [ref=f4e481]: Compound Analysis
+              - link "Retatrutide 20mg" [ref=f4e482]:
+                - /url: "#/product/p1"
+              - paragraph [ref=f4e483]: Triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 20 mg research device for metabolic and energy-pathway studies.
+              - list [ref=f4e484]:
+                - listitem [ref=f4e485]: Published lot assay
+              - generic [ref=f4e486]:
+                - generic [ref=f4e487]: $350
+                - button "Add Retatrutide 20mg to cart" [ref=f4e488]: Add to cart
+        - generic [ref=f4e98]:
+          - button "← Change answers" [ref=f4e489] [cursor=pointer]
+          - generic [ref=f4e490]:
+            - button "Start over" [ref=f4e491] [cursor=pointer]
+            - link "View full catalogue" [ref=f4e492] [cursor=pointer]:
+              - /url: "#/shop"
+      - paragraph [ref=f4e101]: This finder orders the catalogue against your protocol. It is not advice. All products are supplied strictly for laboratory research and educational use — not for human or veterinary consumption.
+  - contentinfo [ref=f4e102]:
+    - generic [ref=f4e103]:
+      - generic [ref=f4e104]:
+        - generic [ref=f4e105]:
+          - generic [ref=f4e106]:
+            - generic [ref=f4e107]: Lyfe
+            - generic [ref=f4e108]: Health
+          - paragraph [ref=f4e109]: Research-grade peptide supply
+          - generic [ref=f4e110]:
+            - heading "Stay updated" [level=4] [ref=f4e111]
+            - generic [ref=f4e112]:
+              - textbox "Email address" [ref=f4e113]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f4e114]
+            - paragraph [ref=f4e115]: Research updates and restock alerts. No spam.
+        - generic [ref=f4e116]:
+          - heading "Quick Links" [level=4] [ref=f4e117]
+          - list [ref=f4e118]:
+            - listitem [ref=f4e119]:
+              - link "Shop" [ref=f4e120] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f4e121]:
+              - link "Home" [ref=f4e122] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f4e123]:
+              - link "About" [ref=f4e124] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f4e125]:
+              - link "Products" [ref=f4e126] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f4e127]:
+              - link "Why Us" [ref=f4e128] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f4e129]:
+              - link "FAQ" [ref=f4e130] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f4e131]:
+              - link "Contact" [ref=f4e132] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f4e133]:
+              - link "Track order" [ref=f4e134] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f4e135]:
+          - heading "Contact" [level=4] [ref=f4e136]
+          - list [ref=f4e137]:
+            - listitem [ref=f4e138]:
+              - link "hello@lyfehealth.com" [ref=f4e139] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=f4e140]:
+              - link "+1 000 000 0000" [ref=f4e141] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f4e142]:
+              - generic [ref=f4e143]: Global research supply
+        - generic [ref=f4e144]:
+          - heading "Policies" [level=4] [ref=f4e145]
+          - list [ref=f4e146]:
+            - listitem [ref=f4e147]:
+              - link "Press Release" [ref=f4e148] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f4e149]:
+              - link "Refund Policy" [ref=f4e150] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f4e151]:
+              - link "Shipping Policy" [ref=f4e152] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f4e153]:
+              - link "Privacy Policy" [ref=f4e154] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f4e155]:
+              - link "Terms Of Service" [ref=f4e156] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f4e157]:
+          - heading "Follow" [level=4] [ref=f4e158]
+          - list [ref=f4e159]:
+            - listitem [ref=f4e160]:
+              - link "WhatsApp" [ref=f4e161]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f4e162]:
+              - link "Instagram" [ref=f4e163]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f4e164]:
+              - link "Email" [ref=f4e165]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f4e167]:
+        - generic [ref=f4e168]: © 2026 Lyfe Health
+        - generic [ref=f4e169]: Global research supply
+      - paragraph [ref=f4e170]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f4e171]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

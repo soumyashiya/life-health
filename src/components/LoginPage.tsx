@@ -175,7 +175,7 @@ export function LoginPage({ redirect }: Props) {
           </h1>
           <p className="auth__lede">
             {mode === "signin"
-              ? "Log in to your Liora Healthcare account to view your research orders and account details."
+              ? "Log in to your Lyfe Health account to view your research orders and account details."
               : mode === "signup"
                 ? "Just a few details to get started."
                 : "Enter the reset token from your email and pick a new password."}

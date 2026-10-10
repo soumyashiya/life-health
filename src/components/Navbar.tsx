@@ -1,22 +1,74 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import { gsap } from "gsap";
 import { site } from "../data/site";
+import {
+  navEntries,
+  primaryCta,
+  type MegaId,
+  type NavId,
+} from "../data/navigation";
 import { useCart } from "../hooks/useCart";
 import { useAuth } from "../hooks/useAuth";
+import { useMagnetic } from "../hooks/useMagnetic";
 import { parse, useRouter } from "../hooks/useRouter";
+import { MegaMenuPanel } from "./MegaMenu";
+import { MobileNav } from "./MobileNav";
+import { NavSearch } from "./NavSearch";
+
+/** Grace period so a diagonal mouse path to the panel doesn't close it. */
+const CLOSE_DELAY = 140;
 
 export function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const targetIndex = hoverIndex !== null ? hoverIndex : activeIndex;
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<MegaId | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+
   const { totalQty, open: openCart } = useCart();
   const { account, logout } = useAuth();
   const { view, navigate } = useRouter();
-  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
-  const accountMenuRef = useRef<HTMLDivElement | null>(null);
 
+  const accountMenuRef = useRef<HTMLDivElement | null>(null);
+  const shellRef = useRef<HTMLDivElement | null>(null);
+  const triggerRefs = useRef<Partial<Record<NavId, HTMLButtonElement | null>>>({});
+  const closeTimer = useRef<number | null>(null);
+  const ctaRef = useMagnetic<HTMLAnchorElement>(0.22);
+
+  const cancelClose = useCallback(() => {
+    if (closeTimer.current !== null) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    cancelClose();
+    setActiveMenu(null);
+  }, [cancelClose]);
+
+  const scheduleClose = useCallback(() => {
+    cancelClose();
+    closeTimer.current = window.setTimeout(() => setActiveMenu(null), CLOSE_DELAY);
+  }, [cancelClose]);
+
+  useEffect(() => () => cancelClose(), [cancelClose]);
+
+  /* ---- solid header once the hero is behind us --------------------------- */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* ---- body scroll lock for the mobile drawer ---------------------------- */
+  useEffect(() => {
+    document.body.classList.toggle("scroll-lock", drawerOpen);
+    return () => document.body.classList.remove("scroll-lock");
+  }, [drawerOpen]);
+
+  /* ---- account dropdown: outside click ----------------------------------- */
   useEffect(() => {
     if (!accountMenuOpen) return;
     const onClickOutside = (e: MouseEvent) => {
@@ -28,342 +80,357 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [accountMenuOpen]);
 
-  const goToSection = (href: string) => {
-    if (href.startsWith("#/")) {
-      navigate(parse(href));
-      return;
-    }
+  /* ---- ESC closes the mega menu and returns focus to its trigger --------- */
+  useEffect(() => {
+    if (!activeMenu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      e.preventDefault();
+      const trigger = triggerRefs.current[activeMenu];
+      closeMenu();
+      trigger?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [activeMenu, closeMenu]);
 
-    const scrollToTarget = () => {
-      if (href === "#home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+  /* ---- clicking outside the header closes the mega menu ------------------ */
+  useEffect(() => {
+    if (!activeMenu) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!shellRef.current?.contains(e.target as Node)) closeMenu();
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [activeMenu, closeMenu]);
+
+  /* ---- navigation -------------------------------------------------------- */
+  const go = useCallback(
+    (href: string) => {
+      closeMenu();
+      setDrawerOpen(false);
+      setSearchOpen(false);
+
+      if (href.startsWith("#/")) {
+        navigate(parse(href));
         return;
       }
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
 
-    if (view.name === "home") {
-      scrollToTarget();
-    } else {
-      navigate({ name: "home" });
-      window.setTimeout(scrollToTarget, 120);
-    }
+      const scrollToTarget = () => {
+        if (href === "#home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+
+      if (view.name === "home") {
+        scrollToTarget();
+      } else {
+        navigate({ name: "home" });
+        window.setTimeout(scrollToTarget, 120);
+      }
+    },
+    [closeMenu, navigate, view.name],
+  );
+
+  /* ---- ArrowDown drops focus into the open panel ------------------------- */
+  const onTriggerKeyDown = (e: React.KeyboardEvent, id: MegaId) => {
+    if (e.key !== "ArrowDown") return;
+    e.preventDefault();
+    setActiveMenu(id);
+    window.requestAnimationFrame(() => {
+      document
+        .querySelector<HTMLAnchorElement>(`#mega-panel-${id} a`)
+        ?.focus();
+    });
   };
 
-  const linksRef = useRef<Array<HTMLAnchorElement | null>>([]);
-  const indicatorRef = useRef<HTMLSpanElement | null>(null);
-  const indicatorInited = useRef(false);
-
-  useEffect(() => {
-    document.body.classList.toggle("scroll-lock", open);
-    return () => document.body.classList.remove("scroll-lock");
-  }, [open]);
-
-  useEffect(() => {
-    const sections = site.navLinks
-      .map((l) => document.querySelector(l.href))
-      .filter((el): el is HTMLElement => el instanceof HTMLElement);
-
-    if (!sections.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = sections.findIndex((s) => s === entry.target);
-            if (idx !== -1) setActiveIndex(idx);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
-    );
-
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const link = linksRef.current[targetIndex];
-    const indicator = indicatorRef.current;
-    if (!link || !indicator) return;
-
-    const measure = () => {
-      const x = link.offsetLeft;
-      const width = link.offsetWidth;
-      if (!indicatorInited.current) {
-        gsap.set(indicator, { x, width, opacity: 1 });
-        indicatorInited.current = true;
-      } else {
-        gsap.to(indicator, {
-          x,
-          width,
-          duration: 0.45,
-          ease: "power3.out",
-        });
-      }
-    };
-
-    measure();
-    const id = requestAnimationFrame(measure);
-
-    const onResize = () => {
-      const l = linksRef.current[targetIndex];
-      if (!l || !indicator) return;
-      gsap.set(indicator, { x: l.offsetLeft, width: l.offsetWidth });
-    };
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      cancelAnimationFrame(id);
-      window.removeEventListener("resize", onResize);
-    };
-  }, [targetIndex]);
+  // Over the hero the header carries no surface of its own; it picks one up
+  // on scroll, on an inner page, or whenever a panel is open.
+  const transparent =
+    !scrolled && view.name === "home" && !activeMenu && !searchOpen;
 
   return (
     <>
-      <header className="nav">
-        <div className="container nav__row">
-        <a
-          className="nav__brand"
-          href="#home"
-          data-cursor
-          aria-label={site.name}
-          onClick={(e) => {
-            e.preventDefault();
-            goToSection("#home");
-          }}
+      <div
+        className={clsx("nav__shell", activeMenu && "has-mega")}
+        ref={shellRef}
+        onMouseLeave={scheduleClose}
+      >
+        <header
+          className={clsx(
+            "nav",
+            scrolled && "is-scrolled",
+            transparent && "is-transparent",
+          )}
         >
-          <span className="nav__logo" aria-hidden>
-            <svg viewBox="0 0 32 32" fill="none">
-              <path
-                d="M10 16 L21 9"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-              <path
-                d="M10 16 L21 23"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-              <circle cx="10" cy="16" r="4.2" fill="currentColor" />
-              <circle cx="22" cy="8.5" r="3" fill="currentColor" />
-              <circle cx="22" cy="23.5" r="3" fill="currentColor" />
-            </svg>
-          </span>
-          <span className="nav__brand-name">
-            <span className="nav__brand-primary">{site.brandMark}</span>
-            <span className="nav__brand-divider" aria-hidden />
-            <span className="nav__brand-accent">{site.brandSub}</span>
-          </span>
-        </a>
-
-        <nav>
-          <ul
-            className="nav__links"
-            onMouseLeave={() => setHoverIndex(null)}
-          >
-            <span
-              className="nav__indicator"
-              ref={indicatorRef}
-              aria-hidden
-            />
-            {site.navLinks.map((link, i) => (
-              <li key={link.href}>
-                <a
-                  ref={(el) => {
-                    linksRef.current[i] = el;
-                  }}
-                  className={clsx(
-                    "nav__link",
-                    i === targetIndex && "is-target",
-                  )}
-                  href={link.href}
-                  data-cursor
-                  onMouseEnter={() => setHoverIndex(i)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveIndex(i);
-                    goToSection(link.href);
-                  }}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="nav__actions">
-          <button
-            type="button"
-            className="nav__shop"
-            onClick={() => navigate({ name: "shop" })}
-            data-cursor
-            data-cursor-text="Shop"
-          >
-            Shop
-          </button>
-
-          <div className="nav__account-wrap" ref={accountMenuRef}>
-            <button
-              className="nav__account"
-              onClick={() => {
-                if (account) {
-                  setAccountMenuOpen((v) => !v);
-                } else {
-                  navigate({ name: "login" });
-                }
-              }}
-              aria-label={account ? "Your account" : "Sign in"}
-              aria-expanded={account ? accountMenuOpen : undefined}
-              data-cursor
-              data-cursor-text={account ? "Account" : "Sign in"}
-              type="button"
-            >
-              <svg
-                className="nav__account-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                <circle
-                  cx="12"
-                  cy="8.5"
-                  r="3.75"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                />
-                <path
-                  d="M4.75 20.25c0-3.59 3.25-6.5 7.25-6.5s7.25 2.91 7.25 6.5"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-
-            {account && accountMenuOpen && (
-              <div className="nav__account-menu" role="menu">
-                <button
-                  type="button"
-                  role="menuitem"
-                  onClick={() => {
-                    setAccountMenuOpen(false);
-                    navigate({ name: "account" });
-                  }}
-                >
-                  My Orders
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  onClick={() => {
-                    setAccountMenuOpen(false);
-                    navigate({ name: "track" });
-                  }}
-                >
-                  Track Order
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  className="nav__account-menu-danger"
-                  onClick={() => {
-                    setAccountMenuOpen(false);
-                    logout();
-                    navigate({ name: "home" });
-                  }}
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-
-          <button
-            className="nav__cart"
-            onClick={openCart}
-            aria-label={`Open cart, ${totalQty} item${totalQty === 1 ? "" : "s"}`}
-            data-cursor
-            data-cursor-text="Cart"
-            type="button"
-          >
-            <svg
-              className="nav__cart-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden
-            >
-              <path
-                d="M4 6h2.2l2.4 10.2a2 2 0 0 0 1.95 1.55h7.6a2 2 0 0 0 1.95-1.55L21.5 9H7.2"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="10.5" cy="20.25" r="1.25" fill="currentColor" />
-              <circle cx="17.5" cy="20.25" r="1.25" fill="currentColor" />
-            </svg>
-            {totalQty > 0 && (
-              <span className="nav__cart-badge" aria-hidden>
-                {totalQty}
-              </span>
-            )}
-          </button>
-
-          <button
-            className="nav__toggle"
-            aria-label="Open menu"
-            aria-expanded={open}
-            onClick={() => setOpen(true)}
-            data-cursor
-          >
-            <span aria-hidden />
-          </button>
-        </div>
-        </div>
-      </header>
-
-      <div className={clsx("nav__drawer", open && "is-open")} aria-hidden={!open}>
-        <button
-          className="nav__drawer-close"
-          aria-label="Close menu"
-          onClick={() => setOpen(false)}
-        >
-          ×
-        </button>
-        <ul className="nav__drawer-list">
-          <li>
+          <div className="container nav__row">
             <a
-              href="#/shop"
+              className="nav__brand"
+              href="#home"
+              data-cursor
+              aria-label={site.name}
               onClick={(e) => {
                 e.preventDefault();
-                setOpen(false);
-                navigate({ name: "shop" });
+                go("#home");
               }}
             >
-              Shop
+              <span className="nav__logo" aria-hidden>
+                <svg viewBox="0 0 32 32" fill="none">
+                  <path
+                    d="M10 16 L21 9"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M10 16 L21 23"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="10" cy="16" r="4.2" fill="currentColor" />
+                  <circle cx="22" cy="8.5" r="3" fill="currentColor" />
+                  <circle cx="22" cy="23.5" r="3" fill="currentColor" />
+                </svg>
+              </span>
+              <span className="nav__brand-name">
+                <span className="nav__brand-primary">{site.brandMark}</span>
+                <span className="nav__brand-divider" aria-hidden />
+                <span className="nav__brand-accent">{site.brandSub}</span>
+              </span>
             </a>
-          </li>
-          {site.navLinks.map((link) => (
-            <li key={link.href}>
+
+            <nav className="nav__primary" aria-label="Primary">
+              <ul className="nav__links">
+                {navEntries.map((entry) => {
+                  const isMega = entry.hasPanel;
+                  const id = entry.id as MegaId;
+                  return (
+                    <li
+                      key={entry.id}
+                      className="nav__item"
+                      onMouseEnter={() => {
+                        cancelClose();
+                        setActiveMenu(isMega ? id : null);
+                      }}
+                    >
+                      {isMega ? (
+                        <button
+                          type="button"
+                          className={clsx(
+                            "nav__link",
+                            activeMenu === id && "is-active",
+                          )}
+                          aria-expanded={activeMenu === id}
+                          aria-controls={`mega-panel-${id}`}
+                          data-cursor
+                          ref={(el) => {
+                            triggerRefs.current[entry.id] = el;
+                          }}
+                          onClick={() =>
+                            setActiveMenu((cur) => (cur === id ? null : id))
+                          }
+                          onKeyDown={(e) => onTriggerKeyDown(e, id)}
+                        >
+                          {entry.label}
+                          <span className="nav__link-rule" aria-hidden />
+                        </button>
+                      ) : null}
+
+                      {isMega && (
+                        <MegaMenuPanel
+                          id={id}
+                          isActive={activeMenu === id}
+                          onNavigate={go}
+                        />
+                      )}
+
+                      {!isMega && (
+                        <a
+                          className="nav__link"
+                          href={entry.href}
+                          data-cursor
+                          onClick={(e) => {
+                            e.preventDefault();
+                            go(entry.href);
+                          }}
+                        >
+                          {entry.label}
+                          <span className="nav__link-rule" aria-hidden />
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <div className="nav__actions">
+              <button
+                type="button"
+                className="nav__icon-btn"
+                onClick={() => {
+                  closeMenu();
+                  setSearchOpen(true);
+                }}
+                aria-label="Search products"
+                aria-expanded={searchOpen}
+                data-cursor
+                data-cursor-text="Search"
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <circle cx="11" cy="11" r="6.25" stroke="currentColor" strokeWidth="1.4" />
+                  <path
+                    d="m15.75 15.75 3.5 3.5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+
+              <div className="nav__account-wrap" ref={accountMenuRef}>
+                <button
+                  className="nav__icon-btn nav__account"
+                  onClick={() => {
+                    if (account) {
+                      setAccountMenuOpen((v) => !v);
+                    } else {
+                      navigate({ name: "login" });
+                    }
+                  }}
+                  aria-label={account ? "Your account" : "Sign in"}
+                  aria-expanded={account ? accountMenuOpen : undefined}
+                  data-cursor
+                  data-cursor-text={account ? "Account" : "Sign in"}
+                  type="button"
+                >
+                  <svg className="nav__account-icon" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <circle cx="12" cy="8.5" r="3.75" stroke="currentColor" strokeWidth="1.4" />
+                    <path
+                      d="M4.75 20.25c0-3.59 3.25-6.5 7.25-6.5s7.25 2.91 7.25 6.5"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </button>
+
+                {account && accountMenuOpen && (
+                  <div className="nav__account-menu" role="menu">
+                    <button
+                      type="button"
+                      role="menuitem"
+                      onClick={() => {
+                        setAccountMenuOpen(false);
+                        navigate({ name: "account" });
+                      }}
+                    >
+                      My Orders
+                    </button>
+                    <button
+                      type="button"
+                      role="menuitem"
+                      onClick={() => {
+                        setAccountMenuOpen(false);
+                        navigate({ name: "track" });
+                      }}
+                    >
+                      Track Order
+                    </button>
+                    <button
+                      type="button"
+                      role="menuitem"
+                      className="nav__account-menu-danger"
+                      onClick={() => {
+                        setAccountMenuOpen(false);
+                        logout();
+                        navigate({ name: "home" });
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              <button
+                className="nav__icon-btn nav__cart"
+                onClick={openCart}
+                aria-label={`Open cart, ${totalQty} item${totalQty === 1 ? "" : "s"}`}
+                data-cursor
+                data-cursor-text="Cart"
+                type="button"
+              >
+                <svg className="nav__cart-icon" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path
+                    d="M4 6h2.2l2.4 10.2a2 2 0 0 0 1.95 1.55h7.6a2 2 0 0 0 1.95-1.55L21.5 9H7.2"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="10.5" cy="20.25" r="1.25" fill="currentColor" />
+                  <circle cx="17.5" cy="20.25" r="1.25" fill="currentColor" />
+                </svg>
+                {totalQty > 0 && (
+                  <span className="nav__cart-badge" aria-hidden>
+                    {totalQty}
+                  </span>
+                )}
+              </button>
+
               <a
-                href={link.href}
+                className="nav__cta"
+                href={primaryCta.href}
+                ref={ctaRef}
+                data-cursor
                 onClick={(e) => {
                   e.preventDefault();
-                  setOpen(false);
-                  goToSection(link.href);
+                  go(primaryCta.href);
                 }}
               >
-                {link.label}
+                <span>{primaryCta.label}</span>
               </a>
-            </li>
-          ))}
-        </ul>
+
+              <button
+                className="nav__toggle"
+                aria-label="Open menu"
+                aria-expanded={drawerOpen}
+                aria-controls="mobile-nav"
+                onClick={() => setDrawerOpen(true)}
+                data-cursor
+                type="button"
+              >
+                <span aria-hidden />
+              </button>
+            </div>
+          </div>
+        </header>
       </div>
+
+      <div
+        className={clsx("nav__backdrop", activeMenu && "is-visible")}
+        aria-hidden
+        onMouseEnter={scheduleClose}
+      />
+
+      <div id="mobile-nav">
+        <MobileNav
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          onNavigate={go}
+        />
+      </div>
+
+      <NavSearch
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        onNavigate={go}
+      />
     </>
   );
 }

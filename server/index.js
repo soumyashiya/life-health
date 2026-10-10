@@ -1,6 +1,6 @@
-// Tiny server-side endpoint for liora.
+// Tiny server-side endpoint for Lyfe Health.
 //
-// liora is a static Vite SPA (not Next.js) — it has no server of its own, and
+// Lyfe Health is a static Vite SPA (not Next.js) — it has no server of its own, and
 // sendOrderConfirmationEmail() must run server-side (it holds the Resend
 // API key / SMTP password). This process is that server: it exposes one
 // endpoint that the frontend calls right after the shared backend confirms
@@ -8,7 +8,7 @@
 //
 // The backend (user-order-service) is unchanged and still creates the
 // order; it just returns the order response. This service only sends the
-// per-brand confirmation email for liora.
+// per-brand confirmation email for Lyfe Health.
 
 import express from 'express';
 // On the VPS, this site is deployed one level deeper than the site name
@@ -22,8 +22,10 @@ import express from 'express';
 import { sendOrderConfirmationEmail } from '../../../shared-email/order-email.js';
 
 const PORT = Number(process.env.PORT) || 4003;
-const BRAND_DOMAIN = process.env.BRAND_DOMAIN || 'liorahealthcare.com';
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || 'https://liorahealthcare.com,http://localhost:5173')
+const BRAND_DOMAIN = process.env.BRAND_DOMAIN || 'lyfehealth.com';
+// The old domain stays in the default allow-list until the deployed site has
+// actually moved — dropping it would 403 every order email from production.
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || 'https://lyfehealth.com,https://liorahealthcare.com,http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -47,17 +49,17 @@ app.use((req, res, next) => {
 
 app.post('/api/send-order-confirmation', async (req, res) => {
   const { customer, order } = req.body || {};
-  console.log('[liora-email-server] request received', {
+  console.log('[lyfe-email-server] request received', {
     to: customer?.email,
     orderNumber: order?.orderNumber,
   });
 
   if (!customer?.email || !customer?.name) {
-    console.warn('[liora-email-server] rejected: missing customer.name/email');
+    console.warn('[lyfe-email-server] rejected: missing customer.name/email');
     return res.status(400).json({ success: false, error: '"customer.name" and "customer.email" are required.' });
   }
   if (!order?.orderNumber || !Array.isArray(order?.items)) {
-    console.warn('[liora-email-server] rejected: missing order.orderNumber/items');
+    console.warn('[lyfe-email-server] rejected: missing order.orderNumber/items');
     return res.status(400).json({ success: false, error: '"order.orderNumber" and "order.items" are required.' });
   }
 
@@ -65,11 +67,11 @@ app.post('/api/send-order-confirmation', async (req, res) => {
   // request — otherwise a caller could pass an arbitrary domain and send
   // mail under a different brand's letterhead through this endpoint.
   const result = await sendOrderConfirmationEmail({ domain: BRAND_DOMAIN, customer, order });
-  console.log('[liora-email-server] result', result);
+  console.log('[lyfe-email-server] result', result);
 
   res.status(result.success ? 200 : 502).json(result);
 });
 
 app.listen(PORT, () => {
-  console.log(`[liora-email-server] listening on :${PORT} (brand domain: ${BRAND_DOMAIN})`);
+  console.log(`[lyfe-email-server] listening on :${PORT} (brand domain: ${BRAND_DOMAIN})`);
 });

@@ -113,7 +113,7 @@ export function CheckoutPage() {
         <span className="mono eyebrow">Checkout</span>
         <h1 className="checkout__title">Sign in to complete your order</h1>
         <p className="checkout__lede">
-          You need a Liora Healthcare account to place an order. It only takes a
+          You need a Lyfe Health account to place an order. It only takes a
           minute.
         </p>
         <button
@@ -210,7 +210,7 @@ export function CheckoutPage() {
         })),
       });
 
-      // Fire-and-forget: liora's own branded confirmation email, built from
+      // Fire-and-forget: Lyfe Health's own branded confirmation email, built from
       // a fresh read of the persisted order (not local checkout form
       // state), so it reflects what was actually saved server-side. Never
       // awaited into this try/catch — a failed send shouldn't undo a
@@ -258,7 +258,7 @@ export function CheckoutPage() {
         <span className="mono eyebrow">Final step</span>
         <h1 className="checkout__title">Checkout</h1>
         <p className="checkout__lede">
-          Complete your Liora Healthcare order securely.
+          Complete your Lyfe Health order securely.
         </p>
       </header>
 

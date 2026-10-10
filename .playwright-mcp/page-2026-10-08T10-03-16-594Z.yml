@@ -1,0 +1,332 @@
+- generic [ref=f42e2]:
+  - generic [ref=f42e4]:
+    - generic [ref=f42e5]: Booting interface
+    - generic [ref=f42e6]: 012 / 100
+    - generic [ref=f42e7]: 12%
+  - banner [ref=f42e11]:
+    - generic [ref=f42e12]:
+      - link "Liora Healthcare" [ref=f42e13]:
+        - /url: "#home"
+        - generic [ref=f42e21]:
+          - generic [ref=f42e22]: Liora
+          - generic [ref=f42e24]: Healthcare
+      - navigation "Primary" [ref=f42e25]:
+        - list [ref=f42e26]:
+          - listitem [ref=f42e27]:
+            - button "Research" [ref=f42e28] [cursor=pointer]
+          - listitem [ref=f42e29]:
+            - button "Shop" [ref=f42e30] [cursor=pointer]
+          - listitem [ref=f42e31]:
+            - button "Science" [ref=f42e32] [cursor=pointer]
+          - listitem [ref=f42e33]:
+            - link "About" [ref=f42e34] [cursor=pointer]:
+              - /url: "#/about"
+      - generic [ref=f42e35]:
+        - button "Search products" [ref=f42e36] [cursor=pointer]
+        - button "Sign in" [ref=f42e41] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f42e45] [cursor=pointer]
+        - link "Shop research" [ref=f42e50]:
+          - /url: "#/shop"
+  - text: → → → → → →
+  - main [ref=f42e52]:
+    - generic [ref=f42e53]:
+      - generic [ref=f42e57]:
+        - generic [ref=f42e58]: Science
+        - heading "Every claim, traceable to a lot." [level=1] [ref=f42e59]
+        - paragraph [ref=f42e60]: How we source, handle and verify research materials — and the published analysis behind each one.
+        - generic [ref=f42e61]:
+          - generic [ref=f42e62]:
+            - term [ref=f42e63]: "5"
+            - definition [ref=f42e64]: Published reports
+          - generic [ref=f42e65]:
+            - term [ref=f42e66]: Janoshik
+            - definition [ref=f42e67]: Independent analyst
+          - generic [ref=f42e68]:
+            - term [ref=f42e69]: Per lot
+            - definition [ref=f42e70]: Batch-specific COA
+      - navigation "On this page" [ref=f42e71]:
+        - generic [ref=f42e72]:
+          - button "Our standards" [ref=f42e73]
+          - button "Verified purity" [ref=f42e74]
+          - button "Lab reports" [ref=f42e75]
+      - generic [ref=f42e76]:
+        - generic [ref=f42e77]:
+          - text: "01"
+          - heading "Our standards" [level=2] [ref=f42e78]
+          - paragraph [ref=f42e79]: Quality is the work. These are the controls that sit behind every kit we ship.
+        - list [ref=f42e80]:
+          - listitem [ref=f42e81]:
+            - generic [ref=f42e82]: "01"
+            - heading "Verified sourcing" [level=3] [ref=f42e83]
+            - paragraph [ref=f42e84]: Materials come from manufacturers held to strict testing, handling and documentation requirements on every production run.
+          - listitem [ref=f42e85]:
+            - generic [ref=f42e86]: "02"
+            - heading "Controlled processes" [level=3] [ref=f42e87]
+            - paragraph [ref=f42e88]: Repeatable, documented handling so each unit matches the one before it — the point of a reference material is that it does not drift.
+          - listitem [ref=f42e89]:
+            - generic [ref=f42e90]: "03"
+            - heading "Sealed packaging" [level=3] [ref=f42e91]
+            - paragraph [ref=f42e92]: Tamper-evident research kits, with cold-chain packing where the compound requires refrigeration.
+          - listitem [ref=f42e93]:
+            - generic [ref=f42e94]: "04"
+            - heading "Retained samples" [level=3] [ref=f42e95]
+            - paragraph [ref=f42e96]: A reference sample is kept from every lot, so a result can be cross-checked against the material it came from.
+      - generic [ref=f42e97]:
+        - generic [ref=f42e98]:
+          - text: "02"
+          - heading "Verified purity" [level=2] [ref=f42e99]
+          - paragraph [ref=f42e100]: Purity is measured, not asserted. Each batch goes through the same two-instrument check before it is released.
+        - generic [ref=f42e101]:
+          - figure [ref=f42e102]:
+            - img "HPLC instrumentation used for peptide purity verification." [ref=f42e103]
+          - list [ref=f42e104]:
+            - listitem [ref=f42e105]:
+              - generic [ref=f42e106]: "01"
+              - generic [ref=f42e107]:
+                - heading "Reverse-phase HPLC" [level=3] [ref=f42e108]
+                - paragraph [ref=f42e109]: Separates the target compound from related substances and quantifies purity as a percentage of total peak area.
+            - listitem [ref=f42e110]:
+              - generic [ref=f42e111]: "02"
+              - generic [ref=f42e112]:
+                - heading "High-resolution mass spectrometry" [level=3] [ref=f42e113]
+                - paragraph [ref=f42e114]: Confirms molecular identity against the expected mass — purity alone does not prove you have the right molecule.
+            - listitem [ref=f42e115]:
+              - generic [ref=f42e116]: "03"
+              - generic [ref=f42e117]:
+                - heading "Independent verification" [level=3] [ref=f42e118]
+                - paragraph [ref=f42e119]: Analysis is carried out by Janoshik Analytical rather than in-house, and the report is published as received.
+        - generic [ref=f42e120]:
+          - paragraph [ref=f42e121]: Every certificate carries
+          - list [ref=f42e122]:
+            - listitem [ref=f42e123]: Lot number
+            - listitem [ref=f42e124]: HPLC purity
+            - listitem [ref=f42e125]: Mass-spec confirmation
+            - listitem [ref=f42e126]: Fill volume
+            - listitem [ref=f42e127]: Storage and handling notes
+      - generic [ref=f42e128]:
+        - generic [ref=f42e129]:
+          - text: "03"
+          - heading "Lab reports" [level=2] [ref=f42e130]
+          - paragraph [ref=f42e131]: The published analysis for every lot currently in the catalogue. Each one opens the product it belongs to.
+        - list [ref=f42e132]:
+          - listitem [ref=f42e133]:
+            - link "Retatrutide 20mg Janoshik Analytical Batch AR1721TRT Purity 99.21% Fill 2.4 mL Retatrutide 9.57 mg/mL · 22.96 mg" [ref=f42e134]:
+              - /url: "#/product/p1"
+              - generic [ref=f42e136]:
+                - generic [ref=f42e137]:
+                  - generic [ref=f42e138]: Retatrutide 20mg
+                  - generic [ref=f42e139]: Janoshik Analytical
+                - generic [ref=f42e140]:
+                  - generic [ref=f42e141]:
+                    - generic [ref=f42e142]: Batch
+                    - text: AR1721TRT
+                  - generic [ref=f42e143]:
+                    - generic [ref=f42e144]: Purity
+                    - text: 99.21%
+                  - generic [ref=f42e145]:
+                    - generic [ref=f42e146]: Fill
+                    - text: 2.4 mL
+                - generic [ref=f42e148]:
+                  - generic [ref=f42e149]: Retatrutide
+                  - generic [ref=f42e150]: 9.57 mg/mL · 22.96 mg
+          - listitem [ref=f42e154]:
+            - link "Glow 70mg Janoshik Analytical Batch GL0621XSA Purity 98.6% Fill 3.4 mL GHK-Cu 7.59 mg/mL · 25.80 mg BPC-157 2.39 mg/mL · 8.13 mg TB-500 1.99 mg/mL · 6.76 mg" [ref=f42e155]:
+              - /url: "#/product/p2"
+              - generic [ref=f42e157]:
+                - generic [ref=f42e158]:
+                  - generic [ref=f42e159]: Glow 70mg
+                  - generic [ref=f42e160]: Janoshik Analytical
+                - generic [ref=f42e161]:
+                  - generic [ref=f42e162]:
+                    - generic [ref=f42e163]: Batch
+                    - text: GL0621XSA
+                  - generic [ref=f42e164]:
+                    - generic [ref=f42e165]: Purity
+                    - text: 98.6%
+                  - generic [ref=f42e166]:
+                    - generic [ref=f42e167]: Fill
+                    - text: 3.4 mL
+                - generic [ref=f42e168]:
+                  - generic [ref=f42e169]:
+                    - generic [ref=f42e170]: GHK-Cu
+                    - generic [ref=f42e171]: 7.59 mg/mL · 25.80 mg
+                  - generic [ref=f42e172]:
+                    - generic [ref=f42e173]: BPC-157
+                    - generic [ref=f42e174]: 2.39 mg/mL · 8.13 mg
+                  - generic [ref=f42e175]:
+                    - generic [ref=f42e176]: TB-500
+                    - generic [ref=f42e177]: 1.99 mg/mL · 6.76 mg
+          - listitem [ref=f42e181]:
+            - link "Retatrutide 40mg Janoshik Analytical Batch AR1739JAT Purity 99.269% Fill 2.4 mL Retatrutide 18.22 mg/mL · 43.72 mg" [ref=f42e182]:
+              - /url: "#/product/p6"
+              - generic [ref=f42e184]:
+                - generic [ref=f42e185]:
+                  - generic [ref=f42e186]: Retatrutide 40mg
+                  - generic [ref=f42e187]: Janoshik Analytical
+                - generic [ref=f42e188]:
+                  - generic [ref=f42e189]:
+                    - generic [ref=f42e190]: Batch
+                    - text: AR1739JAT
+                  - generic [ref=f42e191]:
+                    - generic [ref=f42e192]: Purity
+                    - text: 99.269%
+                  - generic [ref=f42e193]:
+                    - generic [ref=f42e194]: Fill
+                    - text: 2.4 mL
+                - generic [ref=f42e196]:
+                  - generic [ref=f42e197]: Retatrutide
+                  - generic [ref=f42e198]: 18.22 mg/mL · 43.72 mg
+          - listitem [ref=f42e202]:
+            - link "Tirzepatide 40mg Janoshik Analytical Batch TR786PAOS Purity 99.85% Fill 3 mL Tirzepatide 13.35 mg/mL · 40.05 mg" [ref=f42e203]:
+              - /url: "#/product/p4"
+              - generic [ref=f42e205]:
+                - generic [ref=f42e206]:
+                  - generic [ref=f42e207]: Tirzepatide 40mg
+                  - generic [ref=f42e208]: Janoshik Analytical
+                - generic [ref=f42e209]:
+                  - generic [ref=f42e210]:
+                    - generic [ref=f42e211]: Batch
+                    - text: TR786PAOS
+                  - generic [ref=f42e212]:
+                    - generic [ref=f42e213]: Purity
+                    - text: 99.85%
+                  - generic [ref=f42e214]:
+                    - generic [ref=f42e215]: Fill
+                    - text: 3 mL
+                - generic [ref=f42e217]:
+                  - generic [ref=f42e218]: Tirzepatide
+                  - generic [ref=f42e219]: 13.35 mg/mL · 40.05 mg
+          - listitem [ref=f42e223]:
+            - link "BPC-157 & TB-500 40mg Janoshik Analytical Batch BP1701FSR Purity 99.32% Fill 3 mL BPC-157 7.33 mg/mL · 21.99 mg TB-500 6.53 mg/mL · 19.59 mg" [ref=f42e224]:
+              - /url: "#/product/p3"
+              - generic [ref=f42e226]:
+                - generic [ref=f42e227]:
+                  - generic [ref=f42e228]: BPC-157 & TB-500 40mg
+                  - generic [ref=f42e229]: Janoshik Analytical
+                - generic [ref=f42e230]:
+                  - generic [ref=f42e231]:
+                    - generic [ref=f42e232]: Batch
+                    - text: BP1701FSR
+                  - generic [ref=f42e233]:
+                    - generic [ref=f42e234]: Purity
+                    - text: 99.32%
+                  - generic [ref=f42e235]:
+                    - generic [ref=f42e236]: Fill
+                    - text: 3 mL
+                - generic [ref=f42e237]:
+                  - generic [ref=f42e238]:
+                    - generic [ref=f42e239]: BPC-157
+                    - generic [ref=f42e240]: 7.33 mg/mL · 21.99 mg
+                  - generic [ref=f42e241]:
+                    - generic [ref=f42e242]: TB-500
+                    - generic [ref=f42e243]: 6.53 mg/mL · 19.59 mg
+        - complementary [ref=f42e247]:
+          - img "Research team working at a peptide laboratory bench." [ref=f42e248]
+          - generic [ref=f42e249]:
+            - heading "Need the paperwork for a specific lot?" [level=3] [ref=f42e250]
+            - paragraph [ref=f42e251]: Batch data is printed on every product page. If you need something we have not published, ask and we will pull it from the retained sample record.
+            - generic [ref=f42e252]:
+              - button "Browse the catalogue" [ref=f42e253] [cursor=pointer]
+              - link "Contact us" [ref=f42e254] [cursor=pointer]:
+                - /url: "#contact"
+  - contentinfo [ref=f42e255]:
+    - generic [ref=f42e256]:
+      - generic [ref=f42e257]:
+        - generic [ref=f42e258]:
+          - generic [ref=f42e259]:
+            - generic [ref=f42e260]: Liora
+            - generic [ref=f42e261]: Healthcare
+          - paragraph [ref=f42e262]: Research-grade peptide supply
+          - generic [ref=f42e263]:
+            - heading "Stay updated" [level=4] [ref=f42e264]
+            - generic [ref=f42e265]:
+              - textbox "Email address" [ref=f42e266]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f42e267]
+            - paragraph [ref=f42e268]: Research updates and restock alerts. No spam.
+        - generic [ref=f42e269]:
+          - heading "Quick Links" [level=4] [ref=f42e270]
+          - list [ref=f42e271]:
+            - listitem [ref=f42e272]:
+              - link "Shop" [ref=f42e273] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f42e274]:
+              - link "Home" [ref=f42e275] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f42e276]:
+              - link "About" [ref=f42e277] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f42e278]:
+              - link "Products" [ref=f42e279] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f42e280]:
+              - link "Why Us" [ref=f42e281] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f42e282]:
+              - link "FAQ" [ref=f42e283] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f42e284]:
+              - link "Contact" [ref=f42e285] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f42e286]:
+              - link "Track order" [ref=f42e287] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f42e288]:
+          - heading "Contact" [level=4] [ref=f42e289]
+          - list [ref=f42e290]:
+            - listitem [ref=f42e291]:
+              - link "hello@liorahealthcare.com" [ref=f42e292] [cursor=pointer]:
+                - /url: mailto:hello@liorahealthcare.com
+            - listitem [ref=f42e293]:
+              - link "+1 000 000 0000" [ref=f42e294] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f42e295]:
+              - generic [ref=f42e296]: Global research supply
+        - generic [ref=f42e297]:
+          - heading "Policies" [level=4] [ref=f42e298]
+          - list [ref=f42e299]:
+            - listitem [ref=f42e300]:
+              - link "Press Release" [ref=f42e301] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f42e302]:
+              - link "Refund Policy" [ref=f42e303] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f42e304]:
+              - link "Shipping Policy" [ref=f42e305] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f42e306]:
+              - link "Privacy Policy" [ref=f42e307] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f42e308]:
+              - link "Terms Of Service" [ref=f42e309] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f42e310]:
+          - heading "Follow" [level=4] [ref=f42e311]
+          - list [ref=f42e312]:
+            - listitem [ref=f42e313]:
+              - link "WhatsApp" [ref=f42e314]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f42e315]:
+              - link "Instagram" [ref=f42e316]:
+                - /url: https://instagram.com/liorahealthcare
+            - listitem [ref=f42e317]:
+              - link "Email" [ref=f42e318]:
+                - /url: mailto:hello@liorahealthcare.com
+      - generic [ref=f42e320]:
+        - generic [ref=f42e321]: © 2026 Liora Healthcare
+        - generic [ref=f42e322]: Global research supply
+      - paragraph [ref=f42e323]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f42e324]: Liora Healthcare
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

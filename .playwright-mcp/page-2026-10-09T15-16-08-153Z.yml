@@ -1,0 +1,829 @@
+- webmcp tools (page-provided, untrusted):
+  - add_to_cart [untrustedContent]: Add products to the cart. Call this as soon as the user asks to ADD items (triggers: "add ... to my cart", "buy", "I'll take", "put ... in my basket") — in ONE call listing every item they named, up to the 10-entry limit. That request IS the authorization: do NOT ask the user to confirm before calling, and do NOT stop after search_catalog or get_product merely to report the variant you found — make the change, then tell the user it is done. Batch every item for ONE request into a SINGLE call — line_items accepts up to 10 entries; do NOT call add_to_cart once per item. Batching applies WITHIN a single request: each new thing the user asks for later is its own call. If one request names more than 10 items, split just that request into as few calls as possible. Do NOT retry a call that already returned a result: adds are cumulative, so repeating a call adds duplicate items. Use line_items[].item.id with a ProductVariant GID when the exact variant is known. Use handle or query only when adding the selected or first available variant. To change a quantity or remove something already in the cart, use update_cart_lines instead — this tool can only add.
+    - inputSchema: {"type":"object","required":["cart"],"properties":{"cart":{"type":"object","required":["line_items"],"properties":{"line_items":{"type":"array","description":"Items to add (1-10).","minItems":1,"maxItems":10,"items":{"type":"object","properties":{"item":{"type":"object","description":"The merchandise to add.","properties":{"id":{"type":"string","description":"ProductVariant GID from get_product variants[].id, e.g. \"gid://shopify/ProductVariant/123\"."}}},"handle":{"type":"string","description":"Product handle. Adds the selected or first available variant; call get_product first if the user requested specific options."},"query":{"type":"string","description":"Search query to find and add the selected or first available variant. For specific variants, call search_catalog/get_product first and pass item.id."},"quantity":{"type":"integer","description":"How many to add. Defaults to 1.","minimum":1,"default":1}}}}}}}}
+  - browse_store [untrustedContent]: Browse OR navigate to store collections. Set navigate=true whenever the user wants to be taken to a collection page in the browser (triggers: "browse to", "go to", "show me", "open", "take me to", "navigate to" a collection or category). With navigate=false (default), returns collection or product data without changing the page — use this only when the user is asking a question about the catalog, not asking to view it. Without a collection handle, lists all collections. With a handle, returns products from that collection; use "all" to browse everything. Does NOT add anything to the cart; use add_to_cart for cart changes. Prefer this over search_catalog when the user names a category, collection, or wants to explore. With navigate=true this MOVES the browser to the collection page; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{"collection":{"type":"string","description":"Collection handle to browse (e.g. \"best-sellers\", \"new-arrivals\"). Omit to list all collections. Use \"all\" to browse every product."},"navigate":{"type":"boolean","description":"When true, navigate the browser to the collection page after loading data. Set true for user intents like \"browse to\", \"go to\", \"show me\", \"open\", \"take me to\" a collection. Requires a collection handle. Defaults to false."},"sort_by":{"type":"string","description":"Sort order. Options: best-selling (default), price-ascending, price-descending, title-ascending, title-descending, created-descending, created-ascending."},"page":{"type":"number","description":"Page number for pagination (starts at 1). Each page returns up to 30 products."}}}
+  - cancel_cart: Remove all items from the cart in one step. Use when the user wants to empty their cart or start over.
+    - inputSchema: {"type":"object","properties":{}}
+  - get_cart [readOnly, untrustedContent]: Get the current shopping cart contents — line items with product titles, variant titles, handles, URLs, images, unit prices, quantities, and totals. Everything needed to describe the cart to the user in natural language, without a follow-up get_product call per line. Works from any page.
+    - inputSchema: {"type":"object","properties":{}}
+  - get_product [untrustedContent]: Get product details, OR navigate the browser to the product page. Set catalog.navigate=true whenever the user wants to see/view the product in the browser (triggers: "show me", "open", "view", "go to", "take me to", "navigate to" a product). Set catalog.navigate=false (default) only when you need data (description, options, variants, prices, availability) to answer a question or to prepare an add_to_cart call — the browser stays on the current page. Defaults to the current page's product if no catalog.id is provided. Does NOT add anything to the cart; use add_to_cart for that. For a specific variant (color/size/etc.), use show_variant instead — it accepts partial option selections like "purple" without needing every option. With catalog.navigate=true this MOVES the browser to the product page; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{"catalog":{"type":"object","description":"Product detail parameters.","properties":{"id":{"type":"string","description":"Storefront API Product GID, product handle, or product URL path. Custom app product paths and Shopify standard /products/<handle> paths are supported. The id field from search_catalog or browse_store can be passed directly. If omitted, uses the current page's product."},"navigate":{"type":"boolean","description":"When true, navigate the browser to the product page after fetching details. Set true for user intents like \"show me\", \"open\", \"view\", \"go to\", \"take me to\" a product. Defaults to false. If the user specified partial options (e.g. only a color), prefer show_variant with selected_options instead."},"selected_options":{"type":"array","description":"Known product option selections to filter available_options. Use exact option names and values from search_catalog options or a prior get_product available_options entry.","items":{"type":"object","properties":{"name":{"type":"string","description":"Option name, e.g. \"Size\" or \"Color\"."},"value":{"type":"string","description":"Option value, e.g. \"160cm\" or \"Fiberglass\"."}},"required":["name","value"]}}}}}}
+  - get_ucp_profile [readOnly, untrustedContent]: Get this store's Universal Commerce Protocol (UCP) profile, as served at /.well-known/ucp: the UCP version, the services the store offers with their endpoints (e.g. the store's UCP MCP server), its capabilities, and its payment handlers. Use it to discover how to continue a purchase with this store over UCP, or to check which platform operates the store. Read-only; works from any page.
+    - inputSchema: {"type":"object","properties":{}}
+  - manage_orders: Navigate to the customer's order history page. Use when the user asks about past orders, order status, tracking, or returns. The user will be prompted to log in if not already authenticated. This MOVES the browser to the order history page; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{}}
+  - proceed_to_checkout: Proceed to checkout. Verifies the cart is not empty, then MOVES the browser to the checkout page. The tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{}}
+  - search_catalog [readOnly, untrustedContent]: Search the store catalog for products, collections, articles, and pages. Does NOT add anything to the cart; use add_to_cart for cart changes. If the user asks for a specific product variant, call get_product after search_catalog to inspect available variants, then show_variant to display one.
+    - inputSchema: {"type":"object","required":["catalog"],"properties":{"catalog":{"type":"object","required":["query"],"properties":{"query":{"type":"string","description":"Search query string."},"pagination":{"type":"object","properties":{"limit":{"type":"integer","description":"Max results per type (1-10). Defaults to 5.","default":5,"minimum":1,"maximum":10}}}}}}}
+  - search_shop_policies_and_faqs [readOnly, untrustedContent]: Used to get facts about the store's policies, FAQ, or contact details.
+When the question is about specific policy kinds, set policy_types to those kinds; leave it unset for general FAQ questions.
+Some examples of questions you can ask are:
+  - What is your return policy? (policy_types: ["refund"])
+  - What is your shipping policy? (policy_types: ["shipping"])
+  - What is your phone number? (policy_types: ["contact"])
+  - What are your hours of operation? (policy_types: ["contact"])
+  - Do you offer gift wrapping? (general FAQ, no specific policy kind — leave policy_types unset)
+
+    - inputSchema: {"type":"object","properties":{"query":{"type":"string","description":"A natural language query. Searches FAQ pages and articles, and routes policies by keyword when policy_types is omitted."},"policy_types":{"type":"array","description":"Policy kinds to fetch, chosen from the user's question — e.g. [\"refund\"] for returns/exchanges, [\"contact\"] for phone/hours/address. Include every kind the question touches. Omit when no specific policy is relevant (e.g. a general FAQ question).","items":{"type":"string","enum":["refund","shipping","privacy","terms_of_service","terms_of_sale","subscription","legal_notice","contact"]}}},"required":["query"]}
+  - show_variant [untrustedContent]: Navigate the browser to a product page, with a specific variant OR a partial option filter selected. Use for view intents: "show me", "open", "view", "go to", "take me to" a specific product configuration. Accepts EITHER variant_id (fully specified variant) OR selected_options (partial, e.g. only Color=Purple) — with partial options the first matching available variant is picked automatically, so DO NOT ask the user for missing options when their intent is to view. Does NOT add anything to the cart; use add_to_cart for cart changes. For cart operations you still need a full variant_id — call get_product with the full option combination first. This MOVES the browser to the exact variant page with the variant pre-selected; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","required":["catalog"],"properties":{"catalog":{"type":"object","description":"Provide EITHER variant_id OR selected_options. Handle is required unless the user is already on the product page.","properties":{"handle":{"type":"string","description":"Product handle. If omitted, uses the current product page's handle."},"variant_id":{"type":["string","number"],"description":"ProductVariant ID from get_product variants[].id, e.g. \"gid://shopify/ProductVariant/123\", or the numeric variant ID. Use when the user picked a specific fully-specified variant. Omit when using selected_options."},"selected_options":{"type":"array","description":"Partial (or full) option selections, e.g. [{\"name\":\"Color\",\"value\":\"Purple\"}]. Use when the user names some options but not all (e.g. \"show me the purple shoe\" — pass only Color). The first matching available variant will be selected automatically. Use exact option names and values from get_product available_options or search_catalog options.","items":{"type":"object","properties":{"name":{"type":"string"},"value":{"type":"string"}}}}}}}}
+  - update_cart_lines [untrustedContent]: Change the quantity of items already in the cart, or remove them. Every change here addresses an existing cart line by its id, so call get_cart first unless you already have line_items[].id from an earlier get_cart in this conversation. Pass the ABSOLUTE target quantity, not a delta — quantity 2 means the line ends up at 2 regardless of what it was. Use quantity 0 to remove the line entirely. Batch every change for ONE request into a SINGLE call — line_items accepts up to 10 entries; do NOT call update_cart_lines once per line. Batching applies WITHIN a single request: each new thing the user asks for later is its own call. This tool cannot add new merchandise. To add something not already in the cart, use add_to_cart. To empty the whole cart at once, use cancel_cart.
+    - inputSchema: {"type":"object","required":["cart"],"properties":{"cart":{"type":"object","required":["line_items"],"properties":{"line_items":{"type":"array","description":"Existing cart lines to update or remove (1-10).","minItems":1,"maxItems":10,"items":{"type":"object","required":["id","quantity"],"properties":{"id":{"type":"string","description":"Existing cart line id from get_cart line_items[].id. Required — this tool cannot resolve products by name."},"quantity":{"type":"integer","description":"Absolute target quantity for this line (not a delta). 0 removes the line.","minimum":0}}}}}}}}
+
+- generic [active] [ref=f5e1]:
+  - link "Skip to content" [ref=f5e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - region "Announcements" [ref=f5e5]:
+    - group "Slide 1 of 1" [ref=f5e7]:
+      - 'link "Just Launched: arrae Hair Protein" [ref=f5e8] [cursor=pointer]':
+        - /url: /products/hair-protein
+  - banner:
+    - generic [ref=f5e10]:
+      - link "Home" [ref=f5e12] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f5e14]: Arrae
+      - navigation "Primary" [ref=f5e15]:
+        - list [ref=f5e16]:
+          - listitem [ref=f5e17]:
+            - button "Shop" [ref=f5e18] [cursor=pointer]
+          - listitem [ref=f5e20]:
+            - button "Learn" [ref=f5e21] [cursor=pointer]
+          - listitem [ref=f5e23]:
+            - link "Find your Routine" [ref=f5e24] [cursor=pointer]:
+              - /url: https://muf27hrj3lv.typeform.com/to/UdSDOHBV
+      - generic [ref=f5e26]:
+        - 'button "Select region — current: AED" [ref=f5e28] [cursor=pointer]':
+          - generic [ref=f5e29]: AED
+        - button "Search" [ref=f5e33] [cursor=pointer]:
+          - img "Search" [ref=f5e34]
+        - link "Account" [ref=f5e36] [cursor=pointer]:
+          - /url: /account
+          - img "Account" [ref=f5e37]
+        - button "Shopping Bag Cart, 0 items" [ref=f5e40] [cursor=pointer]:
+          - img "Shopping Bag" [ref=f5e41]
+          - generic [ref=f5e43]: Cart, 0 items
+  - dialog [aria-hidden] [ref=f5e44]:
+    - generic [ref=f5e46]:
+      - generic [ref=f5e48]:
+        - link [ref=f5e50] [cursor=pointer]:
+          - /url: /
+        - textbox [ref=f5e61]:
+          - /placeholder: Search
+        - button [ref=f5e63] [cursor=pointer]
+      - generic [ref=f5e67]:
+        - generic [ref=f5e68]:
+          - heading [level=3] [ref=f5e69]: Popular Search Terms
+          - list [ref=f5e70]:
+            - option [ref=f5e71]:
+              - link [ref=f5e72] [cursor=pointer]:
+                - /url: /search?q=hair-skin-beauty
+                - text: Hair Protein
+            - option [ref=f5e73]:
+              - link [ref=f5e74] [cursor=pointer]:
+                - /url: /search?q=metabolism
+                - text: Metabolic Health
+            - option [ref=f5e75]:
+              - link [ref=f5e76] [cursor=pointer]:
+                - /url: /search?q=fitness
+                - text: Fitness & Performance
+            - option [ref=f5e77]:
+              - link [ref=f5e78] [cursor=pointer]:
+                - /url: /search?q=gut
+                - text: Gut Health
+            - option [ref=f5e79]:
+              - link [ref=f5e80] [cursor=pointer]:
+                - /url: /search?q=hormones
+                - text: Hormonal Health
+        - generic [ref=f5e81]:
+          - heading [level=3] [ref=f5e82]: Suggested Products
+          - generic [ref=f5e83]:
+            - generic [ref=f5e86]:
+              - generic [ref=f5e87]:
+                - link [ref=f5e88] [cursor=pointer]:
+                  - /url: /products/hair-protein
+                - generic: NEW!
+                - button [ref=f5e93] [cursor=pointer]
+                - generic [ref=f5e95]:
+                  - button [ref=f5e96] [cursor=pointer]
+                  - generic [ref=f5e98]: 1 Option Available
+              - generic:
+                - generic [ref=f5e99]:
+                  - heading [level=3] [ref=f5e100]:
+                    - link [ref=f5e101] [cursor=pointer]:
+                      - /url: /products/hair-protein
+                      - text: Hair Protein
+                  - generic [ref=f5e102]: Protein-powered hair growth system*
+                - generic [ref=f5e103]:
+                  - paragraph [ref=f5e106]: Rated 4.84 out of 5, 63 reviews.
+                  - generic [ref=f5e119]:
+                    - generic [ref=f5e120]: From
+                    - generic [ref=f5e121]: Dhs. 236.00
+            - generic [ref=f5e124]:
+              - generic [ref=f5e125]:
+                - link [ref=f5e126] [cursor=pointer]:
+                  - /url: ""
+                - button [ref=f5e128] [cursor=pointer]
+              - generic [ref=f5e131]:
+                - paragraph [ref=f5e134]: No reviews yet.
+                - generic [ref=f5e146]: Sold Out
+            - generic [ref=f5e151]:
+              - generic [ref=f5e152]:
+                - link [ref=f5e153] [cursor=pointer]:
+                  - /url: /products/clear-protein-raspberry-yuzu
+                - button [ref=f5e158] [cursor=pointer]
+                - generic [ref=f5e160]:
+                  - button [ref=f5e161] [cursor=pointer]
+                  - button [ref=f5e163] [cursor=pointer]
+                  - generic [ref=f5e168]: 2 Options Available
+              - generic:
+                - generic [ref=f5e169]:
+                  - heading [level=3] [ref=f5e170]:
+                    - link [ref=f5e171] [cursor=pointer]:
+                      - /url: /products/clear-protein-raspberry-yuzu
+                      - text: Clear Protein+ (Raspberry Yuzu)
+                  - generic [ref=f5e172]: Grass-fed collagen protein, aminos & electrolytes
+                - generic [ref=f5e173]:
+                  - paragraph [ref=f5e176]: Rated 4.63 out of 5, 2906 reviews.
+                  - generic [ref=f5e189]:
+                    - generic [ref=f5e190]: From
+                    - generic [ref=f5e191]: Dhs. 176.00
+            - generic [ref=f5e194]:
+              - generic [ref=f5e195]:
+                - link [ref=f5e196] [cursor=pointer]:
+                  - /url: /products/mb-1-max
+                - button [ref=f5e201] [cursor=pointer]
+                - generic [ref=f5e203]:
+                  - button [ref=f5e204] [cursor=pointer]
+                  - button [ref=f5e206] [cursor=pointer]
+                  - button [ref=f5e208] [cursor=pointer]
+                  - generic [ref=f5e210]: 3 Options Available
+              - generic:
+                - generic [ref=f5e211]:
+                  - heading [level=3] [ref=f5e212]:
+                    - link [ref=f5e213] [cursor=pointer]:
+                      - /url: /products/mb-1-max
+                      - text: MB-1 Max
+                  - generic [ref=f5e214]: Extra strength‡ metabolism support*
+                - generic [ref=f5e215]:
+                  - paragraph [ref=f5e218]: Rated 4.63 out of 5, 5290 reviews.
+                  - generic [ref=f5e231]:
+                    - generic [ref=f5e232]: From
+                    - generic [ref=f5e233]: Dhs. 194.40
+  - dialog [aria-hidden] [ref=f5e234]:
+    - generic [ref=f5e236]:
+      - button [ref=f5e237] [cursor=pointer]:
+        - generic [ref=f5e240]: Close
+      - generic [ref=f5e244]:
+        - heading [level=1] [ref=f5e246]:
+          - generic [ref=f5e247]: Your Cart
+          - generic [ref=f5e248]: (0)
+        - generic [ref=f5e249]: Free Shipping on orders $100+ or with subscription
+        - generic [ref=f5e252]:
+          - generic [ref=f5e254]:
+            - generic [ref=f5e255]: Your cart is empty!
+            - link [ref=f5e257] [cursor=pointer]:
+              - /url: https://www.arrae.com/collections/best-sellers
+              - generic [ref=f5e258]: Shop Best Sellers
+          - generic [ref=f5e259]:
+            - heading [level=2] [ref=f5e260]: Complete your routine
+            - list [ref=f5e261]:
+              - listitem [ref=f5e262]:
+                - generic [ref=f5e263]:
+                  - link [ref=f5e264] [cursor=pointer]:
+                    - /url: https://www.arrae.com/products/hair-protein
+                  - generic [ref=f5e268]:
+                    - generic [ref=f5e269]:
+                      - generic [ref=f5e270]:
+                        - heading [level=2] [ref=f5e271]:
+                          - link [ref=f5e272] [cursor=pointer]:
+                            - /url: https://www.arrae.com/products/hair-protein
+                            - text: Hair Protein
+                        - generic [ref=f5e273]: Dhs. 295.00
+                      - paragraph [ref=f5e274]: Protein-powered hair growth system*
+                    - button [ref=f5e275] [cursor=pointer]: Add to Cart
+              - listitem [ref=f5e276]:
+                - generic [ref=f5e277]:
+                  - link [ref=f5e278] [cursor=pointer]:
+                    - /url: https://www.arrae.com/products/clear-protein-raspberry-yuzu
+                  - generic [ref=f5e282]:
+                    - generic [ref=f5e283]:
+                      - generic [ref=f5e284]:
+                        - heading [level=2] [ref=f5e285]:
+                          - link [ref=f5e286] [cursor=pointer]:
+                            - /url: https://www.arrae.com/products/clear-protein-raspberry-yuzu
+                            - text: Clear Protein+ (Raspberry Yuzu)
+                        - generic [ref=f5e287]: Dhs. 220.00
+                      - paragraph [ref=f5e288]: Grass-fed collagen protein, aminos & electrolytes
+                    - button [ref=f5e289] [cursor=pointer]: Add to Cart
+              - listitem [ref=f5e290]:
+                - generic [ref=f5e291]:
+                  - link [ref=f5e292] [cursor=pointer]:
+                    - /url: https://www.arrae.com/products/mb-1-max
+                  - generic [ref=f5e296]:
+                    - generic [ref=f5e297]:
+                      - generic [ref=f5e298]:
+                        - heading [level=2] [ref=f5e299]:
+                          - link [ref=f5e300] [cursor=pointer]:
+                            - /url: https://www.arrae.com/products/mb-1-max
+                            - text: MB-1 Max
+                        - generic [ref=f5e301]: Dhs. 243.00
+                      - paragraph [ref=f5e302]: Extra strength‡ metabolism support*
+                    - button [ref=f5e303] [cursor=pointer]: Add to Cart
+  - dialog [aria-hidden] [ref=f5e304]:
+    - button [ref=f5e307] [cursor=pointer]:
+      - generic [ref=f5e310]: Close
+  - main [ref=f5e314]:
+    - generic [ref=f5e317]:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - paragraph: JUST LAUNCHED
+            - generic:
+              - generic:
+                - img "Alt text not provided for this image"
+            - generic:
+              - paragraph: Sip your way into healthier hair with the protein-powered hair growth system*
+            - link "SHOP NOW" [ref=f5e322] [cursor=pointer]:
+              - /url: /products/hair-protein
+      - button "Pause video" [ref=f5e327] [cursor=pointer]:
+        - generic [ref=f5e328]:
+          - img "Pause"
+    - generic [ref=f5e330]:
+      - heading [level=2] [ref=f5e332]:
+        - paragraph [ref=f5e333]: Targeted Supplements for Unsexy Problems
+      - generic [ref=f5e335]:
+        - tablist "Featured collection tabs" [ref=f5e336]:
+          - tab "Best Sellers" [selected] [ref=f5e337] [cursor=pointer]
+          - tab "Hair, Skin & Beauty" [ref=f5e338] [cursor=pointer]
+          - tab "METABOLIC HEALTH" [ref=f5e339] [cursor=pointer]
+          - tab "FITNESS & PERFORMANCE" [ref=f5e340] [cursor=pointer]
+          - tab "GUT HEALTH" [ref=f5e341] [cursor=pointer]
+          - tab "Hormonal health" [ref=f5e342] [cursor=pointer]
+        - link "SHOP ALL" [ref=f5e345] [cursor=pointer]:
+          - /url: /collections/shop-all
+      - generic [ref=f5e347]:
+        - tabpanel "Best Sellers" [ref=f5e348]:
+          - generic [ref=f5e350]:
+            - group "1 / 6" [ref=f5e351]:
+              - generic [ref=f5e353]:
+                - generic [ref=f5e354]:
+                  - link [ref=f5e355] [cursor=pointer]:
+                    - /url: /products/clear-protein-variety-pack
+                    - img "Clear Protein+ Variety Pack" [ref=f5e359]
+                  - button "Quick Shop" [ref=f5e360] [cursor=pointer]
+                - generic:
+                  - generic [ref=f5e362]:
+                    - button "Variety Pack" [ref=f5e363] [cursor=pointer]
+                    - button "Raspberry Yuzu" [ref=f5e370] [cursor=pointer]
+                  - generic [ref=f5e372]:
+                    - heading [level=3] [ref=f5e373]:
+                      - link "Clear Protein+ Variety Pack" [ref=f5e374] [cursor=pointer]:
+                        - /url: /products/clear-protein-variety-pack
+                    - generic [ref=f5e375]: Grass-fed collagen protein, aminos & electrolytes
+                  - generic [ref=f5e376]:
+                    - generic [ref=f5e378]:
+                      - paragraph [ref=f5e379]: Rated 4.63 out of 5, 2906 reviews.
+                      - generic [aria-hidden] [ref=f5e391]: 2906 Reviews
+                    - generic [ref=f5e393]:
+                      - generic [ref=f5e394]: From
+                      - generic [ref=f5e395]: Dhs. 176.00
+            - group "2 / 6" [ref=f5e396]:
+              - generic [ref=f5e398]:
+                - generic [ref=f5e399]:
+                  - link [ref=f5e400] [cursor=pointer]:
+                    - /url: /products/mb-1-max
+                    - img "MB-1 Max" [ref=f5e404]
+                  - button "Quick Shop" [ref=f5e405] [cursor=pointer]
+                - generic:
+                  - generic [ref=f5e407]:
+                    - button "MB-1 Max" [ref=f5e408] [cursor=pointer]
+                    - button "MB-1" [ref=f5e412] [cursor=pointer]
+                    - button "MB-1 45+" [ref=f5e414] [cursor=pointer]
+                  - generic [ref=f5e416]:
+                    - heading [level=3] [ref=f5e417]:
+                      - link "MB-1 Max" [ref=f5e418] [cursor=pointer]:
+                        - /url: /products/mb-1-max
+                    - generic [ref=f5e419]: Extra strength‡ metabolism support*
+                  - generic [ref=f5e420]:
+                    - generic [ref=f5e422]:
+                      - paragraph [ref=f5e423]: Rated 4.63 out of 5, 5290 reviews.
+                      - generic [aria-hidden] [ref=f5e435]: 5290 Reviews
+                    - generic [ref=f5e437]:
+                      - generic [ref=f5e438]: From
+                      - generic [ref=f5e439]: Dhs. 194.40
+            - group "3 / 6" [ref=f5e440]:
+              - generic [ref=f5e442]:
+                - generic [ref=f5e443]:
+                  - link [ref=f5e444] [cursor=pointer]:
+                    - /url: /products/tone-sour-watermelon
+                    - img "Tone Sour Watermelon" [ref=f5e448]
+                  - button "Quick Shop" [ref=f5e449] [cursor=pointer]
+                - generic:
+                  - generic [ref=f5e451]:
+                    - button "Sour Watermelon" [ref=f5e452] [cursor=pointer]
+                    - button "Mixed Berry" [ref=f5e456] [cursor=pointer]
+                    - button "Green Apple" [ref=f5e458] [cursor=pointer]
+                  - generic [ref=f5e460]:
+                    - heading [level=3] [ref=f5e461]:
+                      - link "Tone Sour Watermelon" [ref=f5e462] [cursor=pointer]:
+                        - /url: /products/tone-sour-watermelon
+                    - generic [ref=f5e463]: Creatine body-toning gummies for lean muscle*
+                  - generic [ref=f5e464]:
+                    - generic [ref=f5e466]:
+                      - paragraph [ref=f5e467]: Rated 4.63 out of 5, 4153 reviews.
+                      - generic [aria-hidden] [ref=f5e479]: 4153 Reviews
+                    - generic [ref=f5e481]:
+                      - generic [ref=f5e482]: From
+                      - generic [ref=f5e483]: Dhs. 164.80
+            - group "4 / 6" [ref=f5e484]:
+              - generic [ref=f5e486]:
+                - generic [ref=f5e487]:
+                  - link [ref=f5e488] [cursor=pointer]:
+                    - /url: /products/bloat-gummies
+                    - img "Bloat Gummies" [ref=f5e492]
+                  - button "Quick Shop" [ref=f5e493] [cursor=pointer]
+                - generic:
+                  - generic [ref=f5e494]:
+                    - heading [level=3] [ref=f5e495]:
+                      - link "Bloat Gummies" [ref=f5e496] [cursor=pointer]:
+                        - /url: /products/bloat-gummies
+                    - generic [ref=f5e497]: Fast-acting digestive support gummies*
+                  - generic [ref=f5e498]:
+                    - generic [ref=f5e500]:
+                      - paragraph [ref=f5e501]: Rated 4.57 out of 5, 791 reviews.
+                      - generic [aria-hidden] [ref=f5e513]: 791 Reviews
+                    - generic [ref=f5e515]:
+                      - generic [ref=f5e516]: From
+                      - generic [ref=f5e517]: Dhs. 134.40
+            - group "5 / 6" [ref=f5e518]:
+              - generic [ref=f5e520]:
+                - generic [ref=f5e521]:
+                  - link [ref=f5e522] [cursor=pointer]:
+                    - /url: /products/mb-1
+                    - img "MB-1" [ref=f5e526]
+                  - button "Quick Shop" [ref=f5e527] [cursor=pointer]
+                - generic:
+                  - generic [ref=f5e529]:
+                    - button "MB-1" [ref=f5e530] [cursor=pointer]
+                    - button "MB-1 Max" [ref=f5e534] [cursor=pointer]
+                    - button "MB-1 45+" [ref=f5e536] [cursor=pointer]
+                  - generic [ref=f5e538]:
+                    - heading [level=3] [ref=f5e539]:
+                      - link "MB-1" [ref=f5e540] [cursor=pointer]:
+                        - /url: /products/mb-1
+                    - generic [ref=f5e541]: Metabolism & weight management support*
+                  - generic [ref=f5e542]:
+                    - generic [ref=f5e544]:
+                      - paragraph [ref=f5e545]: Rated 4.69 out of 5, 3594 reviews.
+                      - generic [aria-hidden] [ref=f5e557]: 3594 Reviews
+                    - generic [ref=f5e559]:
+                      - generic [ref=f5e560]: From
+                      - generic [ref=f5e561]: Dhs. 164.80
+            - group "6 / 6" [ref=f5e562]:
+              - generic [ref=f5e564]:
+                - generic [ref=f5e565]:
+                  - link [ref=f5e566] [cursor=pointer]:
+                    - /url: /products/clear-protein-raspberry-yuzu
+                    - img "Clear Protein+ (Raspberry Yuzu)" [ref=f5e570]
+                  - button "Quick Shop" [ref=f5e571] [cursor=pointer]
+                - generic:
+                  - generic [ref=f5e573]:
+                    - button "Raspberry Yuzu" [ref=f5e574] [cursor=pointer]
+                    - button "Variety Pack" [ref=f5e578] [cursor=pointer]
+                  - generic [ref=f5e583]:
+                    - heading [level=3] [ref=f5e584]:
+                      - link "Clear Protein+ (Raspberry Yuzu)" [ref=f5e585] [cursor=pointer]:
+                        - /url: /products/clear-protein-raspberry-yuzu
+                    - generic [ref=f5e586]: Grass-fed collagen protein, aminos & electrolytes
+                  - generic [ref=f5e587]:
+                    - generic [ref=f5e589]:
+                      - paragraph [ref=f5e590]: Rated 4.63 out of 5, 2906 reviews.
+                      - generic [aria-hidden] [ref=f5e602]: 2906 Reviews
+                    - generic [ref=f5e604]:
+                      - generic [ref=f5e605]: From
+                      - generic [ref=f5e606]: Dhs. 176.00
+        - button "Slide right" [ref=f5e607] [cursor=pointer]
+    - list [ref=f5e614]:
+      - listitem [ref=f5e615]:
+        - link "REACH YOUR FITNESS GOALS" [ref=f5e617] [cursor=pointer]:
+          - /url: /collections/fitness-performance
+          - paragraph [ref=f5e624]: REACH YOUR FITNESS GOALS
+      - listitem [ref=f5e628]:
+        - link "Manage weight naturally" [ref=f5e630] [cursor=pointer]:
+          - /url: /collections/metabolic-health
+          - paragraph [ref=f5e637]: Manage weight naturally
+      - listitem [ref=f5e641]:
+        - link "RESTORE HORMONAL BALANCE" [ref=f5e643] [cursor=pointer]:
+          - /url: /collections/hormonal-health
+          - paragraph [ref=f5e650]: RESTORE HORMONAL BALANCE
+      - listitem [ref=f5e654]:
+        - link "TAKE CONTROL OF YOUR DIGESTION" [ref=f5e656] [cursor=pointer]:
+          - /url: /collections/gut-health
+          - paragraph [ref=f5e663]: TAKE CONTROL OF YOUR DIGESTION
+    - generic [ref=f5e669]:
+      - img "Subscribe & Save On Your Feel-Good Routine" [ref=f5e673]
+      - generic [ref=f5e674]:
+        - generic [ref=f5e675]:
+          - heading "Subscribe & Save On Your Feel-Good Routine" [level=2] [ref=f5e676]
+          - paragraph [ref=f5e677]: Because wellness works best when you make it a ritual
+          - link "SUBSCRIBE & SAVE 30% OFF" [ref=f5e680] [cursor=pointer]:
+            - /url: /collections/shop-all
+        - separator [ref=f5e682]
+        - list [ref=f5e685]:
+          - listitem [ref=f5e686]:
+            - paragraph [ref=f5e688]: Save up to 30% off
+          - listitem [ref=f5e689]:
+            - paragraph [ref=f5e691]: FREE SHIPPING
+          - listitem [ref=f5e692]:
+            - paragraph [ref=f5e694]: Cash back On EVERY ORDER
+          - listitem [ref=f5e695]:
+            - paragraph [ref=f5e697]: pause or cancel anytime
+          - listitem [ref=f5e698]:
+            - paragraph [ref=f5e700]: Exclusive LAUNCH PERKS
+    - generic [ref=f5e702]:
+      - img "Alt text not provided for this image" [ref=f5e706]
+      - generic [ref=f5e707]:
+        - heading "Find the Formula That Fits Your Goals" [level=2] [ref=f5e708]
+        - paragraph [ref=f5e709]: "Tell us what you’d like support with:"
+        - generic [ref=f5e710]:
+          - group [ref=f5e711]:
+            - radiogroup "Tell us what you'd like support with:" [ref=f5e713]:
+              - generic [ref=f5e714] [cursor=pointer]:
+                - radio "Build Lean Muscle & Boost Performance" [ref=f5e715]
+                - generic: Build Lean Muscle & Boost Performance
+              - generic [ref=f5e716] [cursor=pointer]:
+                - radio "Reduce Bloating & Optimize Digestion" [ref=f5e717]
+                - generic: Reduce Bloating & Optimize Digestion
+              - generic [ref=f5e718] [cursor=pointer]:
+                - radio "Manage Weight & Curb Cravings" [ref=f5e719]
+                - generic: Manage Weight & Curb Cravings
+              - generic [ref=f5e720] [cursor=pointer]:
+                - radio "Improve Mood & Sleep" [ref=f5e721]
+                - generic: Improve Mood & Sleep
+              - generic [ref=f5e722] [cursor=pointer]:
+                - radio "Balance Hormones & Feel in Sync" [ref=f5e723]
+                - generic: Balance Hormones & Feel in Sync
+              - generic [ref=f5e724] [cursor=pointer]:
+                - radio "Get Radiant Skin Hair & Nails" [ref=f5e725]
+                - generic: Get Radiant Skin Hair & Nails
+          - generic [ref=f5e726]:
+            - button "Back to previous question" [disabled] [ref=f5e727]
+            - generic [ref=f5e730]:
+              - button "Find your routine" [disabled] [ref=f5e731]
+              - paragraph [ref=f5e733]: Step 1 / 2
+    - generic [ref=f5e735]:
+      - paragraph [ref=f5e736]
+      - generic [ref=f5e737]:
+        - generic [ref=f5e739]:
+          - article [ref=f5e740]:
+            - img "Alt text not provided for this image" [ref=f5e744]
+            - generic [ref=f5e745]:
+              - generic [ref=f5e746]:
+                - heading "The Rigor Behind Every Formula" [level=2] [ref=f5e747]
+                - paragraph [ref=f5e749]: We stay focused on safety and efficacy every step of the way so you can stay focused on feeling your best.
+              - list [ref=f5e754]:
+                - listitem "1 / 3" [ref=f5e755]:
+                  - generic [ref=f5e756]:
+                    - img "Alt text not provided for this image" [ref=f5e760]
+                    - generic [ref=f5e761]: 100% Batches Tested
+                    - paragraph [ref=f5e762]: Each batch is tested for potency, heavy metals, and microbiological contaminants.
+                - listitem "2 / 3":
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img "Alt text not provided for this image"
+                    - generic: 500+ Ingredients Evaluated
+                    - paragraph: Ingredients are rigorously evaluated for safety, efficacy, quality, and scientific support.
+                - listitem "3 / 3":
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img "Alt text not provided for this image"
+                    - generic: 2+ Years Development
+                    - paragraph: Formulations undergo years of rigorous development, testing, and refinement before commercialization.
+          - article [aria-hidden]:
+            - generic:
+              - generic:
+                - heading [level=2]: Our Gold Standard for Quality
+                - generic:
+                  - paragraph: Every Arrae product is developed through a rigorous process to ensure safety, consistency, and quality.
+              - generic:
+                - generic:
+                  - list:
+                    - listitem:
+                      - heading [level=3]: Clinically Studied
+                      - generic: All ingredients are backed by human clinical research, evaluating strength, dosage, and quality.
+                    - listitem:
+                      - heading [level=3]: Expertly Formulated
+                      - generic: Every formula is developed using scientific research and clinically studied ingredients.
+                    - listitem:
+                      - heading [level=3]: Quality Assured
+                      - generic: Supplier qualification and manufacturing oversight is built into each stage of development.
+                    - listitem:
+                      - heading [level=3]: Rigorously Tested
+                      - generic: Every ingredient undergoes evaluation for identity, purity, potency, safety, and quality.
+          - article [aria-hidden]:
+            - generic:
+              - generic:
+                - heading [level=2]: Key Ingredients & Benefits
+                - generic:
+                  - paragraph: Some of the most innovative ingredients we use in our products.
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - heading [level=3]: IGOB131® (African Mango Seed)
+                                - generic:
+                                  - list:
+                                    - listitem: MB-1
+                                    - listitem: Glucose Metabolism
+                                    - listitem: Cholesterol
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - list:
+                                    - listitem: Magnesium
+                                    - listitem: Brain Health*
+                                    - listitem: Focus*
+                                    - listitem: Mood*
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - heading [level=3]: Slimbiotics® (Postbiotic)
+                                - generic:
+                                  - list:
+                                    - listitem: Tone Creatine Gummies
+                                    - listitem: Body Composition*
+                                    - listitem: Healthy Fat Loss*
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - list:
+                                    - listitem: Bloat Gummies
+                                    - listitem: GUT HEALTH*
+                                    - listitem: DIGESTIVE COMFORT*
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - list:
+                                    - listitem: Constipation
+                                    - listitem: Bloating Support*
+                                    - listitem: Bowel Regularity*
+                        - generic:
+                          - button [aria-hidden]
+        - generic:
+          - navigation "Education slideshow navigation":
+            - generic [ref=f5e764]:
+              - button "Formulas" [ref=f5e765] [cursor=pointer]
+              - button "Quality" [ref=f5e769] [cursor=pointer]
+              - button "Ingredients" [ref=f5e771] [cursor=pointer]
+    - generic [ref=f5e774]:
+      - heading [level=2] [ref=f5e775]:
+        - text: Trusted by
+        - emphasis [ref=f5e776]: Millions of Women Worldwide
+      - generic [ref=f5e778]:
+        - group "1 / 4" [ref=f5e779]:
+          - generic [ref=f5e780]:
+            - generic [ref=f5e784]:
+              - button "Play video" [ref=f5e785] [cursor=pointer]:
+                - generic [ref=f5e786]:
+                  - img "Pause"
+              - button "Unmute video" [ref=f5e787] [cursor=pointer]:
+                - generic [ref=f5e788]:
+                  - img "Sound off"
+            - blockquote [ref=f5e790]:
+              - heading "\"Creatine isn't just for the gym bros. Tone Creatine is how I took my abs from puffy and no definition to toned and defined.\"" [level=3] [ref=f5e791]
+              - generic [ref=f5e792]: "@emmapower"
+        - group "2 / 4" [ref=f5e794]:
+          - generic [ref=f5e795]:
+            - generic [ref=f5e796]:
+              - generic:
+                - generic:
+                  - img "@rosiehw"
+            - blockquote [ref=f5e798]:
+              - heading "\"This and not being bloated\"" [level=3] [ref=f5e799]
+              - generic [ref=f5e800]: "@rosiehw"
+        - group "3 / 4" [ref=f5e802]:
+          - generic [ref=f5e803]:
+            - generic [ref=f5e807]:
+              - button "Play video" [ref=f5e808] [cursor=pointer]:
+                - generic [ref=f5e809]:
+                  - img "Pause"
+              - button "Unmute video" [ref=f5e810] [cursor=pointer]:
+                - generic [ref=f5e811]:
+                  - img "Sound off"
+            - blockquote [ref=f5e813]:
+              - heading "\"If there is anyone in my life I know that is dealing with insomnia I always recommend the arrae magnesium\"" [level=3] [ref=f5e814]
+              - generic [ref=f5e815]: Olivia
+        - group "4 / 4" [ref=f5e817]:
+          - generic [ref=f5e818]:
+            - generic [ref=f5e822]:
+              - button "Play video" [ref=f5e823] [cursor=pointer]:
+                - generic [ref=f5e824]:
+                  - img "Pause"
+              - button "Unmute video" [ref=f5e825] [cursor=pointer]:
+                - generic [ref=f5e826]:
+                  - img "Sound off"
+            - blockquote [ref=f5e828]:
+              - heading "\"It even has both on collagen peptides and electrolytes so it's perfect for the girls who want to hit their protein goals stay hydrated\"" [level=3] [ref=f5e829]
+              - generic [ref=f5e830]: "@bizwlaneygrn"
+    - generic [ref=f5e834]:
+      - generic [ref=f5e841]:
+        - button "Play video" [ref=f5e842] [cursor=pointer]:
+          - generic [ref=f5e843]:
+            - img "Play"
+        - button "Unmute video" [ref=f5e844] [cursor=pointer]:
+          - generic [ref=f5e845]:
+            - img "Sound off"
+      - generic [ref=f5e847]:
+        - generic [ref=f5e848]:
+          - heading "Redefining Women’s Wellness Since 2020" [level=2] [ref=f5e849]
+          - paragraph [ref=f5e851]: "Founded by husband-and-wife duo Siff and Nish, arrae was born from a simple belief: wellness should be as beautiful as it is effective. Every product is thoughtfully crafted with clinically studied ingredients and elevated design—creating daily rituals you'll actually look forward to."
+        - link "Our story" [ref=f5e856] [cursor=pointer]:
+          - /url: /pages/about-us
+    - generic [ref=f5e859]:
+      - generic [ref=f5e860]:
+        - heading "The arrae Journal" [level=2] [ref=f5e861]
+        - paragraph [ref=f5e862]: Wellness tips & expert interviews to help you live your most inspired life
+      - generic [ref=f5e865]:
+        - group "1 / 3" [ref=f5e866]:
+          - generic [ref=f5e867]:
+            - link [ref=f5e869] [cursor=pointer]:
+              - /url: /blogs/arrae-journal/pia-mance
+              - img "LAUNCH with Pia Mance | The Align Edit by arrae, Volume 12" [ref=f5e872]
+            - generic [ref=f5e873]:
+              - link "LAUNCH with Pia Mance The Align Edit by arrae, Volume 12" [ref=f5e874] [cursor=pointer]:
+                - /url: /blogs/arrae-journal/pia-mance
+                - generic [ref=f5e875]: LAUNCH with Pia Mance
+                - generic [ref=f5e876]: The Align Edit by arrae, Volume 12
+              - generic [ref=f5e877]:
+                - generic [ref=f5e878]:
+                  - generic [ref=f5e879]: Hailey Bethke
+                  - generic [ref=f5e880]: March 27, 2026
+                - generic [ref=f5e881]: the align edit
+        - group "2 / 3" [ref=f5e883]:
+          - generic [ref=f5e884]:
+            - link [ref=f5e886] [cursor=pointer]:
+              - /url: /blogs/arrae-journal/strawberry-protein-probiotic-smoothie-recipe
+              - img "Strawberry Protein Probiotic Smoothie Recipe" [ref=f5e889]
+            - generic [ref=f5e890]:
+              - link "Strawberry Protein Probiotic Smoothie Recipe" [ref=f5e891] [cursor=pointer]:
+                - /url: /blogs/arrae-journal/strawberry-protein-probiotic-smoothie-recipe
+              - generic [ref=f5e893]:
+                - generic [ref=f5e894]:
+                  - generic [ref=f5e895]: Hailey Bethke
+                  - generic [ref=f5e896]: March 24, 2026
+                - generic [ref=f5e897]: recipes
+        - group "3 / 3" [ref=f5e899]:
+          - generic [ref=f5e900]:
+            - link [ref=f5e902] [cursor=pointer]:
+              - /url: /blogs/arrae-journal/what-your-bloating-says-about-you
+              - img "What Your Bloating Says About You" [ref=f5e905]
+            - generic [ref=f5e906]:
+              - link "What Your Bloating Says About You" [ref=f5e907] [cursor=pointer]:
+                - /url: /blogs/arrae-journal/what-your-bloating-says-about-you
+              - generic [ref=f5e909]:
+                - generic [ref=f5e910]:
+                  - generic [ref=f5e911]: Maggie Kwak
+                  - generic [ref=f5e912]: May 12, 2026
+                - generic [ref=f5e913]: wellness
+      - link "All Articles" [ref=f5e917] [cursor=pointer]:
+        - /url: /blogs/arrae-journal
+  - list [ref=f5e921]:
+    - listitem [ref=f5e922]:
+      - heading "Science-Backed Supplements" [level=3] [ref=f5e925]
+    - listitem [ref=f5e926]:
+      - heading "Results You Can See & Feel" [level=3] [ref=f5e929]
+    - listitem [ref=f5e930]:
+      - heading "Clean, Natural Formulas" [level=3] [ref=f5e933]
+    - listitem [ref=f5e934]:
+      - heading "Transparent Third-Party Testing" [level=3] [ref=f5e937]
+  - contentinfo [ref=f5e938]:
+    - generic [ref=f5e940]:
+      - generic [ref=f5e941]:
+        - img [ref=f5e945]:
+          - generic [ref=f5e946]:
+            - img "Arrae"
+        - generic [ref=f5e947]:
+          - generic [ref=f5e948]:
+            - generic [ref=f5e949]:
+              - button "Shop"
+              - generic "Shop" [ref=f5e950]:
+                - navigation [ref=f5e951]:
+                  - list [ref=f5e952]:
+                    - listitem [ref=f5e953]:
+                      - link "Shop All" [ref=f5e954] [cursor=pointer]:
+                        - /url: /collections/shop-all
+                    - listitem [ref=f5e955]:
+                      - link "Metabolic Health" [ref=f5e956] [cursor=pointer]:
+                        - /url: /collections/metabolic-health
+                    - listitem [ref=f5e957]:
+                      - link "Fitness & Performance" [ref=f5e958] [cursor=pointer]:
+                        - /url: /collections/fitness-essentials
+                    - listitem [ref=f5e959]:
+                      - link "Gut Health" [ref=f5e960] [cursor=pointer]:
+                        - /url: /collections/gut-health
+                    - listitem [ref=f5e961]:
+                      - link "Hormonal Health" [ref=f5e962] [cursor=pointer]:
+                        - /url: /collections/hormonal-health
+                    - listitem [ref=f5e963]:
+                      - link "Sleep & Mood" [ref=f5e964] [cursor=pointer]:
+                        - /url: /collections/sleep-mood
+            - generic [ref=f5e965]:
+              - button "Learn"
+              - generic "Learn" [ref=f5e966]:
+                - navigation [ref=f5e967]:
+                  - list [ref=f5e968]:
+                    - listitem [ref=f5e969]:
+                      - link "About Us" [ref=f5e970] [cursor=pointer]:
+                        - /url: /pages/about-us
+                    - listitem [ref=f5e971]:
+                      - link "Store Locator" [ref=f5e972] [cursor=pointer]:
+                        - /url: /pages/store-locator
+                    - listitem [ref=f5e973]:
+                      - link "Wholesale Inquiry" [ref=f5e974] [cursor=pointer]:
+                        - /url: https://business.arrae.com
+                    - listitem [ref=f5e975]:
+                      - link "Careers" [ref=f5e976] [cursor=pointer]:
+                        - /url: /pages/careers-page
+                    - listitem [ref=f5e977]:
+                      - link "Loyalty Program" [ref=f5e978] [cursor=pointer]:
+                        - /url: /pages/loyalty
+            - generic [ref=f5e979]:
+              - button "Social"
+              - generic "Social" [ref=f5e980]:
+                - navigation [ref=f5e981]:
+                  - list [ref=f5e982]:
+                    - listitem [ref=f5e983]:
+                      - link "Instagram" [ref=f5e984] [cursor=pointer]:
+                        - /url: https://www.instagram.com/arrae/
+                    - listitem [ref=f5e985]:
+                      - link "TikTok" [ref=f5e986] [cursor=pointer]:
+                        - /url: https://www.tiktok.com/@arrae.co
+                    - listitem [ref=f5e987]:
+                      - link "YouTube" [ref=f5e988] [cursor=pointer]:
+                        - /url: https://www.youtube.com/channel/UCPEnayx6zTWYN7G4nGu6PeA
+                    - listitem [ref=f5e989]:
+                      - link "arrae Journal" [ref=f5e990] [cursor=pointer]:
+                        - /url: /blogs/arrae-journal
+            - generic [ref=f5e991]:
+              - button "Support"
+              - generic "Support" [ref=f5e992]:
+                - navigation [ref=f5e993]:
+                  - list [ref=f5e994]:
+                    - listitem [ref=f5e995]:
+                      - link "FAQs" [ref=f5e996] [cursor=pointer]:
+                        - /url: /pages/faqs
+                    - listitem [ref=f5e997]:
+                      - link "Shipping" [ref=f5e998] [cursor=pointer]:
+                        - /url: /pages/shipping
+                    - listitem [ref=f5e999]:
+                      - link "Returns" [ref=f5e1000] [cursor=pointer]:
+                        - /url: /pages/shipping-delivery
+                    - listitem [ref=f5e1001]:
+                      - link "Contact Us" [ref=f5e1002] [cursor=pointer]:
+                        - /url: /pages/contact-us-1
+                    - listitem [ref=f5e1003]:
+                      - link "Retailer Log in" [ref=f5e1004] [cursor=pointer]:
+                        - /url: https://shopify.com/9789440096/account/
+          - generic [ref=f5e1005]:
+            - generic [ref=f5e1006]:
+              - paragraph [ref=f5e1007]: Unlock your mystery discount.
+              - paragraph [ref=f5e1008]:
+                - text: Enter your best
+                - emphasis [ref=f5e1009]: email
+                - text: and
+                - emphasis [ref=f5e1010]: phone
+                - text: number to get your mystery code.
+            - generic [ref=f5e1013]:
+              - generic [ref=f5e1015]:
+                - textbox "First Name" [ref=f5e1016]
+                - textbox "Email Address" [ref=f5e1017]
+                - textbox "Phone Number" [ref=f5e1018]
+                - button "SUBSCRIBE" [ref=f5e1020] [cursor=pointer]
+              - paragraph [ref=f5e1023]:
+                - text: By submitting, you agree to receive informational and marketing texts from Arrae (incl. autodialer). Consent isn’t required for purchase. Msg & data rates may apply. Reply STOP to unsubscribe.
+                - link "Privacy Policy" [ref=f5e1024] [cursor=pointer]:
+                  - /url: /policies/privacy-policy
+      - generic [ref=f5e1025]:
+        - navigation [ref=f5e1026]:
+          - list [ref=f5e1027]:
+            - listitem [ref=f5e1028]:
+              - link "Privacy Policy" [ref=f5e1029] [cursor=pointer]:
+                - /url: /pages/privacy-statement
+            - listitem [ref=f5e1030]:
+              - link "Terms & Conditions" [ref=f5e1031] [cursor=pointer]:
+                - /url: /pages/terms-of-service
+            - listitem [ref=f5e1032]:
+              - link "Accessibility Statement" [ref=f5e1033] [cursor=pointer]:
+                - /url: /pages/accessibility-statement
+        - generic [ref=f5e1034]: © Copyright 2026 Arrae - Where Science Meets Chic - All Rights Reserved. *These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.

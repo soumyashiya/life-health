@@ -1,0 +1,169 @@
+- generic [ref=f28e2]:
+  - banner [ref=f28e11]:
+    - generic [ref=f28e12]:
+      - link "Liora Healthcare" [ref=f28e13]:
+        - /url: "#home"
+        - generic [ref=f28e21]:
+          - generic [ref=f28e22]: Liora
+          - generic [ref=f28e24]: Healthcare
+      - navigation "Primary" [ref=f28e25]:
+        - list [ref=f28e26]:
+          - listitem [ref=f28e27]:
+            - button "Research" [ref=f28e28] [cursor=pointer]
+          - listitem [ref=f28e29]:
+            - button "Shop" [ref=f28e30] [cursor=pointer]
+          - listitem [ref=f28e31]:
+            - button "Science" [ref=f28e32] [cursor=pointer]
+          - listitem [ref=f28e33]:
+            - link "About" [ref=f28e34] [cursor=pointer]:
+              - /url: "#/about"
+      - generic [ref=f28e35]:
+        - button "Search products" [ref=f28e36] [cursor=pointer]
+        - button "Sign in" [ref=f28e41] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f28e45] [cursor=pointer]
+        - link "Find your product" [ref=f28e50]:
+          - /url: "#/find"
+  - text: → → → → → →
+  - main [ref=f28e52]:
+    - generic [ref=f28e54]:
+      - generic [ref=f28e55]: Step 01 / 03
+      - generic [ref=f28e61]:
+        - generic [ref=f28e62]:
+          - heading "What are you studying?" [level=1] [ref=f28e63]
+          - paragraph [ref=f28e64]: Pick the application closest to your protocol.
+        - group "What are you studying?" [ref=f28e65]:
+          - generic [ref=f28e67] [cursor=pointer]:
+            - radio "Metabolic research Receptor-agonist reference materials for metabolic and energy-pathway studies." [checked] [active]
+            - generic [aria-hidden] [ref=f28e68]: A
+            - generic [ref=f28e69]:
+              - generic [ref=f28e70]: Metabolic research
+              - generic [ref=f28e71]: Receptor-agonist reference materials for metabolic and energy-pathway studies.
+          - generic [ref=f28e72] [cursor=pointer]:
+            - radio "Cellular research Coenzyme and signalling compounds for cellular energy and pathway work."
+            - generic [aria-hidden] [ref=f28e73]: B
+            - generic [ref=f28e74]:
+              - generic [ref=f28e75]: Cellular research
+              - generic [ref=f28e76]: Coenzyme and signalling compounds for cellular energy and pathway work.
+          - generic [ref=f28e77] [cursor=pointer]:
+            - radio "Peptide research Characterised peptide reference materials for structural and stability analysis."
+            - generic [aria-hidden] [ref=f28e78]: C
+            - generic [ref=f28e79]:
+              - generic [ref=f28e80]: Peptide research
+              - generic [ref=f28e81]: Characterised peptide reference materials for structural and stability analysis.
+          - generic [ref=f28e82] [cursor=pointer]:
+            - radio "Recovery research Tissue-repair peptide pairings for regeneration-focused laboratory studies."
+            - generic [aria-hidden] [ref=f28e83]: D
+            - generic [ref=f28e84]:
+              - generic [ref=f28e85]: Recovery research
+              - generic [ref=f28e86]: Tissue-repair peptide pairings for regeneration-focused laboratory studies.
+          - generic [ref=f28e87] [cursor=pointer]:
+            - radio "Formulation research Multi-compound blends supplied in sealed, fixed-volume research formats."
+            - generic [aria-hidden] [ref=f28e88]: E
+            - generic [ref=f28e89]:
+              - generic [ref=f28e90]: Formulation research
+              - generic [ref=f28e91]: Multi-compound blends supplied in sealed, fixed-volume research formats.
+        - generic [ref=f28e92]:
+          - button "← Back" [disabled] [ref=f28e93]
+          - button "Next →" [ref=f28e94] [cursor=pointer]
+      - paragraph [ref=f28e95]: This finder orders the catalogue against your protocol. It is not advice. All products are supplied strictly for laboratory research and educational use — not for human or veterinary consumption.
+  - contentinfo [ref=f28e96]:
+    - generic [ref=f28e97]:
+      - generic [ref=f28e98]:
+        - generic [ref=f28e99]:
+          - generic [ref=f28e100]:
+            - generic [ref=f28e101]: Liora
+            - generic [ref=f28e102]: Healthcare
+          - paragraph [ref=f28e103]: Research-grade peptide supply
+          - generic [ref=f28e104]:
+            - heading "Stay updated" [level=4] [ref=f28e105]
+            - generic [ref=f28e106]:
+              - textbox "Email address" [ref=f28e107]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f28e108]
+            - paragraph [ref=f28e109]: Research updates and restock alerts. No spam.
+        - generic [ref=f28e110]:
+          - heading "Quick Links" [level=4] [ref=f28e111]
+          - list [ref=f28e112]:
+            - listitem [ref=f28e113]:
+              - link "Shop" [ref=f28e114] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f28e115]:
+              - link "Home" [ref=f28e116] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f28e117]:
+              - link "About" [ref=f28e118] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f28e119]:
+              - link "Products" [ref=f28e120] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f28e121]:
+              - link "Why Us" [ref=f28e122] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f28e123]:
+              - link "FAQ" [ref=f28e124] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f28e125]:
+              - link "Contact" [ref=f28e126] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f28e127]:
+              - link "Track order" [ref=f28e128] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f28e129]:
+          - heading "Contact" [level=4] [ref=f28e130]
+          - list [ref=f28e131]:
+            - listitem [ref=f28e132]:
+              - link "hello@liorahealthcare.com" [ref=f28e133] [cursor=pointer]:
+                - /url: mailto:hello@liorahealthcare.com
+            - listitem [ref=f28e134]:
+              - link "+1 000 000 0000" [ref=f28e135] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f28e136]:
+              - generic [ref=f28e137]: Global research supply
+        - generic [ref=f28e138]:
+          - heading "Policies" [level=4] [ref=f28e139]
+          - list [ref=f28e140]:
+            - listitem [ref=f28e141]:
+              - link "Press Release" [ref=f28e142] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f28e143]:
+              - link "Refund Policy" [ref=f28e144] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f28e145]:
+              - link "Shipping Policy" [ref=f28e146] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f28e147]:
+              - link "Privacy Policy" [ref=f28e148] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f28e149]:
+              - link "Terms Of Service" [ref=f28e150] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f28e151]:
+          - heading "Follow" [level=4] [ref=f28e152]
+          - list [ref=f28e153]:
+            - listitem [ref=f28e154]:
+              - link "WhatsApp" [ref=f28e155]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f28e156]:
+              - link "Instagram" [ref=f28e157]:
+                - /url: https://instagram.com/liorahealthcare
+            - listitem [ref=f28e158]:
+              - link "Email" [ref=f28e159]:
+                - /url: mailto:hello@liorahealthcare.com
+      - generic [ref=f28e161]:
+        - generic [ref=f28e162]: © 2026 Liora Healthcare
+        - generic [ref=f28e163]: Global research supply
+      - paragraph [ref=f28e164]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f28e165]: Liora Healthcare
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

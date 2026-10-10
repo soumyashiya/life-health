@@ -1,0 +1,663 @@
+- generic [ref=f39e2]:
+  - generic [ref=f39e4]:
+    - generic [ref=f39e5]: Booting interface
+    - generic [ref=f39e6]: 001 / 100
+    - generic [ref=f39e7]: 1%
+  - banner [ref=f39e11]:
+    - generic [ref=f39e12]:
+      - link "Liora Healthcare" [ref=f39e13]:
+        - /url: "#home"
+        - generic [ref=f39e21]:
+          - generic [ref=f39e22]: Liora
+          - generic [ref=f39e24]: Healthcare
+      - navigation "Primary" [ref=f39e25]:
+        - list [ref=f39e26]:
+          - listitem [ref=f39e27]:
+            - button "Research" [ref=f39e28] [cursor=pointer]
+          - listitem [ref=f39e29]:
+            - button "Shop" [ref=f39e30] [cursor=pointer]
+          - listitem [ref=f39e31]:
+            - button "Science" [ref=f39e32] [cursor=pointer]
+          - listitem [ref=f39e33]:
+            - link "About" [ref=f39e34] [cursor=pointer]:
+              - /url: "#/about"
+      - generic [ref=f39e35]:
+        - button "Search products" [ref=f39e36] [cursor=pointer]
+        - button "Sign in" [ref=f39e41] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f39e45] [cursor=pointer]
+        - link "Shop research" [ref=f39e50]:
+          - /url: "#/shop"
+  - main [ref=f39e52]:
+    - generic [ref=f39e53]:
+      - generic [ref=f39e54]:
+        - generic [ref=f39e55]: Research-grade peptide supply
+        - generic [ref=f39e56]: Liora Healthcare · Est. 2026
+      - generic [ref=f39e57]:
+        - generic [ref=f39e58]:
+          - heading [level=1] [ref=f39e59]:
+            - generic "Purity" [ref=f39e60]:
+              - generic [ref=f39e62]:
+                - generic [ref=f39e63]: P
+                - generic [ref=f39e64]: u
+                - generic [ref=f39e65]: r
+                - generic [ref=f39e66]: i
+                - generic [ref=f39e67]: t
+                - generic [ref=f39e68]: "y"
+            - generic "First." [ref=f39e69]:
+              - generic [ref=f39e71]:
+                - generic [ref=f39e72]: F
+                - generic [ref=f39e73]: i
+                - generic [ref=f39e74]: r
+                - generic [ref=f39e75]: s
+                - generic [ref=f39e76]: t
+                - generic [ref=f39e77]: .
+          - paragraph [ref=f39e78]: Research-grade peptide reference materials, sourced from verified suppliers and packed to exacting standards — so every research kit delivers the purity, consistency, and documentation your laboratory work depends on.
+          - generic [ref=f39e79]:
+            - link "Scroll" [ref=f39e80]:
+              - /url: "#about"
+            - generic [ref=f39e83]:
+              - generic [ref=f39e84]: Research-grade peptide supply
+              - generic [ref=f39e85]: Independently lab tested
+        - figure [ref=f39e86]:
+          - img "Liora Healthcare research-grade peptides — verified purity, sealed and third-party tested" [ref=f39e88]
+          - generic [ref=f39e89]: Verified supply
+          - generic [ref=f39e90]: Sealed & tested
+    - generic [ref=f39e91]:
+      - generic [ref=f39e92]:
+        - figure [ref=f39e93]:
+          - generic [ref=f39e94]:
+            - img "Liora Healthcare — research-grade peptide reference-material laboratory facility in Global research supply" [ref=f39e95]
+            - generic [ref=f39e97]: LH
+            - generic [ref=f39e98]: © 2026 · Liora Healthcare
+            - generic [ref=f39e99]: Global research supply
+            - generic [ref=f39e100]: Facility · No. 01
+        - generic [ref=f39e101]:
+          - generic [ref=f39e102]: About
+          - heading "Advancing modern research with smarter formulations." [level=2] [ref=f39e103]:
+            - generic [aria-hidden] [ref=f39e104]:
+              - generic [ref=f39e105]:
+                - generic [ref=f39e106]: A
+                - generic [ref=f39e107]: d
+                - generic [ref=f39e108]: v
+                - generic [ref=f39e109]: a
+                - generic [ref=f39e110]: "n"
+                - generic [ref=f39e111]: c
+                - generic [ref=f39e112]: i
+                - generic [ref=f39e113]: "n"
+                - generic [ref=f39e114]: g
+              - generic [ref=f39e115]:
+                - generic [ref=f39e116]: m
+                - generic [ref=f39e117]: o
+                - generic [ref=f39e118]: d
+                - generic [ref=f39e119]: e
+                - generic [ref=f39e120]: r
+                - generic [ref=f39e121]: "n"
+              - generic [ref=f39e122]:
+                - generic [ref=f39e123]: r
+                - generic [ref=f39e124]: e
+                - generic [ref=f39e125]: s
+                - generic [ref=f39e126]: e
+                - generic [ref=f39e127]: a
+                - generic [ref=f39e128]: r
+                - generic [ref=f39e129]: c
+                - generic [ref=f39e130]: h
+              - generic [ref=f39e131]:
+                - generic [ref=f39e132]: w
+                - generic [ref=f39e133]: i
+                - generic [ref=f39e134]: t
+                - generic [ref=f39e135]: h
+              - generic [ref=f39e136]:
+                - generic [ref=f39e137]: s
+                - generic [ref=f39e138]: m
+                - generic [ref=f39e139]: a
+                - generic [ref=f39e140]: r
+                - generic [ref=f39e141]: t
+                - generic [ref=f39e142]: e
+                - generic [ref=f39e143]: r
+              - generic [ref=f39e144]:
+                - generic [ref=f39e145]: f
+                - generic [ref=f39e146]: o
+                - generic [ref=f39e147]: r
+                - generic [ref=f39e148]: m
+                - generic [ref=f39e149]: u
+                - generic [ref=f39e150]: l
+                - generic [ref=f39e151]: a
+                - generic [ref=f39e152]: t
+                - generic [ref=f39e153]: i
+                - generic [ref=f39e154]: o
+                - generic [ref=f39e155]: "n"
+                - generic [ref=f39e156]: s
+                - generic [ref=f39e157]: .
+          - paragraph [ref=f39e158]: We're committed to advancing high-quality peptide research through clean, reliable, and precisely characterised reference materials. Every product is sourced from verified suppliers and carefully packed to preserve consistency, purity, and integrity — from our facility to your bench.
+          - list [ref=f39e159]:
+            - listitem [ref=f39e160]:
+              - generic [ref=f39e161]: Range
+              - generic [ref=f39e162]: Peptides · Reference materials
+            - listitem [ref=f39e163]:
+              - generic [ref=f39e164]: Sourcing
+              - generic [ref=f39e165]: Verified suppliers
+            - listitem [ref=f39e166]:
+              - generic [ref=f39e167]: Support
+              - generic [ref=f39e168]: Fast WhatsApp
+      - generic [ref=f39e169]:
+        - generic [ref=f39e170]:
+          - generic [ref=f39e171]:
+            - generic [ref=f39e172]: "0"
+            - generic [ref=f39e173]: "%+"
+          - generic [ref=f39e174]: Formulation purity
+        - generic [ref=f39e175]:
+          - generic [ref=f39e176]:
+            - generic [ref=f39e177]: "0"
+            - generic [ref=f39e178]: +
+          - generic [ref=f39e179]: Researchers served
+        - generic [ref=f39e180]:
+          - generic [ref=f39e181]:
+            - generic [ref=f39e182]: "0"
+            - generic [ref=f39e183]: h
+          - generic [ref=f39e184]: WhatsApp response
+    - generic [ref=f39e185]:
+      - generic [ref=f39e186]:
+        - generic [ref=f39e187]:
+          - generic [ref=f39e188]: Standards
+          - heading "Quality is the work." [level=2] [ref=f39e189]
+        - paragraph [ref=f39e190]: Four standards we hold ourselves to on every order — the same whether you're a postdoc reordering a single research kit or a lab provisioning a year of research.
+      - generic [ref=f39e191]:
+        - article [ref=f39e192]:
+          - generic [ref=f39e197]: "01"
+          - heading "Purity First" [level=3] [ref=f39e198]
+          - paragraph [ref=f39e199]: Each product is checked thoroughly to maintain clean, high-quality formulations you can rely on.
+        - article [ref=f39e200]:
+          - generic [ref=f39e205]: "02"
+          - heading "Reliable Consistency" [level=3] [ref=f39e206]
+          - paragraph [ref=f39e207]: Controlled processes ensure every unit is produced to uniform, repeatable standards.
+        - article [ref=f39e208]:
+          - generic [ref=f39e213]: "03"
+          - heading "Secure Packaging" [level=3] [ref=f39e214]
+          - paragraph [ref=f39e215]: Every product is sealed and protected to preserve freshness, stability, and overall product integrity.
+        - article [ref=f39e216]:
+          - generic [ref=f39e221]: "04"
+          - heading "Quick WhatsApp Support" [level=3] [ref=f39e222]
+          - paragraph [ref=f39e223]: Fast WhatsApp assistance for queries, updates, and product guidance — message us any time.
+    - region [ref=f39e224]:
+      - generic [ref=f39e225]:
+        - generic [ref=f39e226]:
+          - generic [ref=f39e227]: Explore research
+          - generic [ref=f39e228]: 05 areas
+        - generic [ref=f39e229]:
+          - heading "Explore research areas" [level=2] [ref=f39e230]
+          - paragraph [ref=f39e231]: Explore our research-focused categories and discover materials relevant to different areas of laboratory research.
+      - list [ref=f39e232]:
+        - listitem [ref=f39e233]:
+          - link "01 3 products Metabolic Research Receptor-agonist reference materials for metabolic and energy-pathway studies. Explore Research" [ref=f39e234]:
+            - /url: "#/shop?research=metabolic"
+            - generic [ref=f39e235]:
+              - generic [ref=f39e236]:
+                - generic [ref=f39e237]: "01"
+                - generic [ref=f39e238]: 3 products
+              - heading "Metabolic Research" [level=3] [ref=f39e239]:
+                - text: Metabolic
+                - generic [ref=f39e240]: Research
+              - paragraph [ref=f39e241]: Receptor-agonist reference materials for metabolic and energy-pathway studies.
+              - generic [ref=f39e242]: Explore Research
+        - listitem [ref=f39e246]:
+          - link "02 2 products Cellular Research Coenzyme and signalling compounds for cellular energy and pathway work. Explore Research" [ref=f39e247]:
+            - /url: "#/shop?research=cellular"
+            - generic [ref=f39e248]:
+              - generic [ref=f39e249]:
+                - generic [ref=f39e250]: "02"
+                - generic [ref=f39e251]: 2 products
+              - heading "Cellular Research" [level=3] [ref=f39e252]:
+                - text: Cellular
+                - generic [ref=f39e253]: Research
+              - paragraph [ref=f39e254]: Coenzyme and signalling compounds for cellular energy and pathway work.
+              - generic [ref=f39e255]: Explore Research
+        - listitem [ref=f39e259]:
+          - link "03 5 products Peptide Research Characterised peptide reference materials for structural and stability analysis. Explore Research" [ref=f39e260]:
+            - /url: "#/shop?research=peptide"
+            - generic [ref=f39e261]:
+              - generic [ref=f39e262]:
+                - generic [ref=f39e263]: "03"
+                - generic [ref=f39e264]: 5 products
+              - heading "Peptide Research" [level=3] [ref=f39e265]:
+                - text: Peptide
+                - generic [ref=f39e266]: Research
+              - paragraph [ref=f39e267]: Characterised peptide reference materials for structural and stability analysis.
+              - generic [ref=f39e268]: Explore Research
+        - listitem [ref=f39e272]:
+          - link "04 2 products Recovery Research Tissue-repair peptide pairings for regeneration-focused laboratory studies. Explore Research" [ref=f39e273]:
+            - /url: "#/shop?research=recovery"
+            - generic [ref=f39e274]:
+              - generic [ref=f39e275]:
+                - generic [ref=f39e276]: "04"
+                - generic [ref=f39e277]: 2 products
+              - heading "Recovery Research" [level=3] [ref=f39e278]:
+                - text: Recovery
+                - generic [ref=f39e279]: Research
+              - paragraph [ref=f39e280]: Tissue-repair peptide pairings for regeneration-focused laboratory studies.
+              - generic [ref=f39e281]: Explore Research
+        - listitem [ref=f39e285]:
+          - link "05 3 products Formulation Research Multi-compound blends supplied in sealed, fixed-volume research formats. Explore Research" [ref=f39e286]:
+            - /url: "#/shop?research=formulation"
+            - generic [ref=f39e287]:
+              - generic [ref=f39e288]:
+                - generic [ref=f39e289]: "05"
+                - generic [ref=f39e290]: 3 products
+              - heading "Formulation Research" [level=3] [ref=f39e291]:
+                - text: Formulation
+                - generic [ref=f39e292]: Research
+              - paragraph [ref=f39e293]: Multi-compound blends supplied in sealed, fixed-volume research formats.
+              - generic [ref=f39e294]: Explore Research
+    - generic [ref=f39e299]:
+      - generic [ref=f39e300]:
+        - generic [ref=f39e301]:
+          - generic [ref=f39e302]: Catalogue
+          - heading "Available products." [level=2] [ref=f39e303]
+        - paragraph [ref=f39e304]: Research-grade peptide reference materials. Documentation and batch data available on request.
+      - generic [ref=f39e306]:
+        - article [ref=f39e307]:
+          - generic [ref=f39e308]:
+            - img "Retatrutide 20mg" [ref=f39e310]
+            - generic [ref=f39e311]: 01 / 06
+          - generic [ref=f39e312]:
+            - generic [ref=f39e313]:
+              - generic [ref=f39e314]: Compound Analysis
+              - generic [ref=f39e315]: USD 350
+            - heading "Retatrutide 20mg" [level=3] [ref=f39e316]
+            - paragraph [ref=f39e317]: Triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 20 mg research device for metabolic and energy-pathway studies.
+            - generic [ref=f39e318]:
+              - link "Read more →" [ref=f39e319]:
+                - /url: "#/product/p1"
+              - button "Add Retatrutide 20mg to cart" [ref=f39e320]:
+                - generic [aria-hidden] [ref=f39e321]: +
+        - article [ref=f39e322]:
+          - generic [ref=f39e323]:
+            - img "Glow 70mg" [ref=f39e325]
+            - generic [ref=f39e326]: 02 / 06
+          - generic [ref=f39e327]:
+            - generic [ref=f39e328]:
+              - generic [ref=f39e329]: Compound Analysis
+              - generic [ref=f39e330]: USD 329
+            - heading "Glow 70mg" [level=3] [ref=f39e331]
+            - paragraph [ref=f39e332]: Multi-peptide research blend pairing GHK-Cu with BPC-157 and TB-500 in a single pre-filled research reference device.
+            - generic [ref=f39e333]:
+              - link "Read more →" [ref=f39e334]:
+                - /url: "#/product/p2"
+              - button "Add Glow 70mg to cart" [ref=f39e335]:
+                - generic [aria-hidden] [ref=f39e336]: +
+        - article [ref=f39e337]:
+          - generic [ref=f39e338]:
+            - img "Retatrutide 40mg" [ref=f39e340]
+            - generic [ref=f39e341]: 03 / 06
+          - generic [ref=f39e342]:
+            - generic [ref=f39e343]:
+              - generic [ref=f39e344]: Compound Analysis
+              - generic [ref=f39e345]: USD 629
+            - heading "Retatrutide 40mg" [level=3] [ref=f39e346]
+            - paragraph [ref=f39e347]: Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 40 mg research reference device for extended metabolic-pathway research.
+            - generic [ref=f39e348]:
+              - link "Read more →" [ref=f39e349]:
+                - /url: "#/product/p6"
+              - button "Add Retatrutide 40mg to cart" [ref=f39e350]:
+                - generic [aria-hidden] [ref=f39e351]: +
+        - article [ref=f39e352]:
+          - generic [ref=f39e353]:
+            - img "Tirzepatide 40mg" [ref=f39e355]
+            - generic [ref=f39e356]: 04 / 06
+          - generic [ref=f39e357]:
+            - generic [ref=f39e358]:
+              - generic [ref=f39e359]: Compound Analysis
+              - generic [ref=f39e360]: USD 399
+            - heading "Tirzepatide 40mg" [level=3] [ref=f39e361]
+            - paragraph [ref=f39e362]: Dual agonist of GLP-1 and GIP receptors. Supplied as a pre-filled 40 mg research device for glucose-regulation and metabolic studies.
+            - generic [ref=f39e363]:
+              - link "Read more →" [ref=f39e364]:
+                - /url: "#/product/p4"
+              - button "Add Tirzepatide 40mg to cart" [ref=f39e365]:
+                - generic [aria-hidden] [ref=f39e366]: +
+        - article [ref=f39e367]:
+          - generic [ref=f39e368]:
+            - img "BPC-157 & TB-500 40mg" [ref=f39e370]
+            - generic [ref=f39e371]: 05 / 06
+          - generic [ref=f39e372]:
+            - generic [ref=f39e373]:
+              - generic [ref=f39e374]: Compound Analysis
+              - generic [ref=f39e375]: USD 269
+            - heading "BPC-157 & TB-500 40mg" [level=3] [ref=f39e376]
+            - paragraph [ref=f39e377]: Peptide research pairing of BPC-157 and TB-500 supplied at 40 mg in a pre-filled research reference device.
+            - generic [ref=f39e378]:
+              - link "Read more →" [ref=f39e379]:
+                - /url: "#/product/p3"
+              - button "Add BPC-157 & TB-500 40mg to cart" [ref=f39e380]:
+                - generic [aria-hidden] [ref=f39e381]: +
+        - article [ref=f39e382]:
+          - generic [ref=f39e383]:
+            - img "NAD+ 1000mg" [ref=f39e385]
+            - generic [ref=f39e386]: 06 / 06
+          - generic [ref=f39e387]:
+            - generic [ref=f39e388]:
+              - generic [ref=f39e389]: Support
+              - generic [ref=f39e390]: USD 249
+            - heading "NAD+ 1000mg" [level=3] [ref=f39e391]
+            - paragraph [ref=f39e392]: NAD+ (Nicotinamide Adenine Dinucleotide) research compound supplied at 1,000 mg total across two pre-filled research reference pens.
+            - generic [ref=f39e393]:
+              - link "Read more →" [ref=f39e394]:
+                - /url: "#/product/p5"
+              - button "Add NAD+ 1000mg to cart" [ref=f39e395]:
+                - generic [aria-hidden] [ref=f39e396]: +
+    - generic [ref=f39e397]:
+      - generic [ref=f39e398]:
+        - generic [ref=f39e399]:
+          - generic [ref=f39e400]: Why us
+          - generic [ref=f39e401]: 01 / 04
+        - heading "Why labs choose us." [level=2] [ref=f39e402]:
+          - generic [aria-hidden] [ref=f39e403]:
+            - generic [ref=f39e404]:
+              - generic [ref=f39e405]: W
+              - generic [ref=f39e406]: h
+              - generic [ref=f39e407]: "y"
+            - generic [ref=f39e408]:
+              - generic [ref=f39e409]: l
+              - generic [ref=f39e410]: a
+              - generic [ref=f39e411]: b
+              - generic [ref=f39e412]: s
+            - generic [ref=f39e413]:
+              - generic [ref=f39e414]: c
+              - generic [ref=f39e415]: h
+              - generic [ref=f39e416]: o
+              - generic [ref=f39e417]: o
+              - generic [ref=f39e418]: s
+              - generic [ref=f39e419]: e
+            - generic [ref=f39e420]:
+              - generic [ref=f39e421]: u
+              - generic [ref=f39e422]: s
+              - generic [ref=f39e423]: .
+        - paragraph [ref=f39e424]: Hover a tile to expand it. Four commitments we hold to on every order, regardless of size or destination.
+      - generic [ref=f39e425]:
+        - article [ref=f39e426]:
+          - img "Consistent results — Sourced from manufacturers that follow strict testing, handling, and documentation standards on every product."
+          - generic:
+            - generic: "01"
+            - generic: Consistent results
+          - generic [ref=f39e427]:
+            - generic [ref=f39e428]: "01"
+            - heading "Consistent results" [level=3] [ref=f39e429]
+            - paragraph [ref=f39e430]: Sourced from manufacturers that follow strict testing, handling, and documentation standards on every product.
+            - generic [ref=f39e432]: Promise
+        - article [ref=f39e434]:
+          - img "Verified purity — Every product undergoes thorough checking to maintain clean, high-quality formulations you can rely on."
+          - generic [ref=f39e435]:
+            - generic [ref=f39e436]: "02"
+            - generic [ref=f39e437]: Verified purity
+          - generic:
+            - generic: "02"
+            - heading "Verified purity" [level=3]
+            - paragraph: Every product undergoes thorough checking to maintain clean, high-quality formulations you can rely on.
+            - generic: Promise
+        - article [ref=f39e438]:
+          - img "Reliable service — Every step — from enquiry to order confirmation — is designed to provide a smooth, dependable customer experience."
+          - generic [ref=f39e439]:
+            - generic [ref=f39e440]: "03"
+            - generic [ref=f39e441]: Reliable service
+          - generic:
+            - generic: "03"
+            - heading "Reliable service" [level=3]
+            - paragraph: Every step — from enquiry to order confirmation — is designed to provide a smooth, dependable customer experience.
+            - generic: Promise
+        - article [ref=f39e442]:
+          - img "Quick support — Fast WhatsApp assistance for queries, updates, and product guidance, whenever you need it."
+          - generic [ref=f39e443]:
+            - generic [ref=f39e444]: "04"
+            - generic [ref=f39e445]: Quick support
+          - generic:
+            - generic: "04"
+            - heading "Quick support" [level=3]
+            - paragraph: Fast WhatsApp assistance for queries, updates, and product guidance, whenever you need it.
+            - generic: Promise
+      - generic [ref=f39e446]:
+        - button "Show reason 1" [ref=f39e447]
+        - button "Show reason 2" [ref=f39e448]
+        - button "Show reason 3" [ref=f39e449]
+        - button "Show reason 4" [ref=f39e450]
+    - generic [ref=f39e451]:
+      - generic [ref=f39e452]:
+        - generic [ref=f39e453]:
+          - generic [ref=f39e454]: Reviews
+          - heading "From researchers we support." [level=2] [ref=f39e455]
+        - paragraph [ref=f39e456]: Unedited words from 6+ labs and independent researchers we've supplied.
+      - generic [ref=f39e457]:
+        - article [ref=f39e458]:
+          - paragraph [ref=f39e459]: "\"Fast support, reliable products, and a smooth ordering experience. The team truly delivers dependable quality every time.\""
+          - generic [ref=f39e460]:
+            - img "Ethan Carter — Lab Procurement Specialist verified review of Liora Healthcare" [ref=f39e461]
+            - generic [ref=f39e462]:
+              - generic [ref=f39e463]: Ethan Carter
+              - generic [ref=f39e464]: Lab Procurement Specialist
+        - article [ref=f39e465]:
+          - paragraph [ref=f39e466]: "\"Everything arrived securely, communication was excellent, and the overall service exceeded expectations for a premium brand.\""
+          - generic [ref=f39e467]:
+            - img "Samuel Bennett — Research Operations Lead verified review of Liora Healthcare" [ref=f39e468]
+            - generic [ref=f39e469]:
+              - generic [ref=f39e470]: Samuel Bennett
+              - generic [ref=f39e471]: Research Operations Lead
+        - article [ref=f39e472]:
+          - paragraph [ref=f39e473]: "\"Product consistency, helpful guidance, and quick responses made the entire process simple, smooth, and extremely satisfying.\""
+          - generic [ref=f39e474]:
+            - img "Michelle Reed — Research Assistant verified review of Liora Healthcare" [ref=f39e475]
+            - generic [ref=f39e476]:
+              - generic [ref=f39e477]: Michelle Reed
+              - generic [ref=f39e478]: Research Assistant
+        - article [ref=f39e479]:
+          - paragraph [ref=f39e480]: "\"Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.\""
+          - generic [ref=f39e481]:
+            - img "Marco Ruiz — Procurement Lead, Vela Biotech verified review of Liora Healthcare" [ref=f39e482]
+            - generic [ref=f39e483]:
+              - generic [ref=f39e484]: Marco Ruiz
+              - generic [ref=f39e485]: Procurement Lead, Vela Biotech
+        - article [ref=f39e486]:
+          - paragraph [ref=f39e487]: "\"Pricing is fair, turnaround is quick, and the certificate of analysis is more detailed than what we used to get from larger suppliers.\""
+          - generic [ref=f39e488]:
+            - img "Sasha Petrov — Postdoctoral Researcher verified review of Liora Healthcare" [ref=f39e489]
+            - generic [ref=f39e490]:
+              - generic [ref=f39e491]: Sasha Petrov
+              - generic [ref=f39e492]: Postdoctoral Researcher
+        - article [ref=f39e493]:
+          - paragraph [ref=f39e494]: "\"WhatsApp reply within the hour. That alone changed how we plan ordering for our team.\""
+          - generic [ref=f39e495]:
+            - img "Rohan Natarajan — Co-founder, Ember Research verified review of Liora Healthcare" [ref=f39e496]
+            - generic [ref=f39e497]:
+              - generic [ref=f39e498]: Rohan Natarajan
+              - generic [ref=f39e499]: Co-founder, Ember Research
+        - article [ref=f39e500]:
+          - paragraph [ref=f39e501]: "\"Fast support, reliable products, and a smooth ordering experience. The team truly delivers dependable quality every time.\""
+          - generic [ref=f39e502]:
+            - img "Ethan Carter — Lab Procurement Specialist verified review of Liora Healthcare" [ref=f39e503]
+            - generic [ref=f39e504]:
+              - generic [ref=f39e505]: Ethan Carter
+              - generic [ref=f39e506]: Lab Procurement Specialist
+        - article [ref=f39e507]:
+          - paragraph [ref=f39e508]: "\"Everything arrived securely, communication was excellent, and the overall service exceeded expectations for a premium brand.\""
+          - generic [ref=f39e509]:
+            - img "Samuel Bennett — Research Operations Lead verified review of Liora Healthcare" [ref=f39e510]
+            - generic [ref=f39e511]:
+              - generic [ref=f39e512]: Samuel Bennett
+              - generic [ref=f39e513]: Research Operations Lead
+        - article [ref=f39e514]:
+          - paragraph [ref=f39e515]: "\"Product consistency, helpful guidance, and quick responses made the entire process simple, smooth, and extremely satisfying.\""
+          - generic [ref=f39e516]:
+            - img "Michelle Reed — Research Assistant verified review of Liora Healthcare" [ref=f39e517]
+            - generic [ref=f39e518]:
+              - generic [ref=f39e519]: Michelle Reed
+              - generic [ref=f39e520]: Research Assistant
+        - article [ref=f39e521]:
+          - paragraph [ref=f39e522]: "\"Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.\""
+          - generic [ref=f39e523]:
+            - img "Marco Ruiz — Procurement Lead, Vela Biotech verified review of Liora Healthcare" [ref=f39e524]
+            - generic [ref=f39e525]:
+              - generic [ref=f39e526]: Marco Ruiz
+              - generic [ref=f39e527]: Procurement Lead, Vela Biotech
+        - article [ref=f39e528]:
+          - paragraph [ref=f39e529]: "\"Pricing is fair, turnaround is quick, and the certificate of analysis is more detailed than what we used to get from larger suppliers.\""
+          - generic [ref=f39e530]:
+            - img "Sasha Petrov — Postdoctoral Researcher verified review of Liora Healthcare" [ref=f39e531]
+            - generic [ref=f39e532]:
+              - generic [ref=f39e533]: Sasha Petrov
+              - generic [ref=f39e534]: Postdoctoral Researcher
+        - article [ref=f39e535]:
+          - paragraph [ref=f39e536]: "\"WhatsApp reply within the hour. That alone changed how we plan ordering for our team.\""
+          - generic [ref=f39e537]:
+            - img "Rohan Natarajan — Co-founder, Ember Research verified review of Liora Healthcare" [ref=f39e538]
+            - generic [ref=f39e539]:
+              - generic [ref=f39e540]: Rohan Natarajan
+              - generic [ref=f39e541]: Co-founder, Ember Research
+    - generic [ref=f39e542]:
+      - generic [ref=f39e543]:
+        - generic [ref=f39e544]: FAQ
+        - heading "Frequently asked questions." [level=2] [ref=f39e545]
+      - generic [ref=f39e546]:
+        - figure [ref=f39e547]:
+          - img "Liora Healthcare research team verifying peptide batches in the lab" [ref=f39e548]
+        - generic [ref=f39e549]:
+          - generic [ref=f39e550]:
+            - button "What documentation comes with each order?" [expanded] [ref=f39e551] [cursor=pointer]
+            - paragraph [ref=f39e558]: Every research kit is paired with a batch-specific certificate of analysis listing lot number, HPLC purity, and mass-spec confirmation. Storage and handling notes are included on the packing slip.
+          - generic [ref=f39e559]:
+            - button "How is purity verified?" [ref=f39e560] [cursor=pointer]
+            - paragraph [ref=f39e565]: Each batch is independently tested by reverse-phase HPLC and high-resolution mass spectrometry, then verified by Janoshik Analytical. We retain a reference sample from every lot for cross-verification on request.
+          - generic [ref=f39e566]:
+            - button "How is the product packaged?" [ref=f39e567] [cursor=pointer]
+            - paragraph [ref=f39e572]: Products are sealed inside tamper-evident research kits with pre-filled research devices. Cold-chain packaging is used where the compound requires refrigeration.
+          - generic [ref=f39e573]:
+            - button "What's the return policy?" [ref=f39e574] [cursor=pointer]
+            - paragraph [ref=f39e579]: We don't accept returns on opened or temperature-compromised kits. If a research kit arrives damaged or out of spec, contact us within 48 hours of receipt and we'll replace or refund.
+          - generic [ref=f39e580]:
+            - button "How can I pay?" [ref=f39e581] [cursor=pointer]
+            - paragraph [ref=f39e586]: Bank transfer, card payments via our checkout, and crypto on request. Institutional purchase orders are accepted with prior credit approval.
+    - generic [ref=f39e588]:
+      - generic [ref=f39e589]:
+        - generic [ref=f39e590]: Contact
+        - heading "Place an order or ask a question." [level=2] [ref=f39e591]
+        - paragraph [ref=f39e592]: Tell us what you need — a single research kit, a recurring lab supply, or a quote for a custom catalogue. We reply by email or WhatsApp within a working day.
+        - list [ref=f39e593]:
+          - listitem [ref=f39e594]:
+            - generic [ref=f39e595]: WhatsApp
+            - link "+1 000 000 0000" [ref=f39e596]:
+              - /url: https://wa.me/10000000000
+          - listitem [ref=f39e597]:
+            - generic [ref=f39e598]: Email
+            - link "hello@liorahealthcare.com" [ref=f39e599]:
+              - /url: mailto:hello@liorahealthcare.com
+          - listitem [ref=f39e600]:
+            - generic [ref=f39e601]: Facility
+            - generic [ref=f39e602]: Global research supply
+      - generic [ref=f39e603]:
+        - generic [ref=f39e604]:
+          - generic [ref=f39e605]: Name or organisation
+          - textbox "Name or organisation" [ref=f39e606]
+        - generic [ref=f39e607]:
+          - generic [ref=f39e608]: Email
+          - textbox "Email" [ref=f39e609]
+        - generic [ref=f39e610]:
+          - generic [ref=f39e611]: Order details or question
+          - textbox "Order details or question" [ref=f39e612]
+        - button "Send enquiry" [ref=f39e613] [cursor=pointer]
+  - contentinfo [ref=f39e614]:
+    - generic [ref=f39e615]:
+      - generic [ref=f39e616]:
+        - generic [ref=f39e617]:
+          - generic [ref=f39e618]:
+            - generic [ref=f39e619]: Liora
+            - generic [ref=f39e620]: Healthcare
+          - paragraph [ref=f39e621]: Research-grade peptide supply
+          - generic [ref=f39e622]:
+            - heading "Stay updated" [level=4] [ref=f39e623]
+            - generic [ref=f39e624]:
+              - textbox "Email address" [ref=f39e625]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f39e626]
+            - paragraph [ref=f39e627]: Research updates and restock alerts. No spam.
+        - generic [ref=f39e628]:
+          - heading "Quick Links" [level=4] [ref=f39e629]
+          - list [ref=f39e630]:
+            - listitem [ref=f39e631]:
+              - link "Shop" [ref=f39e632] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f39e633]:
+              - link "Home" [ref=f39e634] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f39e635]:
+              - link "About" [ref=f39e636] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f39e637]:
+              - link "Products" [ref=f39e638] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f39e639]:
+              - link "Why Us" [ref=f39e640] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f39e641]:
+              - link "FAQ" [ref=f39e642] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f39e643]:
+              - link "Contact" [ref=f39e644] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f39e645]:
+              - link "Track order" [ref=f39e646] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f39e647]:
+          - heading "Contact" [level=4] [ref=f39e648]
+          - list [ref=f39e649]:
+            - listitem [ref=f39e650]:
+              - link "hello@liorahealthcare.com" [ref=f39e651] [cursor=pointer]:
+                - /url: mailto:hello@liorahealthcare.com
+            - listitem [ref=f39e652]:
+              - link "+1 000 000 0000" [ref=f39e653] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f39e654]:
+              - generic [ref=f39e655]: Global research supply
+        - generic [ref=f39e656]:
+          - heading "Policies" [level=4] [ref=f39e657]
+          - list [ref=f39e658]:
+            - listitem [ref=f39e659]:
+              - link "Press Release" [ref=f39e660] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f39e661]:
+              - link "Refund Policy" [ref=f39e662] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f39e663]:
+              - link "Shipping Policy" [ref=f39e664] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f39e665]:
+              - link "Privacy Policy" [ref=f39e666] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f39e667]:
+              - link "Terms Of Service" [ref=f39e668] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f39e669]:
+          - heading "Follow" [level=4] [ref=f39e670]
+          - list [ref=f39e671]:
+            - listitem [ref=f39e672]:
+              - link "WhatsApp" [ref=f39e673]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f39e674]:
+              - link "Instagram" [ref=f39e675]:
+                - /url: https://instagram.com/liorahealthcare
+            - listitem [ref=f39e676]:
+              - link "Email" [ref=f39e677]:
+                - /url: mailto:hello@liorahealthcare.com
+      - generic [ref=f39e679]:
+        - generic [ref=f39e680]: © 2026 Liora Healthcare
+        - generic [ref=f39e681]: Global research supply
+      - paragraph [ref=f39e682]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f39e683]: Liora Healthcare
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

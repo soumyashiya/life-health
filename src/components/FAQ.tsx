@@ -17,7 +17,7 @@ export function FAQ() {
         <figure className="faq__media" data-cursor data-cursor-text="Lab">
           <img
             src={faqImg}
-            alt="Liora Healthcare research team verifying peptide batches in the lab"
+            alt="Lyfe Health research team verifying peptide batches in the lab"
             loading="lazy"
           />
         </figure>

@@ -1,0 +1,180 @@
+- generic [ref=e2]:
+  - banner [ref=e11]:
+    - generic [ref=e12]:
+      - link "Lyfe Health" [ref=e13]:
+        - /url: "#home"
+        - generic [ref=e21]:
+          - generic [ref=e22]: Lyfe
+          - generic [ref=e24]: Health
+      - generic [ref=e25]:
+        - button "Search products" [ref=e26] [cursor=pointer]
+        - button "Sign in" [ref=e31] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=e35] [cursor=pointer]
+        - button "Open menu" [ref=e40]
+  - text: → → → → → →
+  - main [ref=e42]:
+    - generic [ref=e44]:
+      - generic [ref=e45]: Your matches
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - heading "Your closest matches." [level=1] [ref=e302]
+          - paragraph [ref=e55]: Ranked against your answers. Every match is supplied for laboratory research only.
+        - generic [ref=e303]:
+          - article [ref=e304]:
+            - generic [ref=e305]: Best match
+            - link [ref=e306]:
+              - /url: "#/product/p6"
+              - img "Retatrutide 40mg" [ref=e307]
+            - generic [ref=e308]:
+              - generic [ref=e309]: Compound Analysis
+              - link "Retatrutide 40mg" [ref=e310]:
+                - /url: "#/product/p6"
+              - paragraph [ref=e311]: Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 40 mg research reference device for extended metabolic-pathway research.
+              - list [ref=e312]:
+                - listitem [ref=e313]: Metabolic research
+                - listitem [ref=e314]: Single compound
+                - listitem [ref=e315]: Published lot assay
+                - listitem [ref=e316]: Extended programme
+              - generic [ref=e317]:
+                - generic [ref=e318]: $629
+                - button "Add Retatrutide 40mg to cart" [ref=e319]: Add to cart
+          - article [ref=e320]:
+            - link [ref=e321]:
+              - /url: "#/product/p1"
+              - img "Retatrutide 20mg" [ref=e322]
+            - generic [ref=e323]:
+              - generic [ref=e324]: Compound Analysis
+              - link "Retatrutide 20mg" [ref=e325]:
+                - /url: "#/product/p1"
+              - paragraph [ref=e326]: Triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 20 mg research device for metabolic and energy-pathway studies.
+              - list [ref=e327]:
+                - listitem [ref=e328]: Metabolic research
+                - listitem [ref=e329]: Single compound
+                - listitem [ref=e330]: Published lot assay
+              - generic [ref=e331]:
+                - generic [ref=e332]: $350
+                - button "Add Retatrutide 20mg to cart" [ref=e333]: Add to cart
+          - article [ref=e334]:
+            - link [ref=e335]:
+              - /url: "#/product/p4"
+              - img "Tirzepatide 40mg" [ref=e336]
+            - generic [ref=e337]:
+              - generic [ref=e338]: Compound Analysis
+              - link "Tirzepatide 40mg" [ref=e339]:
+                - /url: "#/product/p4"
+              - paragraph [ref=e340]: Dual agonist of GLP-1 and GIP receptors. Supplied as a pre-filled 40 mg research device for glucose-regulation and metabolic studies.
+              - list [ref=e341]:
+                - listitem [ref=e342]: Metabolic research
+                - listitem [ref=e343]: Single compound
+                - listitem [ref=e344]: Published lot assay
+              - generic [ref=e345]:
+                - generic [ref=e346]: $399
+                - button "Add Tirzepatide 40mg to cart" [ref=e347]: Add to cart
+        - generic [ref=e83]:
+          - button "← Change answers" [ref=e348] [cursor=pointer]
+          - generic [ref=e349]:
+            - button "Start over" [ref=e350] [cursor=pointer]
+            - link "View full catalogue" [ref=e351] [cursor=pointer]:
+              - /url: "#/shop"
+      - paragraph [ref=e86]: This finder orders the catalogue against your protocol. It is not advice. All products are supplied strictly for laboratory research and educational use — not for human or veterinary consumption.
+  - contentinfo [ref=e87]:
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - generic [ref=e92]: Lyfe
+            - generic [ref=e93]: Health
+          - paragraph [ref=e94]: Research-grade peptide supply
+          - generic [ref=e95]:
+            - heading "Stay updated" [level=4] [ref=e96]
+            - generic [ref=e97]:
+              - textbox "Email address" [ref=e98]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=e99]
+            - paragraph [ref=e100]: Research updates and restock alerts. No spam.
+        - generic [ref=e101]:
+          - heading "Quick Links" [level=4] [ref=e102]
+          - list [ref=e103]:
+            - listitem [ref=e104]:
+              - link "Shop" [ref=e105] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=e106]:
+              - link "Home" [ref=e107] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=e108]:
+              - link "About" [ref=e109] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=e110]:
+              - link "Products" [ref=e111] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=e112]:
+              - link "Why Us" [ref=e113] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=e114]:
+              - link "FAQ" [ref=e115] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=e116]:
+              - link "Contact" [ref=e117] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=e118]:
+              - link "Track order" [ref=e119] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=e120]:
+          - heading "Contact" [level=4] [ref=e121]
+          - list [ref=e122]:
+            - listitem [ref=e123]:
+              - link "hello@lyfehealth.com" [ref=e124] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=e125]:
+              - link "+1 000 000 0000" [ref=e126] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=e127]:
+              - generic [ref=e128]: Global research supply
+        - generic [ref=e129]:
+          - heading "Policies" [level=4] [ref=e130]
+          - list [ref=e131]:
+            - listitem [ref=e132]:
+              - link "Press Release" [ref=e133] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=e134]:
+              - link "Refund Policy" [ref=e135] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=e136]:
+              - link "Shipping Policy" [ref=e137] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=e138]:
+              - link "Privacy Policy" [ref=e139] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=e140]:
+              - link "Terms Of Service" [ref=e141] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=e142]:
+          - heading "Follow" [level=4] [ref=e143]
+          - list [ref=e144]:
+            - listitem [ref=e145]:
+              - link "WhatsApp" [ref=e146]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=e147]:
+              - link "Instagram" [ref=e148]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=e149]:
+              - link "Email" [ref=e150]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=e152]:
+        - generic [ref=e153]: © 2026 Lyfe Health
+        - generic [ref=e154]: Global research supply
+      - paragraph [ref=e155]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=e156]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

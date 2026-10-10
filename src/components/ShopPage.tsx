@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { projects } from "../data/site";
+import {
+  getResearchArea,
+  researchAreaProducts,
+  type ResearchVisualKey,
+} from "../data/research";
 import { useCart } from "../hooks/useCart";
 
 const formatUsd = (n: number) =>
@@ -9,11 +14,12 @@ const formatUsd = (n: number) =>
     maximumFractionDigits: 0,
   }).format(n);
 
-export function ShopPage() {
+export function ShopPage({ research }: { research?: ResearchVisualKey } = {}) {
   const { addItem, open: openCart } = useCart();
   const [addedId, setAddedId] = useState<string | null>(null);
 
-  const results = projects;
+  const area = research ? getResearchArea(research) : undefined;
+  const results = area ? researchAreaProducts(area) : projects;
 
   const handleQuickAdd = (id: string) => {
     addItem(id, 1);
@@ -26,18 +32,27 @@ export function ShopPage() {
     <div className="shop-page">
       <div className="container">
         <header className="shop-page__hero">
-          <span className="eyebrow">Shop</span>
-          <h1 className="h2 shop-page__title">The full catalogue.</h1>
+          <span className="eyebrow">{area ? "Research area" : "Shop"}</span>
+          <h1 className="h2 shop-page__title">
+            {area ? `${area.name}.` : "The full catalogue."}
+          </h1>
           <p className="lead">
-            Research-grade peptide reference materials, independently lab tested and
-            packed for laboratory analysis. Documentation and batch data available on
-            every product.
+            {area
+              ? area.description
+              : "Research-grade peptide reference materials, independently lab tested and packed for laboratory analysis. Documentation and batch data available on every product."}
           </p>
         </header>
 
-        <p className="shop-page__count mono">
-          {results.length} product{results.length === 1 ? "" : "s"}
-        </p>
+        <div className="shop-page__filter">
+          <p className="shop-page__count mono">
+            {results.length} product{results.length === 1 ? "" : "s"}
+          </p>
+          {area && (
+            <a className="shop-page__clear mono" href="#/shop" data-cursor>
+              View full catalogue
+            </a>
+          )}
+        </div>
 
         {results.length === 0 ? null : (
           <div className="shop-page__grid">

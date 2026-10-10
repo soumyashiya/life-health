@@ -1,0 +1,1429 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - link "CUTLABS" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=e10]:
+          - link "Home" [ref=e11] [cursor=pointer]:
+            - /url: /
+          - link "Shop" [ref=e12] [cursor=pointer]:
+            - /url: /products
+          - link "Bulk Order" [ref=e13] [cursor=pointer]:
+            - /url: /bulk-orders
+          - link "COA" [ref=e14] [cursor=pointer]:
+            - /url: /coa-archive
+          - link "Research" [ref=e15] [cursor=pointer]:
+            - /url: /research
+          - link "Partner Program" [ref=e16] [cursor=pointer]:
+            - /url: /partner-program
+          - link "Contact" [ref=e17] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e18]:
+          - button "Search" [ref=e19] [cursor=pointer]
+          - button "Open wishlist" [ref=e23] [cursor=pointer]
+          - link "Account" [ref=e26] [cursor=pointer]:
+            - /url: /auth/login
+          - button "Open cart" [ref=e30] [cursor=pointer]
+      - generic [aria-hidden]:
+        - dialog:
+          - generic:
+            - generic:
+              - textbox:
+                - /placeholder: Search products…
+              - button
+            - generic:
+              - generic:
+                - heading [level=3]: Trending
+                - generic:
+                  - link:
+                    - /url: /product/glp-3-rt
+                    - text: Retatrutide
+                  - link:
+                    - /url: /product/tesamorelin
+                    - text: Tesamorelin
+                  - link:
+                    - /url: /product/klow-80mg
+                    - text: KLOW
+              - generic:
+                - heading [level=3]: Relevant Products
+                - generic:
+                  - generic:
+                    - generic:
+                      - button
+                      - link:
+                        - /url: /product/glp-3-rt
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /product/glp-3-rt
+                          - heading [level=3]: Retatrutide
+                        - generic:
+                          - generic: From
+                          - generic: $60
+                      - button:
+                        - generic: Add to cart
+                    - generic:
+                      - generic:
+                        - paragraph: Select Size
+                        - button
+                      - generic:
+                        - button:
+                          - generic: 5mg
+                          - generic: $60.00
+                        - button:
+                          - generic: 10mg
+                          - generic: $80.00
+                        - button:
+                          - generic: 20mg
+                          - generic: $140.00
+                        - button:
+                          - generic: 30mg
+                          - generic: $180.00
+                        - button [disabled]:
+                          - generic: 50mg
+                          - generic: Sold out
+                        - button:
+                          - generic: 60mg
+                          - generic: $260.00
+                      - button:
+                        - generic: Add to cart
+                        - generic: $60.00
+                  - generic:
+                    - generic:
+                      - button
+                      - link:
+                        - /url: /product/tesamorelin
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /product/tesamorelin
+                          - heading [level=3]: Tesamorelin
+                        - generic:
+                          - generic: From
+                          - generic: $55
+                      - button:
+                        - generic: Add to cart
+                    - generic:
+                      - generic:
+                        - paragraph: Select Size
+                        - button
+                      - generic:
+                        - button:
+                          - generic: 5mg
+                          - generic: $55.00
+                        - button:
+                          - generic: 10mg
+                          - generic: $90.00
+                        - button:
+                          - generic: 20mg
+                          - generic: $165.00
+                      - button:
+                        - generic: Add to cart
+                        - generic: $55.00
+                  - generic:
+                    - generic:
+                      - button
+                      - link:
+                        - /url: /product/klow-80mg
+                    - generic:
+                      - generic:
+                        - link:
+                          - /url: /product/klow-80mg
+                          - heading [level=3]: KLOW
+                        - generic: $115
+                      - button:
+                        - generic: Add to cart
+                    - generic:
+                      - generic:
+                        - paragraph: Select Size
+                        - button
+                      - generic:
+                        - button:
+                          - generic: 80mg
+                          - generic: $115.00
+                      - button:
+                        - generic: Add to cart
+                        - generic: $115.00
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e38]: Fall Savings
+        - generic [ref=e39]:
+          - generic [ref=e41]: "30% Off Sitewide · Code:"
+          - link "FALL" [ref=e42] [cursor=pointer]:
+            - /url: /products
+      - paragraph [ref=e43]:
+        - generic [ref=e44]: Free Research Water $150+
+        - generic [ref=e45]: ·Free GHK-Cu $200+
+        - generic [ref=e46]: ·Any product free $550+
+    - main [ref=e47]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - heading "Elevate Your Research to New Heights." [level=1] [ref=e51]:
+            - generic [ref=e52]: Elevate
+            - generic [ref=e53]: Your Research to New Heights.
+          - paragraph [ref=e54]: Research-grade compounds with Certificate of Analysis on every batch. 99%+ purity guaranteed through third-party 8x testing in US Labs.
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - link "Browse Catalog" [ref=e57] [cursor=pointer]:
+              - /url: /products
+            - link "View Quality Control" [ref=e61] [cursor=pointer]:
+              - /url: /quality-control
+          - generic [ref=e65]:
+            - generic [ref=e66]: Same day dispatch
+            - generic [ref=e72]: Every batch 8× tested
+            - generic [ref=e78]: Based in Jax, FL
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e86]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e87]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e88]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e89]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e90]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e91]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e92]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e93]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e94]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e95]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e96]: Third Party 8x Tested | COA With Every Batch
+        - generic [ref=e97]:
+          - generic [ref=e98]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e99]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e100]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e101]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e102]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e103]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e104]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e105]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e106]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e107]: Third Party 8x Tested | COA With Every Batch
+          - generic [ref=e108]: Free 2 Day (Air) Shipping on Orders $200+
+          - generic [ref=e109]: Third Party 8x Tested | COA With Every Batch
+      - generic [ref=e110]:
+        - generic [ref=e111]:
+          - generic [ref=e113]:
+            - heading "Featured Products" [level=2] [ref=e114]
+            - paragraph [ref=e116]: Research compounds, third-party 8x tested
+            - link "View all" [ref=e117] [cursor=pointer]:
+              - /url: /products
+          - generic [ref=e118]:
+            - button "Scroll to previous products" [disabled]
+            - button "Scroll to next products" [ref=e119] [cursor=pointer]
+            - generic [ref=e122]:
+              - generic [ref=e124]:
+                - generic [ref=e125]:
+                  - button "Add to wishlist" [ref=e126] [cursor=pointer]
+                  - img "GLOW GHK-Cu" [ref=e129]
+                  - link "View GLOW GHK-Cu" [ref=e130] [cursor=pointer]:
+                    - /url: /product/glow-70mg
+                  - button "View the 70mg certificate of analysis" [ref=e131] [cursor=pointer]:
+                    - text: 99.54%
+                    - generic [ref=e134]: COA
+                    - generic [aria-hidden] [ref=e135]: ›
+                - generic [ref=e136]:
+                  - generic [ref=e137]:
+                    - link [ref=e138] [cursor=pointer]:
+                      - /url: /product/glow-70mg
+                      - heading "GLOW GHK-Cu" [level=3] [ref=e139]
+                    - generic [ref=e140]: $100
+                  - paragraph [ref=e142]: Tissue Repair Blend
+                  - button "Add to cart" [ref=e143] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "70mg $100.00":
+                      - generic: 70mg
+                      - generic: $100.00
+                  - button "Add to cart $100.00":
+                    - generic: Add to cart
+                    - generic: $100.00
+              - generic [ref=e148]:
+                - generic [ref=e149]:
+                  - button "Add to wishlist" [ref=e150] [cursor=pointer]
+                  - img "CJC-1295 Without DAC" [ref=e153]
+                  - link "View CJC-1295 Without DAC" [ref=e154] [cursor=pointer]:
+                    - /url: /product/cjc-1295-ipamorelin
+                  - button "View the 10mg certificate of analysis" [ref=e155] [cursor=pointer]:
+                    - text: 99.53%
+                    - generic [ref=e158]: COA
+                    - generic [aria-hidden] [ref=e159]: ›
+                - generic [ref=e160]:
+                  - generic [ref=e161]:
+                    - link [ref=e162] [cursor=pointer]:
+                      - /url: /product/cjc-1295-ipamorelin
+                      - heading "CJC-1295 Without DAC" [level=3] [ref=e163]
+                    - generic [ref=e164]:
+                      - generic [ref=e165]: From
+                      - generic [ref=e166]: $75
+                  - paragraph [ref=e167]: Growth Hormone Blend
+                  - button "Add to cart" [ref=e168] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "10mg $75.00":
+                      - generic: 10mg
+                      - generic: $75.00
+                  - button "Add to cart $75.00":
+                    - generic: Add to cart
+                    - generic: $75.00
+              - generic [ref=e173]:
+                - generic [ref=e174]:
+                  - button "Add to wishlist" [ref=e175] [cursor=pointer]
+                  - img "MOTS-c" [ref=e178]
+                  - link "View MOTS-c" [ref=e179] [cursor=pointer]:
+                    - /url: /product/mots-c
+                  - button "View the 10mg certificate of analysis" [ref=e180] [cursor=pointer]:
+                    - text: 99.84%
+                    - generic [ref=e183]: COA
+                    - generic [aria-hidden] [ref=e184]: ›
+                - generic [ref=e185]:
+                  - generic [ref=e186]:
+                    - link [ref=e187] [cursor=pointer]:
+                      - /url: /product/mots-c
+                      - heading "MOTS-c" [level=3] [ref=e188]
+                    - generic [ref=e189]:
+                      - generic [ref=e190]: From
+                      - generic [ref=e191]: $65
+                  - paragraph [ref=e192]: Mitochondrial Research Peptide
+                  - button "Add to cart" [ref=e193] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "10mg $65.00":
+                      - generic: 10mg
+                      - generic: $65.00
+                    - button "20mg $115.00":
+                      - generic: 20mg
+                      - generic: $115.00
+                    - button "40mg $190.00":
+                      - generic: 40mg
+                      - generic: $190.00
+                  - button "Add to cart $65.00":
+                    - generic: Add to cart
+                    - generic: $65.00
+              - generic [ref=e198]:
+                - generic [ref=e199]:
+                  - button "Add to wishlist" [ref=e200] [cursor=pointer]
+                  - img "BPC-157 & TB-500" [ref=e203]
+                  - link "View BPC-157 & TB-500" [ref=e204] [cursor=pointer]:
+                    - /url: /product/wolverine-10mg
+                  - button "View the 10mg certificate of analysis" [ref=e205] [cursor=pointer]:
+                    - text: 99.69%
+                    - generic [ref=e208]: COA
+                    - generic [aria-hidden] [ref=e209]: ›
+                - generic [ref=e210]:
+                  - generic [ref=e211]:
+                    - link [ref=e212] [cursor=pointer]:
+                      - /url: /product/wolverine-10mg
+                      - heading "BPC-157 & TB-500" [level=3] [ref=e213]
+                    - generic [ref=e214]:
+                      - generic [ref=e215]: From
+                      - generic [ref=e216]: $70
+                  - paragraph [ref=e217]: Tissue Repair Blend
+                  - button "Add to cart" [ref=e218] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "10mg $70.00":
+                      - generic: 10mg
+                      - generic: $70.00
+                    - button "20mg $120.00":
+                      - generic: 20mg
+                      - generic: $120.00
+                    - button "40mg Sold out" [disabled]:
+                      - generic: 40mg
+                      - generic: Sold out
+                  - button "Add to cart $70.00":
+                    - generic: Add to cart
+                    - generic: $70.00
+              - generic [ref=e223]:
+                - generic [ref=e224]:
+                  - button "Add to wishlist" [ref=e225] [cursor=pointer]
+                  - img "NAD+" [ref=e228]
+                  - link "View NAD+" [ref=e229] [cursor=pointer]:
+                    - /url: /product/nad-plus
+                  - button "View the 500mg certificate of analysis" [ref=e230] [cursor=pointer]:
+                    - text: 99.46%
+                    - generic [ref=e233]: COA
+                    - generic [aria-hidden] [ref=e234]: ›
+                - generic [ref=e235]:
+                  - generic [ref=e236]:
+                    - link [ref=e237] [cursor=pointer]:
+                      - /url: /product/nad-plus
+                      - heading "NAD+" [level=3] [ref=e238]
+                    - generic [ref=e239]:
+                      - generic [ref=e240]: From
+                      - generic [ref=e241]: $70
+                  - paragraph [ref=e242]: Cellular Longevity Coenzyme
+                  - button "Add to cart" [ref=e243] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "500mg $70.00":
+                      - generic: 500mg
+                      - generic: $70.00
+                    - button "1000mg $105.00":
+                      - generic: 1000mg
+                      - generic: $105.00
+                  - button "Add to cart $70.00":
+                    - generic: Add to cart
+                    - generic: $70.00
+              - generic [ref=e248]:
+                - generic [ref=e249]:
+                  - button "Add to wishlist" [ref=e250] [cursor=pointer]
+                  - generic: Limited Supply
+                  - img "Retatrutide" [ref=e253]
+                  - link "View Retatrutide" [ref=e254] [cursor=pointer]:
+                    - /url: /product/glp-3-rt
+                  - button "View the 5mg certificate of analysis" [ref=e255] [cursor=pointer]:
+                    - text: 99.95%
+                    - generic [ref=e258]: COA
+                    - generic [aria-hidden] [ref=e259]: ›
+                - generic [ref=e260]:
+                  - generic [ref=e261]:
+                    - link [ref=e262] [cursor=pointer]:
+                      - /url: /product/glp-3-rt
+                      - heading "Retatrutide" [level=3] [ref=e263]
+                    - generic [ref=e264]:
+                      - generic [ref=e265]: From
+                      - generic [ref=e266]: $60
+                  - paragraph [ref=e267]: Metabolic Research Peptide
+                  - button "Add to cart" [ref=e268] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "5mg $60.00":
+                      - generic: 5mg
+                      - generic: $60.00
+                    - button "10mg $80.00":
+                      - generic: 10mg
+                      - generic: $80.00
+                    - button "20mg $140.00":
+                      - generic: 20mg
+                      - generic: $140.00
+                    - button "30mg $180.00":
+                      - generic: 30mg
+                      - generic: $180.00
+                    - button "50mg Sold out" [disabled]:
+                      - generic: 50mg
+                      - generic: Sold out
+                    - button "60mg $260.00":
+                      - generic: 60mg
+                      - generic: $260.00
+                  - button "Add to cart $60.00":
+                    - generic: Add to cart
+                    - generic: $60.00
+              - generic [ref=e273]:
+                - generic [ref=e274]:
+                  - button "Add to wishlist" [ref=e275] [cursor=pointer]
+                  - generic: Limited Supply
+                  - img "Tirzepatide" [ref=e278]
+                  - link "View Tirzepatide" [ref=e279] [cursor=pointer]:
+                    - /url: /product/glp-2-tz
+                  - button "View the 10mg certificate of analysis" [ref=e280] [cursor=pointer]:
+                    - text: 99.83%
+                    - generic [ref=e283]: COA
+                    - generic [aria-hidden] [ref=e284]: ›
+                - generic [ref=e285]:
+                  - generic [ref=e286]:
+                    - link [ref=e287] [cursor=pointer]:
+                      - /url: /product/glp-2-tz
+                      - heading "Tirzepatide" [level=3] [ref=e288]
+                    - generic [ref=e289]:
+                      - generic [ref=e290]: From
+                      - generic [ref=e291]: $65
+                  - paragraph [ref=e292]: Metabolic Research Peptide
+                  - button "Add to cart" [ref=e293] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "10mg $65.00":
+                      - generic: 10mg
+                      - generic: $65.00
+                    - button "20mg $105.00":
+                      - generic: 20mg
+                      - generic: $105.00
+                    - button "30mg $135.00":
+                      - generic: 30mg
+                      - generic: $135.00
+                    - button "60mg $175.00":
+                      - generic: 60mg
+                      - generic: $175.00
+                    - button "100mg $225.00":
+                      - generic: 100mg
+                      - generic: $225.00
+                    - button "120mg Sold out" [disabled]:
+                      - generic: 120mg
+                      - generic: Sold out
+                  - button "Add to cart $65.00":
+                    - generic: Add to cart
+                    - generic: $65.00
+              - generic [ref=e298]:
+                - generic [ref=e299]:
+                  - button "Add to wishlist" [ref=e300] [cursor=pointer]
+                  - img "Tesamorelin" [ref=e303]
+                  - link "View Tesamorelin" [ref=e304] [cursor=pointer]:
+                    - /url: /product/tesamorelin
+                  - button "View the 5mg certificate of analysis" [ref=e305] [cursor=pointer]:
+                    - text: 99.48%
+                    - generic [ref=e308]: COA
+                    - generic [aria-hidden] [ref=e309]: ›
+                - generic [ref=e310]:
+                  - generic [ref=e311]:
+                    - link [ref=e312] [cursor=pointer]:
+                      - /url: /product/tesamorelin
+                      - heading "Tesamorelin" [level=3] [ref=e313]
+                    - generic [ref=e314]:
+                      - generic [ref=e315]: From
+                      - generic [ref=e316]: $55
+                  - paragraph [ref=e317]: Growth Hormone Peptide
+                  - button "Add to cart" [ref=e318] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "5mg $55.00":
+                      - generic: 5mg
+                      - generic: $55.00
+                    - button "10mg $90.00":
+                      - generic: 10mg
+                      - generic: $90.00
+                    - button "20mg $165.00":
+                      - generic: 20mg
+                      - generic: $165.00
+                  - button "Add to cart $55.00":
+                    - generic: Add to cart
+                    - generic: $55.00
+        - generic [ref=e322]:
+          - generic [ref=e324]:
+            - heading "New Arrivals" [level=2] [ref=e325]
+            - paragraph [ref=e327]: The latest additions to the catalog, in stock and ready to ship
+            - link "View all" [ref=e328] [cursor=pointer]:
+              - /url: /products?category=New+Arrivals
+          - generic [ref=e329]:
+            - button "Scroll to previous products" [disabled]
+            - button "Scroll to next products" [ref=e330] [cursor=pointer]
+            - generic [ref=e333]:
+              - generic [ref=e335]:
+                - generic [ref=e336]:
+                  - button "Add to wishlist" [ref=e337] [cursor=pointer]
+                  - img "NAD+" [ref=e340]
+                  - link "View NAD+" [ref=e341] [cursor=pointer]:
+                    - /url: /product/nad-plus?view=box
+                  - button "View the 500mg certificate of analysis" [ref=e342] [cursor=pointer]:
+                    - text: 99.46%
+                    - generic [ref=e345]: COA
+                    - generic [aria-hidden] [ref=e346]: ›
+                - generic [ref=e347]:
+                  - generic [ref=e348]:
+                    - link [ref=e349] [cursor=pointer]:
+                      - /url: /product/nad-plus?view=box
+                      - heading "NAD+" [level=3] [ref=e350]
+                    - generic [ref=e351]:
+                      - generic [ref=e352]: From
+                      - generic [ref=e353]: $70
+                  - paragraph [ref=e354]: Cellular Longevity Coenzyme
+                  - button "Add to cart" [ref=e355] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "500mg $70.00":
+                      - generic: 500mg
+                      - generic: $70.00
+                    - button "1000mg $105.00":
+                      - generic: 1000mg
+                      - generic: $105.00
+                  - button "Add to cart $70.00":
+                    - generic: Add to cart
+                    - generic: $70.00
+              - generic [ref=e360]:
+                - generic [ref=e361]:
+                  - button "Add to wishlist" [ref=e362] [cursor=pointer]
+                  - generic: Limited Supply
+                  - img "Retatrutide" [ref=e365]
+                  - link "View Retatrutide" [ref=e366] [cursor=pointer]:
+                    - /url: /product/glp-3-rt?view=box
+                  - button "View the 5mg certificate of analysis" [ref=e367] [cursor=pointer]:
+                    - text: 99.95%
+                    - generic [ref=e370]: COA
+                    - generic [aria-hidden] [ref=e371]: ›
+                - generic [ref=e372]:
+                  - generic [ref=e373]:
+                    - link [ref=e374] [cursor=pointer]:
+                      - /url: /product/glp-3-rt?view=box
+                      - heading "Retatrutide" [level=3] [ref=e375]
+                    - generic [ref=e376]:
+                      - generic [ref=e377]: From
+                      - generic [ref=e378]: $60
+                  - paragraph [ref=e379]: Metabolic Research Peptide
+                  - button "Add to cart" [ref=e380] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "5mg $60.00":
+                      - generic: 5mg
+                      - generic: $60.00
+                    - button "10mg $80.00":
+                      - generic: 10mg
+                      - generic: $80.00
+                    - button "20mg $140.00":
+                      - generic: 20mg
+                      - generic: $140.00
+                    - button "30mg $180.00":
+                      - generic: 30mg
+                      - generic: $180.00
+                    - button "50mg Sold out" [disabled]:
+                      - generic: 50mg
+                      - generic: Sold out
+                    - button "60mg $260.00":
+                      - generic: 60mg
+                      - generic: $260.00
+                  - button "Add to cart $60.00":
+                    - generic: Add to cart
+                    - generic: $60.00
+              - generic [ref=e385]:
+                - generic [ref=e386]:
+                  - button "Add to wishlist" [ref=e387] [cursor=pointer]
+                  - img "GLOW GHK-Cu" [ref=e390]
+                  - link "View GLOW GHK-Cu" [ref=e391] [cursor=pointer]:
+                    - /url: /product/glow-70mg?view=box
+                  - button "View the 70mg certificate of analysis" [ref=e392] [cursor=pointer]:
+                    - text: 99.54%
+                    - generic [ref=e395]: COA
+                    - generic [aria-hidden] [ref=e396]: ›
+                - generic [ref=e397]:
+                  - generic [ref=e398]:
+                    - link [ref=e399] [cursor=pointer]:
+                      - /url: /product/glow-70mg?view=box
+                      - heading "GLOW GHK-Cu" [level=3] [ref=e400]
+                    - generic [ref=e401]: $100
+                  - paragraph [ref=e403]: Tissue Repair Blend
+                  - button "Add to cart" [ref=e404] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "70mg $100.00":
+                      - generic: 70mg
+                      - generic: $100.00
+                  - button "Add to cart $100.00":
+                    - generic: Add to cart
+                    - generic: $100.00
+              - generic [ref=e409]:
+                - generic [ref=e410]:
+                  - button "Add to wishlist" [ref=e411] [cursor=pointer]
+                  - img "CJC-1295 Without DAC" [ref=e414]
+                  - link "View CJC-1295 Without DAC" [ref=e415] [cursor=pointer]:
+                    - /url: /product/cjc-1295-ipamorelin?view=box
+                  - button "View the 10mg certificate of analysis" [ref=e416] [cursor=pointer]:
+                    - text: 99.53%
+                    - generic [ref=e419]: COA
+                    - generic [aria-hidden] [ref=e420]: ›
+                - generic [ref=e421]:
+                  - generic [ref=e422]:
+                    - link [ref=e423] [cursor=pointer]:
+                      - /url: /product/cjc-1295-ipamorelin?view=box
+                      - heading "CJC-1295 Without DAC" [level=3] [ref=e424]
+                    - generic [ref=e425]:
+                      - generic [ref=e426]: From
+                      - generic [ref=e427]: $75
+                  - paragraph [ref=e428]: Growth Hormone Blend
+                  - button "Add to cart" [ref=e429] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "10mg $75.00":
+                      - generic: 10mg
+                      - generic: $75.00
+                  - button "Add to cart $75.00":
+                    - generic: Add to cart
+                    - generic: $75.00
+              - generic [ref=e434]:
+                - generic [ref=e435]:
+                  - button "Add to wishlist" [ref=e436] [cursor=pointer]
+                  - img "Tesamorelin" [ref=e439]
+                  - link "View Tesamorelin" [ref=e440] [cursor=pointer]:
+                    - /url: /product/tesamorelin?view=box
+                  - button "View the 5mg certificate of analysis" [ref=e441] [cursor=pointer]:
+                    - text: 99.48%
+                    - generic [ref=e444]: COA
+                    - generic [aria-hidden] [ref=e445]: ›
+                - generic [ref=e446]:
+                  - generic [ref=e447]:
+                    - link [ref=e448] [cursor=pointer]:
+                      - /url: /product/tesamorelin?view=box
+                      - heading "Tesamorelin" [level=3] [ref=e449]
+                    - generic [ref=e450]:
+                      - generic [ref=e451]: From
+                      - generic [ref=e452]: $55
+                  - paragraph [ref=e453]: Growth Hormone Peptide
+                  - button "Add to cart" [ref=e454] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "5mg $55.00":
+                      - generic: 5mg
+                      - generic: $55.00
+                    - button "10mg $90.00":
+                      - generic: 10mg
+                      - generic: $90.00
+                    - button "20mg $165.00":
+                      - generic: 20mg
+                      - generic: $165.00
+                  - button "Add to cart $55.00":
+                    - generic: Add to cart
+                    - generic: $55.00
+              - generic [ref=e459]:
+                - generic [ref=e460]:
+                  - button "Add to wishlist" [ref=e461] [cursor=pointer]
+                  - generic: Limited Supply
+                  - img "Tirzepatide" [ref=e464]
+                  - link "View Tirzepatide" [ref=e465] [cursor=pointer]:
+                    - /url: /product/glp-2-tz?view=box
+                  - button "View the 10mg certificate of analysis" [ref=e466] [cursor=pointer]:
+                    - text: 99.83%
+                    - generic [ref=e469]: COA
+                    - generic [aria-hidden] [ref=e470]: ›
+                - generic [ref=e471]:
+                  - generic [ref=e472]:
+                    - link [ref=e473] [cursor=pointer]:
+                      - /url: /product/glp-2-tz?view=box
+                      - heading "Tirzepatide" [level=3] [ref=e474]
+                    - generic [ref=e475]:
+                      - generic [ref=e476]: From
+                      - generic [ref=e477]: $65
+                  - paragraph [ref=e478]: Metabolic Research Peptide
+                  - button "Add to cart" [ref=e479] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "10mg $65.00":
+                      - generic: 10mg
+                      - generic: $65.00
+                    - button "20mg $105.00":
+                      - generic: 20mg
+                      - generic: $105.00
+                    - button "30mg $135.00":
+                      - generic: 30mg
+                      - generic: $135.00
+                    - button "60mg $175.00":
+                      - generic: 60mg
+                      - generic: $175.00
+                    - button "100mg $225.00":
+                      - generic: 100mg
+                      - generic: $225.00
+                    - button "120mg Sold out" [disabled]:
+                      - generic: 120mg
+                      - generic: Sold out
+                  - button "Add to cart $65.00":
+                    - generic: Add to cart
+                    - generic: $65.00
+              - generic [ref=e484]:
+                - generic [ref=e485]:
+                  - button "Add to wishlist" [ref=e486] [cursor=pointer]
+                  - img "MOTS-c" [ref=e489]
+                  - link "View MOTS-c" [ref=e490] [cursor=pointer]:
+                    - /url: /product/mots-c?view=box
+                  - button "View the 10mg certificate of analysis" [ref=e491] [cursor=pointer]:
+                    - text: 99.84%
+                    - generic [ref=e494]: COA
+                    - generic [aria-hidden] [ref=e495]: ›
+                - generic [ref=e496]:
+                  - generic [ref=e497]:
+                    - link [ref=e498] [cursor=pointer]:
+                      - /url: /product/mots-c?view=box
+                      - heading "MOTS-c" [level=3] [ref=e499]
+                    - generic [ref=e500]:
+                      - generic [ref=e501]: From
+                      - generic [ref=e502]: $65
+                  - paragraph [ref=e503]: Mitochondrial Research Peptide
+                  - button "Add to cart" [ref=e504] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "10mg $65.00":
+                      - generic: 10mg
+                      - generic: $65.00
+                    - button "20mg $115.00":
+                      - generic: 20mg
+                      - generic: $115.00
+                    - button "40mg $190.00":
+                      - generic: 40mg
+                      - generic: $190.00
+                  - button "Add to cart $65.00":
+                    - generic: Add to cart
+                    - generic: $65.00
+              - generic [ref=e509]:
+                - generic [ref=e510]:
+                  - button "Add to wishlist" [ref=e511] [cursor=pointer]
+                  - generic: Limited Supply
+                  - img "Retatrutide" [ref=e514]
+                  - link "View Retatrutide" [ref=e515] [cursor=pointer]:
+                    - /url: /product/glp-3-rt?view=box
+                  - button "View the 5mg certificate of analysis" [ref=e516] [cursor=pointer]:
+                    - text: 99.95%
+                    - generic [ref=e519]: COA
+                    - generic [aria-hidden] [ref=e520]: ›
+                - generic [ref=e521]:
+                  - generic [ref=e522]:
+                    - link [ref=e523] [cursor=pointer]:
+                      - /url: /product/glp-3-rt?view=box
+                      - heading "Retatrutide" [level=3] [ref=e524]
+                    - generic [ref=e525]:
+                      - generic [ref=e526]: From
+                      - generic [ref=e527]: $60
+                  - paragraph [ref=e528]: Metabolic Research Peptide
+                  - button "Add to cart" [ref=e529] [cursor=pointer]
+                - generic:
+                  - generic:
+                    - paragraph: Select Size
+                    - button "Close size selector"
+                  - generic:
+                    - button "5mg $60.00":
+                      - generic: 5mg
+                      - generic: $60.00
+                    - button "10mg $80.00":
+                      - generic: 10mg
+                      - generic: $80.00
+                    - button "20mg $140.00":
+                      - generic: 20mg
+                      - generic: $140.00
+                    - button "30mg $180.00":
+                      - generic: 30mg
+                      - generic: $180.00
+                    - button "50mg Sold out" [disabled]:
+                      - generic: 50mg
+                      - generic: Sold out
+                    - button "60mg $260.00":
+                      - generic: 60mg
+                      - generic: $260.00
+                  - button "Add to cart $60.00":
+                    - generic: Add to cart
+                    - generic: $60.00
+        - generic [ref=e534]:
+          - generic [ref=e535]:
+            - generic [ref=e536]:
+              - generic [ref=e537]: Verification
+              - heading "How to verify each product." [level=2] [ref=e544]
+              - paragraph [ref=e545]: Each compound comes with a scannable QR code, batch number, and COA number.
+            - generic [ref=e546]:
+              - img "CutLabs vial labelled with a scannable QR code, batch number AS-KLOW80-2 and its COA number" [ref=e547]
+              - paragraph [ref=e548]: "*For demonstration, scan this vial."
+            - generic [ref=e549]:
+              - generic [ref=e550]:
+                - generic [ref=e551]:
+                  - generic [ref=e552]: "1"
+                  - generic [ref=e560]:
+                    - heading "Scan the QR code" [level=3] [ref=e561]
+                    - paragraph [ref=e562]: It takes you directly to the COA published on the independent third-party lab's own website, so you can verify the product in your hand is 8× tested.
+                - generic [ref=e563]:
+                  - generic [ref=e564]: "2"
+                  - generic [ref=e569]:
+                    - heading "Check the numbers match" [level=3] [ref=e570]
+                    - paragraph [ref=e571]: The batch number and COA number printed on the vial align with the data on the published COA.
+              - link "View full COA archive" [ref=e572] [cursor=pointer]:
+                - /url: /coa-archive
+          - generic [ref=e577]:
+            - generic [ref=e578]: Quality Control
+            - heading "Every batch, 8× tested." [level=2] [ref=e582]
+            - paragraph [ref=e583]: We don't grade our own work. Every batch clears eight independent lab tests at accredited third-party facilities, and each result is published on the Certificate of Analysis tied to that exact lot number.
+          - generic [ref=e584]:
+            - generic [ref=e585]:
+              - generic [ref=e586]: 99%+
+              - generic [ref=e587]: Purity Guaranteed
+            - generic [ref=e588]:
+              - generic [ref=e589]: "8"
+              - generic [ref=e590]: Quality Checks
+            - generic [ref=e591]:
+              - generic [ref=e592]: 100%
+              - generic [ref=e593]: U.S. Verified
+          - generic [ref=e594]:
+            - generic [ref=e595]:
+              - generic [ref=e596]: "1"
+              - generic [ref=e600]:
+                - heading "Purity" [level=3] [ref=e601]
+                - paragraph [ref=e602]: HPLC-UV quantification against a certified reference standard.
+            - generic [ref=e603]:
+              - generic [ref=e604]: "2"
+              - generic [ref=e610]:
+                - heading "Content Verification" [level=3] [ref=e611]
+                - paragraph [ref=e612]: Mass and concentration verified to the labeled potency.
+            - generic [ref=e613]:
+              - generic [ref=e614]: "3"
+              - generic [ref=e625]:
+                - heading "Identity Confirmation" [level=3] [ref=e626]
+                - paragraph [ref=e627]: Mass spectrometry confirms the exact molecular structure.
+            - generic [ref=e628]:
+              - generic [ref=e629]: "4"
+              - generic [ref=e633]:
+                - heading "Heavy Metals Screening" [level=3] [ref=e634]
+                - paragraph [ref=e635]: ICP-MS screen for Pb, As, Cd, and Hg below USP <232> limits.
+            - generic [ref=e636]:
+              - generic [ref=e637]: "5"
+              - generic [ref=e642]:
+                - heading "Sterility Testing" [level=3] [ref=e643]
+                - paragraph [ref=e644]: USP <71> compliant sterility screen on every fill.
+            - generic [ref=e645]:
+              - generic [ref=e646]: "6"
+              - generic [ref=e650]:
+                - heading "Endotoxin Testing" [level=3] [ref=e651]
+                - paragraph [ref=e652]: LAL kinetic chromogenic assay on each production lot.
+            - generic [ref=e653]:
+              - generic [ref=e654]: "7"
+              - generic [ref=e660]:
+                - heading "Batch Conformity Verification" [level=3] [ref=e661]
+                - paragraph [ref=e662]: Independent batch review confirming every lot matches its release spec and COA.
+            - generic [ref=e663]:
+              - generic [ref=e664]: "8"
+              - generic [ref=e669]:
+                - heading "Fentanyl Screen" [level=3] [ref=e670]
+                - paragraph [ref=e671]: LC-MS/MS screen confirms no fentanyl or fentanyl-analog contamination.
+          - generic [ref=e672]:
+            - generic [ref=e678]:
+              - paragraph [ref=e679]: Proof, on demand
+              - paragraph [ref=e680]: Verify any batch — full COA, signed and dated.
+            - link "Verify a batch" [ref=e681] [cursor=pointer]:
+              - /url: /coa-archive
+        - generic [ref=e685]:
+          - generic [ref=e686]:
+            - heading "Why choose CutLabs?" [level=2] [ref=e687]
+            - paragraph [ref=e688]: From independent lab testing to fast, tracked shipping, every detail is built to give researchers total confidence in what lands on the bench.
+          - generic [ref=e689]:
+            - generic [ref=e697]:
+              - heading "Fast Shipping" [level=3] [ref=e698]
+              - paragraph [ref=e699]: Orders processed and shipped the same day with full tracking and an expected delivery of 2 days.
+            - generic [ref=e705]:
+              - heading "100% Safe Payments" [level=3] [ref=e706]
+              - paragraph [ref=e707]: All transactions are secured with industry-standard encryption.
+            - generic [ref=e719]:
+              - heading "Premium Research Grade Quality" [level=3] [ref=e720]
+              - paragraph [ref=e721]: Every compound undergoes extensive third party testing for guaranteed quality and consistency.
+            - generic [ref=e729]:
+              - heading "8x Tested in Accredited U.S. Laboratories" [level=3] [ref=e730]
+              - paragraph [ref=e731]: Every batch is independently screened across eight critical quality checks, so purity and potency are never left to chance.
+            - generic [ref=e737]:
+              - heading "24/7 Support" [level=3] [ref=e738]
+              - paragraph [ref=e739]: Our in-house research experts are available to guide you with any questions.
+            - generic [ref=e751]:
+              - heading "Our Promise to You" [level=3] [ref=e752]
+              - paragraph [ref=e753]: We stand behind every product, so you can buy with confidence.
+        - generic [ref=e754]:
+          - generic [ref=e755]:
+            - heading "Real Researchers, Real Reviews." [level=2] [ref=e756]:
+              - text: Real Researchers,
+              - generic [ref=e757]: Real Reviews.
+            - paragraph [ref=e758]: Feedback from the labs and researchers who trust our product and service.
+          - generic [ref=e759]:
+            - generic [ref=e761]:
+              - article [ref=e762] [cursor=pointer]:
+                - paragraph [ref=e777]: Genuinely the most affordable pricing I've found anywhere, and the quality didn't drop to match it. Unbeatable value for a research budget.
+                - generic [ref=e778]:
+                  - generic [ref=e779]: MD
+                  - generic [ref=e780]:
+                    - generic [ref=e781]: Marcus Delgado
+                    - generic [ref=e782]: Verified buyer
+              - article [ref=e785] [cursor=pointer]:
+                - paragraph [ref=e800]: Their customer service is amazing. Every question I had was answered patiently, and they made sure my order was exactly right before it shipped.
+                - generic [ref=e801]:
+                  - generic [ref=e802]: HC
+                  - generic [ref=e803]:
+                    - generic [ref=e804]: Hannah Cole
+                    - generic [ref=e805]: Verified buyer
+              - article [ref=e808] [cursor=pointer]:
+                - paragraph [ref=e823]: Free priority shipping that actually shows up fast. Can't beat it.
+                - generic [ref=e824]:
+                  - generic [ref=e825]: DP
+                  - generic [ref=e826]:
+                    - generic [ref=e827]: Devin Park
+                    - generic [ref=e828]: Verified buyer
+              - article [ref=e831] [cursor=pointer]:
+                - paragraph [ref=e846]: Eight separate tests on every batch, no other company I've found even comes close. That level of verification is the whole reason I moved my orders here.
+                - generic [ref=e847]:
+                  - generic [ref=e848]: EM
+                  - generic [ref=e849]:
+                    - generic [ref=e850]: Elena Marsh
+                    - generic [ref=e851]: Verified buyer
+              - article [ref=e854] [cursor=pointer]:
+                - paragraph [ref=e869]: The packaging was super secure. Everything arrived sealed, padded, and completely intact in transit.
+                - generic [ref=e870]:
+                  - generic [ref=e871]: OB
+                  - generic [ref=e872]:
+                    - generic [ref=e873]: Olivia Brennan
+                    - generic [ref=e874]: Verified buyer
+              - article [ref=e877] [cursor=pointer]:
+                - paragraph [ref=e892]: Easiest site I've ever ordered from. In and out in two minutes.
+                - generic [ref=e893]:
+                  - generic [ref=e894]: RP
+                  - generic [ref=e895]:
+                    - generic [ref=e896]: Raj Patel
+                    - generic [ref=e897]: Verified buyer
+              - article [ref=e900] [cursor=pointer]:
+                - paragraph [ref=e915]: Every product has a COA that actually matches the batch. That kind of transparency is exactly why I keep coming back.
+                - generic [ref=e916]:
+                  - generic [ref=e917]: VI
+                  - generic [ref=e918]:
+                    - generic [ref=e919]: VialViking42
+                    - generic [ref=e920]: Verified buyer
+              - article [ref=e923] [cursor=pointer]:
+                - paragraph [ref=e938]: The 8x testing sold me instantly. Every vial is screened for identity, purity, sterility, endotoxins and more, so I know exactly what I'm getting.
+                - generic [ref=e939]:
+                  - generic [ref=e940]: PU
+                  - generic [ref=e941]:
+                    - generic [ref=e942]: PurityHound
+                    - generic [ref=e943]: Verified buyer
+              - article [ref=e946] [cursor=pointer]:
+                - paragraph [ref=e961]: Best prices, period.
+                - generic [ref=e962]:
+                  - generic [ref=e963]: BU
+                  - generic [ref=e964]:
+                    - generic [ref=e965]: BudgetBeaker
+                    - generic [ref=e966]: Verified buyer
+              - article [ref=e969] [cursor=pointer]:
+                - paragraph [ref=e984]: Support team is the best in the business. 10/10.
+                - generic [ref=e985]:
+                  - generic [ref=e986]: GM
+                  - generic [ref=e987]:
+                    - generic [ref=e988]: Greg Mason
+                    - generic [ref=e989]: Verified buyer
+              - article [ref=e992] [cursor=pointer]:
+                - paragraph [ref=e1007]: Love that priority shipping is free on all orders, no minimums and no surprise fees at checkout. Made me a repeat customer.
+                - generic [ref=e1008]:
+                  - generic [ref=e1009]: NV
+                  - generic [ref=e1010]:
+                    - generic [ref=e1011]: Nina Volkov
+                    - generic [ref=e1012]: Verified buyer
+              - article [ref=e1015] [cursor=pointer]:
+                - paragraph [ref=e1030]: I always verify COAs before I trust a supplier, and theirs are legit, third-party tested and easy to download right from the product page. Huge green flag.
+                - generic [ref=e1031]:
+                  - generic [ref=e1032]: XL
+                  - generic [ref=e1033]:
+                    - generic [ref=e1034]: xLabRat99
+                    - generic [ref=e1035]: Verified buyer
+              - article [ref=e1038] [cursor=pointer]:
+                - paragraph [ref=e1053]: Genuinely the most affordable pricing I've found anywhere, and the quality didn't drop to match it. Unbeatable value for a research budget.
+                - generic [ref=e1054]:
+                  - generic [ref=e1055]: MD
+                  - generic [ref=e1056]:
+                    - generic [ref=e1057]: Marcus Delgado
+                    - generic [ref=e1058]: Verified buyer
+              - article [ref=e1061] [cursor=pointer]:
+                - paragraph [ref=e1076]: Their customer service is amazing. Every question I had was answered patiently, and they made sure my order was exactly right before it shipped.
+                - generic [ref=e1077]:
+                  - generic [ref=e1078]: HC
+                  - generic [ref=e1079]:
+                    - generic [ref=e1080]: Hannah Cole
+                    - generic [ref=e1081]: Verified buyer
+              - article [ref=e1084] [cursor=pointer]:
+                - paragraph [ref=e1099]: Free priority shipping that actually shows up fast. Can't beat it.
+                - generic [ref=e1100]:
+                  - generic [ref=e1101]: DP
+                  - generic [ref=e1102]:
+                    - generic [ref=e1103]: Devin Park
+                    - generic [ref=e1104]: Verified buyer
+              - article [ref=e1107] [cursor=pointer]:
+                - paragraph [ref=e1122]: Eight separate tests on every batch, no other company I've found even comes close. That level of verification is the whole reason I moved my orders here.
+                - generic [ref=e1123]:
+                  - generic [ref=e1124]: EM
+                  - generic [ref=e1125]:
+                    - generic [ref=e1126]: Elena Marsh
+                    - generic [ref=e1127]: Verified buyer
+              - article [ref=e1130] [cursor=pointer]:
+                - paragraph [ref=e1145]: The packaging was super secure. Everything arrived sealed, padded, and completely intact in transit.
+                - generic [ref=e1146]:
+                  - generic [ref=e1147]: OB
+                  - generic [ref=e1148]:
+                    - generic [ref=e1149]: Olivia Brennan
+                    - generic [ref=e1150]: Verified buyer
+              - article [ref=e1153] [cursor=pointer]:
+                - paragraph [ref=e1168]: Easiest site I've ever ordered from. In and out in two minutes.
+                - generic [ref=e1169]:
+                  - generic [ref=e1170]: RP
+                  - generic [ref=e1171]:
+                    - generic [ref=e1172]: Raj Patel
+                    - generic [ref=e1173]: Verified buyer
+              - article [ref=e1176] [cursor=pointer]:
+                - paragraph [ref=e1191]: Every product has a COA that actually matches the batch. That kind of transparency is exactly why I keep coming back.
+                - generic [ref=e1192]:
+                  - generic [ref=e1193]: VI
+                  - generic [ref=e1194]:
+                    - generic [ref=e1195]: VialViking42
+                    - generic [ref=e1196]: Verified buyer
+              - article [ref=e1199] [cursor=pointer]:
+                - paragraph [ref=e1214]: The 8x testing sold me instantly. Every vial is screened for identity, purity, sterility, endotoxins and more, so I know exactly what I'm getting.
+                - generic [ref=e1215]:
+                  - generic [ref=e1216]: PU
+                  - generic [ref=e1217]:
+                    - generic [ref=e1218]: PurityHound
+                    - generic [ref=e1219]: Verified buyer
+              - article [ref=e1222] [cursor=pointer]:
+                - paragraph [ref=e1237]: Best prices, period.
+                - generic [ref=e1238]:
+                  - generic [ref=e1239]: BU
+                  - generic [ref=e1240]:
+                    - generic [ref=e1241]: BudgetBeaker
+                    - generic [ref=e1242]: Verified buyer
+              - article [ref=e1245] [cursor=pointer]:
+                - paragraph [ref=e1260]: Support team is the best in the business. 10/10.
+                - generic [ref=e1261]:
+                  - generic [ref=e1262]: GM
+                  - generic [ref=e1263]:
+                    - generic [ref=e1264]: Greg Mason
+                    - generic [ref=e1265]: Verified buyer
+              - article [ref=e1268] [cursor=pointer]:
+                - paragraph [ref=e1283]: Love that priority shipping is free on all orders, no minimums and no surprise fees at checkout. Made me a repeat customer.
+                - generic [ref=e1284]:
+                  - generic [ref=e1285]: NV
+                  - generic [ref=e1286]:
+                    - generic [ref=e1287]: Nina Volkov
+                    - generic [ref=e1288]: Verified buyer
+              - article [ref=e1291] [cursor=pointer]:
+                - paragraph [ref=e1306]: I always verify COAs before I trust a supplier, and theirs are legit, third-party tested and easy to download right from the product page. Huge green flag.
+                - generic [ref=e1307]:
+                  - generic [ref=e1308]: XL
+                  - generic [ref=e1309]:
+                    - generic [ref=e1310]: xLabRat99
+                    - generic [ref=e1311]: Verified buyer
+            - generic [ref=e1315]:
+              - article [ref=e1316] [cursor=pointer]:
+                - paragraph [ref=e1331]: Arrived sealed, secure, and perfectly packed. Perfect.
+                - generic [ref=e1332]:
+                  - generic [ref=e1333]: SM
+                  - generic [ref=e1334]:
+                    - generic [ref=e1335]: Sofia Marin
+                    - generic [ref=e1336]: Verified buyer
+              - article [ref=e1339] [cursor=pointer]:
+                - paragraph [ref=e1354]: Clean, simple layout that's so easy to navigate. Everything I needed was a click away and reordering takes seconds.
+                - generic [ref=e1355]:
+                  - generic [ref=e1356]: TQ
+                  - generic [ref=e1357]:
+                    - generic [ref=e1358]: Tyler Quinn
+                    - generic [ref=e1359]: Verified buyer
+              - article [ref=e1362] [cursor=pointer]:
+                - paragraph [ref=e1377]: The only lab in the world running 8x testing. That says everything about their standards.
+                - generic [ref=e1378]:
+                  - generic [ref=e1379]: AW
+                  - generic [ref=e1380]:
+                    - generic [ref=e1381]: Aaron Wells
+                    - generic [ref=e1382]: Verified buyer
+              - article [ref=e1385] [cursor=pointer]:
+                - paragraph [ref=e1400]: Affordable pricing without cutting corners. I'm getting lab-grade quality for less than I used to pay elsewhere.
+                - generic [ref=e1401]:
+                  - generic [ref=e1402]: BR
+                  - generic [ref=e1403]:
+                    - generic [ref=e1404]: Bianca Russo
+                    - generic [ref=e1405]: Verified buyer
+              - article [ref=e1408] [cursor=pointer]:
+                - paragraph [ref=e1423]: COAs for every batch. Love the transparency.
+                - generic [ref=e1424]:
+                  - generic [ref=e1425]: PE
+                  - generic [ref=e1426]:
+                    - generic [ref=e1427]: PeptidePilot
+                    - generic [ref=e1428]: Verified buyer
+              - article [ref=e1431] [cursor=pointer]:
+                - paragraph [ref=e1446]: Shout out to the support team, top-tier help. Quick, friendly, and they clearly know the products inside and out.
+                - generic [ref=e1447]:
+                  - generic [ref=e1448]: NI
+                  - generic [ref=e1449]:
+                    - generic [ref=e1450]: NightOwlBio
+                    - generic [ref=e1451]: Verified buyer
+              - article [ref=e1454] [cursor=pointer]:
+                - paragraph [ref=e1469]: Fast, free shipping every single time. A+.
+                - generic [ref=e1470]:
+                  - generic [ref=e1471]: QU
+                  - generic [ref=e1472]:
+                    - generic [ref=e1473]: QuantumQuokka
+                    - generic [ref=e1474]: Verified buyer
+              - article [ref=e1477] [cursor=pointer]:
+                - paragraph [ref=e1492]: Whoever handles packaging deserves a raise. Vials were cushioned and sealed tight, nothing damaged after a long trip.
+                - generic [ref=e1493]:
+                  - generic [ref=e1494]: AL
+                  - generic [ref=e1495]:
+                    - generic [ref=e1496]: Andre Lewis
+                    - generic [ref=e1497]: Verified buyer
+              - article [ref=e1500] [cursor=pointer]:
+                - paragraph [ref=e1515]: I appreciate the extra effort. Most suppliers stop at a basic purity check, but their full 8x panel shows they genuinely care about peak-level quality.
+                - generic [ref=e1516]:
+                  - generic [ref=e1517]: CR
+                  - generic [ref=e1518]:
+                    - generic [ref=e1519]: CryoCatalyst
+                    - generic [ref=e1520]: Verified buyer
+              - article [ref=e1523] [cursor=pointer]:
+                - paragraph [ref=e1538]: So easy to use. Found everything fast.
+                - generic [ref=e1539]:
+                  - generic [ref=e1540]: ZE
+                  - generic [ref=e1541]:
+                    - generic [ref=e1542]: ZeroDarkLabs
+                    - generic [ref=e1543]: Verified buyer
+              - article [ref=e1546] [cursor=pointer]:
+                - paragraph [ref=e1561]: Being able to pull up a certificate of analysis for exactly what I ordered gives me total peace of mind. More companies should do this.
+                - generic [ref=e1562]:
+                  - generic [ref=e1563]: CF
+                  - generic [ref=e1564]:
+                    - generic [ref=e1565]: Caleb Foster
+                    - generic [ref=e1566]: Verified buyer
+              - article [ref=e1569] [cursor=pointer]:
+                - paragraph [ref=e1584]: Cheapest quality source I've found. Sold.
+                - generic [ref=e1585]:
+                  - generic [ref=e1586]: GA
+                  - generic [ref=e1587]:
+                    - generic [ref=e1588]: GainsGoblin
+                    - generic [ref=e1589]: Verified buyer
+              - article [ref=e1592] [cursor=pointer]:
+                - paragraph [ref=e1607]: Arrived sealed, secure, and perfectly packed. Perfect.
+                - generic [ref=e1608]:
+                  - generic [ref=e1609]: SM
+                  - generic [ref=e1610]:
+                    - generic [ref=e1611]: Sofia Marin
+                    - generic [ref=e1612]: Verified buyer
+              - article [ref=e1615] [cursor=pointer]:
+                - paragraph [ref=e1630]: Clean, simple layout that's so easy to navigate. Everything I needed was a click away and reordering takes seconds.
+                - generic [ref=e1631]:
+                  - generic [ref=e1632]: TQ
+                  - generic [ref=e1633]:
+                    - generic [ref=e1634]: Tyler Quinn
+                    - generic [ref=e1635]: Verified buyer
+              - article [ref=e1638] [cursor=pointer]:
+                - paragraph [ref=e1653]: The only lab in the world running 8x testing. That says everything about their standards.
+                - generic [ref=e1654]:
+                  - generic [ref=e1655]: AW
+                  - generic [ref=e1656]:
+                    - generic [ref=e1657]: Aaron Wells
+                    - generic [ref=e1658]: Verified buyer
+              - article [ref=e1661] [cursor=pointer]:
+                - paragraph [ref=e1676]: Affordable pricing without cutting corners. I'm getting lab-grade quality for less than I used to pay elsewhere.
+                - generic [ref=e1677]:
+                  - generic [ref=e1678]: BR
+                  - generic [ref=e1679]:
+                    - generic [ref=e1680]: Bianca Russo
+                    - generic [ref=e1681]: Verified buyer
+              - article [ref=e1684] [cursor=pointer]:
+                - paragraph [ref=e1699]: COAs for every batch. Love the transparency.
+                - generic [ref=e1700]:
+                  - generic [ref=e1701]: PE
+                  - generic [ref=e1702]:
+                    - generic [ref=e1703]: PeptidePilot
+                    - generic [ref=e1704]: Verified buyer
+              - article [ref=e1707] [cursor=pointer]:
+                - paragraph [ref=e1722]: Shout out to the support team, top-tier help. Quick, friendly, and they clearly know the products inside and out.
+                - generic [ref=e1723]:
+                  - generic [ref=e1724]: NI
+                  - generic [ref=e1725]:
+                    - generic [ref=e1726]: NightOwlBio
+                    - generic [ref=e1727]: Verified buyer
+              - article [ref=e1730] [cursor=pointer]:
+                - paragraph [ref=e1745]: Fast, free shipping every single time. A+.
+                - generic [ref=e1746]:
+                  - generic [ref=e1747]: QU
+                  - generic [ref=e1748]:
+                    - generic [ref=e1749]: QuantumQuokka
+                    - generic [ref=e1750]: Verified buyer
+              - article [ref=e1753] [cursor=pointer]:
+                - paragraph [ref=e1768]: Whoever handles packaging deserves a raise. Vials were cushioned and sealed tight, nothing damaged after a long trip.
+                - generic [ref=e1769]:
+                  - generic [ref=e1770]: AL
+                  - generic [ref=e1771]:
+                    - generic [ref=e1772]: Andre Lewis
+                    - generic [ref=e1773]: Verified buyer
+              - article [ref=e1776] [cursor=pointer]:
+                - paragraph [ref=e1791]: I appreciate the extra effort. Most suppliers stop at a basic purity check, but their full 8x panel shows they genuinely care about peak-level quality.
+                - generic [ref=e1792]:
+                  - generic [ref=e1793]: CR
+                  - generic [ref=e1794]:
+                    - generic [ref=e1795]: CryoCatalyst
+                    - generic [ref=e1796]: Verified buyer
+              - article [ref=e1799] [cursor=pointer]:
+                - paragraph [ref=e1814]: So easy to use. Found everything fast.
+                - generic [ref=e1815]:
+                  - generic [ref=e1816]: ZE
+                  - generic [ref=e1817]:
+                    - generic [ref=e1818]: ZeroDarkLabs
+                    - generic [ref=e1819]: Verified buyer
+              - article [ref=e1822] [cursor=pointer]:
+                - paragraph [ref=e1837]: Being able to pull up a certificate of analysis for exactly what I ordered gives me total peace of mind. More companies should do this.
+                - generic [ref=e1838]:
+                  - generic [ref=e1839]: CF
+                  - generic [ref=e1840]:
+                    - generic [ref=e1841]: Caleb Foster
+                    - generic [ref=e1842]: Verified buyer
+              - article [ref=e1845] [cursor=pointer]:
+                - paragraph [ref=e1860]: Cheapest quality source I've found. Sold.
+                - generic [ref=e1861]:
+                  - generic [ref=e1862]: GA
+                  - generic [ref=e1863]:
+                    - generic [ref=e1864]: GainsGoblin
+                    - generic [ref=e1865]: Verified buyer
+        - generic [ref=e1868]:
+          - generic [ref=e1869]:
+            - img "CutLabs Tirzepatide research vial"
+            - img "CutLabs Retatrutide research vial"
+            - generic [ref=e1870]:
+              - heading "All the research compounds you need, with the confidence that every batch is 8× tested before it ships." [level=2] [ref=e1871]:
+                - text: All the research compounds you need, with the
+                - generic [ref=e1872]: confidence
+                - text: that every batch is 8× tested before it ships.
+              - link "See all products" [ref=e1874] [cursor=pointer]:
+                - /url: /products
+          - generic [ref=e1881]:
+            - generic [ref=e1882]:
+              - heading "Subscribe to our Newsletter" [level=2] [ref=e1883]:
+                - text: Subscribe to our
+                - generic [ref=e1884]: Newsletter
+              - paragraph [ref=e1885]: Subscribe to our newsletter to get daily insights, news, updates.
+            - generic [ref=e1888]:
+              - textbox "Enter email address" [ref=e1889]
+              - button "Subscribe" [ref=e1890] [cursor=pointer]
+  - contentinfo [ref=e1894]:
+    - generic [ref=e1895]:
+      - generic [ref=e1896]:
+        - generic [ref=e1897]:
+          - link "CutLabs — return to homepage" [ref=e1898] [cursor=pointer]:
+            - /url: /
+            - text: CUTLABS
+          - paragraph [ref=e1900]: Premium research-grade compounds for optimal controlled studies and performance. Third-party tested with Certificate of Analysis.
+          - generic [ref=e1901]:
+            - link "904-907-4610" [ref=e1902] [cursor=pointer]:
+              - /url: tel:9049074610
+            - link "support@cutlabs.com" [ref=e1905] [cursor=pointer]:
+              - /url: mailto:support@cutlabs.com
+            - generic [ref=e1909]: 134 Land Grant St 2St. Augustine, FL 32092
+        - generic [ref=e1914]:
+          - generic [ref=e1915]:
+            - heading "Shop" [level=3] [ref=e1916]
+            - list [ref=e1917]:
+              - listitem [ref=e1918]:
+                - link "All Products" [ref=e1919] [cursor=pointer]:
+                  - /url: /products
+              - listitem [ref=e1920]:
+                - link "Bulk Order" [ref=e1921] [cursor=pointer]:
+                  - /url: /bulk-orders
+              - listitem [ref=e1922]:
+                - link "Bundles" [ref=e1923] [cursor=pointer]:
+                  - /url: /products?category=Bundles
+          - generic [ref=e1924]:
+            - heading "Resources" [level=3] [ref=e1925]
+            - list [ref=e1926]:
+              - listitem [ref=e1927]:
+                - link "Certificates of Analysis" [ref=e1928] [cursor=pointer]:
+                  - /url: /coa-archive
+              - listitem [ref=e1929]:
+                - link "Quality Control" [ref=e1930] [cursor=pointer]:
+                  - /url: /quality-control
+              - listitem [ref=e1931]:
+                - link "Research Library" [ref=e1932] [cursor=pointer]:
+                  - /url: /research
+              - listitem [ref=e1933]:
+                - link "Partner Program" [ref=e1934] [cursor=pointer]:
+                  - /url: /partner-program
+          - generic [ref=e1935]:
+            - heading "Support" [level=3] [ref=e1936]
+            - list [ref=e1937]:
+              - listitem [ref=e1938]:
+                - link "About Us" [ref=e1939] [cursor=pointer]:
+                  - /url: /about
+              - listitem [ref=e1940]:
+                - link "Contact Us" [ref=e1941] [cursor=pointer]:
+                  - /url: /contact
+              - listitem [ref=e1942]:
+                - link "FAQ" [ref=e1943] [cursor=pointer]:
+                  - /url: /faq
+              - listitem [ref=e1944]:
+                - link "Shipping & Returns" [ref=e1945] [cursor=pointer]:
+                  - /url: /shipping-returns
+              - listitem [ref=e1946]:
+                - link "Track Your Order" [ref=e1947] [cursor=pointer]:
+                  - /url: /track-order
+          - generic [ref=e1948]:
+            - heading "Legal" [level=3] [ref=e1949]
+            - list [ref=e1950]:
+              - listitem [ref=e1951]:
+                - link "Privacy Policy" [ref=e1952] [cursor=pointer]:
+                  - /url: /privacy-policy
+              - listitem [ref=e1953]:
+                - link "Terms of Service" [ref=e1954] [cursor=pointer]:
+                  - /url: /terms-of-service
+              - listitem [ref=e1955]:
+                - link "Disclaimer" [ref=e1956] [cursor=pointer]:
+                  - /url: /disclaimer
+      - generic [ref=e1958]:
+        - generic [ref=e1959]:
+          - generic [ref=e1960]: SSL Secured
+          - generic [ref=e1964]: 99%+ Purity
+          - generic [ref=e1970]: Same Day Shipping
+        - generic [ref=e1976]:
+          - link "TikTok" [ref=e1977] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@cutlabs?_r=1&_t=ZT-97OZm3qORnZ
+            - img "TikTok" [ref=e1978]
+          - link "Discord" [ref=e1979] [cursor=pointer]:
+            - /url: https://discord.gg/agENwVvR
+            - img "Discord" [ref=e1980]
+          - link "Telegram" [ref=e1981] [cursor=pointer]:
+            - /url: https://t.me/ascensionlaboratories
+            - img "Telegram" [ref=e1982]
+      - generic [ref=e1983]: We Accept
+      - paragraph [ref=e1990]: © 2026 CutLabs. All rights reserved.
+  - dialog "My Wishlist" [ref=e1991]:
+    - generic [ref=e1992]:
+      - generic [ref=e1993]:
+        - heading "My Wishlist" [level=2] [ref=e1996]
+        - generic [ref=e1997]: (0)
+      - button "Close wishlist" [ref=e1998] [cursor=pointer]
+    - generic [ref=e2003]:
+      - paragraph [ref=e2007]: Your wishlist is empty.
+      - link "Browse Products" [ref=e2008] [cursor=pointer]:
+        - /url: /products
+  - dialog "Shopping Cart" [ref=e2009]:
+    - generic [ref=e2010]:
+      - heading "Shopping Cart" [level=2] [ref=e2011]
+      - button "Close cart" [ref=e2012] [cursor=pointer]
+    - generic [ref=e2017]:
+      - paragraph [ref=e2018]: Your cart is empty.
+      - paragraph [ref=e2019]: Add a product to get started.
+      - link "Start Shopping" [ref=e2020] [cursor=pointer]:
+        - /url: /products
+  - dialog "Researcher verification" [ref=e2023]:
+    - generic [ref=e2025]:
+      - paragraph [ref=e2028]: CUTLABS
+      - heading "Researcher Verification" [level=1] [ref=e2029]
+      - paragraph [ref=e2030]: CutLabs sells research material exclusively to qualified researchers and laboratories for in vitro and laboratory use. Please confirm before continuing.
+      - generic [ref=e2031]:
+        - checkbox "I am at least 21 years of age." [ref=e2032] [cursor=pointer]
+        - checkbox "I confirm I am a qualified researcher purchasing for in vitro / laboratory research only — not for human or veterinary use." [ref=e2037] [cursor=pointer]
+      - generic [ref=e2042]:
+        - generic [ref=e2043]: What type of researcher are you?
+        - button "What type of researcher are you?" [ref=e2045] [cursor=pointer]:
+          - generic [ref=e2046]: Select one…
+      - button "Enter CutLabs" [disabled] [ref=e2049]
+      - paragraph [ref=e2052]:
+        - text: By proceeding you affirm the statements above are true. Products are not for human or veterinary use, not for use in diagnostic procedures, and have not been evaluated by the U.S. Food and Drug Administration.
+        - link "Full disclaimer." [ref=e2053] [cursor=pointer]:
+          - /url: /terms-of-service
+      - button "Not a researcher? Exit" [ref=e2055] [cursor=pointer]

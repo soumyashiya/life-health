@@ -85,7 +85,7 @@ export function Testimonials() {
                 <img
                   className="testimonial__avatar"
                   src={t.avatar}
-                  alt={`${t.name} — ${t.role} verified review of Liora Healthcare`}
+                  alt={`${t.name} — ${t.role} verified review of Lyfe Health`}
                   loading="lazy"
                 />
               ) : (

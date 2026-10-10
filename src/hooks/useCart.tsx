@@ -26,6 +26,8 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+// Keeps the pre-rebrand prefix on purpose: renaming it to lyfe.* would orphan
+// every saved cart already in a visitor's localStorage.
 const STORAGE_KEY = "liora.cart.v1";
 
 const readStorage = (): CartLine[] => {

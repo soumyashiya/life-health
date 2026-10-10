@@ -1,0 +1,211 @@
+- generic [ref=f37e2]:
+  - generic [ref=f37e4]:
+    - generic [ref=f37e5]: Booting interface
+    - generic [ref=f37e6]: 009 / 100
+    - generic [ref=f37e7]: 9%
+  - banner [ref=f37e11]:
+    - generic [ref=f37e12]:
+      - link "Liora Healthcare" [ref=f37e13]:
+        - /url: "#home"
+        - generic [ref=f37e21]:
+          - generic [ref=f37e22]: Liora
+          - generic [ref=f37e24]: Healthcare
+      - navigation "Primary" [ref=f37e25]:
+        - list [ref=f37e26]:
+          - listitem [ref=f37e27]:
+            - button "Research" [ref=f37e28] [cursor=pointer]
+          - listitem [ref=f37e29]:
+            - button "Shop" [ref=f37e30] [cursor=pointer]
+          - listitem [ref=f37e31]:
+            - button "Science" [ref=f37e32] [cursor=pointer]
+          - listitem [ref=f37e33]:
+            - link "About" [ref=f37e34] [cursor=pointer]:
+              - /url: "#/about"
+      - generic [ref=f37e35]:
+        - button "Search products" [ref=f37e36] [cursor=pointer]
+        - button "Sign in" [ref=f37e41] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f37e45] [cursor=pointer]
+        - link "Shop research" [ref=f37e50]:
+          - /url: "#/shop"
+  - text: → → → → → →
+  - main [ref=f37e52]:
+    - generic [ref=f37e53]:
+      - generic [ref=f37e57]:
+        - generic [ref=f37e58]: About
+        - heading "Advancing modern research with smarter formulations." [level=1] [ref=f37e59]
+        - paragraph [ref=f37e60]: We're committed to advancing high-quality peptide research through clean, reliable, and precisely characterised reference materials. Every product is sourced from verified suppliers and carefully packed to preserve consistency, purity, and integrity — from our facility to your bench.
+      - generic [ref=f37e61]:
+        - generic [ref=f37e62]:
+          - generic [ref=f37e63]:
+            - term [ref=f37e64]:
+              - text: "99"
+              - generic [ref=f37e65]: "%+"
+            - definition [ref=f37e66]: Formulation purity
+          - generic [ref=f37e67]:
+            - term [ref=f37e68]:
+              - text: "1000"
+              - generic [ref=f37e69]: +
+            - definition [ref=f37e70]: Researchers served
+          - generic [ref=f37e71]:
+            - term [ref=f37e72]:
+              - text: "24"
+              - generic [ref=f37e73]: h
+            - definition [ref=f37e74]: WhatsApp response
+        - list [ref=f37e75]:
+          - listitem [ref=f37e76]:
+            - generic [ref=f37e77]: Range
+            - generic [ref=f37e78]: Peptides · Reference materials
+          - listitem [ref=f37e79]:
+            - generic [ref=f37e80]: Sourcing
+            - generic [ref=f37e81]: Verified suppliers
+          - listitem [ref=f37e82]:
+            - generic [ref=f37e83]: Support
+            - generic [ref=f37e84]: Fast WhatsApp
+      - generic [ref=f37e86]:
+        - figure [ref=f37e87]:
+          - img "Research team working at a peptide laboratory bench." [ref=f37e88]
+        - generic [ref=f37e89]:
+          - heading "A supply chain built for people who have to show their working." [level=2] [ref=f37e90]
+          - paragraph [ref=f37e91]: "Laboratories do not buy on a brand promise — they buy on documentation. So the operation is built backwards from that: verified suppliers, controlled handling, a retained sample from every lot, and an independent analysis published against the material it belongs to."
+          - paragraph [ref=f37e92]: That is also why the catalogue is deliberately small. Every item we list is one we can stand behind with a batch-specific certificate.
+          - link "See how we verify purity" [ref=f37e93]:
+            - /url: "#/science?s=purity"
+      - list [ref=f37e97]:
+        - listitem [ref=f37e98]:
+          - blockquote [ref=f37e99]: “WhatsApp reply within the hour. That alone changed how we plan ordering for our team.”
+          - generic [ref=f37e101]:
+            - generic [ref=f37e102]: Rohan Natarajan
+            - generic [ref=f37e103]: Co-founder, Ember Research
+        - listitem [ref=f37e104]:
+          - blockquote [ref=f37e105]: “Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.”
+          - generic [ref=f37e107]:
+            - generic [ref=f37e108]: Marco Ruiz
+            - generic [ref=f37e109]: Procurement Lead, Vela Biotech
+      - generic [ref=f37e111]:
+        - figure [ref=f37e112]:
+          - img "Sealed, protected packaging prepared for dispatch." [ref=f37e113]
+        - generic [ref=f37e114]:
+          - heading "Research use only" [level=2] [ref=f37e115]
+          - list [ref=f37e116]:
+            - listitem [ref=f37e117]: Produced for laboratory research only. Not for human or veterinary consumption.
+            - listitem [ref=f37e118]: These products are not intended to diagnose, treat, cure, or prevent any disease.
+            - listitem [ref=f37e119]: Supplied in sealed, fixed-volume formats intended for laboratory analysis.
+      - generic [ref=f37e121]:
+        - generic [ref=f37e122]:
+          - heading "Talk to us" [level=2] [ref=f37e123]
+          - paragraph [ref=f37e124]: Questions on handling, documentation or a specific lot — we answer them ourselves.
+        - generic [ref=f37e125]:
+          - link "hello@liorahealthcare.com" [ref=f37e126]:
+            - /url: mailto:hello@liorahealthcare.com
+          - list [ref=f37e127]:
+            - listitem [ref=f37e128]:
+              - link "WhatsApp" [ref=f37e129]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f37e130]:
+              - link "Instagram" [ref=f37e131]:
+                - /url: https://instagram.com/liorahealthcare
+            - listitem [ref=f37e132]:
+              - link "Email" [ref=f37e133]:
+                - /url: mailto:hello@liorahealthcare.com
+          - button "Browse the catalogue" [ref=f37e134] [cursor=pointer]
+  - contentinfo [ref=f37e135]:
+    - generic [ref=f37e136]:
+      - generic [ref=f37e137]:
+        - generic [ref=f37e138]:
+          - generic [ref=f37e139]:
+            - generic [ref=f37e140]: Liora
+            - generic [ref=f37e141]: Healthcare
+          - paragraph [ref=f37e142]: Research-grade peptide supply
+          - generic [ref=f37e143]:
+            - heading "Stay updated" [level=4] [ref=f37e144]
+            - generic [ref=f37e145]:
+              - textbox "Email address" [ref=f37e146]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f37e147]
+            - paragraph [ref=f37e148]: Research updates and restock alerts. No spam.
+        - generic [ref=f37e149]:
+          - heading "Quick Links" [level=4] [ref=f37e150]
+          - list [ref=f37e151]:
+            - listitem [ref=f37e152]:
+              - link "Shop" [ref=f37e153] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f37e154]:
+              - link "Home" [ref=f37e155] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f37e156]:
+              - link "About" [ref=f37e157] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f37e158]:
+              - link "Products" [ref=f37e159] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f37e160]:
+              - link "Why Us" [ref=f37e161] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f37e162]:
+              - link "FAQ" [ref=f37e163] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f37e164]:
+              - link "Contact" [ref=f37e165] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f37e166]:
+              - link "Track order" [ref=f37e167] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f37e168]:
+          - heading "Contact" [level=4] [ref=f37e169]
+          - list [ref=f37e170]:
+            - listitem [ref=f37e171]:
+              - link "hello@liorahealthcare.com" [ref=f37e172] [cursor=pointer]:
+                - /url: mailto:hello@liorahealthcare.com
+            - listitem [ref=f37e173]:
+              - link "+1 000 000 0000" [ref=f37e174] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f37e175]:
+              - generic [ref=f37e176]: Global research supply
+        - generic [ref=f37e177]:
+          - heading "Policies" [level=4] [ref=f37e178]
+          - list [ref=f37e179]:
+            - listitem [ref=f37e180]:
+              - link "Press Release" [ref=f37e181] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f37e182]:
+              - link "Refund Policy" [ref=f37e183] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f37e184]:
+              - link "Shipping Policy" [ref=f37e185] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f37e186]:
+              - link "Privacy Policy" [ref=f37e187] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f37e188]:
+              - link "Terms Of Service" [ref=f37e189] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f37e190]:
+          - heading "Follow" [level=4] [ref=f37e191]
+          - list [ref=f37e192]:
+            - listitem [ref=f37e193]:
+              - link "WhatsApp" [ref=f37e194]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f37e195]:
+              - link "Instagram" [ref=f37e196]:
+                - /url: https://instagram.com/liorahealthcare
+            - listitem [ref=f37e197]:
+              - link "Email" [ref=f37e198]:
+                - /url: mailto:hello@liorahealthcare.com
+      - generic [ref=f37e200]:
+        - generic [ref=f37e201]: © 2026 Liora Healthcare
+        - generic [ref=f37e202]: Global research supply
+      - paragraph [ref=f37e203]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f37e204]: Liora Healthcare
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue
