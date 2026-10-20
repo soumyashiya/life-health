@@ -18,7 +18,8 @@ import heroDisc from "../assets/hero/figure.webp";
    product page. Falls back gracefully if the ids ever change. */
 const SHELF_IDS = ["p1", "p4", "p5"];
 
-export function Hero() {
+/** `ready` flips true when the preloader has lifted — see the reveal below. */
+export function Hero({ ready = true }: { ready?: boolean }) {
   const root = useRef<HTMLElement | null>(null);
 
   const shelf = SHELF_IDS.map((id) => projects.find((p) => p.id === id)).filter(
@@ -71,6 +72,46 @@ export function Hero() {
       ScrollTrigger.refresh();
     };
   }, []);
+
+  /* **The headline reveal waits for the preloader** (2026-10-20 fix). It used
+     to belong to the page-load sequence in `Navbar.tsx`, which starts on
+     mount — so the lines rose *behind* the preloader and were already sitting
+     still by the time it lifted, and below 992px there was no reveal at all.
+     Now the lines (and the copy, CTA and foot row after them) are held hidden
+     until `ready`, then rise behind their per-line masks like every other
+     band's heading. When `ready` flips, matchMedia reverts and re-adds in
+     the same tick, so the hidden state is re-applied before any paint — no
+     flash of the finished text. Reduced motion gets no branch: CSS is the
+     finished state. */
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const mm = gsap.matchMedia(el);
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const lines = ".hero__line > span";
+      const bits = ".hero__content > *:not(.hero__title), .hero__foot";
+      gsap.set(lines, { yPercent: 110 });
+      gsap.set(bits, { opacity: 0, y: 24 });
+      if (!ready) return;
+
+      gsap
+        .timeline({ delay: 0.15 })
+        .to(lines, {
+          yPercent: 0,
+          duration: 1.1,
+          ease: "power3.out",
+          stagger: 0.12,
+        })
+        .to(
+          bits,
+          { opacity: 1, y: 0, duration: 0.9, ease: "power2.out", stagger: 0.1 },
+          "-=0.6",
+        );
+    });
+
+    return () => mm.revert();
+  }, [ready]);
 
   return (
     <section id="home" className="hero" ref={root}>

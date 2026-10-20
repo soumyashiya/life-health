@@ -9,6 +9,7 @@ import { DriftBand } from "./components/DriftBand";
 import { LineStory } from "./components/LineStory";
 import { AboutProduct } from "./components/AboutProduct";
 import { TrustBar } from "./components/TrustBar";
+import { FinalCta } from "./components/FinalCta";
 import { AboutBand } from "./components/AboutBand";
 import { WhyChoose } from "./components/WhyChoose";
 import { Testimonials } from "./components/Testimonials";
@@ -35,8 +36,7 @@ import { RouterProvider, useRouter } from "./hooks/useRouter";
 import { AuthProvider } from "./hooks/useAuth";
 import { getLenis, useSmoothScroll } from "./hooks/useSmoothScroll";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { EASE_REVEAL, prefersReducedMotion } from "./lib/motion";
+import { EASE_REVEAL, prefersReducedMotion, safeRefreshScrollTriggers } from "./lib/motion";
 import { sendFingerprintOnce } from "./lib/fingerprint";
 import "./styles/portfolio.css";
 
@@ -63,9 +63,13 @@ function AppShell() {
      cannot interfere with history. `useRouter` has already put the scroll at
      the top by this point. */
   useEffect(() => {
+    /* **Deferred and guarded — see `safeRefreshScrollTriggers`.** Calling
+       `ScrollTrigger.refresh()` inline here threw on a hard load of any
+       non-home route and unmounted the entire app. */
+    const cancelRefresh = safeRefreshScrollTriggers();
+
     const frame = requestAnimationFrame(() => {
       getLenis()?.resize();
-      ScrollTrigger.refresh();
 
       if (prefersReducedMotion()) return;
       const entering = document.querySelector<HTMLElement>("main.view:not([hidden])");
@@ -76,7 +80,10 @@ function AppShell() {
         { opacity: 1, y: 0, duration: 0.5, ease: EASE_REVEAL, clearProps: "opacity,transform" },
       );
     });
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      cancelRefresh();
+    };
   }, [view]);
 
   useEffect(() => {
@@ -88,6 +95,10 @@ function AppShell() {
       {!ready && <Preloader onComplete={() => setReady(true)} />}
       <CustomCursor />
       <ScrollProgress />
+      {/* `AnnouncementBar` — the strip above the header — hidden on request
+          (2026-10-20). Component, `announcementCopy` and `.announce*` are kept;
+          remounting it also needs `--announce-h` in index.css set back to
+          2.5rem, or the page will not clear it. */}
       <Navbar />
       {/* **No scroll-velocity drag on type** (removed on request, 2026-10-20):
           the reference runs it on `h1`/`p`/`ul`, and headings lurching against
@@ -95,9 +106,15 @@ function AppShell() {
           and still correct — it simply has no targets. Images drift instead,
           on the about band's scrubbed parallax. */}
       <main className="view view--home" hidden={!isHome} aria-hidden={!isHome}>
-        <Hero />
+        <Hero ready={ready} />
         {/* Quiet credential strip spanning the hero's two cards */}
         <TrustBar />
+        {/* The home shop band — products and categories combined (2026-10-20,
+            built to a client reference). It took the slot `ShopCategories`
+            held, directly under the hero; that band is unmounted and kept, its
+            tiles now live at the foot of this one. Carries `id="work"`, so
+            the Products nav anchor still resolves. */}
+        <ProductRange />
         {/* About band, built to two client references — the layout of one and
             the scroll word-reveal of the other. Its paragraph is read from
             `aboutCopy`, not restated, so this band and the `#/about` page
@@ -106,11 +123,6 @@ function AppShell() {
             `Hero` because `TrustBar` is the strip spanning the hero's two
             cards, not a section of its own. */}
         <AboutBand />
-        {/* The product grid. Replaced `Catalogue` on 2026-10-15 and took its
-            `id="work"` with it, so the Products anchor still resolves.
-            `Catalogue` is kept in the tree but no longer mounted — same
-            convention as `Projects` and `ResearchAreas`. */}
-        <ProductRange />
         {/* About-product band, built to a client screenshot and mounted
             directly under the products grid on request (2026-10-19). Its own
             cards, labels and chips were benefit and formulation claims and
@@ -251,6 +263,10 @@ function AppShell() {
             are all untouched and still in the tree, so remounting it is this
             line plus its import. */}
         <FAQ />
+        {/* The closing shopping band (2026-10-20). Burgundy rather than
+            near-black: the FAQ above is cream and `.contact` below opens dark
+            before its wipe, so a black band here would merge into it. */}
+        <FinalCta />
         <Contact />
       </main>
       {view.name === "shop" && (

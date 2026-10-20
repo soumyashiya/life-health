@@ -725,10 +725,12 @@ re-exported from `aboutCopy` so the page and the `#about` home section cannot di
 `compliance` block is verbatim product/checkout legal wording — **do not paraphrase it**, and do
 not place clinician, patient or treatment imagery beside it.
 
-**Home sections, as mounted (2026-10-20, latest)** — `Hero`, `TrustBar`, `AboutBand`,
+**Home sections, as mounted (2026-10-20, latest)** — `Hero`, `TrustBar`,
+**`ShopCategories`**, `AboutBand`,
 `ProductRange`, `AboutProduct`, `ScienceBand`, `DriftBand`, `LineStory`,
 `WhyChoose`, `Testimonials`, `ProductFeature`,
-`FAQ`, `Contact`, `Footer`.
+`FAQ`, **`FinalCta`**, `Contact`, `Footer` — with **`AnnouncementBar`** fixed above the
+header, outside the view.
 (**`DocBand` was added 2026-10-20**, between `DriftBand` and `LineStory`, **and unmounted on request the same day**.) (`ConfidenceBand` and `LotOffer` were unmounted the same day. A swap
 putting `AboutProduct` under the hero and `AboutBand` under the range was tried and **reverted on
 request**.) Verified in the DOM, in that order, with every home anchor
@@ -975,6 +977,15 @@ panel takes the larger share, because it carries everything.
 - ≤767px `.hero__foot` wraps and `.hero__shelf` takes its own row. The proof cluster is
   `flex: 0 0 auto` (its label must not wrap), so beside three packshots there was not enough room
   left on a phone and the last tile ran out past the panel's rounded edge.
+
+**⚠ Headline reveal moved into `Hero.tsx` and gated on the preloader (2026-10-20 fix).** The
+Navbar sequence starts on mount, so the lines rose *behind* the ~5s `Preloader` and were already
+still when it lifted (and below 992px there was no reveal at all). `App.tsx` now passes
+`<Hero ready={ready} />`; Hero holds `.hero__line > span` at `yPercent: 110` and the copy/foot at
+`opacity: 0` until `ready`, then runs the rise (1.1s `power3.out`, stagger 0.12) at every width.
+Reduced motion gets no branch. Navbar no longer touches any `.hero__*` element. Verified by
+fast-forwarding GSAP's global timeline in Playwright: hidden while `.preloader` exists, `0` after.
+The paragraph below is history.
 
 Motion: the band's arrival — headline lines rising behind their masks, then the copy, CTA, proof
 and shelf — belongs to the sequence in `Navbar.tsx`, because the hero is hidden behind that
@@ -1732,6 +1743,138 @@ paragraph, a pill CTA with a disc arrow, and a row of three labelled photo tiles
   lines, accent, body, CTA, tiles, note) plus a scrub owning `yPercent` on the `<img>` inside
   the frame — the entrance owns the frame's `clipPath`/`scale`, so nothing shares a property
   on one element. Reduced motion gets no `mm.add` branch and renders from CSS.
+
+**⚠ MERCHANDISING COPY DE-LABBED (2026-10-20, requested: *"still all content research
+and study type, change into content like ecommerce"*).** The shopping surfaces now read as
+a shop; the compliance layer is untouched. What changed, and the line that was held:
+
+| was | now |
+|---|---|
+| `researchAreas[].name` "Metabolic research" … | "Metabolic", "Cellular", "Peptides", "Recovery", "Blends" |
+| `shopTitleLines` "Explore metabolic / pathways", "Study cellular / energy", "Compare peptide / purity", "Research tissue / repair", "Test multi-compound / blends" | "GLP-1 & / metabolic", "NAD+ & / cellular", "All / peptides", "Recovery / peptides", "Multi-compound / blends" |
+| `researchAreas[].description` — "for metabolic and energy-pathway studies", "regeneration-focused laboratory studies" | what the lot **is and contains** |
+| `projects[].sector` "Compound Analysis" ×5 + "Support" | the category it is filed under |
+| `projects[].summary` — "research device", "for … studies", "pathway research" | form, content and how it ships |
+| `specs` Form "Pre-filled research pen(s)" | "Pre-filled pen(s)" |
+| shop `h1` "The full catalogue." / its lead | "Shop all products." / a buying lead |
+| `rangeCopy.lead` "Pre-filled research devices" | "Pre-filled devices" |
+
+- **Every figure in the new summaries was checked against that lot's own `specs`**, not
+  read off the carton artwork — 20 mg total, 2 × 35 mg pens, 20 mg BPC-157 + 20 mg TB-500,
+  2 × 500 mg pens. Nothing was rounded or invented.
+- **The compliance layer is deliberately NOT de-labbed** and must stay: `safetyProtocol`
+  on every lot ("Produced for laboratory research only. Not for human or veterinary
+  consumption."), the PDP `(R&D Only)` title suffix, `rangeCopy.note`, the shop page
+  disclaimer, the About compliance block and the whole Science page. The brief asked for
+  ecommerce *content*, and its own rules forbid inventing benefits — so the lab **framing**
+  went and the research-use-only **position** did not. Pharmacology stayed too (GLP-1/GIP
+  agonist, GHK-Cu, NAD+): it is factual product identity and it is what distinguishes one
+  lot from another on a card.
+- `alt` text still says "research carton" in several bands. Left alone deliberately — it
+  is accurate, it is not merchandising copy, and several of those alts are load-bearing
+  for the compliance notes that explain why they name no compound.
+- Route ids are unchanged (`#/shop?research=<id>`), so no link broke.
+- Verified live: chips read All products · Metabolic · Cellular · Peptides · Recovery ·
+  Blends; PDP breadcrumb "Catalogue · Metabolic" with `safetyProtocol` still printed; card
+  shelf lines "Pre-filled pen · 20 mg total".
+
+**Announcement bar** (`AnnouncementBar.tsx`, `announcementCopy` in `data/site.ts`,
+`.announce__*` in `portfolio.css`) — **added 2026-10-20**, fixed above the header.
+
+- **It carries no offer, and that is deliberate.** There is no promotions system, no
+  discount pricing, no shipping-threshold rule and no guarantee anywhere in this project
+  to read a real one from — inventing one on a live storefront is a real-money error, the
+  same objection that cut the struck-through price out of `ProductOffer` and `OfferBanner`.
+  It states a fact the site already publishes instead. **Replace the copy the day a real
+  offer is configured, not before.**
+- **The offset is a token, not a magic number.** `--announce-h` (2.5rem, `:root`) is read
+  by `body`'s `padding-top` **and** by `.nav__shell`'s `top`, so the bar, the header and
+  the page can never disagree. Padding on `body` moves the normal flow only — fixed
+  elements resolve against the viewport — which is why the bar sits in the gap.
+- **Dismissal is resolved at import, before React's first render.** The module zeroes
+  `--announce-h` when `liora.announce.v1` is set. Doing it in an effect instead gives a
+  returning visitor one frame with a 40px gap and a header that then jumps up into it —
+  that was built and measured. The key keeps the `liora.*` prefix, same as the cart.
+- **Two message lengths, picked by CSS.** The full sentence ellipsises below ~430px in
+  uppercase mono and the word it loses is "third-party" — the only part carrying weight —
+  so `messageShort` takes over at ≤560px along with the link being hidden.
+- **≤560px the close button leaves the overlay and joins the flow.** Absolutely placed it
+  sits over a centred full-width line; padding the text only widened its box. As two flex
+  items they share the row and cannot collide. `.announce__text` needs `min-width: 0`
+  there or the flex item refuses to shrink and overflows instead of ellipsising.
+- Verified at 320 / 375 / 430 / 561 / 768 / 1440 / 1920: no clipping, no collision, 0
+  horizontal overflow; dismiss → `navTop` and `body` padding both 0 with no leftover gap,
+  and it stays dismissed across a reload.
+
+**Shop by category** (`ShopCategories.tsx`, `categoryCopy` in `data/site.ts`, `.cats__*`
+at the end of `portfolio.css`) — **added 2026-10-20**, between `TrustBar` and `AboutBand`.
+
+- **The five tiles are the real `researchAreas`, read in the component** — name,
+  description, `shopImage` and `shopTitleLines` were all already in `data/research.ts`
+  and had been **unused on the home view since `Catalogue` was unmounted**. Each links to
+  `#/shop?research=<id>`, the filter the shop page already supports, so no category is
+  invented and no link is dead. A sixth area in the data adds a sixth tile by itself.
+- The count under each label is `area.productIds.length` — a real figure, not typed copy.
+- **Imagery generated 2026-10-20 (Magnific, `src/assets/shop-categories/`, 200 KB total).**
+  The old `categories/*` lifestyle set was shot for goal-style labels ("Explore metabolic
+  pathways") and a water bottle does not illustrate "Multi-compound blends"; those files
+  are **untouched and still used by the contact band's photo circles**.
+  - **Four passes in one day, all on request.** Abstract macro (ink blooms, quartz,
+    filaments) → full-figure lifestyle portraits → tight studio body crops → **warm
+    golden-hour window scenes**, which is what is live: a figure seen **from behind** at a
+    window, backlit, with the view beyond. The language is the client's own drop,
+    `latest-images/recovery.jpeg` — `recovery` uses it directly and `cellular`, `peptide`
+    and `blends` were generated to match. Each pass overwrote the files in place, so the
+    imports never changed; **the three earlier sets are recoverable only by regenerating.**
+    People are allowed here — this is the one place the project's no-people rule has
+    always been waived.
+  - **`metabolic` is deliberately outside that language** and is now the one cool studio
+    crop in a row of four warm window scenes. It was reverted to the original
+    `categories/metabolic.webp` on request; flagged as the odd frame out, client-directed.
+    It is also the one landscape source (1024x688), so the 4/5 tile crops it hardest —
+    the dumbbell falls outside the frame. The `recovery` drop is 1200x600 and crops to its
+    centre cleanly (checked: the figure stays fully in frame).
+  - **⚠ THIS IS CONSUMER LIFESTYLE IMAGERY ON A LABORATORY-USE-ONLY CATALOGUE AND IT IS AN
+    OPEN, CLIENT-DIRECTED ITEM.** It sits under GLP-1 (a weight-loss drug class) and
+    Recovery, where a person pictured beside the label can read as the outcome the
+    compound is associated with — the one claim every product page disclaims. **Raised at
+    every pass**; the direction was reaffirmed each time.
+    - The **from-behind framing is the mitigation that survived all four passes** and is
+      worth keeping: nobody is posed to display a body or to endorse anything, which keeps
+      the set reading as "a customer" rather than "a result". `metabolic` is the exception
+      — it is a body, not a person.
+  - **What is held regardless of the direction, and must stay in any re-prompt:** no
+    packaging (image models garble printed artwork), no capsule, pill, syringe, vial, lab
+    coat or clinical setting; for `recovery` **no bandage, brace, strapping, bruising,
+    injury or massage** — nothing that reads as being treated; no weighing scale,
+    measuring tape or before-and-after framing; no food or drink (an earlier `cellular`
+    take came back holding a cup and was re-picked — a drink is ingestion imagery); and
+    **faces stay out of frame.**
+  - Nothing holds, takes or sits near the product: no packaging (models garble printed
+    artwork), no capsule, no syringe, no lab coat, no clinical setting. **The `cellular`
+    shot came back holding a cup on the first pass and was re-picked** — a drink is
+    ingestion imagery. Keep `food, drink, cup, glass` in the negation list.
+  - Tiles take `alt=""`: the label beside them is the accessible text, and an alt here
+    would be the only place naming what the person is "for".
+  - `.cats__body`'s scrim is deep (0.88 at the base) and `.cats__name` carries a
+    `text-shadow` — several frames are pale exactly where the label sits.
+- The whole tile is **one anchor**, so the image, label and count are the same target.
+- `grid-template-columns` uses `minmax(0, 1fr)`, never a bare `1fr`: a bare track is
+  floored at its widest item's min-content and the two-line labels blow past it. Same
+  trap as `.whychoose__front`. 5-up → 3 at ≤1199 → 2 at ≤767 → 1 at ≤420, where the crop
+  also goes 16/10 because two portrait tiles that narrow leave the label unreadable.
+
+**Final CTA** (`FinalCta.tsx`, `finalCtaCopy` in `data/site.ts`, `.finalcta__*` at the end
+of `portfolio.css`) — **added 2026-10-20**, between `FAQ` and `Contact`.
+
+- **Burgundy, not near-black.** The FAQ above is cream and `.contact` below **opens dark**
+  before its wipe, so a black band here would merge straight into it; the brand accent is
+  the one value that separates both neighbours.
+- Knockout type uses `--color-on-accent`, never `--color-bg` — the trap the theme
+  inversion exposed.
+- Its heading lines are authored, so they carry `.anim__line` masks themselves and
+  `splitLines` stands aside. Claims nothing: a headline, a line `promoCopy` already makes,
+  and two links to routes that exist.
 
 **Statement band** (`LineStory.tsx`, `lineStoryCopy` in `site.ts`, `.linestory__*` at the end
 of `portfolio.css`) — **added 2026-10-19**, mounted between `DriftBand` and `ProductReel`.
@@ -2545,6 +2688,19 @@ detail gallery with pagers, and a CTA row.
   to be unset at `:nth-child` specificity inside the ≤991px block, or the middle tile laps the
   other two in the mobile row.
 
+**⚠ PRODUCT RANGE + CATEGORIES COMBINED 2026-10-20 (latest — supersedes the layout notes below).**
+Built to a client reference and moved to **directly under the hero** (the slot `ShopCategories` held;
+that band is **unmounted and kept**, its tiles now live here). Still carries `id="work"`. Cream band
+(`--range-cream: #fbf6f1`): eyebrow pill + title + lead, three trust marks opposite
+(`rangeCopy.trust`); a **3-up carousel** (2-up ≤991, one + peek ≤640) of rounded white cards with
+round arrows outside the rail and **page dots** measured off the rail; then **four category tiles**
+(`researchAreas` minus "All peptides", linking `#/shop?research=<id>`). Reference slots that could
+not ship and what fills them: star rating → the lot's **batch number · lab**; *Bestseller / Trending /
+New* badges → the **published purity** (or nothing); wishlist heart → the **add to cart** button;
+outcome-claim tile labels → the areas' own `shopTitleLines`. The blush → coral media gradient is
+kept; packshots sit at `scale(0.88)` so the carton does not run edge to edge. Arrows/dots verified
+stepping 0 → 1 and disabling at each end.
+
 **Product range** (`ProductRange.tsx`, `rangeCopy` in `site.ts`, `.range__*` at the end of
 `portfolio.css`) — added 2026-10-15, **rebuilt 2026-10-16 to a best-sellers reference**: a
 white band, the title on the left with two circular pagers on the right, and a **4-up
@@ -2654,15 +2810,46 @@ scroll-snapped rail**, then a `Shop all products` link and the research-use-only
   weight naturally"). The catalogue is laboratory-use-only — consumer benefit copy on these
   tiles would contradict the compliance position on every product page. Keep that framing.
 
+**⚠⚠ CONTACT: DO NOT PIN (2026-10-20).** A pinned version came back after the timed one and was
+reported as **"stuck and double"** — `position: fixed` under Lenis plus `anticipatePin: 1` painted
+the band twice as it latched and released. Live state: **no pin at any width**; the disc plays a
+timed 1.6s tween at `top 55%`, `toggleActions: "play none none reverse"`. Verified 0 `.pin-spacer`
+on the home view.
+
 **Contact** (`Contact.tsx`, `.contact__*`) — **rebuilt 2026-10-13 against the Vertical Webflow
 template’s contact/footer block**, replacing the 2026-10-12 enquiry-form version.
 
-- **The band pins and the turnover plays against the scroll.** ≥992px the section is `pin: true`
-  for `+=110%` with a scrubbed timeline: it stops at the top of the screen, you keep scrolling,
+- **⚠ The pin is gone (2026-10-20, requested — the page felt stuck at the contact band), and the
+  disc now PLAYS when the band is reached** (second request the same day): a timed 1.6s
+  `power3.inOut` tween, `start: "top 55%"`, `toggleActions: "play none none reverse"` — not a
+  scrub, so it runs on its own and replays on the next pass down. Verified no `.pin-spacer` and
+  the disc at scale 0 until the trigger. The note below describes the old desktop pin.
+- **The band pins and the turnover plays against the scroll.** ≥992px the section is
+  `pin: true` with a scrubbed tween: it stops at the top of the screen, you keep scrolling,
   and a **growing light disc** (`.contact__grow`, 150vmax, `z-index: -1`) opens from the middle
-  until it owns the viewport, then the pin releases into the footer. Below 992px the same wipe
-  just scrubs as the section passes — pinning would trap a phone reader. The section is
+  until it owns the viewport, then the pin releases into the footer. The section is
   `min-height: 100svh` so the pinned frame has no seam.
+  - **⚠ FOUR VERSIONS HAVE SHIPPED IN THIS SLOT — read this before changing it again.**
+    pin + 1:1 scrub (rejected, read as "stuck") → plain scrub, no pin → a timed 1.6s play on
+    arrival → **the current one: pin restored, shorter hold, smoothed scrub** (2026-10-20,
+    requested: it should hold when reached and reveal smoothly as you scroll).
+  - **Two numbers carry that, and they are what to adjust if it reads as stuck again:**
+    `end: "+=70%"` (the rejected version held `+=110%`, a full viewport plus) and
+    **`scrub: 1`, not `scrub: true`** — a raw scrub maps the disc 1:1 to the wheel so every
+    notch is a visible step; the 1s catch-up turns the same travel into a glide. `ease: "none"`
+    for the same reason: an ease on top of a scrub fights the smoothing and reads as lag.
+    `anticipatePin: 1` takes up the pin's layout shift a frame early so the band does not jump
+    as it latches.
+  - **Below 992px it does not pin at all** — a full-height pinned section traps a phone reader,
+    the rule `Services`, `LabProof` and `ProductSpotlight` follow. The disc plays on arrival
+    there (`top 55%`, `toggleActions: play none none reverse`) and rewinds if you scroll back.
+  - Verified at 1440: `.contact` wrapped in a `.pin-spacer` of 1551px (921 band + 630 hold),
+    `position` flipping `relative → fixed; top: 0` on latch, the disc scrubbing
+    0 → 0.15 → 0.42 → 0.74 → 1 while held, and releasing to `relative` with the footer in
+    view. At 390px: **0 pin spacers**, 0 horizontal overflow.
+  - **Measuring this in Playwright needs care.** Setting `scrollTop` directly fights Lenis and
+    the band's `getBoundingClientRect().top` comes back as nonsense mid-flight (−9000-ish).
+    Drive it with real `mouse.wheel` input and assert on `position`/`.pin-spacer` instead.
 - **The type flips with `mix-blend-mode: difference`, not a colour tween.** `.contact__main` /
   `.contact__foot` are pure white and blend: white over the dark band stays white, white over
   the disc lands near-black — and it is correct *per pixel*, so a glyph half-covered by the
@@ -3024,6 +3211,17 @@ with the heading alone opposite them.
 - **`faq-seo.webp` is still unused** — it went out in the first rebuild (dark, junk-food
   icons, off-theme since the inversion) and the second does not bring it back. On disk.
 
+**⚠ The native mouse pointer is visible again (2026-10-20, requested).** The site used to set
+`cursor: none` on every element and draw its own dot + ring, which on the light theme was nearly
+invisible (the dot's `mix-blend-mode: difference` made burgundy a pale speck on white). Now links and
+buttons show `pointer`, fields `text`, everything else `auto`; `.cursor-dot` is `display: none` and
+`.cursor-ring` stays as a follow-along accent (1.5px, `z-index: 100000`). Don't put `cursor: none` back.
+
+**⚠ The announcement bar above the header is hidden (2026-10-20, requested).** `AnnouncementBar`
+is unmounted (component, `announcementCopy`, `.announce*` kept) and **`--announce-h` in `index.css` is
+`0px`** — the header's `top` and `body`'s `padding-top` both read it, so leaving it at 2.5rem would
+leave a blank strip. Remounting needs both changes reversed.
+
 **Chrome** — `Preloader`, `CustomCursor` (`data-cursor` / `data-cursor-text` attributes),
 `ScrollProgress`, `SplitText`
 
@@ -3104,6 +3302,30 @@ The repo directory itself is still `liorahealthcare/`. Product packaging photogr
 ## CURRENT PROJECT STATUS
 
 ### Completed
+
+- **Shop listing became a real collection page** (2026-10-20): category chips, search, sort,
+  live count and an empty state, on top of the grid that was already there.
+  - **Category is a route, search and sort are view state.** The chips link to
+    `#/shop?research=<id>` — the filter that already existed — so a filtered view stays
+    linkable; only search and sort live in the component. The five chips are the real
+    `researchAreas`, so every one resolves.
+  - **Sorts read fields the catalogue actually carries**: price both ways, name, and
+    highest verified purity. Lots without a published analysis sort **last** rather than
+    being given a placeholder figure. There is no review, date or stock field, so no sort
+    pretends otherwise.
+  - **Search covers name, summary, sector and the shelf specs** — what a buyer would type
+    ("retatrutide", "40 mg"). Verified: 2 results for "retatrutide", empty state for a
+    miss, and the count is `aria-live` so it is announced.
+  - **Switching category clears the search.** The component is not remounted on a category
+    change (only its `research` prop changes), so a live search leaked across and showed
+    "no products" for a category that has them. Reset happens **during render**, not in an
+    effect — the project lints `set-state-in-effect`, and that is React's documented
+    pattern for adjusting state when a prop changes.
+  - `.shop-page__controls` carries `min-width: min(100%, 34rem)` so search + sort drop to
+    their own full-width row together instead of squeezing into the gap beside the chips
+    and stacking vertically. ≤767px the chips become an edge-to-edge scroll rail.
+  - Verified at 320 / 375 / 768 / 1024 / 1440 / 1920: 0 horizontal overflow, 6 chips and 6
+    cards at every width, and quick-add writes `[{"id":"p1","qty":1}]` to the real cart.
 
 - **Full commerce flow** — catalogue, PDP, cart, checkout, promo codes, payments
   (Klyme / AabanPay / manual capture), order tracking, accounts, affiliate, newsletter
@@ -3195,6 +3417,20 @@ The repo directory itself is still `liorahealthcare/`. Product packaging photogr
   as-is deliberately; see Known issues.
 
 ### Bugs found and fixed
+
+- **⚠ A hard load of any non-home route rendered a blank page** (introduced and fixed
+  2026-10-20). The route-change effect in `App.tsx` called `ScrollTrigger.refresh()`
+  inline. On a direct load of `#/shop`, `#/product/<id>`, `#/cart` or `#/checkout` the
+  home view mounts **hidden** and its ~15 bands are still creating their triggers; the
+  refresh measures one of them and throws `Cannot read properties of undefined (reading
+  'end')` from inside ScrollTrigger. Nothing caught it, React unmounted, `#root` ended up
+  with **0 children**. Soft navigation was unaffected, which is why it survived the first
+  pass — **test routes with a hard reload, not just by clicking through**.
+  Fixed with `safeRefreshScrollTriggers()` in `lib/motion.ts`: two frames of delay so the
+  mount cascade finishes creating its triggers before anything measures them, plus a
+  `try/catch`, because a stale scroll measurement is cosmetic and a blank storefront is
+  not. The `document.fonts.ready` refresh in `useSmoothScroll` takes the same guard — it
+  can land mid-mount too. Verified: all 8 routes hard-load with 0 page errors.
 
 - **Dropdowns opened on their own when the pointer crossed the middle of the page**
   (fixed 2026-10-17). `.mega` is set to `display: block` inside the `@media (min-width: 992px)`
@@ -3457,6 +3693,10 @@ When the instruction is "continue", "resume", or "continue from where I stopped"
 | Compound collage | `components/CompoundCollage.tsx`, `collageCopy` in `data/site.ts`, `portfolio.css` (`.collage__*`, end of file) |
 | Product range / home grid (`#work`) | `components/ProductRange.tsx`, `rangeCopy` in `data/site.ts`, `portfolio.css` (`.range__*`) |
 | A home section | the matching `components/<Section>.tsx` + its block in `portfolio.css` |
+| Shop listing / filter / sort / search | `components/ShopPage.tsx`, `researchAreas` in `data/research.ts`, `portfolio.css` (`.shop-page__*`) |
+| Announcement bar | `components/AnnouncementBar.tsx`, `announcementCopy` in `data/site.ts`, `--announce-h` in `index.css`, `portfolio.css` (`.announce__*`) |
+| Shop by category (home) | `components/ShopCategories.tsx`, `categoryCopy` in `data/site.ts`, `researchAreas` in `data/research.ts`, `portfolio.css` (`.cats__*`) |
+| Final CTA | `components/FinalCta.tsx`, `finalCtaCopy` in `data/site.ts`, `portfolio.css` (`.finalcta__*`) |
 | Routes | `hooks/useRouter.tsx` + `App.tsx` |
 | Shared motion / reveals | `lib/motion.ts`, `hooks/useReveal.ts`, `useScrollShift.ts`, `useParallax.ts`, `.anim__*` in `index.css` |
 | Cart / auth behaviour | `hooks/useCart.tsx`, `hooks/useAuth.tsx` |

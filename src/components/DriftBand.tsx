@@ -2,7 +2,7 @@ import { useEffect, useRef, type CSSProperties } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { driftCopy } from "../data/site";
-import gallery1 from "../assets/drift/gallery1-new.webp";
+import gallery1 from "../assets/drift/gallery1.webp";
 import gallery2 from "../assets/drift/gallery2.webp";
 import gallery3 from "../assets/drift/gallery3.webp";
 import gallery4 from "../assets/drift/gallery4.webp";
@@ -28,9 +28,11 @@ const TILES: {
   depth: number;
   pos?: number;
 }[] = [
-  /* `pos` is the square crop's vertical bias — she stands high in this frame
-     and a centred crop takes the top of her head. */
-  { src: gallery1, alt: "A customer holding a sealed carton", x: 22, y: 18, size: 13, tilt: -7, depth: 0.6, pos: 15 },
+  /* `pos` is the square crop's vertical bias, left at the default 50% here:
+     this frame sits centred and the device is well inside the crop. The
+     gallery1-new drop that briefly replaced this one needed `pos: 15` — she
+     stood high in that frame — so re-check the crop if the image changes. */
+  { src: gallery1, alt: "A customer holding a pre-filled device", x: 22, y: 18, size: 13, tilt: -7, depth: 0.6 },
   { src: gallery2, alt: "", x: 78, y: 17, size: 15, tilt: 6, depth: 1 },
   { src: gallery3, alt: "A customer holding a pre-filled device", x: 9, y: 62, size: 14, tilt: 5, depth: 0.85 },
   { src: gallery4, alt: "", x: 92, y: 52, size: 12, tilt: -6, depth: 0.5 },

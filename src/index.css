@@ -151,6 +151,14 @@
      content edge now adds it too, so the whole page keeps one line. Set it
      to `0rem` to put everything back on `--hero-inset + --gutter`. */
   --nav-pad-x: clamp(0.75rem, 1.6vw, 1.75rem);
+  /* The announcement bar's height. Read by `body`'s padding and by
+     `.nav__shell`'s `top`, so the bar, the header and the page can never
+     disagree about it. `AnnouncementBar` writes `0px` here on dismissal.
+     **Fixed, not auto**: the strip is one line at every width (its text
+     truncates below ~420px) so nothing below it reflows. */
+  /* 0 while the announcement bar is unmounted (2026-10-20). Set back to
+     2.5rem if it is remounted — the header and `body` both offset by it. */
+  --announce-h: 0px;
 
   /* The hero's campaign green and its lime CTA are gone with the burgundy
      redesign (2026-10-15). `.hero__panel` now takes `--brand-primary` flat,
@@ -224,6 +232,12 @@ body {
 
 body {
   min-height: 100svh;
+  /* Room for the fixed announcement bar. Padding on `body` shifts the normal
+     flow only — fixed elements resolve against the viewport — so the bar sits
+     in the gap and `.nav__shell` takes the same offset as its `top`.
+     `AnnouncementBar` sets this to `0px` when dismissed, which closes the gap
+     everywhere at once. */
+  padding-top: var(--announce-h, 0px);
 }
 
 html.lenis,

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { safeRefreshScrollTriggers } from "../lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,12 +118,17 @@ export function useSmoothScroll(enabled: boolean = true) {
        fallback, so headings reflow and every start/end below them is stale.
        One refresh once the faces are in fixes the lot. */
     let fontsPending = true;
+    let cancelFontRefresh: (() => void) | null = null;
     void document.fonts?.ready.then(() => {
-      if (fontsPending) ScrollTrigger.refresh();
+      /* Deferred and guarded for the same reason the route change is — this
+         can land while a view is still mounting. See
+         `safeRefreshScrollTriggers`. */
+      if (fontsPending) cancelFontRefresh = safeRefreshScrollTriggers();
     });
 
     return () => {
       fontsPending = false;
+      cancelFontRefresh?.();
       document.removeEventListener("click", onAnchorClick);
       gsap.ticker.remove(tick);
       lenis.destroy();

@@ -1,3 +1,8 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 /**
  * Shared motion vocabulary.
  *
@@ -61,6 +66,41 @@ export const DEPTH_NEAR = 0.25;
 export const DEPTH_FAR = 1 / 7;
 export const PARALLAX_NEAR = 7;
 export const PARALLAX_FAR = 4;
+
+/**
+ * `ScrollTrigger.refresh()` that cannot take the storefront down.
+ *
+ * **This exists because of a real outage.** A refresh called straight after a
+ * view swap lands while that view is still mounting, measures a trigger on the
+ * hidden home view, and throws inside ScrollTrigger (`reading 'end'` of
+ * undefined). Nothing catches it, React unmounts, and the page goes white — a
+ * hard load of `#/shop`, `#/product/<id>` or `#/checkout` rendered nothing at
+ * all. Two guards, and both are needed:
+ *
+ * - **Two frames of delay**, so the mount cascade has finished creating its own
+ *   triggers before anything measures them.
+ * - **A catch**, because a stale scroll measurement is a cosmetic problem that
+ *   the next resize fixes, and a blank shop is not.
+ *
+ * Returns a canceller — call it from the effect's cleanup.
+ */
+export function safeRefreshScrollTriggers(): () => void {
+  let outer = 0;
+  let inner = 0;
+  outer = requestAnimationFrame(() => {
+    inner = requestAnimationFrame(() => {
+      try {
+        ScrollTrigger.refresh();
+      } catch {
+        /* Left to the next resize. Never rethrow: see above. */
+      }
+    });
+  });
+  return () => {
+    cancelAnimationFrame(outer);
+    cancelAnimationFrame(inner);
+  };
+}
 
 /** Honoured by every hook in `hooks/use{Reveal,ScrollShift,Parallax}`. */
 export function prefersReducedMotion(): boolean {

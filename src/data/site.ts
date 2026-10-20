@@ -119,11 +119,23 @@ export const promoCopy = {
    stale the first time one is added. */
 export const rangeCopy = {
   index: "02",
-  eyebrow: "The range",
-  title: "Every lot, documented",
-  lead: "Pre-filled research devices — each one sealed, cold-packed and published with its own third-party report.",
+  /* Shop-led wording (2026-10-20, requested), in place of "The range / Every
+     lot, documented". Deliberately not "Bestsellers": there is no sales data
+     to back a ranking claim. */
+  eyebrow: "Our products",
+  title: "Shop the range",
+  lead: "Pre-filled devices — each one sealed, cold-packed and published with its own third-party report.",
   shopAll: { label: "Shop all products", href: "#/shop" },
   note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
+  /* The three marks top right (2026-10-20 rebuild). The reference's read
+     "Clean Ingredients · Trusted Quality · Fast & Safe Shipping"; these are
+     the three things `promoCopy` and the published reports already evidence. */
+  trust: [
+    { icon: "lab", lines: ["Third-party", "tested"] },
+    { icon: "doc", lines: ["Batch", "documented"] },
+    { icon: "cold", lines: ["Cold-packed", "shipping"] },
+  ],
+  categoriesLabel: "Shop by category",
 };
 
 /* The annotated product band (2026-10-16), the 3rd home section. Built to a
@@ -633,6 +645,47 @@ export const reelCopy = {
   note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
 };
 
+/* The announcement bar (2026-10-20), above the header.
+   **There is no offer, discount, free-shipping threshold or guarantee anywhere
+   in this project** — no promo system, no shipping rules in the data, nothing
+   to advertise. Inventing one on a live storefront is a real-money error, so
+   the bar carries a fact the site already evidences and publishes instead:
+   every stocked lot links to its own third-party report. Replace this the day
+   a real offer is configured, not before. */
+export const announcementCopy = {
+  message: "Every lot ships with its own third-party lab report.",
+  /* The full sentence ellipsises below ~430px in uppercase mono, and the word
+     it loses is "third-party" — the only part that carries any weight. This
+     keeps that and drops the rest; CSS picks one. */
+  messageShort: "Third-party tested, every lot.",
+  link: { label: "See the reports", href: "#/science?s=reports" },
+  dismissLabel: "Dismiss announcement",
+};
+
+/* "Shop by category" on the home view (2026-10-20).
+   The five categories are the real `researchAreas`, read in the component —
+   their names, descriptions, imagery and product lists all already exist, and
+   each one resolves to `#/shop?research=<id>`, a route that works. No category
+   is invented to balance the grid. */
+export const categoryCopy = {
+  eyebrow: "Shop by category",
+  title: "Shop by category.",
+  lead: "Five ways into the catalogue — every one a live filter on products you can order today.",
+  allLabel: "Shop all products",
+  allHref: "#/shop",
+};
+
+/* The closing shopping band (2026-10-20), between the FAQ and the contact
+   band. One headline, one CTA — no claim, no figure, nothing that needs
+   evidence. */
+export const finalCtaCopy = {
+  lines: ["Documented material,", "ready to ship."],
+  lead: "Browse the full catalogue — every lot sealed, cold-packed and published with its batch data.",
+  primary: { label: "Shop all products", href: "#/shop" },
+  secondary: { label: "Read the lab reports", href: "#/science?s=reports" },
+  note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
+};
+
 export const driftCopy = {
   lines: ["Sealed lots,", "published reports,", "the same every order."],
   link: { label: "See the lab reports", href: "#/science?s=reports" },
@@ -1000,11 +1053,11 @@ export const projects = [
   {
     id: "p1",
     title: "Retatrutide 20mg",
-    sector: "Compound Analysis",
+    sector: "Metabolic",
     year: "USD 350",
     price: 350,
     summary:
-      "Triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 20 mg research device for metabolic and energy-pathway studies.",
+      "Triple-agonist of GLP-1, GIP and glucagon receptors. One pre-filled pen, 20 mg total, sealed and cold-packed.",
     description:
       "A 20mg Retatrutide formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -1014,7 +1067,7 @@ export const projects = [
     subImages: [productRetatrutide, reta20Pen, reta20Open, reta20Uv],
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
-      { label: "Form", value: "Pre-filled research pen" },
+      { label: "Form", value: "Pre-filled pen" },
       { label: "Total content", value: "20 mg total" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
@@ -1041,11 +1094,11 @@ export const projects = [
   {
     id: "p2",
     title: "Glow 70mg",
-    sector: "Compound Analysis",
+    sector: "Cellular",
     year: "USD 329",
     price: 329,
     summary:
-      "Multi-peptide research blend pairing GHK-Cu with BPC-157 and TB-500 in a single pre-filled research reference device.",
+      "GHK-Cu paired with BPC-157 and TB-500 in one blend. Two pre-filled pens, 35 mg each.",
     description:
       "A 70mg Glow formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -1055,7 +1108,7 @@ export const projects = [
     subImages: [productGlow, glowPen, glowOpen, glowUv],
     specs: [
       { label: "Purity", value: "≥98% HPLC" },
-      { label: "Form", value: "Pre-filled research pens" },
+      { label: "Form", value: "Pre-filled pens" },
       { label: "Total content", value: "2 × 35 mg pens" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
@@ -1085,11 +1138,11 @@ export const projects = [
   {
     id: "p6",
     title: "Retatrutide 40mg",
-    sector: "Compound Analysis",
+    sector: "Metabolic",
     year: "USD 629",
     price: 629,
     summary:
-      "Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 40 mg research reference device for extended metabolic-pathway research.",
+      "Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. One pre-filled pen, 40 mg total.",
     description:
       "A 40mg Retatrutide formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -1099,7 +1152,7 @@ export const projects = [
     subImages: [productRetatrutide40, reta40Pen, reta40Open, reta40Uv],
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
-      { label: "Form", value: "Pre-filled research pen" },
+      { label: "Form", value: "Pre-filled pen" },
       { label: "Total content", value: "40 mg total" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
@@ -1126,11 +1179,11 @@ export const projects = [
   {
     id: "p4",
     title: "Tirzepatide 40mg",
-    sector: "Compound Analysis",
+    sector: "Metabolic",
     year: "USD 399",
     price: 399,
     summary:
-      "Dual agonist of GLP-1 and GIP receptors. Supplied as a pre-filled 40 mg research device for glucose-regulation and metabolic studies.",
+      "Dual agonist of GLP-1 and GIP receptors. One pre-filled pen, 40 mg total, sealed and cold-packed.",
     description:
       "A 40mg Tirzepatide formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -1140,7 +1193,7 @@ export const projects = [
     subImages: [productTirzepatide, tirzPen, tirzOpen, tirzUv],
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
-      { label: "Form", value: "Pre-filled research pen" },
+      { label: "Form", value: "Pre-filled pen" },
       { label: "Total content", value: "40 mg total" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
@@ -1167,11 +1220,11 @@ export const projects = [
   {
     id: "p3",
     title: "BPC-157 & TB-500 40mg",
-    sector: "Compound Analysis",
+    sector: "Recovery",
     year: "USD 269",
     price: 269,
     summary:
-      "Peptide research pairing of BPC-157 and TB-500 supplied at 40 mg in a pre-filled research reference device.",
+      "BPC-157 and TB-500 paired in one pre-filled pen — 20 mg of each, 40 mg total.",
     description:
       "A 40mg BPC-157 & TB-500 formulation supplied in a pre-filled research device, provided exclusively for controlled laboratory R&D applications. Delivered in sealed format to support compound stability analysis, formulation studies, and delivery mechanism evaluation.",
     safetyProtocol:
@@ -1181,7 +1234,7 @@ export const projects = [
     subImages: [productBpcTb, bpcPen, bpcOpen, bpcUv],
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
-      { label: "Form", value: "Pre-filled research pen" },
+      { label: "Form", value: "Pre-filled pen" },
       { label: "Total content", value: "20 mg BPC-157 + 20 mg TB-500" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],
@@ -1209,11 +1262,11 @@ export const projects = [
   {
     id: "p5",
     title: "NAD+ 1000mg",
-    sector: "Support",
+    sector: "Cellular",
     year: "USD 249",
     price: 249,
     summary:
-      "NAD+ (Nicotinamide Adenine Dinucleotide) research compound supplied at 1,000 mg total across two pre-filled research reference pens.",
+      "NAD+ (nicotinamide adenine dinucleotide). Two pre-filled pens, 500 mg each, 1,000 mg total.",
     description:
       "NAD+ (Nicotinamide Adenine Dinucleotide) research formulation for laboratory analysis and in vitro studies only. Provided exclusively for controlled laboratory R&D applications.",
     safetyProtocol:
@@ -1223,7 +1276,7 @@ export const projects = [
     subImages: [productNad, nadPen, nadOpen, nadUv],
     specs: [
       { label: "Purity", value: "≥99% HPLC" },
-      { label: "Form", value: "Pre-filled research pens" },
+      { label: "Form", value: "Pre-filled pens" },
       { label: "Total content", value: "2 × 500 mg pens" },
       { label: "Storage", value: "2–8°C, do not freeze" },
     ],

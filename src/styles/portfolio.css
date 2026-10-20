@@ -92,10 +92,131 @@
    backdrop and expand as one surface instead of floating beneath it. */
 .nav__shell {
   position: fixed;
-  top: 0;
+  /* Clears the announcement bar. `body` carries the same value as padding, so
+     the header and the page never disagree about where the top of the content
+     is — see `--announce-h` in index.css. */
+  top: var(--announce-h, 0px);
   left: 0;
   right: 0;
   z-index: 50;
+}
+
+/* ---------------------------------------------------------------------------
+   ANNOUNCEMENT BAR (.announce) — added 2026-10-20, above the header.
+   It carries no offer: there is no promotions system in this project to read a
+   real one from, and a fabricated discount on a live storefront is a
+   real-money error. See `announcementCopy`.
+   --------------------------------------------------------------------------- */
+
+.announce {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Above the header, which is 50. */
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: var(--announce-h);
+  padding-inline: clamp(0.75rem, 3vw, 2rem);
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.announce__text {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  /* One line at every width — the height is a fixed token, so wrapping here
+     would push the strip over the header. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* One of the two lengths is always hidden — see `announcementCopy`. */
+.announce__short {
+  display: none;
+}
+
+.announce__link {
+  color: inherit;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+.announce__link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.announce__close {
+  position: absolute;
+  right: clamp(0.5rem, 2vw, 1rem);
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.announce__close:hover {
+  opacity: 1;
+}
+
+.announce__close svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  stroke-width: 2;
+}
+
+@media (max-width: 560px) {
+  /* The link doubles the strip's length; below this the message alone has to
+     fit beside the close button, and it swaps to the short form. */
+  .announce__link,
+  .announce__full {
+    display: none;
+  }
+  .announce__short {
+    display: inline;
+  }
+  /* Even without the link the message ran 24px over at 375 and ellipsised
+     mid-word, which defeats the point of the strip. A notch down on both size
+     and tracking fits it whole. */
+  .announce__text {
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    /* Needed for the ellipsis: a flex item's min-width defaults to its
+       content, so without this it refuses to shrink and overflows instead. */
+    min-width: 0;
+  }
+  /* **The close button joins the flow here.** Absolutely placed it sits over
+     a centred full-width line, and padding the text only widened its box —
+     as two flex items they simply share the row and cannot collide. */
+  .announce__close {
+    position: static;
+    right: auto;
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 374px) {
+  /* 320 is the last width where the sentence fits at all; one more notch down
+     keeps it whole rather than ellipsised. */
+  .announce__text {
+    font-size: 0.5625rem;
+    letter-spacing: 0.04em;
+  }
 }
 
 /* Default is the surfaced state — inner pages have no hero to sit over, so
@@ -3994,22 +4115,20 @@
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 100000;
   opacity: 0;
 }
 
+/* Redundant now the native pointer is back (see the note at `a, button` in
+   the utility block) — the ring alone is the accent. */
 .cursor-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  mix-blend-mode: difference;
+  display: none;
 }
 
 .cursor-ring {
   width: 40px;
   height: 40px;
-  border: 1px solid var(--color-accent);
+  border: 1.5px solid rgba(139, 30, 45, 0.45);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -4174,36 +4293,23 @@
   overflow: hidden;
 }
 
-* {
-  cursor: none;
-}
-
-@media (pointer: coarse) {
-  * {
-    cursor: auto;
-  }
-}
-
+/* **The native pointer is shown again** (2026-10-20 — "why can't I see the
+   mouse"). Every element used to carry `cursor: none`, leaving only the
+   custom dot and ring, and on the light theme that pair all but vanished: the
+   dot's `mix-blend-mode: difference` turned burgundy into a pale speck on
+   white and cream, and the ring is a 1px hairline. The ring stays as a
+   follow-along accent; the real pointer does the pointing. */
 a,
 button,
 [role="button"],
-input,
-textarea,
 select,
 label {
-  cursor: none;
+  cursor: pointer;
 }
 
-@media (pointer: coarse) {
-  a,
-  button,
-  [role="button"],
-  input,
-  textarea,
-  select,
-  label {
-    cursor: pointer;
-  }
+input,
+textarea {
+  cursor: text;
 }
 
 /* ===== Nav cart button & actions group ===== */
@@ -7864,6 +7970,227 @@ label {
 
 .shop-page__count {
   margin-bottom: 1.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Shop toolbar — category chips, search and sort (added 2026-10-20).
+   The category is a **route** (`#/shop?research=<id>`) so a filtered view stays
+   linkable; search and sort are view state. Every sort option reads a field the
+   catalogue really carries.
+   --------------------------------------------------------------------------- */
+
+.shop-page__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  margin-bottom: clamp(1.25rem, 2.4vw, 2rem);
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--brand-border);
+}
+
+.shop-page__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.shop-page__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 999px;
+  background: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--brand-muted);
+  white-space: nowrap;
+  transition:
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out);
+}
+
+.shop-page__chip:hover {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.shop-page__chip.is-active {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.shop-page__controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  /* The six chips take ~775px, so search + sort rarely fit beside them. The
+     min-width makes the pair drop to its **own full-width row** and sit side
+     by side there, rather than squeezing into the leftover gap and stacking
+     the sort underneath the search. */
+  flex: 1 1 auto;
+  min-width: min(100%, 34rem);
+}
+
+.shop-page__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 999px;
+  background: #ffffff;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.shop-page__search:focus-within {
+  border-color: var(--brand-primary);
+}
+
+.shop-page__search > svg {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  stroke-width: 1.6;
+  color: var(--brand-muted);
+}
+
+.shop-page__search-input {
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--brand-ink);
+  width: clamp(9rem, 22vw, 15rem);
+  /* Safari paints its own clear control on `type="search"`; this row has one. */
+  appearance: none;
+}
+
+.shop-page__search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.shop-page__search-input:focus {
+  outline: none;
+}
+
+.shop-page__search-clear {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--brand-sand);
+  color: var(--brand-muted);
+  cursor: pointer;
+}
+
+.shop-page__search-clear svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  stroke-width: 2;
+}
+
+.shop-page__sort {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.shop-page__sort-select {
+  appearance: none;
+  padding: 0.6rem 2.1rem 0.6rem 0.95rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 999px;
+  background: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-ink);
+  cursor: pointer;
+}
+
+.shop-page__sort-select:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+.shop-page__sort > svg {
+  position: absolute;
+  right: 0.75rem;
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.8;
+  color: var(--brand-muted);
+  pointer-events: none;
+}
+
+.shop-page__empty {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+  text-align: center;
+  border: 1px dashed var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: var(--brand-sand);
+}
+
+.shop-page__empty-title {
+  margin: 0;
+  font-family: var(--font-heavy);
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  letter-spacing: -0.02em;
+  color: var(--brand-ink);
+}
+
+.shop-page__empty-note {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--brand-muted);
+}
+
+.shop-page__empty .btn {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .shop-page__toolbar {
+    align-items: stretch;
+  }
+  /* Six chips will not sit on one line on a phone; the row becomes a rail
+     rather than shrinking the type. Same device as `.trustbar__list`. */
+  .shop-page__chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * clamp(1.25rem, 4vw, 5rem));
+    padding-inline: clamp(1.25rem, 4vw, 5rem);
+  }
+  .shop-page__chips::-webkit-scrollbar {
+    display: none;
+  }
+  .shop-page__controls {
+    width: 100%;
+  }
+  .shop-page__search {
+    flex: 1 1 auto;
+  }
+  .shop-page__search-input {
+    width: 100%;
+  }
 }
 
 /* Research-area filter row (from the Explore Research cards). */
@@ -11708,183 +12035,212 @@ label {
 
 
 
-/* ===== Product range — best-sellers rail under the hero ==================
-   Rebuilt 2026-10-16 to a best-sellers reference: a white band, the title on
-   the left with two circular pagers on the right, and a 4-up scroll-snapped
-   rail whose cards are a warm sand media tile over a shelf line, the name and
-   the price. The tile reveals an Add to cart pill on hover.
+/* ===== Product range + categories — the home shop band ===================
+   Rebuilt 2026-10-20 to a client reference, combining the old best-sellers
+   rail with the separate "Shop by category" band (`ShopCategories`,
+   unmounted): an eyebrow pill, title and lead with three trust marks
+   opposite; a 3-up carousel of rounded white product cards with arrows
+   either side and page dots under it; then four category photo tiles.
 
-   This replaced a continuously scrolling marquee on a burgundy backdrop, so
-   `@keyframes range-marquee`, the two-copy duplication contract, `.range__bg`
-   and the `.range::after` scrim are all gone. `assets/range/backdrop.webp` is
-   no longer imported but stays on disk.
-
-   The reference's cards carry a star rating and a review count. **There is no
-   review data in this project**, and inventing it is exactly what the site's
-   rules exclude everywhere else — so that slot carries the lot's real shelf
-   spec, and the only figure on a card is a published purity. */
+   See the component's header for what the reference carries that this
+   catalogue cannot (ratings, sales badges, a wishlist, outcome-claim tiles)
+   and what fills each of those slots instead. */
 .range {
-  --range-gap: clamp(0.75rem, 1.5vw, 1.5rem);
-  background: var(--brand-bg);
+  --range-gap: clamp(1rem, 1.8vw, 1.75rem);
+  --range-cream: #fbf6f1;
+  background: var(--range-cream);
   color: var(--color-fg);
   padding-block: clamp(2.75rem, 5.5vw, 4.5rem);
 }
 
-/* Starts on the line the header, hero headline and the other bands share —
-   see the note on `.offer__inner`. */
+/* Starts on the line the header, hero headline and the other bands share. */
 .range__inner {
   padding-inline: calc(var(--hero-inset) + var(--gutter) + var(--nav-pad-x));
 }
 
-/* ---- head: title left, pagers right ---- */
+/* ---- head: copy left, trust marks right ---- */
 
 .range__head {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: clamp(1rem, 3vw, 3rem);
-  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  gap: clamp(1.25rem, 3vw, 3rem);
+  margin-bottom: clamp(1.75rem, 3.2vw, 2.75rem);
 }
 
 .range__head-copy {
   min-width: 0;
 }
 
-/* The reference's heading is wide and black. **Anton cannot do that** — it is
-   a condensed grotesque — so this takes `--font-heavy` (Roboto 900), the same
-   face and for the same reason as the hero headline. Sentence case, against
-   the site's usual uppercase display type. */
+.range__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(184, 90, 102, 0.14);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
 .range__title {
   margin: 0;
   font-family: var(--font-heavy);
-  font-size: clamp(1.9rem, 5vw, 4rem);
-  font-weight: 900;
+  font-size: clamp(1.9rem, 4.4vw, 3.6rem);
+  font-weight: 600;
   line-height: 1.02;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   text-transform: none;
   color: var(--color-fg);
 }
 
 .range__lead {
-  margin: 0.7rem 0 0;
-  max-width: 48ch;
-  font-size: clamp(0.8125rem, 0.95vw, 0.9375rem);
+  margin: 0.75rem 0 0;
+  max-width: 52ch;
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
   line-height: 1.6;
   color: var(--brand-muted);
 }
 
-.range__pagers {
+/* Three marks with hairline dividers between them, as the reference sets
+   its "Clean ingredients · Trusted quality · Fast shipping". */
+.range__trust {
   display: flex;
-  flex: 0 0 auto;
-  gap: 0.6rem;
-  margin-left: auto;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.range__pager {
+.range__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem clamp(1rem, 2vw, 1.75rem);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--brand-muted);
+}
+
+.range__trust-item + .range__trust-item {
+  border-left: 1px solid rgba(139, 30, 45, 0.18);
+}
+
+.range__trust-item:last-child {
+  padding-right: 0;
+}
+
+.range__trust-item svg {
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--brand-rose);
+}
+
+/* ---- the carousel ---- */
+
+/* Arrows sit outside the rail, overlapping the gutter, as the reference
+   floats its round white pagers either side of the cards. */
+.range__carousel {
+  position: relative;
+}
+
+.range__arrow {
+  position: absolute;
+  top: 38%;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 1px solid var(--brand-border);
+  width: clamp(2.75rem, 3.6vw, 3.25rem);
+  aspect-ratio: 1;
+  border: 0;
   border-radius: 50%;
-  background: var(--brand-bg);
+  background: #ffffff;
   color: var(--color-fg);
+  box-shadow: 0 14px 30px -16px rgba(61, 12, 20, 0.4);
   cursor: pointer;
-  transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out),
-    color 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out),
+    opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 
-.range__pager svg {
-  width: 1.1rem;
-  height: 1.1rem;
-  stroke-width: 1.6;
+.range__arrow--prev {
+  left: 0;
+  transform: translateX(-55%);
 }
 
-/* The filled one is the forward pager, as the reference has it — the only
-   filled control in the band. */
-.range__pager--on {
-  border-color: var(--brand-primary);
+.range__arrow--next {
+  right: 0;
+  transform: translateX(55%);
+}
+
+.range__arrow:hover:not(:disabled) {
   background: var(--brand-primary);
   color: var(--color-on-accent);
 }
 
-.range__pager:hover:not(:disabled) {
-  border-color: var(--brand-primary);
-  color: var(--brand-primary);
+.range__arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.range__pager--on:hover:not(:disabled) {
-  background: var(--brand-primary-deep);
-  border-color: var(--brand-primary-deep);
-  color: var(--color-on-accent);
+.range__arrow svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.range__pager:disabled {
-  opacity: 0.32;
-  cursor: default;
-}
-
-/* ---- the rail ---- */
-
+/* `grid-auto-columns` must stay a plain `calc()` — wrapped in `minmax(0, …)`
+   the tracks shrink to fit, the rail never overflows, and the arrows and
+   dots never appear. Vertical padding gives the cards' shadows room inside
+   the scroll box, which clips them otherwise. */
 .range__rail {
   display: grid;
   grid-auto-flow: column;
-  /* **Plain `calc()`, never `minmax(0, …)`** — a minmax track shrinks to fit,
-     the rail then never overflows and the pagers never appear. Same trap as
-     the catalogue rail. */
-  grid-auto-columns: calc((100% - 3 * var(--range-gap)) / 4);
+  grid-auto-columns: calc((100% - 2 * var(--range-gap)) / 3);
   gap: var(--range-gap);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  /* Hidden rather than styled: the rail is still swipeable and keyboard
-     scrollable, it just doesn't grow a grey bar across the band. */
   scrollbar-width: none;
+  padding-block: 0.75rem 1.75rem;
+  margin-block: -0.75rem -1.75rem;
 }
 
 .range__rail::-webkit-scrollbar {
   display: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .range__rail {
-    scroll-behavior: auto;
-  }
-}
-
-/* ---- card ---- */
-
 .range__card {
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  scroll-snap-align: start;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: 0 18px 40px -28px rgba(61, 12, 20, 0.35);
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
 }
 
-/* **Square, deliberately.** The packshot canvases are 900x1130 (ratio .796),
-   so a 4/5 tile (.8) is almost the same shape and `cover` then crops nothing —
-   the carton sits small with the empty canvas showing above and below it. A
-   square tile is far enough from .796 to crop that away.
+.range__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 50px -28px rgba(61, 12, 20, 0.45);
+}
 
-   Squared corners, like every other card on the light theme; pills are
-   reserved for controls. */
-/* Pale blush at the top deepening to a soft coral at the base (2026-10-19,
-   requested) — stops sampled off the client's swatch at 0 / 25 / 50 / 75 /
-   100%, not eyeballed. It replaced the flat `--brand-sand` tile. */
+/* The blush → coral ground from the 2026-10-19 swatch, kept. The packshots
+   sit on tall transparent canvases with the carton centred; `cover` in a
+   landscape-ish tile crops the empty canvas off. */
 .range__media {
   position: relative;
-  aspect-ratio: 1 / 1;
-  background: linear-gradient(
-    180deg,
-    #f1e5e4 0%,
-    #efdbdb 25%,
-    #eccac4 50%,
-    #e9aea5 75%,
-    #e79181 100%
-  );
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  background: linear-gradient(180deg, #f1e5e4 0%, #efdbdb 30%, #eccac4 60%, #e9aea5 100%);
 }
 
 .range__media-link {
@@ -11898,74 +12254,55 @@ label {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  transition: transform 0.6s var(--ease-out);
+  /* The carton spans ~97% of its canvas, so at full size it ran edge to edge
+     in the tile; a little inset lets the gradient frame it. */
+  transform: scale(0.88);
+  transition: transform 0.7s var(--ease-out);
 }
 
 .range__card:hover .range__media-link img {
-  transform: scale(1.04);
+  transform: scale(0.93);
 }
 
-/* A real published figure or nothing — never rounded, never invented. */
-.range__purity {
+/* The reference's "Bestseller" pill — here the lot's real published purity. */
+.range__badge {
   position: absolute;
-  top: 0.7rem;
-  left: 0.7rem;
-  display: flex;
-  flex-direction: column;
-  padding: 0.3rem 0.55rem;
-  border-radius: var(--radius-sm);
-  background: var(--brand-primary);
-  color: var(--color-on-accent);
-  line-height: 1.15;
-}
-
-.range__purity strong {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.range__purity span {
-  font-size: 0.5rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.85;
-}
-
-/* The add button sits in the card body, opposite the name and price, and is
-   always visible (2026-10-19, requested) — it used to be a pill revealed over
-   the tile on hover. */
-.range__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.range__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
-}
-
-.range__add {
-  flex: 0 0 auto;
+  top: 0.85rem;
+  left: 0.85rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.55rem 0.95rem;
-  border: 1px solid var(--brand-primary);
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem 0.35rem 0.5rem;
   border-radius: 999px;
-  background: transparent;
-  color: var(--brand-primary);
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(6px);
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  color: var(--brand-primary);
+}
+
+.range__badge svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Where the reference's wishlist heart sits — the add to cart action. */
+.range__add {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--color-fg);
+  box-shadow: 0 8px 18px -10px rgba(61, 12, 20, 0.45);
   cursor: pointer;
   transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out),
     transform 0.3s var(--ease-out);
@@ -11979,50 +12316,52 @@ label {
 }
 
 .range__add:active {
-  transform: scale(0.96);
+  transform: scale(0.94);
 }
 
 .range__add svg {
-  width: 0.95rem;
-  height: 0.95rem;
+  width: 1.1rem;
+  height: 1.1rem;
   stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* One card plus a peek on a phone: the label goes, the icon stays. */
-@media (max-width: 480px) {
-  .range__add {
-    padding: 0.55rem;
-  }
-  .range__add span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-  }
+/* The reference's variant chip — here the lot's total content. */
+.range__chip {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem 0.3rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-fg);
+}
+
+.range__chip-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--brand-primary);
 }
 
 .range__body {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  padding-top: 0.85rem;
+  gap: 0.3rem;
+  padding: clamp(1rem, 1.6vw, 1.35rem) clamp(1rem, 1.6vw, 1.4rem) clamp(1.1rem, 1.7vw, 1.4rem);
 }
 
-/* The reference's rating row sits here. See the compliance note at the top of
-   this block — this is the lot's real shelf spec instead. */
-.range__spec {
-  margin: 0;
-  font-size: 0.6875rem;
-  letter-spacing: 0.03em;
-  line-height: 1.45;
-  color: var(--brand-muted);
-}
-
+/* Not uppercased as the reference's are — `uppercase` renders "20MG", and the
+   unit matters on a research catalogue. */
 .range__name {
   font-family: var(--font-body);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.35;
   text-decoration: none;
@@ -12034,10 +12373,145 @@ label {
   color: var(--brand-primary);
 }
 
-.range__price {
-  font-family: var(--font-body);
+.range__desc {
+  margin: 0;
   font-size: 0.875rem;
   color: var(--brand-muted);
+}
+
+/* The reference's rating row — the lot's real batch number instead. */
+.range__foot-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+
+.range__batch {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: var(--brand-muted);
+}
+
+.range__price {
+  flex: 0 0 auto;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-fg);
+}
+
+.range__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.range__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(23, 23, 23, 0.18);
+  cursor: pointer;
+  transition: width 0.35s var(--ease-out), background 0.35s var(--ease-out);
+}
+
+.range__dot.is-active {
+  width: 1.5rem;
+  background: var(--color-fg);
+}
+
+/* ---- categories ---- */
+
+.range__cats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--range-gap);
+  margin: clamp(1.75rem, 3vw, 2.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.range__cat {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.range__cat img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+
+/* Type over photography is hard-coded white (CLAUDE.md), on a scrim heavy at
+   the top-left where the label sits. */
+.range__cat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(23, 10, 12, 0.6) 0%, rgba(23, 10, 12, 0.15) 55%, transparent 100%);
+}
+
+.range__cat:hover img {
+  transform: scale(1.06);
+}
+
+.range__cat-title {
+  position: absolute;
+  top: clamp(0.9rem, 1.4vw, 1.25rem);
+  left: clamp(0.9rem, 1.5vw, 1.35rem);
+  right: 3.75rem;
+  z-index: 1;
+  font-family: var(--font-heavy);
+  font-size: clamp(0.95rem, 1.35vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.range__cat-arrow {
+  position: absolute;
+  top: clamp(0.75rem, 1.2vw, 1rem);
+  right: clamp(0.75rem, 1.2vw, 1rem);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-fg);
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.range__cat:hover .range__cat-arrow {
+  background: var(--brand-primary);
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+.range__cat-arrow svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ---- foot ---- */
@@ -12047,35 +12521,30 @@ label {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.9rem;
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  gap: 0.75rem 2rem;
+  margin-top: clamp(1.5rem, 2.6vw, 2.25rem);
 }
 
 .range__all {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--brand-border);
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid currentColor;
+  font-size: 0.875rem;
   font-weight: 600;
-  text-decoration: none;
   color: var(--color-fg);
-  white-space: nowrap;
-  transition: gap 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
-    color 0.35s var(--ease-out);
+  text-decoration: none;
+  transition: color 0.3s var(--ease-out);
 }
 
 .range__all svg {
-  width: 1rem;
-  height: 1rem;
-  stroke-width: 1.6;
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke-width: 1.8;
 }
 
 .range__all:hover {
-  gap: 0.85rem;
-  border-color: var(--brand-primary);
   color: var(--brand-primary);
 }
 
@@ -12086,26 +12555,60 @@ label {
 }
 
 @media (max-width: 1199px) {
-  .range__rail {
-    grid-auto-columns: calc((100% - 2 * var(--range-gap)) / 3);
+  .range__cats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 767px) {
+/* Two cards up; the arrows step inside the rail's edge so they do not land
+   on the page margin. */
+@media (max-width: 991px) {
   .range__rail {
     grid-auto-columns: calc((100% - var(--range-gap)) / 2);
   }
-  .range__pager {
-    width: 2.375rem;
-    height: 2.375rem;
+  .range__arrow--prev {
+    transform: translateX(-30%);
+  }
+  .range__arrow--next {
+    transform: translateX(30%);
+  }
+  .range__trust {
+    width: 100%;
+  }
+  .range__trust-item:first-child {
+    padding-left: 0;
   }
 }
 
-/* One card plus a slice of the next, so it still reads as a rail rather than
-   a column that happens to be cut off. */
-@media (max-width: 480px) {
+/* One card plus a peek; arrows give way to swipe and the dots. */
+@media (max-width: 640px) {
   .range__rail {
-    grid-auto-columns: 76%;
+    grid-auto-columns: 84%;
+  }
+  .range__arrow {
+    display: none;
+  }
+  .range__trust-item {
+    padding-inline: 0.75rem;
+    font-size: 0.75rem;
+  }
+  .range__trust-item svg {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .range__cats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Three marks in a phone width leaves each label three lines tall; the
+     icons go and the words carry it. */
+  .range__trust-item svg {
+    display: none;
+  }
+  .range__cat {
+    aspect-ratio: 5 / 2;
   }
 }
 
@@ -18357,5 +18860,324 @@ label {
   }
   .docband__tile:last-child img {
     aspect-ratio: 16 / 9;
+  }
+}
+
+/* ===========================================================================
+   SHOP BY CATEGORY (.cats) — added 2026-10-20, between the trust strip and
+   the about band.
+
+   The five tiles are the real `researchAreas`, read in the component: name,
+   description, `shopImage` and `shopTitleLines` all already existed in
+   `data/research.ts` and had been unused on the home view since `Catalogue`
+   was unmounted. Every tile links to `#/shop?research=<id>`, a route the shop
+   page already supports — nothing here is invented to fill the grid.
+   =========================================================================== */
+
+.cats {
+  background: var(--brand-bg);
+  padding-block: var(--section-pad-y);
+}
+
+.cats__inner {
+  /* The shared page line — the same calc the header and every other band uses,
+     all reading the same :root tokens so they cannot drift. */
+  padding-inline: calc(var(--hero-inset) + var(--gutter) + var(--nav-pad-x));
+}
+
+.cats__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.cats__head-copy {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 44rem;
+}
+
+.cats__eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+.cats__title {
+  margin: 0;
+  font-family: var(--font-heavy);
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--brand-ink);
+}
+
+.cats__lead {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--brand-muted);
+  line-height: 1.6;
+}
+
+.cats__all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--brand-ink);
+  white-space: nowrap;
+  transition: color 0.3s var(--ease-out);
+}
+
+.cats__all:hover {
+  color: var(--brand-primary);
+}
+
+.cats__all svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.6;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.cats__all:hover svg {
+  transform: translateX(3px);
+}
+
+.cats__grid {
+  display: grid;
+  /* Five real categories, five tracks. `minmax(0, 1fr)` and not a bare `1fr`:
+     a bare track is floored at its widest item's min-content, which the long
+     two-line labels would blow past. Same trap as `.whychoose__front`. */
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.2vw, 1.25rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The whole tile is one anchor — the image, the label and the count are all
+   the same target, not a card with a small link inside it. */
+.cats__card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.cats__media {
+  display: block;
+  /* Portrait tiles: the category photographs are people and the crop needs the
+     height. */
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.cats__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* `scale`, not `transform` — consistent with the other hover zooms, and it
+     leaves `transform` free if this tile ever takes a drift. */
+  scale: 1;
+  transition: scale 0.7s var(--ease-out);
+}
+
+.cats__card:hover .cats__media img {
+  scale: 1.05;
+}
+
+/* The label sits on the photograph, so it needs its own floor — the category
+   images are lifestyle frames and several are pale at the bottom. */
+.cats__body {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: grid;
+  gap: 0.4rem;
+  /* A little deeper at the foot: the label runs to two lines and the count
+     sits under it, so an even inset crowds both against the tile edge. */
+  padding: clamp(0.85rem, 1.6vw, 1.15rem) clamp(0.85rem, 1.6vw, 1.15rem)
+    clamp(1rem, 1.8vw, 1.35rem);
+  /* Deep enough for the two ink tiles, which are bright exactly where the
+     label sits — the three neutral tiles would read at half this. */
+  background: linear-gradient(
+    to top,
+    rgba(23, 23, 23, 0.88) 0%,
+    rgba(23, 23, 23, 0.64) 55%,
+    rgba(23, 23, 23, 0) 100%
+  );
+  color: #ffffff;
+}
+
+/* Type over photography is hard-coded white — it has no theme. */
+.cats__name {
+  font-family: var(--font-heavy);
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  /* The scrim is uniform but the photography under it is not — the ink tiles
+     carry bright highlights right behind the label. Same reason the header
+     needs one over the hero. */
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+}
+
+.cats__count {
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 1199px) {
+  .cats__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .cats__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cats__head {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  /* Two portrait tiles at this width leave the label unreadable; one column
+     with a wider crop reads properly. */
+  .cats__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cats__media {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* ===========================================================================
+   FINAL CTA (.finalcta) — added 2026-10-20, between the FAQ and the contact
+   band. **Burgundy, not near-black**: the FAQ above is cream and `.contact`
+   below opens dark before its wipe, so a black band here would merge into it.
+   =========================================================================== */
+
+.finalcta {
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.finalcta__inner {
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.finalcta__title {
+  margin: 0;
+  font-family: var(--font-heavy);
+  font-size: clamp(2rem, 5.4vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  /* Knockout type on an accent fill — `--color-on-accent`, never
+     `--color-bg`. That is the trap the theme inversion exposed. */
+  color: var(--color-on-accent);
+}
+
+.finalcta__lead {
+  margin: 0;
+  max-width: 52ch;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+}
+
+.finalcta__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.finalcta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.8rem;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--brand-primary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+.finalcta__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px -18px rgba(0, 0, 0, 0.5);
+}
+
+.finalcta__btn svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.8;
+}
+
+.finalcta__ghost {
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-on-accent);
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.finalcta__ghost:hover {
+  border-color: #ffffff;
+}
+
+.finalcta__note {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 480px) {
+  .finalcta__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .finalcta__btn {
+    justify-content: center;
   }
 }

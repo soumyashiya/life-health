@@ -50,56 +50,32 @@ export function Contact() {
     if (!root.current) return;
     const mm = gsap.matchMedia();
 
-    /* Desktop: the band PINS when it reaches the top of the screen and the
-       turnover plays against the scroll — you keep scrolling, the section
-       stays put, and the white grows out of the middle. It releases into the
-       footer once the disc owns the viewport. */
+    /* The turnover **plays once the band is reached, at every width, with no
+       pin** (2026-10-20). History, so it is not re-tried: pin + 1:1 scrub
+       ("stuck") → plain scrub → timed play on arrival → pin + smoothed scrub
+       (`end: "+=70%"`, `anticipatePin: 1`), which was reported as **stuck
+       and doubled** — pinning switches the band to `position: fixed`, and
+       with Lenis driving the scroll and `anticipatePin` re-laying it out a
+       frame early, it painted in two places as it latched and released.
+       **Don't pin this band again.** The disc opens on its own as the band
+       arrives and rewinds if you scroll back up past it. */
     mm.add(
-      "(prefers-reduced-motion: no-preference) and (min-width: 992px)",
+      "(prefers-reduced-motion: no-preference)",
       () => {
-        gsap
-          .timeline({
+        gsap.fromTo(
+          ".contact__grow",
+          { scale: 0 },
+          {
+            scale: 1,
+            duration: 1.6,
+            ease: "power3.inOut",
             scrollTrigger: {
               trigger: root.current,
-              start: "top top",
-              /* One extra viewport of scroll, spent entirely on the wipe */
-              end: "+=110%",
-              pin: true,
-              pinSpacing: true,
-              scrub: 0.6,
-              invalidateOnRefresh: true,
+              start: "top 55%",
+              toggleActions: "play none none reverse",
             },
-          })
-          .fromTo(
-            ".contact__grow",
-            { scale: 0 },
-            { scale: 1, ease: "none" },
-            0,
-          );
-      },
-      root,
-    );
-
-    /* Below 992px pinning would trap the reader, so the same turnover simply
-       scrubs as the section passes. */
-    mm.add(
-      "(prefers-reduced-motion: no-preference) and (max-width: 991px)",
-      () => {
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top 70%",
-              end: "bottom bottom",
-              scrub: true,
-            },
-          })
-          .fromTo(
-            ".contact__grow",
-            { scale: 0 },
-            { scale: 1, ease: "none" },
-            0,
-          );
+          },
+        );
       },
       root,
     );

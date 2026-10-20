@@ -77,14 +77,9 @@ export function Navbar() {
 
     mm.add("(min-width: 992px) and (prefers-reduced-motion: no-preference)", () => {
       const parts = [".nav__star", ".nav__logo", ".nav__brand-lead", ".nav__brand-accent"];
-      // Only present on the home view; GSAP no-ops on an empty selector.
-      // The hero's arrival belongs to this timeline, not to Hero's own: the
-      // band is hidden behind the field until it lifts, so anything that
-      // animated on mount would play unseen. GSAP no-ops on an empty selector,
-      // so an inner page just runs the header part.
-      const heroBits =
-        ".hero__content > *:not(.hero__title), .hero__shelf-item";
-      const heroLines = ".hero__line > span";
+      // The hero headline's reveal used to ride this timeline; it moved to
+      // Hero.tsx (2026-10-20) and now waits for the preloader to lift, because
+      // this sequence starts on mount and played the lines unseen behind it.
 
       brand.classList.add("is-intro");
 
@@ -98,8 +93,6 @@ export function Navbar() {
       tl.set(cover, { yPercent: 0 })
         .set(brand, { y: toCentre, scale: 2.6, transformOrigin: "center center" })
         .set(parts, { yPercent: 100 })
-        .set(heroBits, { opacity: 0 })
-        .set(heroLines, { yPercent: 110 })
         .to(parts, {
           yPercent: 0,
           delay: 0.4,
@@ -131,30 +124,6 @@ export function Navbar() {
             clearProps: "transform",
           },
           "<",
-        )
-        // The headline rises behind its per-line masks as the field clears,
-        // then the smaller type and the card follow it.
-        .to(
-          heroLines,
-          {
-            yPercent: 0,
-            duration: 0.95,
-            ease: "power3.out",
-            stagger: 0.09,
-            clearProps: "transform",
-          },
-          "-=0.45",
-        )
-        .to(
-          heroBits,
-          {
-            opacity: 1,
-            duration: 0.9,
-            ease: "power2.out",
-            stagger: 0.08,
-            clearProps: "opacity",
-          },
-          "-=0.6",
         );
 
       return () => {
