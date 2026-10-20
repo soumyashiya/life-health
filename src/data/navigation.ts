@@ -6,6 +6,11 @@ import {
 } from "./research";
 import labFacility from "../assets/liora-healthcare-lab-facility-dubai.jpeg";
 import purityImg from "../assets/hplc-verified-peptide-purity.jpg";
+import learnImg from "../assets/nav/learn.webp";
+import supportImg from "../assets/nav/support.webp";
+import aboutImg from "../assets/about/hero-lattice.webp";
+import faqImg from "../assets/faq-seo.webp";
+import contactImg from "../assets/quick-support.avif";
 
 /**
  * Information architecture for the header.
@@ -25,8 +30,8 @@ import purityImg from "../assets/hplc-verified-peptide-purity.jpg";
  * the bar stays four items wide and the panels stay worth opening.
  */
 
-export type NavId = "research" | "shop" | "science" | "about";
-export type MegaId = Extract<NavId, "research" | "shop" | "science">;
+export type NavId = "shop" | "learn" | "support";
+export type MegaId = NavId;
 
 export type NavLink = {
   label: string;
@@ -44,11 +49,16 @@ export type NavEntry = {
   hasPanel: boolean;
 };
 
+/**
+ * Three top-level words, each opening a panel. The four options this header
+ * used to carry in the bar itself — Research, Shop, Science, About — are now
+ * sub-items inside them: Research became the category row under Shop, Science
+ * and About sit under Learn, and the old utility row is Support's whole panel.
+ */
 export const navEntries: NavEntry[] = [
-  { id: "research", label: "Research", href: "#/shop", hasPanel: true },
   { id: "shop", label: "Shop", href: "#/shop", hasPanel: true },
-  { id: "science", label: "Science", href: "#/science", hasPanel: true },
-  { id: "about", label: "About", href: "#/about", hasPanel: false },
+  { id: "learn", label: "Learn", href: "#/science", hasPanel: true },
+  { id: "support", label: "Support", href: "#/track", hasPanel: true },
 ];
 
 export const megaIds = navEntries
@@ -85,13 +95,11 @@ export const researchRows: NavRow[] = researchAreas.map((area) => {
   };
 });
 
-export const researchPanel = {
-  rows: researchRows,
-  allLink: {
-    label: "All research materials",
-    href: "#/shop",
-  } satisfies NavLink,
-};
+/** The old Research panel, now the category row inside Shop. */
+export const researchLinks: NavLink[] = researchAreas.map((area) => ({
+  label: area.name.replace(/\s+research$/i, ""),
+  href: researchAreaHref(area),
+}));
 
 /* -------------------------------------------------------------------- shop */
 
@@ -112,20 +120,24 @@ export const shopRows: NavRow[] = projects.map((product) => ({
 
 export const shopPanel = {
   rows: shopRows,
+  /* Rendered as a compact wrapped row, not six more thumbnails — the panel has
+     to stay short enough to scan. */
+  groupLabel: "Shop by research area",
+  groupLinks: researchLinks,
   allLink: {
     label: "Shop all products",
     href: "#/shop",
   } satisfies NavLink,
 };
 
-/* ----------------------------------------------------------------- science */
+/* ------------------------------------------------------------------- learn */
 
 /**
- * Each row deep-links into a section of the Science page (`#/science?s=…`),
- * which scrolls to it on arrival. These replaced the earlier home-section
- * anchors once the page existed.
+ * The old Science panel plus the About page, which used to be its own item in
+ * the bar. Each science row deep-links into a section of `#/science?s=…`,
+ * which scrolls to it on arrival.
  */
-export const sciencePanel = {
+export const learnPanel = {
   rows: [
     {
       id: "standards",
@@ -141,11 +153,57 @@ export const sciencePanel = {
       image: purityImg,
       href: "#/science?s=purity",
     },
+    {
+      id: "reports",
+      label: "Lab reports",
+      meta: "Every published lot",
+      image: learnImg,
+      href: "#/science?s=reports",
+    },
+    {
+      id: "about",
+      label: "About us",
+      meta: "Who we supply",
+      image: aboutImg,
+      href: "#/about",
+    },
   ] satisfies NavRow[],
   allLink: {
     label: "The science",
     href: "#/science",
   } satisfies NavLink,
+};
+
+/* ----------------------------------------------------------------- support */
+
+/** What used to ride the hairline utility row at the foot of every panel. */
+export const supportPanel = {
+  rows: [
+    {
+      id: "track",
+      label: "Track order",
+      meta: "By order number",
+      image: supportImg,
+      href: "#/track",
+    },
+    {
+      id: "faq",
+      label: "FAQ",
+      meta: "Shipping, storage, payment",
+      image: faqImg,
+      href: "#faq",
+    },
+    {
+      id: "contact",
+      label: "Contact us",
+      meta: "Email or WhatsApp",
+      image: contactImg,
+      href: "#contact",
+    },
+  ] satisfies NavRow[],
+  /* Its rows already are the utility row — repeating it below them would be
+     the same three links twice. */
+  showUtility: false,
 };
 
 /* ----------------------------------------------------------------- utility */
@@ -162,6 +220,6 @@ export const utilityLinks: NavLink[] = [
 ];
 
 export const primaryCta: NavLink = {
-  label: "Find your product",
-  href: "#/find",
+  label: "How we verify",
+  href: "#/science?s=purity",
 };

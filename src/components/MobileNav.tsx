@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import {
+  learnPanel,
   navEntries,
-  primaryCta,
-  researchPanel,
-  sciencePanel,
   shopPanel,
+  supportPanel,
   utilityLinks,
   type NavId,
   type NavLink,
@@ -20,21 +19,24 @@ type Props = {
 
 /** The accordion contents, flattened from the same rows the dropdowns use. */
 const linksFor = (id: NavId): NavLink[] => {
-  const panel: { rows: NavRow[]; allLink?: NavLink } =
-    id === "research" ? researchPanel : id === "science" ? sciencePanel : shopPanel;
+  const panel: {
+    rows: NavRow[];
+    groupLinks?: NavLink[];
+    allLink?: NavLink;
+  } = id === "learn" ? learnPanel : id === "support" ? supportPanel : shopPanel;
   const rows: NavLink[] = panel.rows.map((row) => ({
     label: row.label,
     href: row.href,
     note: row.meta,
   }));
-  // Science has no "view all" — each of its rows is already a destination.
-  return panel.allLink ? [...rows, panel.allLink] : rows;
+  // Shop's category row rides along as plain links; Support has no "view all",
+  // since each of its rows is already a destination.
+  return [...rows, ...(panel.groupLinks ?? []), ...(panel.allLink ? [panel.allLink] : [])];
 };
 
 /**
- * Mobile navigation — a full-screen panel, not a shrunken mega menu. Research
- * and Shop expand as accordions; Science and About are direct links, matching
- * the desktop bar one-for-one.
+ * Mobile navigation — a full-screen panel, not a shrunken mega menu. All three
+ * bar items expand as accordions, matching the desktop dropdowns one-for-one.
  */
 export function MobileNav({ open, onClose, onNavigate }: Props) {
   const [expanded, setExpanded] = useState<NavId | null>(null);
@@ -169,16 +171,8 @@ export function MobileNav({ open, onClose, onNavigate }: Props) {
           })}
         </ul>
 
-        <a
-          className="mobnav__cta"
-          href={primaryCta.href}
-          onClick={(e) => {
-            e.preventDefault();
-            onNavigate(primaryCta.href);
-          }}
-        >
-          {primaryCta.label}
-        </a>
+        {/* The "Find your product" CTA was removed from the drawer on request
+            (2026-10-15), alongside the one in the bar. */}
 
         <div className="mobnav__foot">
           {utilityLinks.map((link) => (

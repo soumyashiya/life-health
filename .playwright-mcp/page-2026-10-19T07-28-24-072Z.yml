@@ -1,0 +1,764 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e5]: Booting interface
+    - generic [ref=e6]: 003 / 100
+    - generic [ref=e7]: 3%
+  - banner [ref=e11]:
+    - generic [ref=e12]:
+      - link "Lyfe Health" [ref=e13]:
+        - /url: "#home"
+        - generic [ref=e22]: Lyfe
+        - generic [ref=e24]: Health
+      - navigation "Primary" [ref=e26]:
+        - list [ref=e27]:
+          - listitem [ref=e28]:
+            - button "Shop" [ref=e29] [cursor=pointer]
+          - listitem [ref=e31]:
+            - button "Learn" [ref=e32] [cursor=pointer]
+          - listitem [ref=e34]:
+            - button "Support" [ref=e35] [cursor=pointer]
+      - generic [ref=e38]:
+        - button "Sign in" [ref=e40] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=e44] [cursor=pointer]
+  - main [ref=e49]:
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - heading "Feel better. Live stronger. Every day." [level=1] [ref=e53]:
+            - generic [ref=e54]: Feel better.
+            - generic [ref=e57]:
+              - text: Live
+              - generic [ref=e58]: stronger.
+            - generic [ref=e60]: Every day.
+          - paragraph [ref=e62]: Pre-filled, sealed and cold-packed reference materials — every lot published with its own third-party purity report.
+          - link "Explore products" [ref=e63]:
+            - /url: "#/shop"
+        - generic [ref=e66]:
+          - generic [ref=e69]:
+            - strong [ref=e70]: 1000+
+            - text: Researchers served
+          - list [ref=e71]:
+            - listitem [ref=e72]:
+              - link [ref=e73]:
+                - /url: "#/product/p1"
+                - img "Retatrutide 20mg" [ref=e74]
+            - listitem [ref=e75]:
+              - link [ref=e76]:
+                - /url: "#/product/p4"
+                - img "Tirzepatide 40mg" [ref=e77]
+            - listitem [ref=e78]:
+              - link [ref=e79]:
+                - /url: "#/product/p5"
+                - img "NAD+ 1000mg" [ref=e80]
+      - generic [ref=e82]:
+        - generic [aria-hidden]: Lyfe
+    - region "How every lot is supplied" [ref=e83]:
+      - list [ref=e85]:
+        - listitem [ref=e86]:
+          - generic [ref=e89]:
+            - generic [ref=e90]: Janoshik Analytical
+            - generic [ref=e91]: Independent lab
+        - listitem [ref=e92]:
+          - generic [ref=e95]:
+            - generic [ref=e96]: HPLC + mass spec
+            - generic [ref=e97]: Every batch
+        - listitem [ref=e98]:
+          - generic [ref=e102]:
+            - generic [ref=e103]: Sealed & cold-packed
+            - generic [ref=e104]: Fixed volume
+        - listitem [ref=e105]:
+          - generic [ref=e109]:
+            - generic [ref=e110]: Batch documented
+            - generic [ref=e111]: Published in full
+        - listitem [ref=e112]:
+          - generic [ref=e117]:
+            - generic [ref=e118]: Tracked delivery
+            - generic [ref=e119]: Worldwide
+        - listitem [ref=e120]:
+          - generic [ref=e124]:
+            - generic [ref=e125]: Research use only
+            - generic [ref=e126]: Not for human use
+    - generic [ref=e128]:
+      - figure [ref=e129]:
+        - img "A customer holding a sealed research carton" [ref=e130]
+      - generic [ref=e131]:
+        - generic [ref=e132]: About us
+        - heading "Characterised in the lab. Packed for the bench." [level=2] [ref=e133]:
+          - generic [ref=e134]: Characterised in the lab.
+          - generic [ref=e136]: Packed for the bench.
+        - generic [ref=e138]:
+          - figure [ref=e139]:
+            - img "A customer at home" [ref=e140]
+          - generic [ref=e141]:
+            - paragraph [ref=e142]:
+              - generic [ref=e143]: We're
+              - generic [ref=e144]: committed
+              - generic [ref=e145]: to
+              - generic [ref=e146]: advancing
+              - generic [ref=e147]: high-quality
+              - generic [ref=e148]: peptide
+              - generic [ref=e149]: research
+              - generic [ref=e150]: through
+              - generic [ref=e151]: clean,
+              - generic [ref=e152]: reliable,
+              - generic [ref=e153]: and
+              - generic [ref=e154]: precisely
+              - generic [ref=e155]: characterised
+              - generic [ref=e156]: reference
+              - generic [ref=e157]: materials.
+              - generic [ref=e158]: Every
+              - generic [ref=e159]: product
+              - generic [ref=e160]: is
+              - generic [ref=e161]: sourced
+              - generic [ref=e162]: from
+              - generic [ref=e163]: verified
+              - generic [ref=e164]: suppliers
+              - generic [ref=e165]: and
+              - generic [ref=e166]: carefully
+              - generic [ref=e167]: packed
+              - generic [ref=e168]: to
+              - generic [ref=e169]: preserve
+              - generic [ref=e170]: consistency,
+              - generic [ref=e171]: purity,
+              - generic [ref=e172]: and
+              - generic [ref=e173]: integrity
+              - generic [ref=e174]: —
+              - generic [ref=e175]: from
+              - generic [ref=e176]: our
+              - generic [ref=e177]: facility
+              - generic [ref=e178]: to
+              - generic [ref=e179]: your
+              - text: bench.
+            - link "Learn more" [ref=e180]:
+              - /url: "#/about"
+    - generic [ref=e185]:
+      - generic [ref=e186]:
+        - generic [ref=e187]:
+          - heading "Every lot, documented" [level=2] [ref=e188]
+          - paragraph [ref=e189]: Pre-filled research devices — each one sealed, cold-packed and published with its own third-party report.
+        - generic [ref=e190]:
+          - button "Previous products" [disabled] [ref=e191]
+          - button "More products" [ref=e194] [cursor=pointer]
+      - generic [ref=e197]:
+        - article [ref=e198]:
+          - generic [ref=e199]:
+            - link [ref=e200]:
+              - /url: "#/product/p1"
+              - img "Retatrutide 20mg" [ref=e201]
+            - generic [ref=e202]:
+              - strong [ref=e203]: 99.21%
+              - generic [ref=e204]: Verified
+            - button "Add Retatrutide 20mg to cart":
+              - generic: Add to cart
+          - generic [ref=e205]:
+            - paragraph [ref=e206]: Pre-filled research pen · 20 mg total
+            - link "Retatrutide 20mg" [ref=e207]:
+              - /url: "#/product/p1"
+            - generic [ref=e208]: $350
+        - article [ref=e209]:
+          - generic [ref=e210]:
+            - link [ref=e211]:
+              - /url: "#/product/p2"
+              - img "Glow 70mg" [ref=e212]
+            - generic [ref=e213]:
+              - strong [ref=e214]: 98.6%
+              - generic [ref=e215]: Verified
+            - button "Add Glow 70mg to cart":
+              - generic: Add to cart
+          - generic [ref=e216]:
+            - paragraph [ref=e217]: Pre-filled research pens · 2 × 35 mg pens
+            - link "Glow 70mg" [ref=e218]:
+              - /url: "#/product/p2"
+            - generic [ref=e219]: $329
+        - article [ref=e220]:
+          - generic [ref=e221]:
+            - link [ref=e222]:
+              - /url: "#/product/p6"
+              - img "Retatrutide 40mg" [ref=e223]
+            - generic [ref=e224]:
+              - strong [ref=e225]: 99.269%
+              - generic [ref=e226]: Verified
+            - button "Add Retatrutide 40mg to cart":
+              - generic: Add to cart
+          - generic [ref=e227]:
+            - paragraph [ref=e228]: Pre-filled research pen · 40 mg total
+            - link "Retatrutide 40mg" [ref=e229]:
+              - /url: "#/product/p6"
+            - generic [ref=e230]: $629
+        - article [ref=e231]:
+          - generic [ref=e232]:
+            - link [ref=e233]:
+              - /url: "#/product/p4"
+              - img "Tirzepatide 40mg" [ref=e234]
+            - generic [ref=e235]:
+              - strong [ref=e236]: 99.85%
+              - generic [ref=e237]: Verified
+            - button "Add Tirzepatide 40mg to cart":
+              - generic: Add to cart
+          - generic [ref=e238]:
+            - paragraph [ref=e239]: Pre-filled research pen · 40 mg total
+            - link "Tirzepatide 40mg" [ref=e240]:
+              - /url: "#/product/p4"
+            - generic [ref=e241]: $399
+        - article [ref=e242]:
+          - generic [ref=e243]:
+            - link [ref=e244]:
+              - /url: "#/product/p5"
+              - img "NAD+ 1000mg" [ref=e245]
+            - button "Add NAD+ 1000mg to cart":
+              - generic: Add to cart
+          - generic [ref=e246]:
+            - paragraph [ref=e247]: Pre-filled research pens · 2 × 500 mg pens
+            - link "NAD+ 1000mg" [ref=e248]:
+              - /url: "#/product/p5"
+            - generic [ref=e249]: $249
+      - generic [ref=e250]:
+        - link "Shop all products" [ref=e251]:
+          - /url: "#/shop"
+        - paragraph [ref=e254]: Supplied strictly for laboratory research. Not for human or veterinary use.
+    - generic [ref=e256]:
+      - paragraph [ref=e257]: Inside the lot
+      - heading "Every lot ships in a sealed carton, cold-packed and pre-filled to a fixed volume, so the material you reorder is the material you opened last time." [level=2] [ref=e258]:
+        - generic [ref=e259]: Every
+        - generic [ref=e260]: lot
+        - generic [ref=e261]: ships
+        - generic [ref=e262]: in
+        - generic [ref=e263]: a
+        - generic [ref=e264]: sealed
+        - generic [ref=e265]: carton,
+        - generic [ref=e266]: cold-packed
+        - generic [ref=e267]: and
+        - generic [ref=e268]: pre-filled
+        - generic [ref=e269]: to
+        - generic [ref=e270]: a
+        - generic [ref=e271]: fixed
+        - generic [ref=e272]: volume,
+        - generic [ref=e273]: so
+        - generic [ref=e274]: the
+        - generic [ref=e275]: material
+        - generic [ref=e276]: you
+        - generic [ref=e277]: reorder
+        - generic [ref=e278]: is
+        - generic [ref=e279]: the
+        - generic [ref=e280]: material
+        - generic [ref=e281]: you
+        - generic [ref=e282]: opened
+        - generic [ref=e283]: last
+        - text: time.
+      - generic [ref=e284]:
+        - heading "Tesamorelin" [level=3]
+        - img "A sealed research carton" [ref=e287]
+      - list [ref=e288]:
+        - listitem [ref=e289]:
+          - generic [ref=e290]: 20 mg
+          - generic [ref=e291]: Total content
+        - listitem [ref=e292]:
+          - generic [ref=e293]: 10 doses
+          - generic [ref=e294]: of 2 mg each
+        - listitem [ref=e295]:
+          - generic [ref=e296]: 2–8 °C
+          - generic [ref=e297]: Cold-packed storage
+        - listitem [ref=e298]:
+          - generic [ref=e299]: Pre-filled
+          - generic [ref=e300]: Pen, sealed carton
+      - paragraph [ref=e301]: Supplied strictly for laboratory research. Not for human or veterinary use.
+    - region [ref=e302]:
+      - generic [ref=e303]:
+        - figure [ref=e304]:
+          - img "A sealed research carton being placed into a tote bag" [ref=e305]
+        - generic [ref=e306]:
+          - paragraph [ref=e307]: Featured lot
+          - heading "A reference lot, fully documented." [level=2] [ref=e308]:
+            - generic [ref=e309]: A reference lot,
+            - generic [ref=e310]: fully documented.
+          - paragraph [ref=e311]: Multi-peptide research blend pairing GHK-Cu with BPC-157 and TB-500 in a single pre-filled research reference device.
+          - list [ref=e312]:
+            - listitem [ref=e313]: Pre-filled research pens
+            - listitem [ref=e314]: 2 × 35 mg pens
+            - listitem [ref=e315]: 98.6% verified
+          - paragraph [ref=e316]:
+            - generic [ref=e317]: Glow 70mg —
+            - text: $329
+          - generic [ref=e318]:
+            - group "Quantity" [ref=e319]:
+              - button "Decrease quantity" [disabled] [ref=e320]
+              - generic [ref=e322]: "1"
+              - button "Increase quantity" [ref=e323] [cursor=pointer]
+            - button "Add to cart" [ref=e326] [cursor=pointer]
+          - link "View full specification" [ref=e331]:
+            - /url: "#/product/p2"
+          - paragraph [ref=e332]: Produced for laboratory research only. Not for human or veterinary consumption.
+    - region [ref=e333]:
+      - generic [ref=e334]:
+        - generic [ref=e335]:
+          - paragraph [ref=e336]: Our science
+          - heading "Independently tested. Published in full." [level=2] [ref=e337]:
+            - generic [ref=e338]: Independently tested.
+            - generic [ref=e339]: Published in full.
+          - paragraph [ref=e340]: Analysis is carried out by an outside lab and the report goes up as received — no in-house figures, and nothing rounded on the way.
+          - paragraph [ref=e341]: Every report carries
+          - list [ref=e342]:
+            - listitem [ref=e343]: Lot number
+            - listitem [ref=e347]: HPLC purity
+            - listitem [ref=e351]: Mass-spec confirmation
+            - listitem [ref=e355]: Fill volume
+          - link "Explore our standards" [ref=e359]:
+            - /url: "#/science"
+        - figure [ref=e363]:
+          - img "Sealed research cartons with their pre-filled devices" [ref=e364]
+    - generic [ref=e365]:
+      - heading "Tested before it ships." [level=2] [ref=e366]:
+        - generic [ref=e367]: Tested before
+        - generic [ref=e369]: it ships.
+      - generic [ref=e371]:
+        - generic [aria-hidden]:
+          - generic: Why
+          - generic: choose us
+        - generic [ref=e372]:
+          - figure [ref=e373]:
+            - img "A customer outdoors in daylight" [ref=e374]
+          - img "Three sealed research cartons stacked" [ref=e375]
+          - list [ref=e379]:
+            - listitem [ref=e380]:
+              - generic [ref=e381]: "01"
+              - generic [ref=e383]: Reorder with confidence
+            - listitem [ref=e384]:
+              - generic [ref=e385]: "02"
+              - generic [ref=e387]: Check the numbers first
+            - listitem [ref=e388]:
+              - generic [ref=e389]: "03"
+              - generic [ref=e391]: Straightforward delivery
+            - listitem [ref=e392]:
+              - generic [ref=e393]: "04"
+              - generic [ref=e395]: Help when you need it
+    - generic [ref=e396]:
+      - generic [ref=e397]:
+        - generic [ref=e398]: Reviews
+        - heading "Stories from our customers" [level=2] [ref=e399]
+      - generic [ref=e400]:
+        - article [ref=e402]:
+          - generic "Ethan Carter — verified Lyfe Health customer" [ref=e403]
+          - generic [ref=e404]: Ethan Carter
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Fast support, reliable products, and a smooth ordering experience. The team truly delivers dependable quality every time.
+            - generic:
+              - generic:
+                - generic: Ethan Carter
+                - generic: Lab Procurement Specialist
+        - article [ref=e406]:
+          - generic "Samuel Bennett — verified Lyfe Health customer" [ref=e407]
+          - generic [ref=e408]: Samuel Bennett
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Everything arrived securely, communication was excellent, and the overall service exceeded expectations for a premium brand.
+            - generic:
+              - generic:
+                - generic: Samuel Bennett
+                - generic: Research Operations Lead
+        - article [ref=e410]:
+          - generic "Michelle Reed — verified Lyfe Health customer" [ref=e411]
+          - generic [ref=e412]: Michelle Reed
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Product consistency, helpful guidance, and quick responses made the entire process simple, smooth, and extremely satisfying.
+            - generic:
+              - generic:
+                - generic: Michelle Reed
+                - generic: Research Assistant
+        - article [ref=e414]:
+          - generic "Marco Ruiz — verified Lyfe Health customer" [ref=e415]
+          - generic [ref=e416]: Marco Ruiz
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.
+            - generic:
+              - generic:
+                - generic: Marco Ruiz
+                - generic: Procurement Lead, Vela Biotech
+        - article [ref=e418]:
+          - generic "Sasha Petrov — verified Lyfe Health customer" [ref=e419]
+          - generic [ref=e420]: Sasha Petrov
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Pricing is fair, turnaround is quick, and the certificate of analysis is more detailed than what we used to get from larger suppliers.
+            - generic:
+              - generic:
+                - generic: Sasha Petrov
+                - generic: Postdoctoral Researcher
+        - article [ref=e422]:
+          - generic "Rohan Natarajan — verified Lyfe Health customer" [ref=e423]
+          - generic [ref=e424]: Rohan Natarajan
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: WhatsApp reply within the hour. That alone changed how we plan ordering for our team.
+            - generic:
+              - generic:
+                - generic: Rohan Natarajan
+                - generic: Co-founder, Ember Research
+        - article [ref=e426]:
+          - generic "Ethan Carter — verified Lyfe Health customer" [ref=e427]
+          - generic [ref=e428]: Ethan Carter
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Fast support, reliable products, and a smooth ordering experience. The team truly delivers dependable quality every time.
+            - generic:
+              - generic:
+                - generic: Ethan Carter
+                - generic: Lab Procurement Specialist
+        - article [ref=e430]:
+          - generic "Samuel Bennett — verified Lyfe Health customer" [ref=e431]
+          - generic [ref=e432]: Samuel Bennett
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Everything arrived securely, communication was excellent, and the overall service exceeded expectations for a premium brand.
+            - generic:
+              - generic:
+                - generic: Samuel Bennett
+                - generic: Research Operations Lead
+        - article [ref=e434]:
+          - generic "Michelle Reed — verified Lyfe Health customer" [ref=e435]
+          - generic [ref=e436]: Michelle Reed
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Product consistency, helpful guidance, and quick responses made the entire process simple, smooth, and extremely satisfying.
+            - generic:
+              - generic:
+                - generic: Michelle Reed
+                - generic: Research Assistant
+        - article [ref=e438]:
+          - generic "Marco Ruiz — verified Lyfe Health customer" [ref=e439]
+          - generic [ref=e440]: Marco Ruiz
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.
+            - generic:
+              - generic:
+                - generic: Marco Ruiz
+                - generic: Procurement Lead, Vela Biotech
+        - article [ref=e442]:
+          - generic "Sasha Petrov — verified Lyfe Health customer" [ref=e443]
+          - generic [ref=e444]: Sasha Petrov
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Pricing is fair, turnaround is quick, and the certificate of analysis is more detailed than what we used to get from larger suppliers.
+            - generic:
+              - generic:
+                - generic: Sasha Petrov
+                - generic: Postdoctoral Researcher
+        - article [ref=e446]:
+          - generic "Rohan Natarajan — verified Lyfe Health customer" [ref=e447]
+          - generic [ref=e448]: Rohan Natarajan
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: WhatsApp reply within the hour. That alone changed how we plan ordering for our team.
+            - generic:
+              - generic:
+                - generic: Rohan Natarajan
+                - generic: Co-founder, Ember Research
+        - article [ref=e450]:
+          - generic "Ethan Carter — verified Lyfe Health customer" [ref=e451]
+          - generic [ref=e452]: Ethan Carter
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Fast support, reliable products, and a smooth ordering experience. The team truly delivers dependable quality every time.
+            - generic:
+              - generic:
+                - generic: Ethan Carter
+                - generic: Lab Procurement Specialist
+        - article [ref=e454]:
+          - generic "Samuel Bennett — verified Lyfe Health customer" [ref=e455]
+          - generic [ref=e456]: Samuel Bennett
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Everything arrived securely, communication was excellent, and the overall service exceeded expectations for a premium brand.
+            - generic:
+              - generic:
+                - generic: Samuel Bennett
+                - generic: Research Operations Lead
+        - article [ref=e458]:
+          - generic "Michelle Reed — verified Lyfe Health customer" [ref=e459]
+          - generic [ref=e460]: Michelle Reed
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Product consistency, helpful guidance, and quick responses made the entire process simple, smooth, and extremely satisfying.
+            - generic:
+              - generic:
+                - generic: Michelle Reed
+                - generic: Research Assistant
+        - article [ref=e462]:
+          - generic "Marco Ruiz — verified Lyfe Health customer" [ref=e463]
+          - generic [ref=e464]: Marco Ruiz
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.
+            - generic:
+              - generic:
+                - generic: Marco Ruiz
+                - generic: Procurement Lead, Vela Biotech
+        - article [ref=e466]:
+          - generic "Sasha Petrov — verified Lyfe Health customer" [ref=e467]
+          - generic [ref=e468]: Sasha Petrov
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Pricing is fair, turnaround is quick, and the certificate of analysis is more detailed than what we used to get from larger suppliers.
+            - generic:
+              - generic:
+                - generic: Sasha Petrov
+                - generic: Postdoctoral Researcher
+        - article [ref=e470]:
+          - generic "Rohan Natarajan — verified Lyfe Health customer" [ref=e471]
+          - generic [ref=e472]: Rohan Natarajan
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: WhatsApp reply within the hour. That alone changed how we plan ordering for our team.
+            - generic:
+              - generic:
+                - generic: Rohan Natarajan
+                - generic: Co-founder, Ember Research
+        - article [ref=e474]:
+          - generic "Ethan Carter — verified Lyfe Health customer" [ref=e475]
+          - generic [ref=e476]: Ethan Carter
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Fast support, reliable products, and a smooth ordering experience. The team truly delivers dependable quality every time.
+            - generic:
+              - generic:
+                - generic: Ethan Carter
+                - generic: Lab Procurement Specialist
+        - article [ref=e478]:
+          - generic "Samuel Bennett — verified Lyfe Health customer" [ref=e479]
+          - generic [ref=e480]: Samuel Bennett
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Everything arrived securely, communication was excellent, and the overall service exceeded expectations for a premium brand.
+            - generic:
+              - generic:
+                - generic: Samuel Bennett
+                - generic: Research Operations Lead
+        - article [ref=e482]:
+          - generic "Michelle Reed — verified Lyfe Health customer" [ref=e483]
+          - generic [ref=e484]: Michelle Reed
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Product consistency, helpful guidance, and quick responses made the entire process simple, smooth, and extremely satisfying.
+            - generic:
+              - generic:
+                - generic: Michelle Reed
+                - generic: Research Assistant
+        - article [ref=e486]:
+          - generic "Marco Ruiz — verified Lyfe Health customer" [ref=e487]
+          - generic [ref=e488]: Marco Ruiz
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.
+            - generic:
+              - generic:
+                - generic: Marco Ruiz
+                - generic: Procurement Lead, Vela Biotech
+        - article [ref=e490]:
+          - generic "Sasha Petrov — verified Lyfe Health customer" [ref=e491]
+          - generic [ref=e492]: Sasha Petrov
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: Pricing is fair, turnaround is quick, and the certificate of analysis is more detailed than what we used to get from larger suppliers.
+            - generic:
+              - generic:
+                - generic: Sasha Petrov
+                - generic: Postdoctoral Researcher
+        - article [ref=e494]:
+          - generic "Rohan Natarajan — verified Lyfe Health customer" [ref=e495]
+          - generic [ref=e496]: Rohan Natarajan
+          - generic:
+            - generic "Five out of five": ★★★★★
+            - paragraph: WhatsApp reply within the hour. That alone changed how we plan ordering for our team.
+            - generic:
+              - generic:
+                - generic: Rohan Natarajan
+                - generic: Co-founder, Ember Research
+    - generic [ref=e497]:
+      - generic [ref=e498]:
+        - generic [ref=e499]:
+          - heading "Ready to order a documented lot?" [level=2] [ref=e500]:
+            - generic [ref=e501]: Ready to order
+            - generic [ref=e502]: a documented lot?
+          - paragraph [ref=e503]: Every kit ships sealed and cold-packed with the batch certificate of analysis for its own lot. Browse the catalogue, or ask before you order — we answer either way.
+          - link "Shop the range" [ref=e504]:
+            - /url: "#/shop"
+        - figure [ref=e505]:
+          - img "A customer at home" [ref=e506]
+      - generic [ref=e507]:
+        - heading "Frequently asked questions" [level=2] [ref=e508]:
+          - generic [ref=e509]: Frequently asked
+          - generic [ref=e510]: questions
+        - generic [ref=e511]:
+          - generic [ref=e512]:
+            - button "What documentation comes with each order?" [ref=e513] [cursor=pointer]
+            - paragraph [ref=e518]: Every research kit is paired with a batch-specific certificate of analysis listing lot number, HPLC purity, and mass-spec confirmation. Storage and handling notes are included on the packing slip.
+          - generic [ref=e519]:
+            - button "How is purity verified?" [ref=e520] [cursor=pointer]
+            - paragraph [ref=e525]: Each batch is independently tested by reverse-phase HPLC and high-resolution mass spectrometry, then verified by Janoshik Analytical. We retain a reference sample from every lot for cross-verification on request.
+          - generic [ref=e526]:
+            - button "How is the product packaged?" [ref=e527] [cursor=pointer]
+            - paragraph [ref=e532]: Products are sealed inside tamper-evident research kits with pre-filled research devices. Cold-chain packaging is used where the compound requires refrigeration.
+          - generic [ref=e533]:
+            - button "What's the return policy?" [ref=e534] [cursor=pointer]
+            - paragraph [ref=e539]: We don't accept returns on opened or temperature-compromised kits. If a research kit arrives damaged or out of spec, contact us within 48 hours of receipt and we'll replace or refund.
+          - generic [ref=e540]:
+            - button "How can I pay?" [ref=e541] [cursor=pointer]
+            - paragraph [ref=e546]: Bank transfer, card payments via our checkout, and crypto on request. Institutional purchase orders are accepted with prior credit approval.
+          - generic [ref=e547]:
+            - button "Who are these materials for?" [ref=e548] [cursor=pointer]
+            - paragraph [ref=e553]: We supply laboratories and qualified researchers. Everything in the catalogue is a research-grade reference material, intended for laboratory research only — not for human or veterinary use, and not for diagnostic or therapeutic purposes.
+          - generic [ref=e554]:
+            - button "How should a kit be stored once it arrives?" [ref=e555] [cursor=pointer]
+            - paragraph [ref=e560]: Refrigerate between 2–8°C and do not freeze. Kits ship sealed in a fixed-volume format, so keep them sealed until the material is needed. The storage and handling notes for the specific lot are printed on the packing slip and on each product page.
+    - generic [ref=e561]:
+      - generic [ref=e569]:
+        - generic [ref=e570]: Contact us
+        - heading "Orders, batches and paperwork — ask us anything." [level=2] [ref=e571]
+        - link "hello@lyfehealth.com" [ref=e572]:
+          - /url: mailto:hello@lyfehealth.com
+          - generic [aria-hidden] [ref=e574]:
+            - generic [ref=e575]: h
+            - generic [ref=e576]: e
+            - generic [ref=e577]: l
+            - generic [ref=e578]: l
+            - generic [ref=e579]: o
+            - generic [ref=e580]: "@"
+            - generic [ref=e581]: l
+            - generic [ref=e582]: "y"
+            - generic [ref=e583]: f
+            - generic [ref=e584]: e
+            - generic [ref=e585]: h
+            - generic [ref=e586]: e
+            - generic [ref=e587]: a
+            - generic [ref=e588]: l
+            - generic [ref=e589]: t
+            - generic [ref=e590]: h
+            - generic [ref=e591]: .
+            - generic [ref=e592]: c
+            - generic [ref=e593]: o
+            - generic [ref=e594]: m
+        - link "Track an order" [ref=e596]:
+          - /url: "#/track"
+      - generic [ref=e602]:
+        - generic [ref=e603]:
+          - generic [ref=e604]: Shop
+          - link "All products" [ref=e605]:
+            - /url: "#/shop"
+          - link "Lab reports" [ref=e606]:
+            - /url: "#/science?s=reports"
+        - generic [ref=e607]:
+          - generic [ref=e608]: Help
+          - link "Track order" [ref=e609]:
+            - /url: "#/track"
+          - link "FAQ" [ref=e610]:
+            - /url: "#faq"
+        - generic [ref=e611]:
+          - generic [ref=e612]: Follow
+          - link "Instagram" [ref=e613]:
+            - /url: https://instagram.com/lyfehealth
+          - link "Email" [ref=e614]:
+            - /url: mailto:hello@lyfehealth.com
+  - contentinfo [ref=e615]:
+    - generic [ref=e616]:
+      - generic [ref=e617]:
+        - generic [ref=e618]:
+          - generic [ref=e619]:
+            - generic [ref=e620]: Lyfe
+            - generic [ref=e621]: Health
+          - paragraph [ref=e622]: Research-grade peptide supply
+          - generic [ref=e623]:
+            - heading "Stay updated" [level=4] [ref=e624]
+            - generic [ref=e625]:
+              - textbox "Email address" [ref=e626]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=e627]
+            - paragraph [ref=e628]: Research updates and restock alerts. No spam.
+        - generic [ref=e629]:
+          - heading "Quick Links" [level=4] [ref=e630]
+          - list [ref=e631]:
+            - listitem [ref=e632]:
+              - link "Shop" [ref=e633] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=e634]:
+              - link "Home" [ref=e635] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=e636]:
+              - link "About" [ref=e637] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=e638]:
+              - link "Products" [ref=e639] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=e640]:
+              - link "Why Us" [ref=e641] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=e642]:
+              - link "FAQ" [ref=e643] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=e644]:
+              - link "Contact" [ref=e645] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=e646]:
+              - link "Track order" [ref=e647] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=e648]:
+          - heading "Contact" [level=4] [ref=e649]
+          - list [ref=e650]:
+            - listitem [ref=e651]:
+              - link "hello@lyfehealth.com" [ref=e652] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=e653]:
+              - link "+1 000 000 0000" [ref=e654] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=e655]:
+              - generic [ref=e656]: Global research supply
+        - generic [ref=e657]:
+          - heading "Policies" [level=4] [ref=e658]
+          - list [ref=e659]:
+            - listitem [ref=e660]:
+              - link "Press Release" [ref=e661] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=e662]:
+              - link "Refund Policy" [ref=e663] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=e664]:
+              - link "Shipping Policy" [ref=e665] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=e666]:
+              - link "Privacy Policy" [ref=e667] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=e668]:
+              - link "Terms Of Service" [ref=e669] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=e670]:
+          - heading "Follow" [level=4] [ref=e671]
+          - list [ref=e672]:
+            - listitem [ref=e673]:
+              - link "WhatsApp" [ref=e674]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=e675]:
+              - link "Instagram" [ref=e676]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=e677]:
+              - link "Email" [ref=e678]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=e680]:
+        - generic [ref=e681]: © 2026 Lyfe Health
+        - generic [ref=e682]: Global research supply
+      - paragraph [ref=e683]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=e684]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

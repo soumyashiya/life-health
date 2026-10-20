@@ -1,0 +1,298 @@
+- generic [ref=f65e2]:
+  - banner [ref=f65e11]:
+    - generic [ref=f65e12]:
+      - link "Lyfe Health" [ref=f65e13]:
+        - /url: "#home"
+        - generic [ref=f65e22]: Lyfe
+        - generic [ref=f65e24]: Health
+      - navigation "Primary" [ref=f65e26]:
+        - list [ref=f65e27]:
+          - listitem [ref=f65e28]:
+            - button "Shop" [ref=f65e29] [cursor=pointer]
+          - listitem [ref=f65e31]:
+            - button "Learn" [ref=f65e32] [cursor=pointer]
+          - listitem [ref=f65e34]:
+            - button "Support" [ref=f65e35] [cursor=pointer]
+      - generic [ref=f65e38]:
+        - button "Sign in" [ref=f65e40] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f65e44] [cursor=pointer]
+  - text: · ·
+  - main [ref=f65e789]:
+    - generic [ref=f65e790]:
+      - generic [ref=f65e794]:
+        - generic [ref=f65e795]: Science
+        - heading "Every claim, traceable to a lot." [level=1] [ref=f65e796]:
+          - generic [aria-hidden] [ref=f65e798]:
+            - generic [ref=f65e799]:
+              - generic [ref=f65e800]: E
+              - generic [ref=f65e801]: v
+              - generic [ref=f65e802]: e
+              - generic [ref=f65e803]: r
+              - generic [ref=f65e804]: "y"
+            - generic [ref=f65e805]:
+              - generic [ref=f65e806]: c
+              - generic [ref=f65e807]: l
+              - generic [ref=f65e808]: a
+              - generic [ref=f65e809]: i
+              - generic [ref=f65e810]: m
+              - generic [ref=f65e811]: ","
+            - generic [ref=f65e812]:
+              - generic [ref=f65e813]: t
+              - generic [ref=f65e814]: r
+              - generic [ref=f65e815]: a
+              - generic [ref=f65e816]: c
+              - generic [ref=f65e817]: e
+              - generic [ref=f65e818]: a
+              - generic [ref=f65e819]: b
+              - generic [ref=f65e820]: l
+              - generic [ref=f65e821]: e
+            - generic [ref=f65e822]:
+              - generic [ref=f65e823]: t
+              - generic [ref=f65e824]: o
+            - generic [ref=f65e825]: a
+            - generic [ref=f65e827]:
+              - generic [ref=f65e828]: l
+              - generic [ref=f65e829]: o
+              - generic [ref=f65e830]: t
+              - generic [ref=f65e831]: .
+        - paragraph [ref=f65e832]: How we source, handle and verify research materials — and the published analysis behind each one.
+        - generic [ref=f65e833]:
+          - generic [ref=f65e834]:
+            - term [ref=f65e835]: "5"
+            - definition [ref=f65e836]: Published reports
+          - generic [ref=f65e837]:
+            - term [ref=f65e838]: Janoshik
+            - definition [ref=f65e839]: Independent analyst
+          - generic [ref=f65e840]:
+            - term [ref=f65e841]: Per lot
+            - definition [ref=f65e842]: Batch-specific COA
+      - navigation "On this page" [ref=f65e843]:
+        - generic [ref=f65e844]:
+          - button "Our standards" [ref=f65e845]
+          - button "Verified purity" [ref=f65e846]
+          - button "Lab reports" [ref=f65e847]
+      - generic [ref=f65e848]:
+        - generic [ref=f65e849]:
+          - text: "01"
+          - heading "Our standards" [level=2] [ref=f65e850]
+          - paragraph [ref=f65e851]: Quality is the work. These are the controls that sit behind every kit we ship.
+        - list [ref=f65e852]:
+          - listitem [ref=f65e853]:
+            - generic [ref=f65e854]: "01"
+            - heading "Verified sourcing" [level=3] [ref=f65e855]
+            - paragraph [ref=f65e856]: Materials come from manufacturers held to strict testing, handling and documentation requirements on every production run.
+          - listitem [ref=f65e857]:
+            - generic [ref=f65e858]: "02"
+            - heading "Controlled processes" [level=3] [ref=f65e859]
+            - paragraph [ref=f65e860]: Repeatable, documented handling so each unit matches the one before it — the point of a reference material is that it does not drift.
+          - listitem [ref=f65e861]:
+            - generic [ref=f65e862]: "03"
+            - heading "Sealed packaging" [level=3] [ref=f65e863]
+            - paragraph [ref=f65e864]: Tamper-evident research kits, with cold-chain packing where the compound requires refrigeration.
+          - listitem [ref=f65e865]:
+            - generic [ref=f65e866]: "04"
+            - heading "Retained samples" [level=3] [ref=f65e867]
+            - paragraph [ref=f65e868]: A reference sample is kept from every lot, so a result can be cross-checked against the material it came from.
+      - generic [ref=f65e869]:
+        - generic [ref=f65e870]:
+          - text: "02"
+          - heading "Verified purity" [level=2] [ref=f65e871]
+          - paragraph [ref=f65e872]: Purity is measured, not asserted. Each batch goes through the same two-instrument check before it is released.
+        - generic [ref=f65e873]:
+          - figure [ref=f65e874]:
+            - img "HPLC instrumentation used for peptide purity verification." [ref=f65e875]
+          - list [ref=f65e876]:
+            - listitem [ref=f65e877]:
+              - generic [ref=f65e878]: "01"
+              - generic [ref=f65e879]:
+                - heading "Reverse-phase HPLC" [level=3] [ref=f65e880]
+                - paragraph [ref=f65e881]: Separates the target compound from related substances and quantifies purity as a percentage of total peak area.
+            - listitem [ref=f65e882]:
+              - generic [ref=f65e883]: "02"
+              - generic [ref=f65e884]:
+                - heading "High-resolution mass spectrometry" [level=3] [ref=f65e885]
+                - paragraph [ref=f65e886]: Confirms molecular identity against the expected mass — purity alone does not prove you have the right molecule.
+            - listitem [ref=f65e887]:
+              - generic [ref=f65e888]: "03"
+              - generic [ref=f65e889]:
+                - heading "Independent verification" [level=3] [ref=f65e890]
+                - paragraph [ref=f65e891]: Analysis is carried out by Janoshik Analytical rather than in-house, and the report is published as received.
+        - generic [ref=f65e892]:
+          - paragraph [ref=f65e893]: Every certificate carries
+          - list [ref=f65e894]:
+            - listitem [ref=f65e895]: Lot number
+            - listitem [ref=f65e896]: HPLC purity
+            - listitem [ref=f65e897]: Mass-spec confirmation
+            - listitem [ref=f65e898]: Fill volume
+            - listitem [ref=f65e899]: Storage and handling notes
+      - generic [ref=f65e900]:
+        - generic [ref=f65e901]:
+          - text: "03"
+          - heading "Lab reports" [level=2] [ref=f65e902]
+          - paragraph [ref=f65e903]: The published analysis for every lot currently in the catalogue. Open a row to read the certificate exactly as the lab issued it.
+        - list [ref=f65e904]:
+          - listitem [ref=f65e905]:
+            - article [ref=f65e906]:
+              - heading [level=3] [ref=f65e907]:
+                - button "Retatrutide 20mg Lot AR1721TRT · 2.4 mL HPLC purity 99.21%" [ref=f65e908]:
+                  - generic [ref=f65e910]:
+                    - generic [ref=f65e911]: Retatrutide 20mg
+                    - generic [ref=f65e912]: Lot AR1721TRT · 2.4 mL
+                  - generic [ref=f65e914]:
+                    - generic [ref=f65e915]: HPLC purity
+                    - generic [ref=f65e916]: 99.21%
+                  - generic [ref=f65e920]: Report
+          - listitem [ref=f65e922]:
+            - article [ref=f65e923]:
+              - heading [level=3] [ref=f65e924]:
+                - button "Glow 70mg Lot GL0621XSA · 3.4 mL HPLC purity 98.6%" [ref=f65e925]:
+                  - generic [ref=f65e927]:
+                    - generic [ref=f65e928]: Glow 70mg
+                    - generic [ref=f65e929]: Lot GL0621XSA · 3.4 mL
+                  - generic [ref=f65e931]:
+                    - generic [ref=f65e932]: HPLC purity
+                    - generic [ref=f65e933]: 98.6%
+                  - generic [ref=f65e937]: Report
+          - listitem [ref=f65e939]:
+            - article [ref=f65e940]:
+              - heading [level=3] [ref=f65e941]:
+                - button "Retatrutide 40mg Lot AR1739JAT · 2.4 mL HPLC purity 99.269%" [ref=f65e942]:
+                  - generic [ref=f65e944]:
+                    - generic [ref=f65e945]: Retatrutide 40mg
+                    - generic [ref=f65e946]: Lot AR1739JAT · 2.4 mL
+                  - generic [ref=f65e948]:
+                    - generic [ref=f65e949]: HPLC purity
+                    - generic [ref=f65e950]: 99.269%
+                  - generic [ref=f65e954]: Report
+          - listitem [ref=f65e956]:
+            - article [ref=f65e957]:
+              - heading [level=3] [ref=f65e958]:
+                - button "Tirzepatide 40mg Lot TR786PAOS · 3 mL HPLC purity 99.85%" [ref=f65e959]:
+                  - generic [ref=f65e961]:
+                    - generic [ref=f65e962]: Tirzepatide 40mg
+                    - generic [ref=f65e963]: Lot TR786PAOS · 3 mL
+                  - generic [ref=f65e965]:
+                    - generic [ref=f65e966]: HPLC purity
+                    - generic [ref=f65e967]: 99.85%
+                  - generic [ref=f65e971]: Report
+          - listitem [ref=f65e973]:
+            - article [ref=f65e974]:
+              - heading [level=3] [ref=f65e975]:
+                - button "BPC-157 & TB-500 40mg Lot BP1701FSR · 3 mL HPLC purity 99.32%" [ref=f65e976]:
+                  - generic [ref=f65e978]:
+                    - generic [ref=f65e979]: BPC-157 & TB-500 40mg
+                    - generic [ref=f65e980]: Lot BP1701FSR · 3 mL
+                  - generic [ref=f65e982]:
+                    - generic [ref=f65e983]: HPLC purity
+                    - generic [ref=f65e984]: 99.32%
+                  - generic [ref=f65e988]: Report
+        - complementary [ref=f65e990]:
+          - img "Research team working at a peptide laboratory bench." [ref=f65e991]
+          - generic [ref=f65e992]:
+            - heading "Need the paperwork for a specific lot?" [level=3] [ref=f65e993]
+            - paragraph [ref=f65e994]: Batch data is printed on every product page. If you need something we have not published, ask and we will pull it from the retained sample record.
+            - generic [ref=f65e995]:
+              - button "Browse the catalogue" [ref=f65e996] [cursor=pointer]
+              - link "Contact us" [ref=f65e997] [cursor=pointer]:
+                - /url: "#contact"
+  - contentinfo [ref=f65e719]:
+    - generic [ref=f65e720]:
+      - generic [ref=f65e721]:
+        - generic [ref=f65e722]:
+          - generic [ref=f65e723]:
+            - generic [ref=f65e724]: Lyfe
+            - generic [ref=f65e725]: Health
+          - paragraph [ref=f65e726]: Research-grade peptide supply
+          - generic [ref=f65e727]:
+            - heading "Stay updated" [level=4] [ref=f65e728]
+            - generic [ref=f65e729]:
+              - textbox "Email address" [ref=f65e730]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f65e731]
+            - paragraph [ref=f65e732]: Research updates and restock alerts. No spam.
+        - generic [ref=f65e733]:
+          - heading "Quick Links" [level=4] [ref=f65e734]
+          - list [ref=f65e735]:
+            - listitem [ref=f65e736]:
+              - link "Shop" [ref=f65e737] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f65e738]:
+              - link "Home" [ref=f65e739] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f65e740]:
+              - link "About" [ref=f65e741] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f65e742]:
+              - link "Products" [ref=f65e743] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f65e744]:
+              - link "Why Us" [ref=f65e745] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f65e746]:
+              - link "FAQ" [ref=f65e747] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f65e748]:
+              - link "Contact" [ref=f65e749] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f65e750]:
+              - link "Track order" [ref=f65e751] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f65e752]:
+          - heading "Contact" [level=4] [ref=f65e753]
+          - list [ref=f65e754]:
+            - listitem [ref=f65e755]:
+              - link "hello@lyfehealth.com" [ref=f65e756] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=f65e757]:
+              - link "+1 000 000 0000" [ref=f65e758] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f65e759]:
+              - generic [ref=f65e760]: Global research supply
+        - generic [ref=f65e761]:
+          - heading "Policies" [level=4] [ref=f65e762]
+          - list [ref=f65e763]:
+            - listitem [ref=f65e764]:
+              - link "Press Release" [ref=f65e765] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f65e766]:
+              - link "Refund Policy" [ref=f65e767] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f65e768]:
+              - link "Shipping Policy" [ref=f65e769] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f65e770]:
+              - link "Privacy Policy" [ref=f65e771] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f65e772]:
+              - link "Terms Of Service" [ref=f65e773] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f65e774]:
+          - heading "Follow" [level=4] [ref=f65e775]
+          - list [ref=f65e776]:
+            - listitem [ref=f65e777]:
+              - link "WhatsApp" [ref=f65e778]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f65e779]:
+              - link "Instagram" [ref=f65e780]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f65e781]:
+              - link "Email" [ref=f65e782]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f65e784]:
+        - generic [ref=f65e785]: © 2026 Lyfe Health
+        - generic [ref=f65e786]: Global research supply
+      - paragraph [ref=f65e787]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f65e788]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

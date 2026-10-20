@@ -1,0 +1,259 @@
+- generic [ref=f17e2]:
+  - banner [ref=f17e11]:
+    - generic [ref=f17e12]:
+      - link "Lyfe Health" [ref=f17e13]:
+        - /url: "#home"
+        - generic [ref=f17e21]:
+          - generic [ref=f17e22]: Lyfe
+          - generic [ref=f17e24]: Health
+      - navigation "Primary" [ref=f17e25]:
+        - list [ref=f17e26]:
+          - listitem [ref=f17e27]:
+            - button "Research" [ref=f17e28] [cursor=pointer]
+          - listitem [ref=f17e29]:
+            - button "Shop" [expanded] [ref=f17e30] [cursor=pointer]
+            - region "Shop menu" [ref=f17e805]:
+              - list [ref=f17e806]:
+                - listitem [ref=f17e807]:
+                  - link "$350 Retatrutide 20mg" [ref=f17e808]:
+                    - /url: "#/product/p1"
+                    - generic [ref=f17e810]:
+                      - generic [ref=f17e811]: $350
+                      - generic [ref=f17e812]: Retatrutide 20mg
+                - listitem [ref=f17e813]:
+                  - link "$329 Glow 70mg" [ref=f17e814]:
+                    - /url: "#/product/p2"
+                    - generic [ref=f17e816]:
+                      - generic [ref=f17e817]: $329
+                      - generic [ref=f17e818]: Glow 70mg
+                - listitem [ref=f17e819]:
+                  - link "$629 Retatrutide 40mg" [ref=f17e820]:
+                    - /url: "#/product/p6"
+                    - generic [ref=f17e822]:
+                      - generic [ref=f17e823]: $629
+                      - generic [ref=f17e824]: Retatrutide 40mg
+                - listitem [ref=f17e825]:
+                  - link "$399 Tirzepatide 40mg" [ref=f17e826]:
+                    - /url: "#/product/p4"
+                    - generic [ref=f17e828]:
+                      - generic [ref=f17e829]: $399
+                      - generic [ref=f17e830]: Tirzepatide 40mg
+                - listitem [ref=f17e831]:
+                  - link "$269 BPC-157 & TB-500 40mg" [ref=f17e832]:
+                    - /url: "#/product/p3"
+                    - generic [ref=f17e834]:
+                      - generic [ref=f17e835]: $269
+                      - generic [ref=f17e836]: BPC-157 & TB-500 40mg
+                - listitem [ref=f17e837]:
+                  - link "$249 NAD+ 1000mg" [ref=f17e838]:
+                    - /url: "#/product/p5"
+                    - generic [ref=f17e840]:
+                      - generic [ref=f17e841]: $249
+                      - generic [ref=f17e842]: NAD+ 1000mg
+              - link "Shop all products" [ref=f17e843]:
+                - /url: "#/shop"
+              - generic [ref=f17e846]:
+                - link "Track order" [ref=f17e847]:
+                  - /url: "#/track"
+                - link "FAQ" [ref=f17e848]:
+                  - /url: "#faq"
+                - link "Contact" [ref=f17e849]:
+                  - /url: "#contact"
+          - listitem [ref=f17e31]:
+            - button "Science" [ref=f17e32] [cursor=pointer]
+          - listitem [ref=f17e33]:
+            - link "About" [ref=f17e34] [cursor=pointer]:
+              - /url: "#/about"
+      - generic [ref=f17e35]:
+        - button "Search products" [ref=f17e36] [cursor=pointer]
+        - button "Sign in" [ref=f17e41] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f17e45] [cursor=pointer]
+        - link "How we verify" [ref=f17e50]:
+          - /url: "#/science?s=purity"
+  - main [ref=f17e850]:
+    - generic [ref=f17e852]:
+      - generic [ref=f17e853]:
+        - generic [ref=f17e854]: Shop
+        - heading "The full catalogue." [level=1] [ref=f17e855]
+        - paragraph [ref=f17e856]: Research-grade peptide reference materials, independently lab tested and packed for laboratory analysis. Documentation and batch data available on every product.
+      - paragraph [ref=f17e858]: 6 products
+      - generic [ref=f17e859]:
+        - article [ref=f17e860]:
+          - link "Retatrutide 20mg Lab verified" [ref=f17e861]:
+            - /url: "#/product/p1"
+            - img "Retatrutide 20mg" [ref=f17e862]
+            - generic [ref=f17e863]: Lab verified
+          - generic [ref=f17e864]:
+            - generic [ref=f17e865]: Compound Analysis
+            - link "Retatrutide 20mg" [ref=f17e866]:
+              - /url: "#/product/p1"
+            - paragraph [ref=f17e867]: Triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 20 mg research device for metabolic and energy-pathway studies.
+            - generic [ref=f17e868]:
+              - generic [ref=f17e869]: $350
+              - button "Add Retatrutide 20mg to cart" [ref=f17e870]: Add to cart
+        - article [ref=f17e871]:
+          - link "Glow 70mg Lab verified" [ref=f17e872]:
+            - /url: "#/product/p2"
+            - img "Glow 70mg" [ref=f17e873]
+            - generic [ref=f17e874]: Lab verified
+          - generic [ref=f17e875]:
+            - generic [ref=f17e876]: Compound Analysis
+            - link "Glow 70mg" [ref=f17e877]:
+              - /url: "#/product/p2"
+            - paragraph [ref=f17e878]: Multi-peptide research blend pairing GHK-Cu with BPC-157 and TB-500 in a single pre-filled research reference device.
+            - generic [ref=f17e879]:
+              - generic [ref=f17e880]: $329
+              - button "Add Glow 70mg to cart" [ref=f17e881]: Add to cart
+        - article [ref=f17e882]:
+          - link "Retatrutide 40mg Lab verified" [ref=f17e883]:
+            - /url: "#/product/p6"
+            - img "Retatrutide 40mg" [ref=f17e884]
+            - generic [ref=f17e885]: Lab verified
+          - generic [ref=f17e886]:
+            - generic [ref=f17e887]: Compound Analysis
+            - link "Retatrutide 40mg" [ref=f17e888]:
+              - /url: "#/product/p6"
+            - paragraph [ref=f17e889]: Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. Supplied as a pre-filled 40 mg research reference device for extended metabolic-pathway research.
+            - generic [ref=f17e890]:
+              - generic [ref=f17e891]: $629
+              - button "Add Retatrutide 40mg to cart" [ref=f17e892]: Add to cart
+        - article [ref=f17e893]:
+          - link "Tirzepatide 40mg Lab verified" [ref=f17e894]:
+            - /url: "#/product/p4"
+            - img "Tirzepatide 40mg" [ref=f17e895]
+            - generic [ref=f17e896]: Lab verified
+          - generic [ref=f17e897]:
+            - generic [ref=f17e898]: Compound Analysis
+            - link "Tirzepatide 40mg" [ref=f17e899]:
+              - /url: "#/product/p4"
+            - paragraph [ref=f17e900]: Dual agonist of GLP-1 and GIP receptors. Supplied as a pre-filled 40 mg research device for glucose-regulation and metabolic studies.
+            - generic [ref=f17e901]:
+              - generic [ref=f17e902]: $399
+              - button "Add Tirzepatide 40mg to cart" [ref=f17e903]: Add to cart
+        - article [ref=f17e904]:
+          - link "BPC-157 & TB-500 40mg Lab verified" [ref=f17e905]:
+            - /url: "#/product/p3"
+            - img "BPC-157 & TB-500 40mg" [ref=f17e906]
+            - generic [ref=f17e907]: Lab verified
+          - generic [ref=f17e908]:
+            - generic [ref=f17e909]: Compound Analysis
+            - link "BPC-157 & TB-500 40mg" [ref=f17e910]:
+              - /url: "#/product/p3"
+            - paragraph [ref=f17e911]: Peptide research pairing of BPC-157 and TB-500 supplied at 40 mg in a pre-filled research reference device.
+            - generic [ref=f17e912]:
+              - generic [ref=f17e913]: $269
+              - button "Add BPC-157 & TB-500 40mg to cart" [ref=f17e914]: Add to cart
+        - article [ref=f17e915]:
+          - link [ref=f17e916]:
+            - /url: "#/product/p5"
+            - img "NAD+ 1000mg" [ref=f17e917]
+          - generic [ref=f17e918]:
+            - generic [ref=f17e919]: Support
+            - link "NAD+ 1000mg" [ref=f17e920]:
+              - /url: "#/product/p5"
+            - paragraph [ref=f17e921]: NAD+ (Nicotinamide Adenine Dinucleotide) research compound supplied at 1,000 mg total across two pre-filled research reference pens.
+            - generic [ref=f17e922]:
+              - generic [ref=f17e923]: $249
+              - button "Add NAD+ 1000mg to cart" [ref=f17e924]: Add to cart
+      - paragraph [ref=f17e925]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+  - contentinfo [ref=f17e735]:
+    - generic [ref=f17e736]:
+      - generic [ref=f17e737]:
+        - generic [ref=f17e738]:
+          - generic [ref=f17e739]:
+            - generic [ref=f17e740]: Lyfe
+            - generic [ref=f17e741]: Health
+          - paragraph [ref=f17e742]: Research-grade peptide supply
+          - generic [ref=f17e743]:
+            - heading "Stay updated" [level=4] [ref=f17e744]
+            - generic [ref=f17e745]:
+              - textbox "Email address" [ref=f17e746]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f17e747]
+            - paragraph [ref=f17e748]: Research updates and restock alerts. No spam.
+        - generic [ref=f17e749]:
+          - heading "Quick Links" [level=4] [ref=f17e750]
+          - list [ref=f17e751]:
+            - listitem [ref=f17e752]:
+              - link "Shop" [ref=f17e753] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f17e754]:
+              - link "Home" [ref=f17e755] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f17e756]:
+              - link "About" [ref=f17e757] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f17e758]:
+              - link "Products" [ref=f17e759] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f17e760]:
+              - link "Why Us" [ref=f17e761] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f17e762]:
+              - link "FAQ" [ref=f17e763] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f17e764]:
+              - link "Contact" [ref=f17e765] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f17e766]:
+              - link "Track order" [ref=f17e767] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f17e768]:
+          - heading "Contact" [level=4] [ref=f17e769]
+          - list [ref=f17e770]:
+            - listitem [ref=f17e771]:
+              - link "hello@lyfehealth.com" [ref=f17e772] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=f17e773]:
+              - link "+1 000 000 0000" [ref=f17e774] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f17e775]:
+              - generic [ref=f17e776]: Global research supply
+        - generic [ref=f17e777]:
+          - heading "Policies" [level=4] [ref=f17e778]
+          - list [ref=f17e779]:
+            - listitem [ref=f17e780]:
+              - link "Press Release" [ref=f17e781] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f17e782]:
+              - link "Refund Policy" [ref=f17e783] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f17e784]:
+              - link "Shipping Policy" [ref=f17e785] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f17e786]:
+              - link "Privacy Policy" [ref=f17e787] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f17e788]:
+              - link "Terms Of Service" [ref=f17e789] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f17e790]:
+          - heading "Follow" [level=4] [ref=f17e791]
+          - list [ref=f17e792]:
+            - listitem [ref=f17e793]:
+              - link "WhatsApp" [ref=f17e794]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f17e795]:
+              - link "Instagram" [ref=f17e796]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f17e797]:
+              - link "Email" [ref=f17e798]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f17e800]:
+        - generic [ref=f17e801]: © 2026 Lyfe Health
+        - generic [ref=f17e802]: Global research supply
+      - paragraph [ref=f17e803]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f17e804]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

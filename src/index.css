@@ -1,25 +1,182 @@
+/* ===== THE SITE'S TWO FACES (2026-10-19) ===================================
+   Taken from `fluxtheory.in/about-us` on request. Measured off it rather than
+   guessed: headings are **Oswald**, uppercase, weights 500–700, leading equal
+   to the font size, and tracked **negative** (-2.2px at 44px ≈ -0.05em);
+   body is **Geist** at 400, 16/24, normal tracking, with small caps labels at
+   500/12px and **+0.07em**.
+
+   `--font-display` and `--font-heavy` both point at Oswald and `--font-body`
+   at Geist, so this is a token re-point, not a sweep — the same device the
+   header uses for the palette. Anton, Roboto and Plex are all still imported
+   and unused; reverting is editing those three token lines. */
+/* 300 and 400 are imported because existing rules ask for them — the collage
+   pairs a light line against a bold one, and the lot band's statement is set
+   at a near-regular weight. Without the cuts they would fall back to 500 and
+   those pairings collapse. Oswald's heaviest is 700, so the site's many
+   `font-weight: 900` rules land there; `font-synthesis: none` below keeps the
+   browser from faking anything heavier. */
+@import "@fontsource/oswald/300.css";
+@import "@fontsource/oswald/400.css";
+@import "@fontsource/oswald/500.css";
+@import "@fontsource/oswald/600.css";
+@import "@fontsource/oswald/700.css";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+
 @import "@fontsource/anton/400.css";
+/* Roboto was already a dependency but unimported. Its Black is the hero
+   headline's face — Anton is far more condensed than the reference's heavy
+   grotesque. */
+@import "@fontsource/roboto/700.css";
+@import "@fontsource/roboto/900.css";
+/* The collage heading pairs a light line against a bold one; once that
+   heading moved onto this face (2026-10-17) the light line needed a Light cut
+   to fall back to, or it synthesised off the Bold and the pair collapsed. */
+@import "@fontsource/roboto/300.css";
+/* The lot band's statement heading (2026-10-19) is the one home heading set
+   at a near-regular weight — the reference reads as a sentence, not a slab,
+   and at 900 the scrubbed word-fill is unreadable through it. */
+@import "@fontsource/roboto/500.css";
+/* **The whole site runs on this face as of 2026-10-19** (requested: the hero
+   title's family and style everywhere), so the regular cut body copy needs is
+   imported too — it was never needed while Plex carried the body. */
+@import "@fontsource/roboto/400.css";
+/* The Plex cuts are kept imported but **no face points at them any more** —
+   `--font-body` moved to Roboto with everything else. They are two lines from
+   being dropped if the change sticks; left in so reverting is a token edit
+   rather than a dependency one. */
 @import "@fontsource/ibm-plex-sans/300.css";
 @import "@fontsource/ibm-plex-sans/400.css";
 @import "@fontsource/ibm-plex-sans/500.css";
 @import "@fontsource/ibm-plex-sans/600.css";
 @import "@fontsource/ibm-plex-sans/700.css";
+/* The header wordmark only. The reference bar sets its brand in a
+   high-contrast serif, which none of the faces above can do — Anton is a
+   condensed grotesque and Plex is low-contrast. Scoped to `--font-serif` so
+   nothing else picks it up. */
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/500.css";
+/* The FAQ heading's italic accent word (2026-10-19). */
+@import "@fontsource/playfair-display/400-italic.css";
 
+/* ===== THEME INVERTED TO LIGHT — 2026-10-15 ================================
+   The site ran on a near-black ground with cream and lime accents. The
+   burgundy redesign brief calls for a white ground, soft-black type and
+   restrained burgundy accents, so these core tokens are flipped rather than a
+   second palette added — `body` reads `--color-bg`/`--color-fg`, so this is
+   what actually turns the page white.
+
+   KNOWN CONSEQUENCE: ~58 values in portfolio.css were hard-coded for the dark
+   theme (`rgba(255,255,255,…)` hairlines, white type, dark-only fills). They
+   do not follow these tokens and are being corrected band by band — anything
+   still looking washed out is one of those, not a token problem. */
 :root {
-  --color-bg: #080808;
-  --color-bg-elev: #141414;
-  --color-fg: #ffffff;
-  --color-fg-dim: #bcbcb7;
-  --color-fg-muted: #949490;
-  --color-accent: #ffeec8;
-  --color-accent-soft: rgba(255, 238, 200, 0.12);
-  --color-outline: #4b4b49;
-  --color-outline-soft: rgba(255, 255, 255, 0.08);
-  --color-danger: #ea384c;
-  --color-success: #82e298;
+  --color-bg: #ffffff;
+  /* The raised surface is now the warm off-white, not a lighter black. */
+  --color-bg-elev: #f7f4f2;
+  --color-fg: #171717;
+  --color-fg-dim: #4a4746;
+  --color-fg-muted: #6f6a68;
+  /* The accent is burgundy now, not cream. Cream was legible on near-black and
+     is invisible on white, so every use of it as type had to move. */
+  --color-accent: #8b1e2d;
+  --color-accent-soft: rgba(139, 30, 45, 0.08);
+  /* Type that sits **on** an accent fill. Those rules used to say
+     `color: var(--color-bg)` — correct when the page was near-black and the
+     accent was cream, and silently invisible the moment the theme inverted
+     (white type on a white-ish fill). 43 of them were repointed here, so the
+     pairing is explicit and survives the next palette change. */
+  --color-on-accent: #ffffff;
+  /* Secondary accent — the shop CTAs. Was lime; the muted rose is the brief's
+     supporting accent and the only other colour allowed near the burgundy. */
+  --color-secondary: #b85a66;
+  --color-secondary-soft: rgba(184, 90, 102, 0.12);
+  --color-outline: #ddd6d3;
+  --color-outline-soft: rgba(23, 23, 23, 0.1);
+  --color-danger: #c0283a;
+  --color-success: #2f7d4f;
 
-  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Anton", "Bebas Neue", Impact, sans-serif;
+  /* LIORA storefront palette — the light surfaces (hero, header, showcase).
+     Added alongside the dark tokens rather than replacing them, so only the
+     components that opt in consume these.
+
+     **Repointed to the burgundy identity on 2026-10-15** (brief: white ground,
+     deep burgundy accent, soft-black type, warm off-white secondary). The
+     palette before this was LIORA lavender/purple, and before that a campaign
+     green on the hero alone — both are gone. */
+  --brand-bg: #ffffff;
+  --brand-primary: #8b1e2d;
+  --brand-primary-deep: #6d1622;
+  --brand-primary-soft: rgba(139, 30, 45, 0.08);
+  /* The supporting accent — used for quiet marks, never for type on white. */
+  --brand-rose: #b85a66;
+  /* Warm off-white: the second surface, against the pure-white ground. */
+  --brand-sand: #f7f4f2;
+  --brand-soft: var(--brand-sand);
+  --brand-ink: #171717;
+  --brand-muted: #6f6a68;
+  --brand-border: #e8e2e0;
+  /* Back-compat aliases. The header, footer, search overlay and mobile drawer
+     were all written against these names, so pointing them at the primary
+     flips every one of those surfaces in a single edit instead of a sweep
+     through ~8 selectors. New rules should use `--brand-primary*`. */
+  --brand-purple: var(--brand-primary);
+  --brand-purple-deep: var(--brand-primary-deep);
+  /* Where the hero's colour panel meets the figure. The header reads it too —
+     its nav items have to land inside the panel, not across the join. */
+  --brand-split: 56%;
+  /* The gutter around the hero's two cards. Lives here rather than on `.hero`
+     because the header reads it as well: the bar aligns its content to where
+     the hero's headline starts, which is this plus the panel's own padding. */
+  --hero-inset: clamp(0.5rem, 0.75vw, 0.75rem);
+  /* Breathing room above and below the hero's cards (2026-10-15, requested).
+     The header reads this too and shifts down by the same amount while it is
+     transparent — the bar sits *over* the hero, so without that its white type
+     would land on the white page strip this opens up, not on the green card. */
+  --hero-pad-y: clamp(1rem, 2vw, 2rem);
+  /* How far the wordmark and the nav words sit below the bar's icon cluster
+     (2026-10-15, requested). Applied as `top`, not `transform` — the header's
+     opening sequence owns `.nav__brand`'s transform. */
+  --nav-drop: 0.5rem;
+  /* The shared page gutter. Read by `.hero__panel`, `.nav__row` and the three
+     bands under the hero (trust bar, showcase, range), so widening it moves
+     all of them together and the left edge stays a single unbroken line —
+     which is why the header's side padding is adjusted here rather than on
+     `.nav__row` alone. Widened a step on request (2026-10-15). */
+  --gutter: clamp(1.5rem, 4.6vw, 6rem);
+  /* Extra side padding on top of the shared line (2026-10-17, requested).
+     The bar asked for it first; every home band that has a left-aligned
+     content edge now adds it too, so the whole page keeps one line. Set it
+     to `0rem` to put everything back on `--hero-inset + --gutter`. */
+  --nav-pad-x: clamp(0.75rem, 1.6vw, 1.75rem);
+
+  /* The hero's campaign green and its lime CTA are gone with the burgundy
+     redesign (2026-10-15). `.hero__panel` now takes `--brand-primary` flat,
+     and the CTA is white-on-burgundy — the brief asks for restrained accents
+     and explicitly against constant gradients. */
+
+  /* **Oswald for display, Geist for body** (2026-10-19) — the pairing taken
+     from `fluxtheory.in/about-us`. It replaced a site-wide Roboto, which had
+     itself replaced Anton + IBM Plex earlier the same day.
+
+     All three heading tokens point at Oswald: `--font-display` drives the
+     `h1`–`h6` default and the size helpers, `--font-heavy` drives the hero
+     and every band heading written against it. Keeping them separate but
+     equal means a future "headings only" change is still one line.
+
+     **Reverting is editing these three lines** — Anton, Roboto and Plex are
+     all still imported. */
+  --font-body: "Geist Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Oswald", "Anton", Impact, sans-serif;
+  /* Was "the hero headline only, a heavy grotesque, not the condensed display
+     face" — that distinction is gone: the reference uses one condensed face
+     for every heading, so this and `--font-display` now resolve the same. */
+  --font-heavy: "Oswald", "Anton", Impact, sans-serif;
+  /* The header wordmark only (2026-10-15). High-contrast serif caps, as the
+     reference bar sets its brand — nothing else on the site uses it. */
+  --font-serif: "Playfair Display", "Times New Roman", Georgia, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Adjacent sections are flush, so the gap a reader sees is TWICE this —
@@ -121,9 +278,18 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: 0.01em;
+  /* **Measured off `fluxtheory.in/about-us`**, not guessed: its headings run
+     Oswald 500–700, uppercase, with leading equal to the font size and
+     *negative* tracking that tightens as the type grows (-2.2px at 44px,
+     -1.12px at 28px → about -0.05em and -0.04em). 600 is its h1 weight and
+     the one this default takes; the site's own 900s fall back to Oswald's
+     700, which is its heaviest cut.
+
+     The previous values (900 / 0.98 / -0.025em) were the hero's, from when
+     everything ran on Roboto. */
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
   text-transform: uppercase;
   margin: 0;
 }
@@ -188,24 +354,37 @@ p {
   display: inline-block;
 }
 
+/* **The size helpers came down ~30% when the face changed** (2026-10-19).
+   Every clamp here was set for Anton, a condensed grotesque; Roboto Black
+   runs far wider at the same size, so the Anton-era numbers overflowed their
+   measures. `.faq__title` had already had to drop off `.h2` for exactly this
+   reason when the home headings moved onto this face in 2026-10-17 — that
+   note is now the rule rather than the exception. */
+/* **The helpers went back up when the face changed again.** They were cut
+   ~30% for Roboto, which is wide; Oswald is condensed — between Anton and
+   Roboto, nearer Anton — so those numbers set far too small. Scaled by the
+   faces' average uppercase advance (Anton ≈ 0.44em, Oswald ≈ 0.50em, Roboto
+   Black ≈ 0.62em), which puts Oswald at about 0.88× the original Anton-era
+   sizes. */
 .display {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 12.5vw, 11.25rem);
-  line-height: 0.9;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: clamp(3rem, 11vw, 9.9rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
   text-transform: uppercase;
 }
 
 .h2 {
-  font-size: clamp(2.5rem, 7vw, 7.5rem);
+  font-size: clamp(2.2rem, 6.2vw, 6.6rem);
 }
 
 .h3 {
-  font-size: clamp(2rem, 5vw, 5rem);
+  font-size: clamp(1.75rem, 4.4vw, 4.4rem);
 }
 
 .h4 {
-  font-size: clamp(1.5rem, 3vw, 3.75rem);
+  font-size: clamp(1.35rem, 2.7vw, 3.3rem);
 }
 
 .lead {
@@ -267,6 +446,34 @@ p {
   transform: translate(3px, -3px);
 }
 
+/* ---------------------------------------------------------------------------
+   Motion primitives — the shared classes `lib/motion.ts` writes.
+
+   `splitLines()` wraps each rendered line in `.anim__line > .anim__line-inner`,
+   the reference's `.animtitle__line > span`: the outer box is the mask, the
+   inner one is what rises. The resting state here is the **finished** one, so
+   reduced motion renders straight from CSS with no tween to undo.
+   --------------------------------------------------------------------------- */
+
+.anim__line {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  /* A mask on a line box clips descenders; the pair must stay equal. */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  /* `overflow: hidden` clips **horizontally too**, and a `nowrap` line can sit
+     a hairline wider than its box — the FAQ heading does by 4px at 375. The
+     box takes a little slack and gives it straight back, so nothing moves. */
+  padding-inline: 0.2em;
+  margin-inline: -0.2em;
+}
+
+.anim__line-inner {
+  display: block;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -276,6 +483,9 @@ p {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+  /* The hooks in `hooks/use{Reveal,ScrollShift,Parallax}` bail out entirely
+     under this preference — the rule above only reaches CSS animation, and a
+     GSAP tween writes inline transforms it cannot touch. */
 }
 
 @media (max-width: 991px) {

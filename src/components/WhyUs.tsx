@@ -71,13 +71,13 @@ export function WhyUs() {
           </span>
         </div>
         <SplitText
-          text="Why labs choose us."
+          text="Why people reorder."
           as="h2"
           className="why__heading"
         />
         <p className="why__lead" data-why-reveal>
-          Hover a tile to expand it. Four commitments we hold to on every
-          order, regardless of size or destination.
+          Hover a tile to open it. Four reasons customers come back — same
+          product, same paperwork, every time.
         </p>
       </div>
 

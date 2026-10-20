@@ -1,115 +1,269 @@
-import { useState, type FormEvent } from "react";
-import clsx from "clsx";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "../data/site";
-import { useMagnetic } from "../hooks/useMagnetic";
+import standardPurity from "../assets/standards/purity.webp";
+import standardConsistency from "../assets/standards/consistency.webp";
+import standardPackaging from "../assets/standards/packaging.webp";
+import standardSupport from "../assets/standards/support.webp";
+import catMetabolic from "../assets/categories/metabolic.webp";
+import catCellular from "../assets/categories/cellular.webp";
+import catRecovery from "../assets/categories/recovery.webp";
+import catFormulation from "../assets/categories/formulation.webp";
 
-type Status = "idle" | "sending" | "sent" | "error";
+/**
+ * `site.phone` / `site.whatsapp` are still placeholders (a run of zeros).
+ * Showing them reads as broken on a site selling on credibility, so the
+ * channel is hidden until real numbers land — then it returns on its own.
+ */
+const isPlaceholderNumber = (value: string) =>
+  /0{6,}/.test(value.replace(/\D/g, ""));
+
+/* size classes mirror the reference's small / large / medium / small rhythm */
+const LEFT_PHOTOS = [
+  { src: catMetabolic, size: "sm" },
+  { src: standardPurity, size: "lg" },
+  { src: catCellular, size: "md" },
+  { src: standardConsistency, size: "sm" },
+];
+
+const RIGHT_PHOTOS = [
+  { src: standardSupport, size: "lg" },
+  { src: catRecovery, size: "sm" },
+  { src: standardPackaging, size: "md" },
+  { src: catFormulation, size: "sm" },
+];
 
 export function Contact() {
-  const [status, setStatus] = useState<Status>("idle");
-  const submitRef = useMagnetic<HTMLButtonElement>(0.25);
+  const root = useRef<HTMLElement | null>(null);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const payload = Object.fromEntries(data.entries());
+  const whatsappReady =
+    !isPlaceholderNumber(site.whatsapp) && !isPlaceholderNumber(site.phone);
 
-    if (!payload.email || !payload.message) {
-      setStatus("error");
-      return;
-    }
+  /* The email is set on an arc: ends low, middle high. Deterministic, so it
+     matches between renders — no randomness. */
+  const chars = Array.from(site.email);
+  const lift = (i: number) =>
+    Math.round(Math.sin(((i + 0.5) / chars.length) * Math.PI) * -34);
 
-    setStatus("sending");
-    await new Promise((r) => setTimeout(r, 900));
-    setStatus("sent");
-    form.reset();
-  };
+  useEffect(() => {
+    if (!root.current) return;
+    const mm = gsap.matchMedia();
+
+    /* Desktop: the band PINS when it reaches the top of the screen and the
+       turnover plays against the scroll — you keep scrolling, the section
+       stays put, and the white grows out of the middle. It releases into the
+       footer once the disc owns the viewport. */
+    mm.add(
+      "(prefers-reduced-motion: no-preference) and (min-width: 992px)",
+      () => {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top top",
+              /* One extra viewport of scroll, spent entirely on the wipe */
+              end: "+=110%",
+              pin: true,
+              pinSpacing: true,
+              scrub: 0.6,
+              invalidateOnRefresh: true,
+            },
+          })
+          .fromTo(
+            ".contact__grow",
+            { scale: 0 },
+            { scale: 1, ease: "none" },
+            0,
+          );
+      },
+      root,
+    );
+
+    /* Below 992px pinning would trap the reader, so the same turnover simply
+       scrubs as the section passes. */
+    mm.add(
+      "(prefers-reduced-motion: no-preference) and (max-width: 991px)",
+      () => {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top 70%",
+              end: "bottom bottom",
+              scrub: true,
+            },
+          })
+          .fromTo(
+            ".contact__grow",
+            { scale: 0 },
+            { scale: 1, ease: "none" },
+            0,
+          );
+      },
+      root,
+    );
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      /* Each circle opens like an aperture — the frame clips from nothing to a
+         full circle while the photograph inside settles out of a blur and the
+         whole thing drifts in from its own side of the band. Touching only
+         clipPath / x / rotate on the frame and scale / filter on the <img>
+         keeps it clear of the scroll drift below, which owns `y`. */
+      gsap.utils.toArray<HTMLElement>(".contact__photo").forEach((photo, i) => {
+        const fromLeft = photo.closest(".contact__photos--left") !== null;
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: root.current, start: "top 85%", once: true },
+          delay: i * 0.09,
+        });
+
+        tl.fromTo(
+          photo,
+          {
+            clipPath: "circle(0% at 50% 50%)",
+            x: fromLeft ? -90 : 90,
+            rotate: fromLeft ? -9 : 9,
+            opacity: 0,
+          },
+          {
+            clipPath: "circle(50% at 50% 50%)",
+            x: 0,
+            rotate: 0,
+            opacity: 1,
+            duration: 1.1,
+            ease: "power3.out",
+          },
+        ).fromTo(
+          photo.querySelector("img"),
+          { scale: 1.45, filter: "blur(14px)" },
+          { scale: 1, filter: "blur(0px)", duration: 1.3, ease: "power2.out" },
+          0,
+        );
+      });
+
+      /* Afterwards they keep moving: alternating drift speeds so the two
+         columns never read as a static frame. */
+      gsap.utils.toArray<HTMLElement>(".contact__photo").forEach((photo, i) => {
+        gsap.to(photo, {
+          y: i % 2 === 0 ? -48 : -22,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+
+      gsap.from(".contact__char", {
+        yPercent: 60,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.015,
+        scrollTrigger: { trigger: ".contact__email", start: "top 85%" },
+      });
+    }, root);
+
+    return () => {
+      mm.revert();
+      ScrollTrigger.refresh();
+    };
+  }, []);
 
   return (
-    <section id="contact" className="contact">
-      <div className="container contact__grid">
-        <div>
-          <span className="eyebrow">Contact</span>
-          <h2 className="contact__heading" style={{ marginTop: "1.5rem" }}>
-            Place an order or ask a question.
-          </h2>
-          <p className="contact__body">
-            Tell us what you need — a single research kit, a recurring lab
-            supply, or a quote for a custom catalogue. We reply by email or
-            WhatsApp within a working day.
-          </p>
+    <section id="contact" className="contact" ref={root}>
+      <span className="contact__grow" aria-hidden />
 
-          <ul className="contact__channels">
-            <li>
-              <span className="mono">WhatsApp</span>
+      <div className="container contact__inner">
+        <div className="contact__photos contact__photos--left" aria-hidden>
+          {LEFT_PHOTOS.map((photo, i) => (
+            <span
+              className={`contact__photo contact__photo--${photo.size}`}
+              key={`l-${i}`}
+            >
+              <img src={photo.src} alt="" loading="lazy" decoding="async" />
+            </span>
+          ))}
+        </div>
+
+        <div className="contact__main">
+          <span className="contact__eyebrow">Contact us</span>
+          <h2 className="contact__title">
+            Orders, batches and paperwork — ask us anything.
+          </h2>
+
+          <a className="contact__email" href={`mailto:${site.email}`}>
+            <span className="sr-only">{site.email}</span>
+            <span aria-hidden>
+              {chars.map((char, i) => (
+                <span
+                  className="contact__char"
+                  key={`${char}-${i}`}
+                  style={{ transform: `translateY(${lift(i)}%)` }}
+                >
+                  {char}
+                </span>
+              ))}
+            </span>
+          </a>
+
+          <div className="contact__actions">
+            {whatsappReady && (
               <a
+                className="contact__action"
                 href={site.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                data-cursor
-                data-cursor-text="Chat"
               >
-                {site.phone}
+                Message on WhatsApp
               </a>
-            </li>
-            <li>
-              <span className="mono">Email</span>
-              <a
-                href={`mailto:${site.email}`}
-                data-cursor
-                data-cursor-text="Email"
-              >
-                {site.email}
-              </a>
-            </li>
-            <li>
-              <span className="mono">Facility</span>
-              <span>{site.location}</span>
-            </li>
-          </ul>
+            )}
+            <a className="contact__action" href="#/track">
+              Track an order
+            </a>
+          </div>
         </div>
 
-        <form className="form" onSubmit={handleSubmit} noValidate>
-          <div className="field">
-            <label htmlFor="name">Name or organisation</label>
-            <input id="name" name="name" type="text" autoComplete="name" />
-          </div>
-          <div className="field">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="message">Order details or question</label>
-            <textarea id="message" name="message" rows={4} required />
-          </div>
-          <button
-            type="submit"
-            className="btn form__submit"
-            disabled={status === "sending"}
-            data-cursor
-            data-cursor-text="Send"
-            ref={submitRef}
-          >
-            {status === "sending" ? "Sending…" : "Send enquiry"}
-          </button>
-          {status === "sent" && (
-            <p className="form__status">
-              Sent — we'll reply within one working day.
-            </p>
-          )}
-          {status === "error" && (
-            <p className={clsx("form__status", "is-error")}>
-              Please add an email and a short message.
-            </p>
-          )}
-        </form>
+        <div className="contact__photos contact__photos--right" aria-hidden>
+          {RIGHT_PHOTOS.map((photo, i) => (
+            <span
+              className={`contact__photo contact__photo--${photo.size}`}
+              key={`r-${i}`}
+            >
+              <img src={photo.src} alt="" loading="lazy" decoding="async" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="container contact__foot">
+        <div className="contact__links">
+          <span className="contact__links-label">Shop</span>
+          <a href="#/shop">All products</a>
+          <a href="#/science?s=reports">Lab reports</a>
+        </div>
+        <div className="contact__links">
+          <span className="contact__links-label">Help</span>
+          <a href="#/track">Track order</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div className="contact__links contact__links--end">
+          <span className="contact__links-label">Follow</span>
+          {site.socials
+            .filter((social) => !isPlaceholderNumber(social.href))
+            .map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+              >
+                {social.label}
+              </a>
+            ))}
+        </div>
       </div>
     </section>
   );

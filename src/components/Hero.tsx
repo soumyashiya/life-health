@@ -1,169 +1,175 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { site, heroCopy } from "../data/site";
-import { SplitText } from "./SplitText";
-import { useMagnetic } from "../hooks/useMagnetic";
-import heroImg from "../assets/hero-seo-update.webp";
+import { heroCopy, projects, site, testimonials } from "../data/site";
+/* A client-supplied cut-out (`latest-images/hero-withoutbg.png`), so the right
+   half is a figure standing on a plain ground with the wordmark ghosted behind
+   her — no background photograph, and so no second layer to keep aligned. */
+import heroModel from "../assets/hero/figure.webp";
+/* The inline disc renders at about 40px across, where packaging detail is mush
+   — and the catalogue packshots sit on tall transparent canvases that crop to
+   a circle badly anyway. A crop of the band's own portrait reads cleanly at
+   that size and ties the two halves together — it is a crop of the very
+   figure standing beside it. The old `showcase.webp` crop is purple and would
+   now read as a foreign image. */
+import heroDisc from "../assets/hero/figure.webp";
+
+/* Real catalogue entries, so every packshot in the band links to its own
+   product page. Falls back gracefully if the ids ever change. */
+const SHELF_IDS = ["p1", "p4", "p5"];
 
 export function Hero() {
   const root = useRef<HTMLElement | null>(null);
-  const arrowRef = useMagnetic<HTMLAnchorElement>(0.4);
+
+  const shelf = SHELF_IDS.map((id) => projects.find((p) => p.id === id)).filter(
+    (p): p is (typeof projects)[number] => Boolean(p),
+  );
+  const faces = testimonials.slice(0, 4);
 
   useEffect(() => {
-    if (!root.current) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".hero .char",
-        { yPercent: 110 },
-        {
-          yPercent: 0,
-          duration: 1.2,
-          ease: "power4.out",
-          stagger: { each: 0.025, from: "start" },
-          delay: 0.2,
-        },
-      );
+    const el = root.current;
+    if (!el) return;
 
-      gsap.from(".hero [data-fade]", {
-        y: 24,
+    // Scoped so the selectors below only match inside the hero, and so reduced
+    // motion gets no timeline and no ScrollTrigger at all — every element is
+    // already at its finished state in CSS.
+    const mm = gsap.matchMedia(el);
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      // The band's arrival — headline, copy, CTA, shelf — belongs to the
+      // sequence in Navbar.tsx, because the hero is hidden behind that
+      // sequence's field until it lifts. All this adds is the photograph's
+      // settle and a restrained parallax as the band leaves.
+      //
+      // Both run on `.hero__frame`, never on the two image layers: the cut-out
+      // only reads as part of the photograph while it sits exactly over it, so
+      // anything that moves one must move both. They also take disjoint
+      // properties — the entrance owns scale/opacity, the scrub owns yPercent
+      // — so the two tweens cannot fight over the same transform.
+      gsap.from(".hero__frame", {
+        scale: 1.06,
         opacity: 0,
-        duration: 0.9,
+        duration: 1.4,
         ease: "power3.out",
-        delay: 1,
-        stagger: 0.1,
+        delay: 0.2,
       });
 
-      gsap.fromTo(
-        ".hero__image-inner",
-        { clipPath: "inset(100% 0% 0% 0%)" },
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 1.4,
-          ease: "power4.out",
-          delay: 0.4,
-        },
-      );
-
-      gsap.to(".hero__meta", {
-        yPercent: -40,
+      gsap.to(".hero__frame", {
+        yPercent: -4,
         ease: "none",
         scrollTrigger: {
-          trigger: root.current,
+          trigger: el,
           start: "top top",
           end: "bottom top",
           scrub: true,
         },
       });
+    });
 
-      gsap.to(".hero__display", {
-        yPercent: 18,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      gsap.to(".hero__image", {
-        yPercent: -15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      gsap.to(".hero__image-inner img", {
-        scale: 1.1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      gsap.to(".hero__bottom", {
-        yPercent: -25,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }, root);
     return () => {
-      ctx.revert();
+      mm.revert();
       ScrollTrigger.refresh();
     };
   }, []);
 
   return (
-    <section id="home" className="container hero" ref={root}>
-      <div className="hero__meta">
-        <div data-fade className="mono">
-          {site.role}
+    <section id="home" className="hero" ref={root}>
+      <div className="hero__panel">
+        <div className="hero__content">
+          <h1 className="hero__title">
+            {heroCopy.lines.map((parts, i) => (
+              /* Static, art-directed lines — the index is a stable key. A line
+                 given two parts carries the disc between them. */
+              <span className="hero__line" key={i}>
+                <span>
+                  {parts.map((part, p) => (
+                    <span key={p}>
+                      {p > 0 && (
+                        <span className="hero__disc" aria-hidden>
+                          <img
+                            src={heroDisc}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </span>
+                      )}
+                      {p > 0 ? " " : ""}
+                      {part}
+                    </span>
+                  ))}
+                </span>
+              </span>
+            ))}
+          </h1>
+
+          <p className="hero__lede">{heroCopy.lede}</p>
+
+          <a className="hero__cta" href={heroCopy.cta.href} data-cursor data-cursor-text="Shop">
+            {heroCopy.cta.label}
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M2.5 8h11M9.5 4l4 4-4 4" />
+            </svg>
+          </a>
+
         </div>
-        <div data-fade className="mono">
-          {site.name} · Est. {new Date().getFullYear()}
+
+        {/* The proof cluster and the shelf share one row along the panel's
+            foot — left and right, as the reference sets them. */}
+        <div className="hero__foot">
+          <div className="hero__proof">
+            <span className="hero__faces">
+              {faces.map((t) => (
+                <img key={t.name} src={t.avatar} alt="" loading="lazy" decoding="async" />
+              ))}
+            </span>
+            <span className="hero__proof-text">
+              <strong>{heroCopy.proof.value}</strong>
+              {heroCopy.proof.label}
+            </span>
+          </div>
+
+          {/* Real catalogue entries, each linking to its own product page. */}
+          <ul className="hero__shelf">
+            {shelf.map((p) => (
+              <li className="hero__shelf-item" key={p.id}>
+                <a href={`#/product/${p.id}`} data-cursor data-cursor-text="View">
+                  <img src={p.image} alt={p.title} loading="lazy" decoding="async" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <div className="hero__layout">
-        <div className="hero__text">
-          <h1 className="hero__display">
-            <SplitText text={heroCopy.headlineTop} as="span" />
-            <SplitText text={heroCopy.headlineBottom} as="span" />
-          </h1>
-          <p className="hero__lead" data-fade>
-            {heroCopy.intro}
-          </p>
-
-          <div className="hero__bottom">
-            <a
-              className="hero__scroll"
-              href="#about"
-              data-fade
-              data-cursor
-              data-cursor-text="Scroll"
-              ref={arrowRef}
-            >
-              <span>Scroll</span>
-              <span className="hero__scroll-arrow" aria-hidden />
-            </a>
-
-            <div className="hero__tags" data-fade>
-              <span className="hero__tag">{site.role}</span>
-              <span className="hero__tag">{heroCopy.available}</span>
-            </div>
-          </div>
+      {/* The brand set large and ghosted behind the figure, as the reference
+          does. Decorative only — the bar already carries the real wordmark.
+          `.hero__visual` is the rounded card and does the clipping; the frame
+          inside it is what moves, so the card never leaves its grid slot and
+          opens a white gap. */}
+      <div className="hero__visual">
+        <div className="hero__frame">
+          <span className="hero__wordmark" aria-hidden>
+            {site.brandMark}
+          </span>
+          <img
+            className="hero__model"
+            src={heroModel}
+            alt=""
+            width={1199}
+            height={1312}
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
-
-        <figure className="hero__image" data-cursor data-cursor-text="Lab">
-          <span className="hero__layer hero__layer--cream" aria-hidden />
-          <span className="hero__layer hero__layer--orange" aria-hidden />
-          <span className="hero__layer hero__layer--glass" aria-hidden />
-          <div className="hero__image-inner">
-            <img
-              src={heroImg}
-              alt="Lyfe Health research-grade peptides — verified purity, sealed and third-party tested"
-            />
-          </div>
-          <span className="hero__image-tag hero__image-tag--tl">
-            Verified supply
-          </span>
-          <span className="hero__image-tag hero__image-tag--br">
-            Sealed & tested
-          </span>
-        </figure>
       </div>
     </section>
   );

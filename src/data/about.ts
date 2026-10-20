@@ -1,5 +1,5 @@
 import { aboutCopy, site, testimonials } from "./site";
-import heroImg from "../assets/about/hero.webp";
+import heroImg from "../assets/about/hero-lattice.webp";
 import operationsImg from "../assets/about/operations.webp";
 import complianceImg from "../assets/about/compliance.webp";
 
@@ -19,7 +19,7 @@ export const aboutHero = {
   lead: aboutCopy.paragraph,
   image: heroImg,
   imageAlt:
-    "Sealed unlabelled research vials on a dark laboratory bench under cool blue light.",
+    "Abstract network of connected nodes and filaments in cyan and violet on near-black.",
 };
 
 export const aboutStats = aboutCopy.stats;

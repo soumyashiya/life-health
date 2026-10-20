@@ -51,8 +51,8 @@ export function AboutPage() {
             alt=""
             loading="eager"
             decoding="async"
-            width={1600}
-            height={1067}
+            width={1344}
+            height={752}
           />
           <span className="about-page__hero-scrim" />
         </div>

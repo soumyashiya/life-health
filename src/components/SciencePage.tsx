@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,11 +13,16 @@ import {
   type ScienceSection,
 } from "../data/science";
 import { useRouter } from "../hooks/useRouter";
+import { getLenis } from "../hooks/useSmoothScroll";
+import { SplitText } from "./SplitText";
 
 type Props = { section?: ScienceSection };
 
 export function SciencePage({ section }: Props) {
   const root = useRef<HTMLDivElement | null>(null);
+  const railInner = useRef<HTMLDivElement | null>(null);
+  const marker = useRef<HTMLSpanElement | null>(null);
+  const progress = useRef<HTMLSpanElement | null>(null);
   const [current, setCurrent] = useState<ScienceSection>(
     section ?? "standards",
   );
@@ -25,22 +30,40 @@ export function SciencePage({ section }: Props) {
   const [openReport, setOpenReport] = useState<string | null>(null);
   const { navigate } = useRouter();
 
+  /**
+   * Scroll through Lenis rather than `scrollIntoView`. Native smooth scrolling
+   * fights the smooth-scroll instance that runs site-wide, and the offset has
+   * to clear the fixed header *and* this page's own sticky rail — otherwise
+   * the section heading lands underneath it.
+   */
+  const scrollToSection = useCallback((id: ScienceSection) => {
+    const el = document.getElementById(`science-${id}`);
+    if (!el) return;
+    const navH =
+      document.querySelector<HTMLElement>(".nav")?.offsetHeight ?? 0;
+    const railH =
+      document.querySelector<HTMLElement>(".science__rail")?.offsetHeight ?? 0;
+    const offset = -(navH + railH + 16);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lenis = getLenis();
+
+    if (lenis) {
+      lenis.scrollTo(el, { offset, duration: reduced ? 0 : 1.2 });
+      return;
+    }
+    window.scrollTo({
+      top: el.getBoundingClientRect().top + window.scrollY + offset,
+      behavior: reduced ? "auto" : "smooth",
+    });
+  }, []);
+
   /* ---- deep link: scroll to the requested section once laid out --------- */
   useEffect(() => {
     if (!section) return;
-    const el = document.getElementById(`science-${section}`);
-    if (!el) return;
     // One frame so the section has its final height before we measure it.
-    const id = window.requestAnimationFrame(() => {
-      el.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-        block: "start",
-      });
-    });
+    const id = window.requestAnimationFrame(() => scrollToSection(section));
     return () => window.cancelAnimationFrame(id);
-  }, [section]);
+  }, [section, scrollToSection]);
 
   /* ---- rail follows whichever section owns the viewport ----------------- */
   useEffect(() => {
@@ -64,23 +87,123 @@ export function SciencePage({ section }: Props) {
     return () => observer.disconnect();
   }, []);
 
-  /* ---- entrance reveals ------------------------------------------------- */
+  /* ---- rail: sliding marker follows the active section ------------------ */
+  useEffect(() => {
+    const strip = railInner.current;
+    const bar = marker.current;
+    if (!strip || !bar) return;
+
+    const index = scienceSections.findIndex((s) => s.id === current);
+    const link = strip.children[index] as HTMLElement | undefined;
+    if (!link) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    gsap.to(bar, {
+      x: link.offsetLeft,
+      width: link.offsetWidth,
+      duration: reduced ? 0 : 0.5,
+      ease: "power3.out",
+    });
+
+    // Keep the active item in view when the strip scrolls on narrow screens.
+    if (strip.scrollWidth > strip.clientWidth) {
+      strip.scrollTo({
+        left: link.offsetLeft - (strip.clientWidth - link.offsetWidth) / 2,
+        behavior: reduced ? "auto" : "smooth",
+      });
+    }
+  }, [current]);
+
+  /* ---- entrance + scroll-driven animation ------------------------------- */
   useEffect(() => {
     if (!root.current) return;
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const targets = root.current?.querySelectorAll<HTMLElement>("[data-sci-reveal]");
-      targets?.forEach((target) => {
-        gsap.from(target, {
-          y: 28,
-          opacity: 0,
-          duration: 0.8,
+      /* Hero headline rises character by character behind its own mask. */
+      gsap.fromTo(
+        ".science__hero-title .char",
+        { yPercent: 115 },
+        {
+          yPercent: 0,
+          duration: 1,
+          ease: "power4.out",
+          stagger: 0.012,
+          delay: 0.1,
+        },
+      );
+
+      /* The banner drifts slower than the page scrolling over it. */
+      gsap.to(".science__hero-media img", {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".science__hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      /* Reading progress across the rail. */
+      if (progress.current) {
+        gsap.fromTo(
+          progress.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.3,
+            },
+          },
+        );
+      }
+
+      /* Generic reveals, batched so a row of cards arrives together rather
+         than each firing its own trigger. */
+      ScrollTrigger.batch("[data-sci-reveal]", {
+        start: "top 88%",
+        onEnter: (batch) =>
+          gsap.from(batch, {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.08,
+            overwrite: true,
+          }),
+      });
+
+      /* The purity meters fill to their real reading as each row arrives.
+         Animate scaleX, never width: `width` is set inline as a percentage of
+         the lot's actual purity, and tweening it makes GSAP freeze that into a
+         pixel value — the bars then under-report the published figure. The
+         fill already has `transform-origin: left center` for this. */
+      gsap.utils.toArray<HTMLElement>(".report__meter-fill").forEach((bar) => {
+        gsap.from(bar, {
+          scaleX: 0,
+          duration: 1.2,
           ease: "power3.out",
-          scrollTrigger: { trigger: target, start: "top 88%" },
+          scrollTrigger: { trigger: bar, start: "top 92%" },
         });
       });
-    });
+
+      /* The method image counter-drifts against its column. */
+      gsap.to(".science__purity-media img", {
+        yPercent: -8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".science__purity",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }, root);
 
     return () => {
       mm.revert();
@@ -90,9 +213,7 @@ export function SciencePage({ section }: Props) {
 
   const go = (id: ScienceSection) => {
     navigate({ name: "science", section: id });
-    document
-      .getElementById(`science-${id}`)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToSection(id);
   };
 
   return (
@@ -115,8 +236,12 @@ export function SciencePage({ section }: Props) {
           <span className="eyebrow" data-sci-reveal>
             {scienceHero.eyebrow}
           </span>
-          <h1 className="h2 science__hero-title" data-sci-reveal>
-            {scienceHero.title}
+          {/* Split so each character can rise behind its own mask. */}
+          <h1
+            className="h2 science__hero-title"
+            aria-label={scienceHero.title}
+          >
+            <SplitText text={scienceHero.title} as="span" ariaLabel="" />
           </h1>
           <p className="lead science__hero-lead" data-sci-reveal>
             {scienceHero.lead}
@@ -135,7 +260,7 @@ export function SciencePage({ section }: Props) {
 
       {/* ------------------------------------------------- sticky section rail */}
       <nav className="science__rail" aria-label="On this page">
-        <div className="container science__rail-inner">
+        <div className="container science__rail-inner" ref={railInner}>
           {scienceSections.map((s) => (
             <button
               key={s.id}
@@ -148,7 +273,12 @@ export function SciencePage({ section }: Props) {
               {s.label}
             </button>
           ))}
+          {/* Slides between items rather than fading one underline out and
+              another in. Positioned from the active link's layout box. */}
+          <span className="science__rail-marker" ref={marker} aria-hidden />
         </div>
+        {/* Reading progress for the whole page. */}
+        <span className="science__rail-progress" ref={progress} aria-hidden />
       </nav>
 
       {/* ----------------------------------------------------- 01 standards */}

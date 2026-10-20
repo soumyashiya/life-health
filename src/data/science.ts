@@ -136,3 +136,21 @@ export const scienceStats = [
   { value: "Janoshik", label: "Independent analyst" },
   { value: "Per lot", label: "Batch-specific COA" },
 ];
+
+/* ------------------------------------------------------------ home teaser */
+
+/**
+ * Copy for the home-page "proof" section. The lot count and analyst name are
+ * read from `scienceReports`, so the sentence stays true as lots are added.
+ */
+export const proofCopy = {
+  mark: "Proof",
+  titleLead: "Every batch comes",
+  titleAccent: "with its paperwork.",
+  text: `${scienceReports.length} lots in the shop ship with a report from ${
+    scienceReports[0]?.lab ?? "an independent laboratory"
+  } — an outside lab, not ours. Open any product and you can read it before you buy: batch number, purity, fill volume and what's actually in the device.`,
+  cta: { label: "Read the reports", href: "#/science?s=reports" },
+  crumb: { parent: "Science", parentHref: "#/science", label: "Lab reports" },
+  disclaimer: "For laboratory research only. Not for human or veterinary use.",
+};

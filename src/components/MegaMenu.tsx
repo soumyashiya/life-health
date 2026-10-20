@@ -2,11 +2,12 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import clsx from "clsx";
 import {
-  researchPanel,
-  sciencePanel,
+  learnPanel,
   shopPanel,
+  supportPanel,
   utilityLinks,
   type MegaId,
+  type NavLink,
   type NavRow,
 } from "../data/navigation";
 
@@ -19,20 +20,25 @@ type Props = {
 
 type Panel = {
   rows: NavRow[];
+  /** A compact wrapped row of plain links under the thumbnails. */
+  groupLabel?: string;
+  groupLinks?: NavLink[];
   /** Omitted where each row is already its own destination. */
   allLink?: { label: string; href: string };
+  /** Support's rows *are* the utility links; repeating them would be silly. */
+  showUtility?: boolean;
 };
 
 const panels: Record<MegaId, Panel> = {
-  research: researchPanel,
   shop: shopPanel,
-  science: sciencePanel,
+  learn: learnPanel,
+  support: supportPanel,
 };
 
 const panelLabels: Record<MegaId, string> = {
-  research: "Research",
   shop: "Shop",
-  science: "Science",
+  learn: "Learn",
+  support: "Support",
 };
 
 /**
@@ -44,7 +50,7 @@ const panelLabels: Record<MegaId, string> = {
 export function MegaMenuPanel({ id, isActive, onNavigate }: Props) {
   const root = useRef<HTMLDivElement | null>(null);
   const firstRun = useRef(true);
-  const { rows, allLink } = panels[id];
+  const { rows, allLink, groupLabel, groupLinks, showUtility = true } = panels[id];
 
   useEffect(() => {
     const el = root.current;
@@ -149,6 +155,27 @@ export function MegaMenuPanel({ id, isActive, onNavigate }: Props) {
         ))}
       </ul>
 
+      {groupLinks && groupLinks.length > 0 && (
+        <div className="mega__group" data-mega-item>
+          {groupLabel && <span className="mega__group-label">{groupLabel}</span>}
+          <div className="mega__group-links">
+            {groupLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                data-cursor
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(link.href);
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
       {allLink && (
         <a
           className="mega__all"
@@ -173,24 +200,26 @@ export function MegaMenuPanel({ id, isActive, onNavigate }: Props) {
       )}
 
       {/* One hairline row, so support stays reachable without adding height. */}
-      <div
-        className={clsx("mega__utility", !allLink && "mega__utility--ruled")}
-        data-mega-item
-      >
-        {utilityLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            data-cursor
-            onClick={(e) => {
-              e.preventDefault();
-              onNavigate(link.href);
-            }}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+      {showUtility && (
+        <div
+          className={clsx("mega__utility", !allLink && "mega__utility--ruled")}
+          data-mega-item
+        >
+          {utilityLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              data-cursor
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(link.href);
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
