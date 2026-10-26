@@ -162,10 +162,20 @@ export function WhyChoose() {
 
           <ol className="whychoose__list">
             {whyUs.map((item) => (
+              /* The row is the reference's number · hairline · title line,
+                 with one short supporting fact under it. `note`, not
+                 `description`: the long form runs five lines in this column
+                 and buries the band — see `whyUs`. */
+              /* Redesigned 2026-10-20 (requested): a number badge, then the
+                 title over its note. The row used to reuse `.whychoose__line`
+                 — the heading's line class — so the heading's rise tween and
+                 a grid rule meant for the rows each landed on the other. */
               <li className="whychoose__row" key={item.number}>
                 <span className="whychoose__num">{item.number}</span>
-                <span className="whychoose__rule" aria-hidden />
-                <span className="whychoose__label">{item.title}</span>
+                <span className="whychoose__row-text">
+                  <span className="whychoose__label">{item.title}</span>
+                  <span className="whychoose__note">{item.note}</span>
+                </span>
               </li>
             ))}
           </ol>

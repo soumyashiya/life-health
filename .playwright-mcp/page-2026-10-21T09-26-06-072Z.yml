@@ -1,0 +1,347 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e4]:
+    - generic [ref=f2e5]: Booting interface
+    - generic [ref=f2e6]: 000 / 100
+    - generic [ref=f2e7]: 0%
+  - banner [ref=f2e11]:
+    - generic [ref=f2e12]:
+      - link "Lyfe Health" [ref=f2e13] [cursor=pointer]:
+        - /url: "#home"
+        - generic [ref=f2e22]: Lyfe
+        - generic [ref=f2e24]: Health
+      - navigation "Primary" [ref=f2e26]:
+        - list [ref=f2e27]:
+          - listitem [ref=f2e28]:
+            - button "Shop" [ref=f2e29] [cursor=pointer]
+          - listitem [ref=f2e31]:
+            - button "Learn" [ref=f2e32] [cursor=pointer]
+          - listitem [ref=f2e34]:
+            - button "Support" [ref=f2e35] [cursor=pointer]
+      - generic [ref=f2e38]:
+        - button "Sign in" [ref=f2e40] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f2e44] [cursor=pointer]
+  - text: · ·
+  - main [ref=f2e49]:
+    - generic [ref=f2e50]:
+      - generic [ref=f2e54]:
+        - generic [ref=f2e55]: About
+        - heading "Know exactly what you're buying." [level=1] [ref=f2e56]
+        - paragraph [ref=f2e57]: Every lot we sell is tested by an independent lab and listed with its own report — purity, batch number and the full breakdown, on the product page before you add it to the cart. Orders ship sealed and cold-packed with the paperwork inside, and a real person answers when you ask about one.
+        - generic [ref=f2e58]:
+          - link "Shop all products" [ref=f2e59] [cursor=pointer]:
+            - /url: "#/shop"
+          - link "See a lab report" [ref=f2e60] [cursor=pointer]:
+            - /url: "#/science?s=reports"
+        - list [ref=f2e61]:
+          - listitem [ref=f2e62]: Independent lab report on every lot
+          - listitem [ref=f2e65]: Sealed and cold-packed
+          - listitem [ref=f2e68]: Tracked delivery worldwide
+      - region "What you get with every order" [ref=f2e71]:
+        - list [ref=f2e72]:
+          - listitem [ref=f2e73]:
+            - generic [ref=f2e77]:
+              - generic [ref=f2e78]: Reorder with confidence
+              - generic [ref=f2e79]: One spec, one fill volume, every time.
+          - listitem [ref=f2e80]:
+            - generic [ref=f2e84]:
+              - generic [ref=f2e85]: Check the numbers first
+              - generic [ref=f2e86]: Purity and batch on every product page.
+          - listitem [ref=f2e87]:
+            - generic [ref=f2e91]:
+              - generic [ref=f2e92]: Cold-packed and tracked
+              - generic [ref=f2e93]: Sealed, with the batch paperwork inside.
+          - listitem [ref=f2e94]:
+            - generic [ref=f2e98]:
+              - generic [ref=f2e99]: A real person answers
+              - generic [ref=f2e100]: On WhatsApp, usually the same day.
+      - generic [ref=f2e101]:
+        - generic [ref=f2e102]:
+          - generic [ref=f2e103]:
+            - term [ref=f2e104]:
+              - text: "99"
+              - generic [ref=f2e105]: "%+"
+            - definition [ref=f2e106]: Verified purity
+          - generic [ref=f2e107]:
+            - term [ref=f2e108]:
+              - text: "1000"
+              - generic [ref=f2e109]: +
+            - definition [ref=f2e110]: Customers served
+          - generic [ref=f2e111]:
+            - term [ref=f2e112]:
+              - text: "24"
+              - generic [ref=f2e113]: h
+            - definition [ref=f2e114]: WhatsApp reply
+        - list [ref=f2e115]:
+          - listitem [ref=f2e116]:
+            - generic [ref=f2e117]: Range
+            - generic [ref=f2e118]: Pre-filled peptide lots
+          - listitem [ref=f2e119]:
+            - generic [ref=f2e120]: Testing
+            - generic [ref=f2e121]: Independent, published
+          - listitem [ref=f2e122]:
+            - generic [ref=f2e123]: Support
+            - generic [ref=f2e124]: Real people on WhatsApp
+      - generic [ref=f2e126]:
+        - figure [ref=f2e127]:
+          - img "An order being packed into an insulated mailer with a cold pack." [ref=f2e128]
+        - generic [ref=f2e129]:
+          - heading "A short catalogue, and a report behind every line of it." [level=2] [ref=f2e130]
+          - paragraph [ref=f2e131]: "We keep the range small on purpose: every lot is bought from a verified supplier, handled in controlled conditions, sampled, and sent to an independent lab before it goes on sale. The report comes back against that exact batch and we publish it as received — not a summary of it."
+          - paragraph [ref=f2e132]: So there is nothing on the site we cannot show you the paperwork for. If a lot has no report yet, it does not get listed.
+          - link "See how purity is verified" [ref=f2e133] [cursor=pointer]:
+            - /url: "#/science?s=purity"
+      - region [ref=f2e136]:
+        - generic [ref=f2e137]:
+          - generic [ref=f2e138]:
+            - generic [ref=f2e139]: How ordering works
+            - heading "Four steps, and you can check our working at every one." [level=2] [ref=f2e140]
+            - list [ref=f2e141]:
+              - listitem [ref=f2e142]:
+                - generic [ref=f2e143]: "01"
+                - generic [ref=f2e144]:
+                  - generic [ref=f2e145]: Browse the range
+                  - generic [ref=f2e146]: A short catalogue of pre-filled lots, each listed with its form, total content and price before you open it.
+              - listitem [ref=f2e147]:
+                - generic [ref=f2e148]: "02"
+                - generic [ref=f2e149]:
+                  - generic [ref=f2e150]: Read the report
+                  - generic [ref=f2e151]: Purity, batch number and the full compound breakdown sit on the product page. Read them before you add to cart.
+              - listitem [ref=f2e152]:
+                - generic [ref=f2e153]: "03"
+                - generic [ref=f2e154]:
+                  - generic [ref=f2e155]: Check out
+                  - generic [ref=f2e156]: Card or bank transfer, a confirmation email with your order number, and an account page you can reorder from.
+              - listitem [ref=f2e157]:
+                - generic [ref=f2e158]: "04"
+                - generic [ref=f2e159]:
+                  - generic [ref=f2e160]: Sealed, cold-packed, tracked
+                  - generic [ref=f2e161]: Your order ships in an insulated mailer with a cold pack and the batch paperwork inside, with a tracking number.
+            - list [ref=f2e162]:
+              - listitem [ref=f2e163]:
+                - link "Shipping policy" [ref=f2e164] [cursor=pointer]:
+                  - /url: "#/policies/shipping-policy"
+              - listitem [ref=f2e167]:
+                - link "Refund policy" [ref=f2e168] [cursor=pointer]:
+                  - /url: "#/policies/refund-policy"
+              - listitem [ref=f2e171]:
+                - link "Track an order" [ref=f2e172] [cursor=pointer]:
+                  - /url: "#/track"
+          - figure [ref=f2e175]:
+            - img "A packing bench with a plain shipping box, an insulated mailer, a cold pack and paper tape." [ref=f2e176]
+      - region [ref=f2e177]:
+        - generic [ref=f2e178]:
+          - generic [ref=f2e179]:
+            - generic [ref=f2e180]: Shop the range
+            - heading "Every lot, with its paperwork." [level=2] [ref=f2e181]
+            - paragraph [ref=f2e182]: Six pre-filled lots, one spec each. Prices are per unit and the purity badge is the lot's own published figure — never a rounded one.
+          - link "Shop all products" [ref=f2e183] [cursor=pointer]:
+            - /url: "#/shop"
+        - list [ref=f2e184]:
+          - listitem [ref=f2e185]:
+            - article [ref=f2e186]:
+              - generic [ref=f2e187]:
+                - link [aria-hidden] [ref=f2e188] [cursor=pointer]:
+                  - /url: "#/product/p1"
+                - generic [ref=f2e189]: 99.21% verified
+                - button "Add Retatrutide 20mg to cart" [ref=f2e192] [cursor=pointer]
+                - generic [ref=f2e196]: 20 mg total
+              - generic [ref=f2e198]:
+                - link "Retatrutide 20mg" [ref=f2e199] [cursor=pointer]:
+                  - /url: "#/product/p1"
+                - paragraph [ref=f2e200]: Pre-filled pen
+                - generic [ref=f2e201]:
+                  - generic [ref=f2e202]: Batch AR1721TRT · Janoshik Analytical
+                  - generic [ref=f2e203]: $350
+          - listitem [ref=f2e204]:
+            - article [ref=f2e205]:
+              - generic [ref=f2e206]:
+                - link [aria-hidden] [ref=f2e207] [cursor=pointer]:
+                  - /url: "#/product/p2"
+                - generic [ref=f2e208]: 98.6% verified
+                - button "Add Glow 70mg to cart" [ref=f2e211] [cursor=pointer]
+                - generic [ref=f2e215]: 2 × 35 mg pens
+              - generic [ref=f2e217]:
+                - link "Glow 70mg" [ref=f2e218] [cursor=pointer]:
+                  - /url: "#/product/p2"
+                - paragraph [ref=f2e219]: Pre-filled pens
+                - generic [ref=f2e220]:
+                  - generic [ref=f2e221]: Batch GL0621XSA · Janoshik Analytical
+                  - generic [ref=f2e222]: $329
+          - listitem [ref=f2e223]:
+            - article [ref=f2e224]:
+              - generic [ref=f2e225]:
+                - link [aria-hidden] [ref=f2e226] [cursor=pointer]:
+                  - /url: "#/product/p4"
+                - generic [ref=f2e227]: 99.85% verified
+                - button "Add Tirzepatide 40mg to cart" [ref=f2e230] [cursor=pointer]
+                - generic [ref=f2e234]: 40 mg total
+              - generic [ref=f2e236]:
+                - link "Tirzepatide 40mg" [ref=f2e237] [cursor=pointer]:
+                  - /url: "#/product/p4"
+                - paragraph [ref=f2e238]: Pre-filled pen
+                - generic [ref=f2e239]:
+                  - generic [ref=f2e240]: Batch TR786PAOS · Janoshik Analytical
+                  - generic [ref=f2e241]: $399
+          - listitem [ref=f2e242]:
+            - article [ref=f2e243]:
+              - generic [ref=f2e244]:
+                - link [aria-hidden] [ref=f2e245] [cursor=pointer]:
+                  - /url: "#/product/p5"
+                - button "Add NAD+ 1000mg to cart" [ref=f2e246] [cursor=pointer]
+                - generic [ref=f2e250]: 2 × 500 mg pens
+              - generic [ref=f2e252]:
+                - link "NAD+ 1000mg" [ref=f2e253] [cursor=pointer]:
+                  - /url: "#/product/p5"
+                - paragraph [ref=f2e254]: Pre-filled pens
+                - generic [ref=f2e255]:
+                  - generic [ref=f2e256]: Research use only
+                  - generic [ref=f2e257]: $249
+        - paragraph [ref=f2e258]: Produced for laboratory research only. Not for human or veterinary consumption.
+      - list [ref=f2e260]:
+        - listitem [ref=f2e261]:
+          - blockquote [ref=f2e262]: “WhatsApp reply within the hour. That alone changed how we plan ordering for our team.”
+          - generic [ref=f2e264]:
+            - generic [ref=f2e265]: Rohan Natarajan
+            - generic [ref=f2e266]: Co-founder, Ember Research
+        - listitem [ref=f2e267]:
+          - blockquote [ref=f2e268]: “Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.”
+          - generic [ref=f2e270]:
+            - generic [ref=f2e271]: Marco Ruiz
+            - generic [ref=f2e272]: Procurement Lead, Vela Biotech
+      - generic [ref=f2e274]:
+        - figure [ref=f2e275]:
+          - img "Sealed parcels packed and ready for dispatch." [ref=f2e276]
+        - generic [ref=f2e277]:
+          - heading "Research use only" [level=2] [ref=f2e278]
+          - list [ref=f2e279]:
+            - listitem [ref=f2e280]: Produced for laboratory research only. Not for human or veterinary consumption.
+            - listitem [ref=f2e281]: These products are not intended to diagnose, treat, cure, or prevent any disease.
+            - listitem [ref=f2e282]: Supplied in sealed, fixed-volume formats intended for laboratory analysis.
+      - generic [ref=f2e284]:
+        - generic [ref=f2e285]:
+          - heading "Talk to us before you order" [level=2] [ref=f2e286]
+          - paragraph [ref=f2e287]: Questions about a lot, its report, or how an order ships — message us and a real person answers, usually the same day.
+        - generic [ref=f2e288]:
+          - link "hello@lyfehealth.com" [ref=f2e289] [cursor=pointer]:
+            - /url: mailto:hello@lyfehealth.com
+          - list [ref=f2e290]:
+            - listitem [ref=f2e291]:
+              - link "WhatsApp" [ref=f2e292] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f2e293]:
+              - link "Instagram" [ref=f2e294] [cursor=pointer]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f2e295]:
+              - link "Email" [ref=f2e296] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f2e298]:
+        - img "A plain sealed parcel waiting on a sunlit doorstep." [ref=f2e299]
+        - generic [ref=f2e300]:
+          - heading "Ready to order?" [level=2] [ref=f2e301]
+          - paragraph [ref=f2e302]: Pick a lot, read its report, and it ships sealed and cold-packed with the paperwork inside.
+          - generic [ref=f2e303]:
+            - link "Shop all products" [ref=f2e304] [cursor=pointer]:
+              - /url: "#/shop"
+            - link "Track an order" [ref=f2e305] [cursor=pointer]:
+              - /url: "#/track"
+  - contentinfo [ref=f2e306]:
+    - generic [ref=f2e307]:
+      - generic [ref=f2e308]:
+        - generic [ref=f2e309]:
+          - generic [ref=f2e310]:
+            - generic [ref=f2e311]: Lyfe
+            - generic [ref=f2e312]: Health
+          - paragraph [ref=f2e313]: Research-grade peptide supply
+          - generic [ref=f2e314]:
+            - heading "Stay updated" [level=4] [ref=f2e315]
+            - generic [ref=f2e316]:
+              - textbox "Email address" [ref=f2e317]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f2e318] [cursor=pointer]
+            - paragraph [ref=f2e319]: Research updates and restock alerts. No spam.
+        - generic [ref=f2e320]:
+          - heading "Quick Links" [level=4] [ref=f2e321]
+          - list [ref=f2e322]:
+            - listitem [ref=f2e323]:
+              - link "Shop" [ref=f2e324] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f2e325]:
+              - link "Home" [ref=f2e326] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f2e327]:
+              - link "About" [ref=f2e328] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f2e329]:
+              - link "Products" [ref=f2e330] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f2e331]:
+              - link "Why Us" [ref=f2e332] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f2e333]:
+              - link "FAQ" [ref=f2e334] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f2e335]:
+              - link "Contact" [ref=f2e336] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f2e337]:
+              - link "Track order" [ref=f2e338] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f2e339]:
+          - heading "Contact" [level=4] [ref=f2e340]
+          - list [ref=f2e341]:
+            - listitem [ref=f2e342]:
+              - link "hello@lyfehealth.com" [ref=f2e343] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=f2e344]:
+              - link "+1 000 000 0000" [ref=f2e345] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f2e346]:
+              - generic [ref=f2e347]: Global research supply
+        - generic [ref=f2e348]:
+          - heading "Policies" [level=4] [ref=f2e349]
+          - list [ref=f2e350]:
+            - listitem [ref=f2e351]:
+              - link "Press Release" [ref=f2e352] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f2e353]:
+              - link "Refund Policy" [ref=f2e354] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f2e355]:
+              - link "Shipping Policy" [ref=f2e356] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f2e357]:
+              - link "Privacy Policy" [ref=f2e358] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f2e359]:
+              - link "Terms Of Service" [ref=f2e360] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f2e361]:
+          - heading "Follow" [level=4] [ref=f2e362]
+          - list [ref=f2e363]:
+            - listitem [ref=f2e364]:
+              - link "WhatsApp" [ref=f2e365] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f2e366]:
+              - link "Instagram" [ref=f2e367] [cursor=pointer]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f2e368]:
+              - link "Email" [ref=f2e369] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f2e371]:
+        - generic [ref=f2e372]: © 2026 Lyfe Health
+        - generic [ref=f2e373]: Global research supply
+      - paragraph [ref=f2e374]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f2e375]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

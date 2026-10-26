@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   purityMethod,
   scienceHero,
+  sciencePromises,
   scienceReports,
   scienceSections,
   scienceStats,
@@ -12,11 +13,26 @@ import {
   teamPanel,
   type ScienceSection,
 } from "../data/science";
+import { useCart } from "../hooks/useCart";
 import { useRouter } from "../hooks/useRouter";
 import { getLenis } from "../hooks/useSmoothScroll";
 import { SplitText } from "./SplitText";
 
 type Props = { section?: ScienceSection };
+
+const formatUsd = (n: number) =>
+  n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+/* One stroke weight across the strip, the header controls' convention. The
+   first and second differ from the About page's set — this page's promise is
+   the paperwork, so the lab flask leads — but the markup and CSS are shared
+   with `.about-page__props` deliberately: one strip design, not two. */
+const PROP_ICONS: Record<string, ReactNode> = {
+  doc: <path d="M7 3h7l4 4v14H7V3Zm7 0v4h4M10 12h5M10 16h5" />,
+  lab: <path d="M10 3h4M11 3v6L5.5 18A2 2 0 0 0 7.2 21h9.6a2 2 0 0 0 1.7-3L13 9V3M8.5 14h7" />,
+  cold: <path d="M12 2v20M4 6l16 12M20 6 4 18M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5" />,
+  chat: <path d="M4 5h16v11H9l-5 4V5Zm4 5h8M8 13h5" />,
+};
 
 export function SciencePage({ section }: Props) {
   const root = useRef<HTMLDivElement | null>(null);
@@ -28,7 +44,20 @@ export function SciencePage({ section }: Props) {
   );
   /** Only one certificate open at a time — the scans are full-page images. */
   const [openReport, setOpenReport] = useState<string | null>(null);
+  /** Which row's Add to cart is showing its confirmation, as `ProductRange`. */
+  const [addedId, setAddedId] = useState<string | null>(null);
   const { navigate } = useRouter();
+  const { addItem, open: openCart } = useCart();
+
+  const addToCart = (id: string) => {
+    addItem(id, 1);
+    setAddedId(id);
+    openCart();
+    window.setTimeout(
+      () => setAddedId((current) => (current === id ? null : current)),
+      1400,
+    );
+  };
 
   /**
    * Scroll through Lenis rather than `scrollIntoView`. Native smooth scrolling
@@ -247,6 +276,43 @@ export function SciencePage({ section }: Props) {
             {scienceHero.lead}
           </p>
 
+          {/* Shares the About hero's pill, deliberately — one control design
+              across both pages rather than a second set of rules. */}
+          <div className="science__hero-actions" data-sci-reveal>
+            {scienceHero.ctas.map((cta) => (
+              <a
+                key={cta.href}
+                className={clsx(
+                  "about-page__pill",
+                  cta.primary && "about-page__pill--solid",
+                )}
+                href={cta.href}
+                data-cursor
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (cta.href.startsWith("#/science")) {
+                    go("reports");
+                    return;
+                  }
+                  navigate({ name: "shop" });
+                }}
+              >
+                {cta.label}
+              </a>
+            ))}
+          </div>
+
+          <ul className="science__hero-marks" data-sci-reveal>
+            {scienceHero.marks.map((mark) => (
+              <li key={mark}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+                  <path d="M5 12.5 10 17.5 19 7.5" />
+                </svg>
+                {mark}
+              </li>
+            ))}
+          </ul>
+
           <dl className="science__stats" data-sci-reveal>
             {scienceStats.map((stat) => (
               <div key={stat.label}>
@@ -257,6 +323,32 @@ export function SciencePage({ section }: Props) {
           </dl>
         </div>
       </header>
+
+      {/* ------------------------------------------------- promise strip */}
+      {/* Shares the About page's strip — same classes, same `whyUs` source, so
+          the two surfaces cannot drift and this cost no new CSS. It sits above
+          the rail because it is page furniture, not one of the three
+          sections. */}
+      <section
+        className="about-page__props-band"
+        aria-label="What you get with every order"
+      >
+        <ul className="container about-page__props" data-sci-reveal>
+          {sciencePromises.map((prop) => (
+            <li className="about-page__prop" key={prop.title}>
+              <span className="about-page__prop-icon" aria-hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  {PROP_ICONS[prop.icon]}
+                </svg>
+              </span>
+              <span className="about-page__prop-text">
+                <span className="about-page__prop-title">{prop.title}</span>
+                <span className="about-page__prop-note">{prop.note}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {/* ------------------------------------------------- sticky section rail */}
       <nav className="science__rail" aria-label="On this page">
@@ -291,8 +383,8 @@ export function SciencePage({ section }: Props) {
             Our standards
           </h2>
           <p className="lead science__block-lead" data-sci-reveal>
-            Quality is the work. These are the controls that sit behind every kit
-            we ship.
+            Four controls sit behind every order that leaves us. This is what
+            "verified" means when you see it on a product page.
           </p>
         </div>
 
@@ -369,8 +461,9 @@ export function SciencePage({ section }: Props) {
             Lab reports
           </h2>
           <p className="lead science__block-lead" data-sci-reveal>
-            The published analysis for every lot currently in the catalogue.
-            Open a row to read the certificate exactly as the lab issued it.
+            Every lot in the shop, with its published analysis and its price.
+            Open a row to read the certificate exactly as the lab issued it, or
+            add the lot straight to your cart.
           </p>
         </div>
 
@@ -380,67 +473,93 @@ export function SciencePage({ section }: Props) {
             return (
               <li key={report.productId} data-sci-reveal>
                 <article className={clsx("report", isOpen && "is-open")}>
-                  <h3 className="report__heading">
-                    <button
-                      type="button"
-                      className="report__summary"
-                      aria-expanded={isOpen}
-                      aria-controls={`report-${report.productId}`}
-                      data-cursor
-                      onClick={() =>
-                        setOpenReport(isOpen ? null : report.productId)
-                      }
-                    >
-                      <span className="report__thumb" aria-hidden>
-                        <img
-                          src={report.image}
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          width={320}
-                          height={320}
-                        />
-                      </span>
-
-                      <span className="report__id">
-                        <span className="report__title">{report.title}</span>
-                        <span className="report__batch mono">
-                          Lot {report.batchNumber} · {report.fillVolume}
-                        </span>
-                      </span>
-
-                      {/* Meter runs the true 0–100 scale: every lot reading
-                          near-full is the honest picture, and the exact
-                          figure is printed beside it either way. */}
-                      <span className="report__purity">
-                        <span className="report__purity-top">
-                          <span className="report__purity-label mono">
-                            HPLC purity
-                          </span>
-                          <span className="report__purity-figure">
-                            {report.purity}
-                          </span>
-                        </span>
-                        <span className="report__meter">
-                          <span
-                            className="report__meter-fill"
-                            style={{
-                              width: Number.isFinite(report.purityValue)
-                                ? `${Math.min(report.purityValue, 100)}%`
-                                : "0%",
-                            }}
+                  {/* The buy controls sit OUTSIDE the expand button — a button
+                      cannot nest inside a button — so the row is a flex pair:
+                      the whole left side expands the certificate, the right
+                      side buys the lot. */}
+                  <div className="report__row">
+                    <h3 className="report__heading">
+                      <button
+                        type="button"
+                        className="report__summary"
+                        aria-expanded={isOpen}
+                        aria-controls={`report-${report.productId}`}
+                        data-cursor
+                        onClick={() =>
+                          setOpenReport(isOpen ? null : report.productId)
+                        }
+                      >
+                        <span className="report__thumb" aria-hidden>
+                          <img
+                            src={report.image}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            width={320}
+                            height={320}
                           />
                         </span>
-                      </span>
 
-                      <span className="report__toggle" aria-hidden>
-                        <span className="report__toggle-text mono">
-                          {isOpen ? "Close" : "Report"}
+                        <span className="report__id">
+                          <span className="report__title">{report.title}</span>
+                          {report.shelf && (
+                            <span className="report__shelf">{report.shelf}</span>
+                          )}
+                          <span className="report__batch mono">
+                            Lot {report.batchNumber} · {report.fillVolume}
+                          </span>
                         </span>
-                        <span className="report__chevron" />
+
+                        {/* Meter runs the true 0–100 scale: every lot reading
+                            near-full is the honest picture, and the exact
+                            figure is printed beside it either way. */}
+                        <span className="report__purity">
+                          <span className="report__purity-top">
+                            <span className="report__purity-label mono">
+                              HPLC purity
+                            </span>
+                            <span className="report__purity-figure">
+                              {report.purity}
+                            </span>
+                          </span>
+                          <span className="report__meter">
+                            <span
+                              className="report__meter-fill"
+                              style={{
+                                width: Number.isFinite(report.purityValue)
+                                  ? `${Math.min(report.purityValue, 100)}%`
+                                  : "0%",
+                              }}
+                            />
+                          </span>
+                        </span>
+
+                        <span className="report__toggle" aria-hidden>
+                          <span className="report__toggle-text mono">
+                            {isOpen ? "Close" : "Report"}
+                          </span>
+                          <span className="report__chevron" />
+                        </span>
+                      </button>
+                    </h3>
+
+                    <div className="report__buy">
+                      <span className="report__price">
+                        {formatUsd(report.price)}
                       </span>
-                    </button>
-                  </h3>
+                      <button
+                        type="button"
+                        className={clsx(
+                          "report__add",
+                          addedId === report.productId && "is-added",
+                        )}
+                        data-cursor
+                        onClick={() => addToCart(report.productId)}
+                      >
+                        {addedId === report.productId ? "Added" : "Add to cart"}
+                      </button>
+                    </div>
+                  </div>
 
                   <div
                     className="report__detail"
@@ -509,6 +628,15 @@ export function SciencePage({ section }: Props) {
           })}
         </ul>
 
+        {/* The band prices and sells now, so it carries the lot's own
+            research-use-only line, printed directly under the only prices on
+            the page — same rule as `rangeCopy.note` and the About shop band. */}
+        {scienceReports[0] && (
+          <p className="science__shop-note" data-sci-reveal>
+            {scienceReports[0].note}
+          </p>
+        )}
+
         <aside className="science__closing" data-sci-reveal>
           <img
             src={teamPanel.image}
@@ -527,16 +655,22 @@ export function SciencePage({ section }: Props) {
               we have not published, ask and we will pull it from the retained
               sample record.
             </p>
+            {/* The card is a burgundy field now, so the shared `.btn` (which
+                fills burgundy) would have been invisible on it. These are the
+                About closing band's pills — light on the fill, ghost beside
+                it — the same controls, one design. */}
             <div className="science__closing-actions">
               <button
                 type="button"
-                className="btn"
+                className="about-page__pill about-page__pill--light"
+                data-cursor
                 onClick={() => navigate({ name: "shop" })}
               >
-                Browse the catalogue
+                Shop all products
               </button>
               <a
-                className="btn btn-ghost"
+                className="about-page__pill about-page__pill--ghost"
+                data-cursor
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();

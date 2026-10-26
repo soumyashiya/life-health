@@ -163,6 +163,14 @@ export function Testimonials() {
       <div className="container stories__head">
         <span className="eyebrow stories__eyebrow">Reviews</span>
         <h2 className="stories__title">Stories from our customers</h2>
+        {/* The reference's own line under this heading, 2026-10-21. It says
+            what the clips actually show — what arrived, how it was packed, how
+            fast someone replied — and names the hover gesture, which is
+            otherwise undiscoverable. */}
+        <p className="stories__lead">
+          Customers on what arrived, how it was packed, and how fast someone
+          replied. Hover a card to play.
+        </p>
       </div>
 
       <div className="stories__rail" ref={trackRef}>

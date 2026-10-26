@@ -138,6 +138,85 @@
   text-overflow: ellipsis;
 }
 
+/* ---- the marquee (2026-10-21) ----
+   The reference scrolls four claims past rather than holding one sentence.
+   The list is rendered twice and the track travels **-50%**, which is what
+   makes the loop seamless: at -50% copy 2 sits exactly where copy 1 started.
+   Change the number of copies and you must change that percentage — the same
+   contract `.about__trust` carries. */
+.announce__viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  /* Feathered at both ends so a claim does not cut off mid-letter against the
+     close button. */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 3rem,
+    #000 calc(100% - 3rem),
+    transparent 100%
+  );
+}
+
+.announce__track {
+  display: flex;
+  width: max-content;
+  animation: announce-scroll 38s linear infinite;
+}
+
+.announce__list {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.announce__list li {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* The separator sits on the item, not between lists, so the seam between the
+   two copies carries one too. */
+.announce__list li::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 4px;
+  height: 4px;
+  margin-right: 1.6rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.announce:hover .announce__track {
+  animation-play-state: paused;
+}
+
+@keyframes announce-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announce__track {
+    animation: none;
+  }
+}
+
 /* One of the two lengths is always hidden — see `announcementCopy`. */
 .announce__short {
   display: none;
@@ -9322,7 +9401,6 @@ textarea {
   padding-top: clamp(8rem, 16vh, 12rem);
   padding-bottom: clamp(3rem, 6vh, 5rem);
   overflow: hidden;
-  border-bottom: 1px solid var(--color-outline-soft);
 }
 
 .science__hero-media {
@@ -9366,9 +9444,22 @@ textarea {
   z-index: 1;
 }
 
+/* ⚠ Hard-coded white, 2026-10-21. Both of these were inheriting the LIGHT
+   theme's ink over a dark scrim — `#171717` on `rgba(8,8,8,.86)` — so the
+   headline had been all but invisible since the inversion. Exactly the bug the
+   About hero carried until 2026-10-20: type over photography has no theme. */
+/* 15ch, down from 18 (2026-10-21): the banner now holds the carton in the
+   right half and at 18ch the headline's first line ran onto its printed face —
+   white type over white artwork. The measure is in `ch`, so it tracks the
+   display size at every width. */
 .science__hero-title {
   margin: 1.1rem 0 1.25rem;
-  max-width: 18ch;
+  max-width: 15ch;
+  color: #ffffff;
+}
+
+.science__hero .eyebrow {
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* The characters start below the baseline and rise, so each word clips them
@@ -9378,50 +9469,116 @@ textarea {
   padding-bottom: 0.08em;
 }
 
+/* 46ch, not 52 (2026-10-21, with the new banner): the photograph has the
+   carton held centre-frame now, and at the old measure the lead ran across the
+   printed face and lost contrast mid-sentence. Moving the type is the fix —
+   the page-banner rule rules out dimming the photograph. Re-check this if the
+   banner image changes. */
 .science__hero-lead {
-  max-width: 52ch;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.88);
 }
 
+/* Three cards on the banner rather than a hairline row (2026-10-21). They sit
+   over photography, so they carry their own translucent plate and hard-coded
+   white type — the rule the About hero follows. */
 .science__stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem 4rem;
-  margin: 2.75rem 0 0;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--color-outline-soft);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.2vw, 0.9rem);
+  margin: 2rem 0 0;
+  max-width: 40rem;
+  padding: 0;
+  border: 0;
 }
 
 .science__stats div {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  padding: 1rem 1.1rem 1.1rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .science__stat-value {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: #ffffff;
 }
 
 .science__stat-label {
   margin: 0;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   letter-spacing: 0.18em;
-  color: var(--color-fg-muted);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ---- hero actions + marks (shared design with the About hero) ---- */
+.science__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.science__hero-actions .about-page__pill {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+.science__hero-actions .about-page__pill--solid {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.science__hero-marks {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.75rem;
+}
+
+.science__hero-marks li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.science__hero-marks svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  color: var(--brand-rose);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ---- sticky section rail ---- */
+/* ⚠ The plate was `rgba(8,8,8,.9)` until 2026-10-21 — a dark-theme leftover
+   that drew a black bar across a white page, the same class of bug as the
+   About hero's inherited ink. It takes the header's own soft-lavender
+   translucent plate now, so the two read as one piece of chrome. */
 .science__rail {
   position: sticky;
   /* Clears the fixed header without guessing: matches its scrolled height. */
   top: 58px;
   z-index: 10;
-  background: rgba(8, 8, 8, 0.9);
+  background: rgba(250, 248, 252, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--color-outline-soft);
+  border-bottom: 1px solid var(--brand-border);
 }
 
 .science__rail-inner {
@@ -9503,8 +9660,10 @@ textarea {
 }
 
 /* ---- shared block head ---- */
+/* ⚠ Was `--color-outline-soft` — a white-alpha token, i.e. no rule at all on a
+   white page. Same class of dark-theme leftover as the rail's black plate. */
 .science__block + .science__block {
-  border-top: 1px solid var(--color-outline-soft);
+  border-top: 1px solid var(--brand-border);
 }
 
 .science__block-head {
@@ -9523,34 +9682,44 @@ textarea {
 }
 
 /* ---- 01 standards ---- */
+/* Rounded cards with a filled number badge, 2026-10-21 — the storefront
+   language the About page's steps and promise strip use. It was a hairline
+   4-up grid, which read as a spec sheet. */
 .science__standards {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--color-outline-soft);
-  border: 1px solid var(--color-outline-soft);
+  gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
 .science__standard {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding: 2rem 1.6rem 2.25rem;
-  background: var(--color-bg);
-  transition: background 0.4s var(--ease-out);
+  padding: clamp(1.4rem, 2.2vw, 1.85rem);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: var(--brand-sand);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
 
 .science__standard:hover {
-  background: var(--color-bg-elev);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px -32px rgba(61, 12, 20, 0.5);
 }
 
 .science__standard-num {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
   font-size: 0.6875rem;
-  letter-spacing: 0.2em;
-  color: var(--color-accent);
+  letter-spacing: 0.06em;
 }
 
 .science__standard-title {
@@ -9580,7 +9749,9 @@ textarea {
 .science__purity-media {
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--color-outline-soft);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -44px rgba(61, 12, 20, 0.5);
   aspect-ratio: 4 / 3;
 }
 
@@ -9599,20 +9770,26 @@ textarea {
 .science__method-step {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 1.25rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--color-outline-soft);
+  gap: 1.1rem;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--brand-border);
 }
 
 .science__method-step:first-child {
   padding-top: 0;
 }
 
+/* Filled disc, matching the About page's ordering steps. */
 .science__method-index {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
   font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  color: var(--color-fg-muted);
-  padding-top: 0.25rem;
+  letter-spacing: 0.06em;
 }
 
 .science__method-label {
@@ -9633,9 +9810,10 @@ textarea {
 
 .science__doc {
   margin-top: clamp(2rem, 4vw, 3rem);
-  padding: 1.75rem;
-  border: 1px solid var(--color-outline-soft);
-  background: var(--color-bg-elev);
+  padding: clamp(1.4rem, 2.4vw, 1.9rem);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: var(--brand-sand);
 }
 
 .science__doc-title {
@@ -9655,10 +9833,12 @@ textarea {
 }
 
 .science__doc-list li {
-  padding: 0.5rem 0.9rem;
+  padding: 0.55rem 1rem;
   font-size: 0.8125rem;
+  font-weight: 500;
   color: var(--color-fg);
-  border: 1px solid var(--color-outline);
+  background: #ffffff;
+  border: 1px solid var(--brand-border);
   border-radius: 999px;
 }
 
@@ -9672,22 +9852,40 @@ textarea {
   gap: 0.6rem;
 }
 
+/* Rounded white cards with a lift, 2026-10-21 — the product-card language,
+   since each row is a lot you can buy. The data inside is untouched. */
 .report {
-  border: 1px solid var(--color-outline-soft);
-  background: var(--color-bg-elev);
-  transition: border-color 0.4s var(--ease-out);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
 
 .report:hover,
 .report.is-open {
-  border-color: var(--color-outline);
+  border-color: var(--brand-primary);
+  box-shadow: 0 20px 44px -34px rgba(61, 12, 20, 0.55);
 }
 
 .report.is-open {
-  background: var(--color-bg);
+  background: var(--brand-sand);
+}
+
+/* The row is a flex pair: the left side expands the certificate, the right
+   side buys the lot. They cannot be one control — a button may not nest inside
+   a button — which is why the buy block is a sibling of the heading rather
+   than a fourth column of `.report__summary`. */
+.report__row {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  padding-right: 1.25rem;
 }
 
 .report__heading {
+  flex: 1 1 auto;
+  min-width: 0;
   margin: 0;
   font: inherit;
   text-transform: none;
@@ -9713,7 +9911,7 @@ textarea {
   flex: 0 0 auto;
   overflow: hidden;
   border-radius: 0.6rem;
-  border: 1px solid var(--color-outline-soft);
+  border: 1px solid var(--brand-border);
 }
 
 .report__thumb img {
@@ -9740,10 +9938,60 @@ textarea {
   line-height: 1.25;
 }
 
+/* The shelf line a buyer reads off a card — form and total content, from the
+   lot's own specs. */
+.report__shelf {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-fg-dim);
+}
+
 .report__batch {
   font-size: 0.625rem;
   letter-spacing: 0.14em;
   color: var(--color-fg-muted);
+}
+
+/* ---- buy ---- */
+.report__buy {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
+}
+
+.report__price {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-fg);
+  white-space: nowrap;
+}
+
+/* The band's only filled control, same language as `.range__add`. */
+.report__add {
+  flex: 0 0 auto;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid var(--brand-primary);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
+}
+
+.report__add:hover,
+.report__add:focus-visible,
+.report__add.is-added {
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.report__add.is-added {
+  border-color: var(--brand-primary);
 }
 
 /* ---- purity meter ---- */
@@ -9774,18 +10022,23 @@ textarea {
   color: var(--color-accent);
 }
 
+/* ⚠ The track was `rgba(255,255,255,.09)` until 2026-10-21 — a dark-theme
+   leftover, i.e. an invisible track on a white card, so a 99% bar and a 100%
+   bar looked identical. It takes the page's hairline now. */
 .report__meter {
   position: relative;
   display: block;
   height: 3px;
-  background: rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  background: var(--brand-border);
   overflow: hidden;
 }
 
 .report__meter-fill {
   position: absolute;
   inset: 0 auto 0 0;
-  background: var(--color-accent);
+  border-radius: 999px;
+  background: var(--brand-primary);
   transform-origin: left center;
 }
 
@@ -9864,7 +10117,7 @@ textarea {
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
   gap: clamp(1.5rem, 3vw, 2.5rem);
   padding: 0.5rem 1.25rem 1.5rem;
-  border-top: 1px solid var(--color-outline-soft);
+  border-top: 1px solid var(--brand-border);
   margin-top: 0.25rem;
 }
 
@@ -9889,7 +10142,7 @@ textarea {
 .report__table td {
   text-align: left;
   padding: 0.6rem 0.75rem 0.6rem 0;
-  border-bottom: 1px solid var(--color-outline-soft);
+  border-bottom: 1px solid var(--brand-border);
   font-weight: 400;
 }
 
@@ -9942,14 +10195,23 @@ textarea {
   max-height: 30rem;
   overflow-y: auto;
   overscroll-behavior: contain;
-  border: 1px solid var(--color-outline-soft);
-  background: var(--color-bg-elev);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
 }
 
 .report__scan-frame img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* The research-use-only line, printed under the only prices on the page. */
+.science__shop-note {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-fg-muted);
 }
 
 /* ---- responsive ---- */
@@ -9959,8 +10221,24 @@ textarea {
     row-gap: 0.9rem;
   }
 
+  /* The price and the cart button take their own full-width row rather than
+     squeezing beside a two-line title. */
+  .report__row {
+    flex-wrap: wrap;
+    padding-right: 0;
+  }
+
+  .report__buy {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 1.25rem 1.1rem;
+  }
+
+  /* Capped: a meter running the full width of a tablet row reads as a loading
+     bar rather than as a reading against a scale. */
   .report__purity {
     grid-column: 2 / -1;
+    max-width: 22rem;
   }
 
   .report__detail-inner {
@@ -9995,7 +10273,7 @@ textarea {
     display: grid;
     gap: 0.15rem;
     padding: 0.7rem 0;
-    border-bottom: 1px solid var(--color-outline-soft);
+    border-bottom: 1px solid var(--brand-border);
   }
 
   .report__table tbody th,
@@ -10016,44 +10294,52 @@ textarea {
 }
 
 /* ---- closing panel ---- */
+/* The About page's closing card, same construction: a burgundy field with the
+   photograph bleeding to the card's edge. The photo is first in the DOM so it
+   reads before the copy; `order` puts it right on screen. */
 .science__closing {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(1.5rem, 3vw, 3rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 0;
+  align-items: stretch;
   margin-top: clamp(2.5rem, 5vw, 4rem);
-  padding: 1.15rem;
-  border: 1px solid var(--color-outline-soft);
-  background: var(--color-bg-elev);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
 }
 
 .science__closing img {
+  order: 1;
   width: 100%;
   height: 100%;
-  max-height: 18rem;
+  min-height: 16rem;
   object-fit: cover;
 }
 
 .science__closing-body {
-  padding: 0.5rem 1rem 0.75rem 0;
+  padding: clamp(1.75rem, 3.5vw, 3rem);
 }
 
 .science__closing-title {
   font-family: var(--font-body);
   font-size: clamp(1.15rem, 2vw, 1.5rem);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
   line-height: 1.3;
   margin: 0 0 0.75rem;
+  color: var(--color-on-accent);
 }
 
 .science__closing-text {
   font-size: 0.9375rem;
   line-height: 1.65;
-  color: var(--color-fg-dim);
+  color: rgba(255, 255, 255, 0.82);
   margin-bottom: 1.5rem;
-  max-width: 48ch;
+  max-width: 44ch;
 }
 
 .science__closing-actions {
@@ -10073,12 +10359,17 @@ textarea {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* Stacked, the photograph leads — the same move the About closing card
+     makes, and `order` has to be unset or it would sit below the copy. */
   .science__closing img {
-    max-height: 14rem;
+    order: -1;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 16 / 9;
   }
 
   .science__closing-body {
-    padding: 0 0.5rem 0.5rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
   }
 
   .science__rail {
@@ -10097,8 +10388,36 @@ textarea {
     justify-self: end;
   }
 
+  /* Three glass cards do not fit one phone row. */
   .science__stats {
-    gap: 1.75rem 2.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  /* The banner's type runs the full column here, so the directional scrim no
+     longer covers it — same vertical ramp as the About hero. */
+  /* A phone-shaped band crops a landscape banner HORIZONTALLY, so x is the
+     only axis that does anything here. Biased left, the carton moves out from
+     under the lead's last line — which is white type on the pack's white
+     printed face — and still keeps two thirds of it in frame. */
+  .science__hero-media img {
+    object-position: 40% center;
+  }
+
+  /* Deeper than it was (2026-10-21): stacked, the type runs the full column,
+     so the directional ramp no longer covers it. The ramp is the fix, not
+     dimming the image — the page-banner rule. */
+  .science__hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(8, 8, 8, 0.4) 0%,
+      rgba(8, 8, 8, 0.68) 34%,
+      rgba(8, 8, 8, 0.82) 100%
+    );
+  }
+
+  .science__hero-actions .about-page__pill {
+    flex: 1 1 100%;
   }
 }
 
@@ -10180,13 +10499,191 @@ textarea {
   z-index: 1;
 }
 
+/* **Knockout white, hard-coded — fixed 2026-10-20.** The banner's scrim is a
+   dark gradient (`rgba(8,8,8,.86)` → 0) because the type sits over a
+   photograph, but the title and lead were inheriting the light theme's ink —
+   `#171717` on near-black, and `#4a4746` for the lead. They had been that way
+   since the theme inversion: the same class of bug as the 43 rules that said
+   `color: var(--color-bg)` to mean "knockout". Type over photography has no
+   theme, so it is stated here rather than tokenised. */
 .about-page__hero-title {
   margin: 1.1rem 0 1.25rem;
   max-width: 20ch;
+  color: #ffffff;
 }
 
+/* **46ch, not 62** (2026-10-21). The banner is a lifestyle photograph now and
+   its subject stands centre-right, where the scrim has already fallen away —
+   at the old measure the lead ran across the pale box she is holding and lost
+   its contrast mid-sentence. Keeping the lines inside the scrimmed left is the
+   fix; dimming the whole photograph is the thing the page-banner rule
+   explicitly rules out. Re-check this if the hero image is ever swapped. */
 .about-page__hero-lead {
-  max-width: 62ch;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ---- shared pill (hero, shop head, closing band) ----
+   The base is page-ink on white. The hero and the closing band sit on a
+   photograph and on burgundy respectively, so each scopes its own ink — type
+   over photography has no theme, the rule the WhyUs tile and the nav follow. */
+.about-page__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid var(--color-fg);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-fg);
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+.about-page__pill:hover,
+.about-page__pill:focus-visible {
+  transform: translateY(-2px);
+}
+
+.about-page__pill--solid {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.about-page__pill--solid:hover,
+.about-page__pill--solid:focus-visible {
+  background: var(--brand-primary-deep);
+  border-color: var(--brand-primary-deep);
+}
+
+.about-page__pill--light {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--brand-primary);
+}
+
+.about-page__pill--ghost {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #ffffff;
+}
+
+.about-page__pill--ghost:hover,
+.about-page__pill--ghost:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #ffffff;
+}
+
+.about-page__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.about-page__hero-actions .about-page__pill {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+.about-page__hero-actions .about-page__pill--solid {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.about-page__hero-marks {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.75rem;
+}
+
+.about-page__hero-marks li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.about-page__hero-marks svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  color: var(--brand-rose);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- promise strip ----
+   Reads `whyUs`, so it cannot drift from the `WhyChoose` band. */
+.about-page__props-band {
+  background: var(--brand-sand);
+  border-block: 1px solid var(--brand-border);
+}
+
+.about-page__props {
+  list-style: none;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.about-page__prop {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.about-page__prop-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--brand-primary);
+  box-shadow: 0 10px 24px -18px rgba(61, 12, 20, 0.6);
+}
+
+.about-page__prop-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-page__prop-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.about-page__prop-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.about-page__prop-note {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--brand-muted);
 }
 
 /* ---- stats + signals ---- */
@@ -10194,21 +10691,23 @@ textarea {
   padding-top: clamp(2.5rem, 5vw, 4rem);
 }
 
+/* Rounded cards rather than the old hairline grid — the storefront's language
+   everywhere else on the site (the hero's two cards, the bento panel). */
 .about-page__stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
   margin: 0;
-  background: var(--color-outline-soft);
-  border: 1px solid var(--color-outline-soft);
 }
 
 .about-page__stats div {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 2rem 1.75rem 2.25rem;
-  background: var(--color-bg);
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: var(--brand-sand);
 }
 
 .about-page__stat-value {
@@ -10219,7 +10718,7 @@ textarea {
   font-size: clamp(2.25rem, 4.5vw, 3.75rem);
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--brand-primary);
 }
 
 .about-page__stat-value span {
@@ -10247,7 +10746,7 @@ textarea {
   flex-direction: column;
   gap: 0.4rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--color-outline-soft);
+  border-top: 1px solid var(--brand-border);
 }
 
 .about-page__signal-label {
@@ -10277,7 +10776,8 @@ textarea {
 .about-page__split-media {
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--color-outline-soft);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
   aspect-ratio: 4 / 3;
 }
 
@@ -10340,9 +10840,11 @@ textarea {
   flex-direction: column;
   justify-content: space-between;
   gap: 1.75rem;
-  padding: 2rem 1.75rem;
-  border: 1px solid var(--color-outline-soft);
-  background: var(--color-bg-elev);
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: 0 18px 40px -32px rgba(61, 12, 20, 0.35);
 }
 
 .about-page__quote blockquote {
@@ -10391,13 +10893,15 @@ textarea {
   gap: clamp(1.5rem, 3vw, 3rem);
   align-items: center;
   padding: 1.15rem;
-  border: 1px solid var(--color-outline-soft);
-  background: var(--color-bg-elev);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: var(--brand-sand);
 }
 
 .about-page__compliance-media {
   margin: 0;
   overflow: hidden;
+  border-radius: calc(var(--radius-lg) - 0.35rem);
   aspect-ratio: 4 / 3;
 }
 
@@ -10454,6 +10958,10 @@ textarea {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1.75rem, 3vw, 3rem);
   align-items: center;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  background: var(--brand-sand);
 }
 
 .about-page__contact-title {
@@ -10513,25 +11021,288 @@ textarea {
   border-color: var(--color-accent);
 }
 
+/* ---- how ordering works ---- */
+.about-page__ordering {
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding-block: var(--section-pad-y);
+  background: var(--brand-sand);
+  border-block: 1px solid var(--brand-border);
+}
+
+.about-page__ordering-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.about-page__ordering-title {
+  margin: 1rem 0 1.75rem;
+  max-width: 24ch;
+}
+
+.about-page__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-page__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.1rem;
+  padding-block: 1.1rem;
+  border-top: 1px solid var(--brand-border);
+}
+
+.about-page__step:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.about-page__step-num {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+}
+
+.about-page__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.about-page__step-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.about-page__step-text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--brand-muted);
+}
+
+.about-page__help-links {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.about-page__help-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-fg);
+  transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.about-page__help-links a:hover,
+.about-page__help-links a:focus-visible {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.about-page__help-links svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-page__ordering-media {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 3 / 2;
+  box-shadow: 0 30px 60px -40px rgba(61, 12, 20, 0.5);
+}
+
+.about-page__ordering-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- shop the range — ⚠ UNUSED since 2026-10-21 ----
+   The band was removed from `AboutPage.tsx` on request; these rules are kept
+   so remounting it is the JSX alone. The cards were `.range__*`, the home
+   band's, so the two surfaces could not drift into looking like different
+   shops — only the container differed: a grid here, a snapped rail there. */
+.about-page__shop-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.about-page__shop-title {
+  margin: 0.9rem 0 0.75rem;
+  max-width: 20ch;
+}
+
+.about-page__shop-lead {
+  margin: 0;
+  max-width: 54ch;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--brand-muted);
+}
+
+.about-page__shop-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+}
+
+.about-page__shop-grid > li {
+  display: flex;
+}
+
+/* `.range__card` is authored for a scroll rail, where the track sets its
+   width. In a grid it has to fill its cell itself. */
+.about-page__shop-grid .range__card {
+  width: 100%;
+}
+
+.about-page__shop-note {
+  margin: 1.5rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--brand-muted);
+}
+
+/* ---- closing band ---- */
+.about-page__closing-wrap {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.about-page__closing {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.about-page__closing-photo {
+  /* The photograph is first in the DOM so it reads before the copy for a
+     screen reader; on screen it belongs on the right. */
+  order: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 16rem;
+  object-fit: cover;
+}
+
+.about-page__closing-body {
+  padding: clamp(2rem, 4vw, 3.25rem);
+}
+
+.about-page__closing-title {
+  margin: 0 0 0.9rem;
+  color: var(--color-on-accent);
+}
+
+.about-page__closing-text {
+  margin: 0;
+  max-width: 38ch;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.about-page__closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
 /* ---- responsive ---- */
+@media (max-width: 1199px) {
+  .about-page__shop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 991px) {
   .about-page__split,
   .about-page__compliance,
   .about-page__contact,
-  .about-page__quotes {
+  .about-page__quotes,
+  .about-page__ordering-inner {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The photograph leads on a phone — a long numbered list above it buries
+     the band's only image. */
+  .about-page__ordering-media {
+    order: -1;
   }
 
   .about-page__compliance-body {
     padding: 0 0.5rem 0.5rem;
   }
 
-  .about-page__signals {
+  .about-page__signals,
+  .about-page__props {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 767px) {
+  /* The ramp turns vertical below this width, the same move the campaign band
+     makes: the type runs the full column here rather than sitting beside the
+     subject, so a left-to-right scrim no longer covers it and the lead lands
+     on her shirt. It stays lightest at the top so her face is not flattened —
+     the page-banner rule is about never dimming the photograph evenly, not
+     about never scrimming it. */
+  .about-page__hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(8, 8, 8, 0.32) 0%,
+      rgba(8, 8, 8, 0.58) 32%,
+      rgba(8, 8, 8, 0.74) 100%
+    );
+  }
+
+  /* A phone-shaped band crops a 16:9 banner HORIZONTALLY — only the x value
+     does anything here, which is why there is no y to tune. Centred, the
+     carton lands behind the middle of the lead and both lose: the pack is
+     half hidden and the paragraph sits on printed artwork. Biasing right
+     frames her and the room instead, and leaves the pack to the four images
+     below, all of which carry it unobstructed. */
+  .about-page__hero-media img {
+    object-position: 72% center;
+  }
+
   .about-page__stats {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -10539,15 +11310,32 @@ textarea {
   .about-page__stats div {
     padding: 1.5rem 1.25rem 1.75rem;
   }
+
+  .about-page__closing {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-page__closing-photo {
+    order: -1;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 @media (max-width: 480px) {
-  .about-page__signals {
+  .about-page__signals,
+  .about-page__props,
+  .about-page__shop-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .about-page__quote {
     padding: 1.5rem 1.25rem;
+  }
+
+  .about-page__hero-actions .about-page__pill,
+  .about-page__closing-actions .about-page__pill {
+    flex: 1 1 100%;
   }
 }
 
@@ -11948,19 +12736,24 @@ textarea {
   padding-inline: calc(var(--hero-inset) + var(--gutter) + var(--nav-pad-x));
 }
 
+/* ⚠ A 4-UP GRID AS OF 2026-10-21, not a flex row. The strip carried six
+   two-word credentials and now carries the client reference's four claims,
+   each with a sentence under it — on a nowrap flex row the fourth ran off the
+   page. Four equal columns with wrapping notes is the reference's own
+   layout. */
 .trustbar__list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
   gap: clamp(1rem, 2.4vw, 2.5rem);
 }
 
 .trustbar__item {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.6rem;
   /* **Burgundy at full strength, not the muted grey** (2026-10-20, requested:
      the colour the row used to show only on hover is now its resting state).
@@ -11991,35 +12784,38 @@ textarea {
 
 .trustbar__label {
   font-family: var(--font-body);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  white-space: nowrap;
+  white-space: normal;
 }
 
+/* Sentence case and wrapping (2026-10-21): these are sentences now, and
+   uppercase mono at this length reads as signage rather than as a claim. */
 .trustbar__note {
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.75;
-  white-space: nowrap;
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--brand-muted);
+  white-space: normal;
 }
 
-/* Six items will not sit on one line much below a laptop. Rather than shrink
-   the type to breaking point, the row becomes a scroll rail — `data-lenis` is
-   not needed because it scrolls on the x axis only. */
-@media (max-width: 1199px) {
+/* ⚠ The scroll-rail rule is gone (2026-10-21). It existed because six nowrap
+   two-word credentials could not sit on one line below a laptop; the strip now
+   carries four claims with wrapping sentences, which simply step down to two
+   columns — and a horizontal rail of sentences is unreadable. */
+@media (max-width: 991px) {
   .trustbar__list {
-    justify-content: flex-start;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 0.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.35rem;
   }
-  .trustbar__list::-webkit-scrollbar {
-    display: none;
-  }
-  .trustbar__item {
-    flex: 0 0 auto;
+}
+
+@media (max-width: 560px) {
+  .trustbar__list {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -12045,10 +12841,26 @@ textarea {
    See the component's header for what the reference carries that this
    catalogue cannot (ratings, sales badges, a wishlist, outcome-claim tiles)
    and what fills each of those slots instead. */
+/* ⚠ **THE BAND HAS NO GROUND OF ITS OWN** (requested, 2026-10-26) — it sits on
+   the page's white, which is what `--color-bg` is. It was `#f3ede7`, the top
+   of a three-step sand ramp sampled off that day's client reference.
+
+   **The other two steps stay and still work**, because the layering was only
+   ever relative: card `#eee6dc` on white still reads as a panel, and tile
+   `#e4dace` on the card still gives the white carton its edge. Only the
+   outermost step went. `--range-cream` is kept, unused, so restoring the band
+   colour is one `background` line.
+
+   Values are measured off the capture, not eyeballed, and are **local
+   `--range-*` properties rather than global tokens** — nothing else on the
+   site runs this beige and promoting it would start a second neutral ramp.
+   **`--range-tile` must stay deeper than `--range-card`** or the packshot
+   floats. */
 .range {
   --range-gap: clamp(1rem, 1.8vw, 1.75rem);
-  --range-cream: #fbf6f1;
-  background: var(--range-cream);
+  --range-cream: #f3ede7;
+  --range-card: #eee6dc;
+  --range-tile: #e4dace;
   color: var(--color-fg);
   padding-block: clamp(2.75rem, 5.5vw, 4.5rem);
 }
@@ -12217,30 +13029,44 @@ textarea {
   display: none;
 }
 
+/* Sand, not white, and **flat at rest** — the reference's cards carry no
+   shadow; they read as panels on the page rather than as sheets above it. The
+   lift is kept for hover so the card still has an affordance. */
 .range__card {
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: #ffffff;
-  box-shadow: 0 18px 40px -28px rgba(61, 12, 20, 0.35);
+  background: var(--range-card);
   transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
 }
 
 .range__card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 26px 50px -28px rgba(61, 12, 20, 0.45);
+  box-shadow: 0 26px 50px -28px rgba(61, 12, 20, 0.35);
 }
 
-/* The blush → coral ground from the 2026-10-19 swatch, kept. The packshots
-   sit on tall transparent canvases with the carton centred; `cover` in a
-   landscape-ish tile crops the empty canvas off. */
+/* ⚠ **FOUR GROUNDS HAVE SHIPPED HERE IN ONE DAY** (2026-10-26) — read this
+   before changing it a fifth time. In order: a blush → coral gradient off a
+   2026-10-19 client swatch (`#f1e5e4 → #e9aea5`, an orange-leaning pink
+   belonging to no token here); sand with a burgundy wash, to get it onto the
+   palette; a **flat `--brand-primary`** field, picked because the product is a
+   white carton and a pale ground gives it no edge; and finally **this**, the
+   deepest of the three sand steps, when a client reference landed showing
+   exactly this card — pale sand tile, sand card, burgundy button.
+
+   The white-carton problem is real and is now solved by the **tile being a
+   step darker than the card**, rather than by colour. Keep that relationship:
+   `--range-tile` must stay deeper than `--range-card`, or the packshot floats.
+
+   The packshots sit on tall transparent canvases with the carton centred;
+   `cover` in a landscape-ish tile crops the empty canvas off. */
 .range__media {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: linear-gradient(180deg, #f1e5e4 0%, #efdbdb 30%, #eccac4 60%, #e9aea5 100%);
+  background: var(--range-tile);
 }
 
 .range__media-link {
@@ -12273,9 +13099,11 @@ textarea {
   align-items: center;
   gap: 0.35rem;
   padding: 0.35rem 0.7rem 0.35rem 0.5rem;
+  /* Outlined, to match `.range__flag` opposite it — on the pale sand tile an
+     unbordered white pill has almost no edge. */
+  border: 1px solid var(--brand-primary);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.72);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--brand-primary);
@@ -12289,39 +13117,55 @@ textarea {
   stroke-linejoin: round;
 }
 
-/* Where the reference's wishlist heart sits — the add to cart action. */
+/* ⚠ **A FULL-WIDTH PILL AT THE FOOT OF THE CARD BODY** (2026-10-26), the
+   reference's own control. It was a 2.5rem round icon button absolutely placed
+   in the media tile's corner — the slot that reference fills with a wishlist
+   heart, which this project does not have, so the one real action had taken
+   it. It is now where the reference actually puts it, and it is the card's
+   only filled control.
+
+   It must stay **inside `.range__body`**, not back in the tile: the tile is a
+   link to the product page, and a button inside a link is the nesting trap
+   `.report__row` carries a note about. */
 .range__add {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.9rem;
+  padding: 0.85rem 1.2rem;
   border: 0;
-  border-radius: 50%;
-  background: #ffffff;
-  color: var(--color-fg);
-  box-shadow: 0 8px 18px -10px rgba(61, 12, 20, 0.45);
+  border-radius: 999px;
+  background: var(--brand-primary-deep);
+  color: var(--color-on-accent);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out),
-    transform 0.3s var(--ease-out);
+  transition: background 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 
+/* Lighter on hover, not darker — the resting state is already the deep shade,
+   so the primary is the only move left that still reads as a change. */
 .range__add:hover,
-.range__add:focus-visible,
-.range__add.is-added {
+.range__add:focus-visible {
   background: var(--brand-primary);
-  color: var(--color-on-accent);
+}
+
+.range__add.is-added {
+  background: var(--brand-rose);
 }
 
 .range__add:active {
-  transform: scale(0.94);
+  transform: scale(0.98);
 }
 
 .range__add svg {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1rem;
+  height: 1rem;
   stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -15437,23 +16281,37 @@ textarea {
   display: block;
 }
 
+/* ---- the pack stack — a fan, redesigned 2026-10-20 (requested) ----
+   Three cartons overlapping and tilted, each with its own soft shadow, so the
+   group reads as a stack of real boxes rather than three flat strips. The
+   tilt is the individual `rotate` property, which composes with the
+   transform GSAP's entrance writes (y / opacity) instead of being wiped by it.
+   On hover the fan opens a little. */
 .whychoose__stack {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-self: center;
+  padding: 0.5rem 0.75rem;
 }
 
 /* The packshots sit on a tall transparent canvas (900x1130) with the carton
    across the middle ~37% of it, so each tile crops to the carton rather than
-   fitting the whole canvas — otherwise three cartons would stack with two
-   canvas-heights of air between them. */
+   fitting the whole canvas. */
 .whychoose__pack {
+  position: relative;
   display: block;
-  /* Up ~15% on request, 2026-10-19 — 144px → 165px at 1440. */
-  width: clamp(5rem, 11.5vw, 10.5rem);
+  width: clamp(5.5rem, 12.5vw, 11.5rem);
   aspect-ratio: 900 / 430;
+  /* Clips the render's tall transparent canvas down to the carton. Without
+     it the tile grows to the canvas height and the fan falls apart. The
+     drop-shadow still renders outside: a filter is not clipped by its own
+     element's overflow. */
   overflow: hidden;
+  border-radius: 6px;
+  filter: drop-shadow(0 14px 18px rgba(61, 12, 20, 0.22))
+    drop-shadow(0 2px 4px rgba(61, 12, 20, 0.12));
+  transition: rotate 0.5s var(--ease-out), translate 0.5s var(--ease-out);
 }
 
 .whychoose__pack img {
@@ -15462,54 +16320,120 @@ textarea {
   object-fit: cover;
   object-position: center;
   display: block;
+  border-radius: 6px;
 }
 
-/* They overlap slightly, as a stack does. */
+.whychoose__pack:nth-child(1) {
+  z-index: 1;
+  rotate: -7deg;
+  translate: -8% 0;
+}
+
+.whychoose__pack:nth-child(2) {
+  z-index: 2;
+  rotate: 4deg;
+  translate: 9% 0;
+}
+
+.whychoose__pack:nth-child(3) {
+  z-index: 3;
+  rotate: -2deg;
+  translate: -3% 0;
+}
+
 .whychoose__pack + .whychoose__pack {
-  margin-top: clamp(-0.5rem, -0.6vw, -0.25rem);
+  margin-top: -14%;
 }
 
+.whychoose__stack:hover .whychoose__pack:nth-child(1) {
+  rotate: -11deg;
+  translate: -14% -6%;
+}
+
+.whychoose__stack:hover .whychoose__pack:nth-child(2) {
+  rotate: 7deg;
+  translate: 15% 0;
+}
+
+.whychoose__stack:hover .whychoose__pack:nth-child(3) {
+  rotate: -3deg;
+  translate: -5% 6%;
+}
+
+/* ---- the reasons list — redesigned 2026-10-20 (requested) ----
+   A number badge beside the title and its note, hairlines between rows, and
+   a soft tint plus a filled badge on hover. The title is sentence case and
+   left-aligned now — it was tracked capitals pushed to the right of a rule,
+   which read as a spec label rather than a reason. */
 .whychoose__list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.55rem, 1.15vw, 0.85rem);
 }
 
-/* Number, hairline, label — the reference's row, and the rule is what makes
-   the four read as a spec list rather than as four stacked captions. */
 .whychoose__row {
   display: grid;
-  /* The label track is `minmax(0, auto)`, not `auto`: a bare `auto` track is
-     floored at max-content, so at 320 the longest label pushed the row past
-     the container and was clipped rather than wrapping. */
-  grid-template-columns: auto minmax(1.5rem, 1fr) minmax(0, auto);
-  align-items: center;
-  gap: 0.85rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.9rem;
+  padding: clamp(0.7rem, 1.1vw, 0.95rem) 0.6rem;
+  border-bottom: 1px solid var(--brand-border);
+  border-radius: var(--radius-md);
+  transition: background 0.35s var(--ease-out);
+}
+
+.whychoose__row:first-child {
+  border-top: 1px solid var(--brand-border);
+}
+
+.whychoose__row:hover {
+  background: var(--brand-primary-soft);
 }
 
 .whychoose__num {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(139, 30, 45, 0.3);
+  border-radius: 50%;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  color: var(--brand-muted);
+  letter-spacing: 0.04em;
+  color: var(--brand-primary);
+  transition: background 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
 }
 
-.whychoose__rule {
-  height: 1px;
-  background: var(--brand-border);
+.whychoose__row:hover .whychoose__num {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--color-on-accent);
 }
 
-.whychoose__label {
-  font-size: clamp(0.6875rem, 0.92vw, 0.875rem);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-align: right;
+.whychoose__row-text {
+  display: grid;
+  gap: 0.2rem;
   min-width: 0;
+  padding-top: 0.2rem;
+}
+
+/* The scrubbed grey-to-ink fill still owns `opacity` on this element. */
+.whychoose__label {
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  text-transform: none;
   color: var(--color-fg);
+}
+
+.whychoose__note {
+  font-size: clamp(0.75rem, 0.85vw, 0.8125rem);
+  line-height: 1.5;
+  color: var(--brand-muted);
 }
 
 @media (max-width: 991px) {
@@ -15534,7 +16458,7 @@ textarea {
     justify-self: start;
   }
   .whychoose__pack {
-    width: clamp(6.5rem, 19vw, 10rem);
+    width: clamp(6.5rem, 19vw, 10.5rem);
   }
   /* The list takes the full width under the pair: at a third of a tablet the
      labels wrap onto two lines and the rules collapse to nothing. */
@@ -15576,12 +16500,13 @@ textarea {
   .whychoose__photo {
     width: 100%;
   }
+  /* The same vertical fan on a phone, sized to the screen — side by side the
+     three cartons came out ~100px wide and unreadable. */
   .whychoose__stack {
-    flex-direction: row;
-    gap: 0.4rem;
+    padding-block: 1rem 1.5rem;
   }
-  .whychoose__pack + .whychoose__pack {
-    margin-top: 0;
+  .whychoose__pack {
+    width: clamp(10rem, 56vw, 13rem);
   }
   .whychoose__list {
     width: 100%;
@@ -18958,10 +19883,11 @@ textarea {
 
 .cats__grid {
   display: grid;
-  /* Five real categories, five tracks. `minmax(0, 1fr)` and not a bare `1fr`:
-     a bare track is floored at its widest item's min-content, which the long
-     two-line labels would blow past. Same trap as `.whychoose__front`. */
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  /* Four real categories, four tracks — five until the Longevity line was
+     removed on 2026-10-26. `minmax(0, 1fr)` and not a bare `1fr`: a bare track
+     is floored at its widest item's min-content, which the long two-line
+     labels would blow past. Same trap as `.whychoose__front`. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(0.6rem, 1.2vw, 1.25rem);
   margin: 0;
   padding: 0;
@@ -18981,9 +19907,17 @@ textarea {
 
 .cats__media {
   display: block;
-  /* Portrait tiles: the category photographs are people and the crop needs the
-     height. */
-  aspect-ratio: 4 / 5;
+  /* ⚠ Landscape-ish, not the portrait 4/5 it was until 2026-10-26 (requested:
+     shorter cards, wider cards). Four tracks instead of five already widened
+     each tile ~234 → ~297px at 1440; at 4/5 that would have made them *taller*
+     (293 → 392), so the ratio had to come down with it. 7/6 lands the tile at
+     ~255px — about 13% shorter than before and 27% wider.
+
+     **The three client tiles are cropped to match** (`crop=1050:900` out of
+     their 1600x900 drops, see `data/research.ts`). Changing this ratio means
+     re-cropping them, or `cover` starts cutting the figure instead of the
+     frame. */
+  aspect-ratio: 7 / 6;
   overflow: hidden;
 }
 
@@ -19046,24 +19980,26 @@ textarea {
   color: rgba(255, 255, 255, 0.75);
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 991px) {
+  /* **2×2, and not until 992px.** Two changes from the five-line version, both
+     because four tiles divide differently: a three-track row leaves a single
+     orphan on row two, and the step down used to happen at 1199 — where four
+     tracks still measure ~250px, so the row holds. Below 992 two tracks is the
+     only even split that keeps the label readable. */
   .cats__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 767px) {
-  .cats__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .cats__head {
     align-items: flex-start;
   }
 }
 
 @media (max-width: 420px) {
-  /* Two portrait tiles at this width leave the label unreadable; one column
-     with a wider crop reads properly. */
+  /* Two tiles at this width leave the label unreadable; one column with a
+     wider crop reads properly. */
   .cats__grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -19180,4 +20116,704 @@ textarea {
   .finalcta__btn {
     justify-content: center;
   }
+}
+
+/* ===========================================================================
+   PARTNER MODAL (.partner) — the entry overlay, 2026-10-21.
+   Built to the client reference's opening modal. It states the ALLUVI
+   partnership, which is a **client-confirmed commercial claim** — see
+   `partnerModal` in `data/site.ts` before editing the copy.
+   =========================================================================== */
+
+.partner {
+  position: fixed;
+  inset: 0;
+  /* Above the announcement bar (60) and the header (50). */
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* A button, not a div: the backdrop is a real dismiss control, so it has to be
+   reachable by keyboard and announced as one. */
+.partner__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(23, 23, 23, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  animation: partner-fade 0.4s var(--ease-out) both;
+}
+
+.partner__card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  width: min(100%, 58rem);
+  max-height: calc(100svh - 4rem);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: 0 60px 120px -60px rgba(23, 23, 23, 0.8);
+  animation: partner-rise 0.55s var(--ease-out) both;
+}
+
+.partner__card:focus-visible {
+  outline: none;
+}
+
+/* The pack sits on the brand's sand ground rather than a photograph: it is the
+   catalogue render on a transparent canvas, so a busy ground would show
+   through the carton's own drop shadow. */
+.partner__media {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--brand-sand);
+}
+
+.partner__media img {
+  width: 100%;
+  height: auto;
+  max-width: 22rem;
+}
+
+.partner__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+  overflow-y: auto;
+}
+
+.partner__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+.partner__eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+}
+
+/* The manufacturer's mark, set as type rather than shipped as a logo file — we
+   hold no ALLUVI artwork other than what is printed on the packaging. */
+.partner__brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-fg);
+}
+
+.partner__brand span {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--brand-muted);
+}
+
+.partner__title {
+  font-family: var(--font-body);
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  margin: 0;
+}
+
+.partner__lead {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-fg-dim);
+  max-width: 48ch;
+}
+
+.partner__marks {
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.partner__marks li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-fg);
+}
+
+.partner__marks svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--brand-primary);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.partner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.partner__note {
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+.partner__close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--color-fg);
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.partner__close:hover {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--color-on-accent);
+}
+
+.partner__close svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+@keyframes partner-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes partner-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+}
+
+/* Lenis keeps scrolling the page behind a fixed overlay, so the body is pinned
+   while the modal is open — the device the mobile drawer already uses. */
+body.has-modal {
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .partner__card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The pack becomes a short band rather than a half-screen panel: on a phone
+     the copy and the two CTAs are what must be reachable without scrolling
+     past a 400px photograph. */
+  .partner__media {
+    padding: 1.25rem;
+  }
+
+  /* ⚠ Constrain the HEIGHT here, not the width. The render is 900x1130 on a
+     transparent canvas, so a width cap still resolves to a ~280px-tall image
+     and the panel grows to it — which pushed the two CTAs below the fold on a
+     phone. An `aspect-ratio` on the panel alone does not help for the same
+     reason: the content is taller than the box and wins. */
+  .partner__media img {
+    width: auto;
+    max-width: 14rem;
+    max-height: 7.5rem;
+    object-fit: contain;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner__backdrop,
+  .partner__card {
+    animation: none;
+  }
+}
+
+/* ===========================================================================
+   BENCH PROGRAMME (.bench) — recurring supply, 2026-10-21.
+   Built to the client reference's subscription band. **Every figure in it is
+   computed from the lot's real price at the client-confirmed rate** — see
+   `benchCopy` in `data/site.ts`, and read the note there before adding any
+   control that takes money.
+   =========================================================================== */
+
+.bench {
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+
+.bench__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.bench__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.bench__eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.bench__title {
+  margin: 1rem 0 1.25rem;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--color-on-accent);
+}
+
+/* Masked lines — the heading is authored, so each line carries its own mask
+   and `splitLines` stands aside. Padding keeps descenders off the mask edge;
+   the equal negative margin is what stops the lines drifting apart. */
+.bench__line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.bench__line > span {
+  display: block;
+}
+
+/* Sand, not --brand-rose: the rose sits only two steps off the burgundy
+   ground and the second line read as a washed-out shadow of the first. */
+.bench__line--accent {
+  color: var(--brand-sand);
+  opacity: 0.92;
+}
+
+.bench__lead {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.84);
+  max-width: 52ch;
+}
+
+/* The worked example. It wraps rather than scrolls: on a phone the saving chip
+   drops under the price instead of pushing the unit label off the row. */
+.bench__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.85rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius-md);
+}
+
+.bench__price-name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+/* The struck-through figure is the lot's **real** catalogue price, which is
+   the only reason it may be struck through at all — a was-price with nothing
+   behind it is the fabricated commercial data that cut the same device out of
+   `ProductOffer` and `OfferBanner`. */
+.bench__price-was {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: line-through;
+}
+
+.bench__price-now {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1;
+}
+
+.bench__price-unit {
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bench__price-save {
+  margin-left: auto;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: var(--brand-sand);
+  color: var(--brand-primary-deep);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.bench__terms {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 56ch;
+}
+
+.bench__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.bench__note {
+  margin-top: 1.25rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bench__benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.bench__benefit {
+  padding: clamp(1.25rem, 2.2vw, 1.75rem);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bench__benefit-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1;
+  /* Same contrast note as the accent line. */
+  color: var(--brand-sand);
+  opacity: 0.75;
+}
+
+.bench__benefit-title {
+  margin: 0.75rem 0 0.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-on-accent);
+}
+
+.bench__benefit-text {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+@media (max-width: 991px) {
+  .bench__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .bench__benefits {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* On one column the chip has room of its own; pushed right by the auto
+     margin it would sit alone on a line beside the unit label. */
+  .bench__price-save {
+    margin-left: 0;
+  }
+}
+
+/* ===========================================================================
+   NEWSLETTER BAND (.newsband) — 2026-10-21, above the footer.
+   **No offer line** until the client's promo code lands — see
+   `newsletterCopy.offer`.
+   =========================================================================== */
+
+.newsband {
+  background: var(--brand-sand);
+  border-block: 1px solid var(--brand-border);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.newsband__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.newsband__eyebrow {
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+.newsband__title {
+  margin: 0.75rem 0 0.6rem;
+  font-family: var(--font-body);
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  max-width: 24ch;
+}
+
+.newsband__lead {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-fg-dim);
+  max-width: 46ch;
+}
+
+.newsband__offer {
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--brand-primary);
+}
+
+.newsband__form {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.6rem;
+}
+
+.newsband__input {
+  min-width: 0;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 999px;
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--color-fg);
+}
+
+.newsband__input:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Honeypot. Positioned off-screen rather than `display: none` — a bot that
+   reads computed styles skips hidden fields, and this one has to look
+   fillable. The form is `position: relative` for it. */
+.newsband__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.newsband__submit {
+  padding: 0.9rem 1.75rem;
+  border: 1px solid var(--brand-primary);
+  border-radius: 999px;
+  background: var(--brand-primary);
+  color: var(--color-on-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease-out);
+}
+
+.newsband__submit:hover:not(:disabled) {
+  background: var(--brand-primary-deep);
+  border-color: var(--brand-primary-deep);
+}
+
+.newsband__submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.newsband__note {
+  grid-column: 1 / -1;
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+@media (max-width: 991px) {
+  .newsband__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Two controls side by side leave the field too narrow to read an address
+     in, so they stack and the note follows them. */
+  .newsband__form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- product card: bestseller flag + bench saving (2026-10-21) ----
+   Both are client-supplied or computed — never derived from data this project
+   does not hold. See `bestsellerIds` and `benchCopy`. The flag sits opposite
+   the purity badge so the two can never stack on one corner. */
+/* ⚠ Moved twice on 2026-10-26, and it is top-right now. It was burgundy-on-
+   white at top-right, where it sat **under the old corner `.range__add`** —
+   38px wider than the gap, so the one card carrying it rendered "BESTSE…". It
+   went bottom-right to clear that button; the button has since left the tile
+   for the card foot, so the corner is free and this is back beside the purity
+   badge, which is the reference's own badge row.
+
+   Outlined pill on a pale fill, the reference's treatment — a plain white pill
+   has almost no edge against `--range-tile`. */
+.range__flag {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--brand-primary);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--brand-primary);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ⚠ The two top pills do not fit one line on a phone card: at 375 the card is
+   228px and the purity badge alone runs 130px, so "Bestseller" beside it
+   overlapped it. The flag drops to the bottom-right corner and tightens; the
+   content chip holds bottom-left.
+
+   **This block has to live after the base rule, not in the band's own
+   `@media (max-width: 640px)` higher up the file.** That one is ~7000 lines
+   earlier, so at equal specificity the base `top: 0.85rem` won and the pill
+   stretched the full height of the tile with both `top` and `bottom` applied.
+   Measure both pills, not just the flag, if either one's copy changes. */
+@media (max-width: 640px) {
+  .range__flag {
+    top: auto;
+    bottom: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 374px) {
+  /* At 320 the card is 182px and the bottom row needs 205, so one pill has to
+     go. **It is this one**: the flag is a client-named label, while the chip
+     beside it and the badge above it are product facts read out of `specs` and
+     `labAnalysis`. Nothing is lost that the card does not already say — the
+     shelf line under the name carries the same lot's format either way, and
+     the flag is back from 375 up. */
+  .range__flag {
+    display: none;
+  }
+}
+
+.range__bench {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+/* ---- footer: contact addresses under the tagline (2026-10-21) ----
+   They moved out of the old "Contact" column when the three link columns
+   became the reference's Shop / Laboratory / Client care. */
+.footer__contacts {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  font-size: 0.8125rem;
+}
+
+.footer__contacts a {
+  color: inherit;
+  opacity: 0.8;
+  text-underline-offset: 0.25em;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.footer__contacts a:hover {
+  opacity: 1;
+}
+
+/* The reviews band gained the reference's line under its heading. */
+.stories__lead {
+  max-width: 52ch;
+  margin-top: 0.9rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-fg-dim);
+}
+
+/* The closing band's small tracked label, over its headline. */
+.finalcta__eyebrow {
+  margin-bottom: 1rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
 }

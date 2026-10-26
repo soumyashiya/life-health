@@ -689,6 +689,64 @@ reports) behind one route, a sticky scroll-spy rail (IntersectionObserver, ±45%
 report list built by filtering `projects` for `labAnalysis`. **All batch numbers, purity figures
 and compound breakdowns derive from `site.ts` — never hand-write them here.**
 
+**⚠ TURNED INTO A STOREFRONT PAGE, 2026-10-21 (requested: *"recreate into like ecommerce,
+also create images like home page"*).** The three sections and the rail are unchanged — they
+are the page's substance — but the page now sells, and all three photographs were re-shot.
+Order: hero (CTAs + tick marks + stat cards) · **promise strip** · rail · 01 standards ·
+02 purity · 03 lab reports, **now shoppable** · closing card.
+
+- **The report rows are the product surface — there is deliberately no second product grid.**
+  Each row carries the lot's shelf line (`Form · Total content`, from its own `specs`), its
+  published purity meter, its **real price** and a working **Add to cart** (`useCart`, opens
+  the drawer). Duplicating `.range__*` cards here would have put the same five lots on the
+  page twice; the About page's grid was removed on request for a related reason.
+  - **`.report__row` is a flex pair, and it has to be**: `.report__summary` is a `<button>`
+    wrapping the whole left side, and a button may not nest inside a button. The buy block is
+    a **sibling** of the heading, never a fourth column of the summary grid.
+  - Verified live: the second row writes `[{"id":"p2","qty":1}]` to `liora.cart.v1`, the
+    drawer opens, and the certificate still expands with its table and Janoshik scan.
+  - The band prints `safetyProtocol` (`.science__shop-note`) under the list — the
+    research-use-only line, directly under the only prices on the page. Keep it.
+- **The promise strip reuses `.about-page__props*` verbatim** — same classes, same `whyUs`
+  source — so it cost no new CSS and the two pages cannot drift. Only `PROP_ICONS` is
+  restated in `SciencePage.tsx` (its first two differ: the flask leads here).
+- **Dark-theme leftovers fixed while here, all pre-existing since the inversion:** the hero
+  headline and lead were inheriting the **light theme's ink over a dark scrim** (the exact
+  About-hero bug of 10-20) and are hard-coded white now; the purity meter's track was
+  `rgba(255,255,255,.09)`, i.e. invisible on a white card, so 99% and 100% looked identical;
+  and `--color-outline-soft` hairlines in the block rules, report card, table and scan frame
+  were white-alpha, i.e. no rule at all. All now `--brand-border`.
+- **The closing card takes the About closing band's pills.** The card is a burgundy field
+  since the restyle, and the shared `.btn` fills burgundy — it was invisible on it.
+- **Imagery: three new plates in `src/assets/science/`**, warm golden-hour lifestyle frames in
+  the home view's language, each with the **real Retatrutide carton composited in** (the
+  Billboard / DocBand / About method — see the working notes in `data/science.ts`'s import
+  block, which record what this set cost).
+
+  | slot | file | 
+  |---|---|
+  | hero | `science/hero-pack.webp` (1400x1054) |
+  | 02 purity | `science/verified.webp` (1400x934) |
+  | closing card | `science/paperwork.webp` (1400x934) |
+
+  - **No open compliance item** — the pack is stocked, so the alts name it, and the printed
+    copy is the real artwork. The three stock lab photos they replace stay on disk and are
+    **still used as nav dropdown thumbnails** (`data/navigation.ts`), so nothing is orphaned.
+    `purityMethod.image` / `teamPanel.image` are also read by the **unmounted** `LabProof`.
+  - **The hero plate is cropped, and that crop is load-bearing.** The composite is a woman
+    holding the carton dead centre; at full width the headline and lead ran across its white
+    printed face. `comp` was cropped to its left 75% (`crop=1530:1152:0:0`), which moves the
+    pack to **45–88%** of the frame — cropping the *right* is what pushes a subject right.
+    With it, `.science__hero-title` at **15ch** (was 18) breaks before the pack and
+    `.science__hero-lead` at **46ch** (was 52) clears it. ≤767px the band crops
+    **horizontally** instead, so the img takes `object-position: 40% center` and the scrim
+    ramp went deeper. **Re-check all four if the banner image changes.**
+- Verified at 1440 / 991 / 375 / 320: `tsc -b` clean, `npm run build` passes, ESLint still
+  exactly **9**, 0 horizontal overflow at every width, `?s=reports` still lands with the
+  section 130px clear of the rail, and the rail still tracks. The one console error on a
+  hard load is `Contact.tsx`'s ScrollTrigger firing while the home view is hidden — the
+  pre-existing one the About page entry already records.
+
 
 Scrolling and motion on this page (added 2026-10-12):
 
@@ -720,17 +778,329 @@ true 0–100 scale; expanded shows the compound table plus the **real Janoshik s
 `max-height` scroll frame carrying `data-lenis-prevent` — without it Lenis swallows the inner
 scroll, and without the frame one open row runs 2.2 viewports tall. Only one row opens at a time.
 
-**About page** — `AboutPage.tsx` + `data/about.ts`. Headline, paragraph, stats and signals are
-re-exported from `aboutCopy` so the page and the `#about` home section cannot diverge. The
+**About page** — `AboutPage.tsx` + `data/about.ts`. The
 `compliance` block is verbatim product/checkout legal wording — **do not paraphrase it**, and do
 not place clinician, patient or treatment imagery beside it.
 
-**Home sections, as mounted (2026-10-20, latest)** — `Hero`, `TrustBar`,
-**`ShopCategories`**, `AboutBand`,
-`ProductRange`, `AboutProduct`, `ScienceBand`, `DriftBand`, `LineStory`,
-`WhyChoose`, `Testimonials`, `ProductFeature`,
-`FAQ`, **`FinalCta`**, `Contact`, `Footer` — with **`AnnouncementBar`** fixed above the
-header, outside the view.
+**⚠ TURNED INTO A STOREFRONT PAGE, 2026-10-21 (requested: *"make it ecommerce friendly and
+overall look set like ecommerce"*).** The 10-20 rebuild changed the *copy* for a shopper; this
+one changed what the page **is**. Section order now: hero (CTAs + tick marks) · promise strip ·
+stats · story split · **how ordering works** · **shop the range** · quotes · compliance ·
+contact · **closing CTA**. Three sections and five new `about.ts` exports are new
+(`valueProps`, `ordering`, `shopPanel`, `closing`, plus `aboutHero.ctas`/`.marks`).
+
+- **The product grid reuses `.range__*` — the home band's card markup, verbatim.** Only the
+  container differs: a grid here (`.about-page__shop-grid`), a snapped rail there. That is
+  deliberate, so the two surfaces cannot drift into looking like different shops, and it is
+  why the band cost ~15 lines of CSS rather than a card system. `.range__card` is authored
+  for a rail where the track sets its width, so the grid rule adds `width: 100%`;
+  `scroll-snap-align` is inert outside a scroll container.
+  - `shopPanel.ids` leaves out **`p3`** for the same reason `ProductRange` hides it — no
+    carton render for that compound. Still routable, still on `#/shop`, which the band's
+    foot link points at.
+  - Add to cart is the real `useCart`. Verified: the second card writes
+    `[{"id":"p2","qty":1}]` to `liora.cart.v1` and the drawer opens reading "1 item".
+- **Nothing shoppable here is invented, and the same four refusals as every other band
+  apply**: no star ratings or review counts (there is no review data — the quotes carry the
+  name and role `testimonials` actually has), no offer, bundle, struck-through price or
+  shipping threshold (none is configured anywhere, so any figure would be fabricated
+  commercial data), and the research-use-only position is untouched — `shopPanel.note` is
+  `projects[0].safetyProtocol`, printed directly under the only prices on the page, and the
+  compliance block is still verbatim.
+- **The promise strip reads `whyUs` and the ordering steps are the page's own.** The strip
+  renders the short `note`, the form that data was written for; the four ordering steps
+  describe things that exist (the shelf specs, the `labAnalysis` block, the real checkout and
+  its confirmation email, the packing format `promoCopy` claims). Its three links are real
+  routes — `#/policies/shipping-policy`, `#/policies/refund-policy`, `#/track`. Verified the
+  first lands on the policy page.
+- **Visual identity moved off the dark-theme leftovers.** The hairline stats grid, the
+  `--color-outline-soft` borders and the `--color-accent` figures were pre-inversion; stats,
+  quotes, compliance and contact are now rounded `--radius-lg` cards on `--brand-sand` with
+  `--brand-border` hairlines and burgundy figures. `.about-page__pill` is the shared control
+  (solid / light / ghost).
+- **The hero and closing band hard-code white type**, same rule as the 10-20 fix: type over
+  photography and over the burgundy fill has no theme. The closing band's knockout uses
+  `--color-on-accent`, never `--color-bg`.
+- **⚠ ALL FIVE IMAGES RE-SHOT 2026-10-21** (Magnific, requested: *"create images like home
+  page"*), replacing the object stills the band had been built on — `counter.webp` and
+  `doorstep.webp` from earlier the same day included. Both sets are on disk; nothing was
+  renamed or deleted.
+
+  | slot | file | 
+  |---|---|
+  | hero | `about/holding-box.webp` (1600x900) |
+  | story split | `about/sealing.webp` (1400x1056) |
+  | ordering | `about/preparing.webp` (1500x1000) |
+  | compliance | `about/stack.webp` (1400x1056) |
+  | closing | `about/delivered.webp` (1600x900) |
+
+  - **The brief was a palette match, and the gap was real.** The home view runs warm
+    backlit lifestyle photography with people — the `shop-categories` window scenes, the
+    `drift` gallery portraits — while this page ran dispatch-bench stills, so the two read
+    as different sites. These five are shot in that language: golden window light,
+    burgundy/rose/sand, a figure in three of them, **seen from behind or with the face
+    clear of the product**, which is the same mitigation the category tiles carry.
+  - **⚠ ALL FIVE CARRY THE REAL CARTON, COMPOSITED IN** (second pass the same day,
+    requested: the product in every image should be the ALLUVI box). Each plate was
+    generated holding a **completely blank** box; the catalogue's own
+    `spotlight/cartons/p1.webp` — **Retatrutide 20mg, a stocked lot** — was mapped onto
+    its face afterwards. Every pixel of printed artwork is real. Billboard/DocBand method,
+    fourth use, and `data/about.ts`'s import block carries the full working notes. The
+    short version of what it cost:
+    - **Box proportions cannot be prompted, only picked.** The carton is 2.17:1. "22 cm
+      wide and 10 cm tall" gave ~1.5; "exactly twice as wide as it is tall" gave **3.34**;
+      the same prompt again gave 1.8. Generate a batch, **pick nearest 2.17** — the
+      Campaign entry's rule, re-confirmed. Shipped faces are 1.65–2.45 (≤30% stretch,
+      invisible at render size; Billboard shipped 11%).
+    - **Measure the face off a grid overlay by eye.** An auto bright-region detector kept
+      locking onto backlit windows, and contact-sheet estimates were out by 30%+ every
+      time.
+    - **A plate with fingers on the face needs the artwork masked to the blank area**, or
+      the carton paints over the thumb — the failure `ProductSpotlight` documents. The
+      mask keys on chromaticity (skin is redder than the box) and must be **one-sided**,
+      or it rejects the box's own highlight and leaves a torn white edge. Still lifes skip
+      the mask entirely, or a shadowed end of the box clips the artwork.
+  - **An earlier version of this set had blank packs on every image** and was replaced by
+    the composite pass above. Its lesson stands: image models garble printed copy. The
+    first `preparing` take came back with a cold pack carrying **garbled blue print** —
+    caught by cropping it at 1:1, the check the Campaign entry says to always run — and
+    was re-generated with the pack out of the scene, not patched (a feathered blur was
+    tried first and read as a smudge).
+  - **This set has NO open compliance item**, which is rare here: the pack is stocked, so
+    the alts name it; the printed copy is the real artwork; nobody ingests anything and
+    nothing reads as treatment. **If these are ever swapped for drops picturing a
+    not-stocked carton, the usual rule comes back** — nothing in the copy may describe the
+    pack, and no alt may name a compound.
+  - **≤767px the hero image takes `object-position: 72% center`.** A phone-shaped band
+    crops a 16:9 banner *horizontally*, so only x does anything. Centred, the carton lands
+    behind the middle of the lead and both lose — the pack half hidden, the paragraph
+    sitting on printed artwork. Biasing right frames her and the room instead and leaves
+    the pack to the four images below.
+  - **`.about-page__hero-lead` is 46ch, down from 62** (and ≤767px takes a **vertical**
+    scrim instead of the directional one). The banner has a subject standing centre-right
+    now: at the old measure the lead ran across the pale box she is holding and lost
+    contrast mid-sentence, and stacked on a phone it sat on her shirt. Both are the
+    type-over-photography problem, fixed by moving the type rather than by dimming the
+    photograph — which the page-banner rule rules out. **Re-check both if the hero image
+    changes.**
+- **`.about-page__closing-photo` is first in the DOM and `order: 1` on screen** — it reads
+  before the copy for a screen reader and sits right of it on a desktop. At ≤767px it drops
+  to `order: -1` and a 16/9 crop.
+- Verified at 1920 / 1440 / 1199 / 991 / 767 / 375 / 320: `tsc -b` clean, `npm run build`
+  passes, ESLint still exactly **9**, 0 horizontal overflow at every width, 4 product cards,
+  grids stepping 4 → 2 → 1 and the ordering photo moving above its steps at ≤991.
+  (`.range__batch` reports `scrollWidth > clientWidth` at 320 — that is its ellipsis doing
+  its job, identical to the home band.)
+- **⚠ THE FOOTER'S `About` LINK NEVER REACHED THIS PAGE** (found and fixed 2026-10-21, after
+  the rebuild was reported as "nothing changed"). `site.navLinks` pointed it at **`#about`**,
+  the home anchor that died when the `About` band was unmounted — so clicking it parsed to the
+  **home** view, found no `#about` element to scroll to, and sat on the home page. The About
+  page was never mounted at all. It is `#/about` now; `Footer.goToSection` already branches on
+  `href.startsWith("#/")`, so no component change was needed. Verified by clicking the real
+  footer link: hash `#/about`, page mounted, 4 product cards.
+  - **The other five entries were checked and all resolve** — `#home`, `#work`, `#why-us`,
+    `#reviews`, `#faq`, `#contact` all exist on the home view. `#about` was the only dead one.
+  - The header's About link was never affected: `data/navigation.ts` has pointed at `#/about`
+    since the page was built.
+- **Pre-existing, not from this pass:** on a hard load with motion enabled the
+  `[data-about-reveal]` targets stay parked at `opacity: 0` in the Playwright harness, and
+  one console error is thrown from `Contact.tsx`'s ScrollTrigger while the home view is
+  hidden. **Measured identically with this pass stashed**, so both predate it; under
+  `reducedMotion: reduce` the page renders complete, which is how it was verified.
+
+**⚠ REBUILT FOR A SHOPPER, 2026-10-20 (requested) — and the home band was explicitly left
+alone.** An ecommerce rewrite was first applied to `aboutCopy` in `site.ts`, which changed
+the home about band too; that was reverted and redone here. What this cost, and what to know:
+
+- **The hero headline and lead are now the page's own**, not `aboutCopy.heading` /
+  `.paragraph`. Those two are read by `AboutBand` on the home view, so editing them to suit
+  this page changes both — which is the thing that had to be avoided. `aboutStats` and
+  `aboutSignals` are **still shared and should stay shared**: published figures must never
+  disagree between the two.
+- **`aboutCopy.stats` / `.signals` labels were safe to relabel** for the shop ("Researchers
+  served" → "Customers served", etc.) because `AboutBand` reads **`paragraph` only** — those
+  two surface on this page and in the unmounted `About` / `ProductPlinth`. The figures
+  themselves are unchanged.
+- **New imagery** (`about/dispatch.webp`, `packing.webp`, `parcels.webp`, Magnific). The
+  three it replaces were built for the **dark theme** — a cyan/violet node lattice on
+  near-black, a cool QC bench, a case of vials — and had been off-palette since the burgundy
+  inversion. The new set is warm dispatch stills, which is also what the copy now describes.
+  **None of them carries printed packaging** (plain kraft, unbranded mailers, blank cold
+  packs) because image models garble pack copy. `hero-lattice.webp`, `operations.webp` and
+  `compliance.webp` stay on disk, unused.
+- **⚠ Fixed a pre-existing theme-inversion bug while here:** the banner's scrim is a dark
+  gradient because the type sits over a photograph, but `.about-page__hero-title` and
+  `-lead` were inheriting the **light theme's ink** — `#171717` on `rgba(8,8,8,.86)`. The
+  headline had been near-invisible since the inversion. Both are hard-coded white now: type
+  over photography has no theme, the same rule the WhyUs tile and the nav follow.
+- Verified at 375 / 768 / 1440: 5 images loading, stats reading the new labels, 0 horizontal
+  overflow — and the home band confirmed untouched (headline still "Characterised in the
+  lab. / Packed for the bench.", still on `portrait.webp` / `inset.webp`, no stats block).
+
+**⚠ HOME REBUILT TO `peptiva-labs-woad.vercel.app`'s WORKFLOW, 2026-10-21
+(requested: *"read this completely and set same website of workflow and content in
+my website"*).** That site sells **the same ALLUVI catalogue with the same Janoshik
+batches** this one holds as real data, so almost all of its content maps onto
+`projects` without inventing anything. **Only its workflow and content were
+adopted — the visual identity stays ours** (burgundy on white, Oswald/Geist), an
+explicit choice when the pass was scoped.
+
+**Home sections, as mounted (2026-10-21, latest)** — `Hero`, `TrustBar`,
+**`ShopCategories`** (remounted), `ProductRange`, **`BenchProgramme`** (new),
+`AboutBand`, `ScienceBand`, `FinalCta`, `Testimonials`, `WhyChoose`, `FAQ`,
+**`NewsletterBand`** (new), `Contact`, `Footer` — with **`AnnouncementBar`**
+(remounted, now a marquee) fixed above the header and the **`PartnerModal`**
+entry overlay outside the view. Verified in the DOM in that order, every home
+anchor still resolving, 0 page-level overflow at 1440 and 375.
+
+How that maps to the reference, band for band: entry modal → `PartnerModal`;
+announcement marquee → `AnnouncementBar`; product hero → `Hero`; 4-icon trust
+strip → `TrustBar`; *Shop by line* → `ShopCategories`; *Bestsellers* →
+`ProductRange`; *Bench Programme* → `BenchProgramme`; *The standard* →
+`AboutBand`; *How each pen is prepared* → `ScienceBand`; *Ready to order?* →
+`FinalCta` (retitled to that copy and **moved up from below the FAQ**);
+*Reviews* → `Testimonials`; newsletter → `NewsletterBand`.
+
+**Four bands were unmounted to make that order** — `AboutProduct`, `DriftBand`,
+`LineStory` and `ProductFeature`. All four keep their component, copy, CSS and
+assets, so remounting any is one line in `App.tsx` plus its import. Two
+consequences worth knowing: `ProductFeature` was the only band pricing a single
+named lot (the `ProductRange` cards still add to the cart, so nothing shoppable
+was lost), and `DriftBand`'s scatter-collage device is what the reference uses
+for its own *Ready to order?* band — `FinalCta` holds that slot instead.
+**`WhyChoose` and `FAQ` were kept, after the reviews**, which the reference has
+no equivalent for: they carry `#why-us` and `#faq`, and the footer links to
+both.
+
+**⚠ THE COPY WAS TAKEN TO THE REFERENCE TOO, 2026-10-21 (second request:
+*"whole content changed like reference website"*).** The first pass moved the
+structure; this one moved the words. What changed, and what each one is now:
+
+| surface | now reads |
+|---|---|
+| `trustBar` | the reference's **four** claims with a sentence each (Verified sourcing · Lab-tested purity · Sealed cold packaging · A human on WhatsApp), where it was six two-word credentials |
+| `categoryCopy` | *Shop by line / Every line on the bench / View all* |
+| `researchAreas` | re-cut to the reference's five lines — **Metabolic · Recovery · Skin & Glow · Longevity · Blends** (three were relabelled on 2026-10-26 — see below) |
+| `rangeCopy` | *Loved by the bench / Bestsellers*, rail ordered bestseller-first |
+| `shelfLines` | the card's compound-class line — *"Triple agonist · 20 mg pen"* |
+| `aboutCopy` + `aboutBandCopy` | *The Lyfe standard / Purity, verified. Paperwork, included.* over the reference's "boring about the basics" paragraph |
+| `sciBandCopy` + `ScienceBand` | *Four deliberate steps / How each lot is prepared*, cards now read `standards` |
+| `finalCtaCopy` | gains an eyebrow; CTA is *Start your order* |
+| `Testimonials` | the reference's line under the heading, naming the hover gesture |
+| `site.tagline` + `Footer` | the reference's footer sentence, and its **Shop / Laboratory / Client care** columns |
+
+Things worth knowing before touching any of it:
+
+- **⚠ THE PRODUCT IDS ARE NOT IN CATALOGUE ORDER.** `p6` is Retatrutide 40mg,
+  `p4` is Tirzepatide 40mg, `p5` is NAD+. Reading them numerically put NAD+
+  under Metabolic, Retatrutide 40mg under Longevity and the wrong shelf line on
+  two cards — caught in the browser, not by the compiler. **Check `projects`
+  before editing `shelfLines`, `bestsellerIds` or any `productIds` list.**
+- **The research-area ids did not change** with the rename, so
+  `#/shop?research=<id>` links still resolve; renaming an id would break every
+  saved link for a cosmetic gain. (`formulation` reads oddly against its
+  current "Skin & Hair" label for exactly that reason — see the 10-26 note
+  below, which also removed `peptide`.)
+- **The "All peptides" catch-all line is gone** — the reference has none, and
+  "Shop all products" covers it from two bands. `ProductRange` used to exclude
+  that id from its four tiles and now takes the first four.
+- **⚠ DOWN TO FOUR LINES, RELABELLED AND RE-SHOT, 2026-10-26** (requested, over
+  several passes in one sitting). The band now reads **GLP-1 & metabolic ·
+  Recovery peptides · NAD+ & cellular · Skin & Hair**:
+
+  | id | was | now | tile |
+  |---|---|---|---|
+  | `formulation` | Multi-compound / Blends | **Skin & Hair** | `shop-categories/skin-hair.webp` |
+  | `cellular` | Longevity | **Cellular** (`NAD+ & cellular`) | `nad-cellular.webp` |
+  | `recovery` | — | — | `recovery-new.webp` |
+  | `peptide` | Skin & Glow → Longevity | **removed** | — |
+
+  - **⚠ `peptide` IS GONE FROM `researchAreas` AND FROM `ResearchVisualKey`.**
+    It was the "All peptides" catch-all, then Skin & Glow, then Longevity for
+    an hour. **Nothing is stranded**: its only lot, `p2` (Glow 70mg), is still
+    filed under `recovery` and `formulation`, so it is still reachable from the
+    band, the chips and the nav dropdown — all three render from the array and
+    lost the row by themselves. A saved `#/shop?research=peptide` link
+    **degrades to the unfiltered `#/shop`** (`isResearchAreaId` rejects the id
+    and `parse()` drops the filter) — verified live: 6 cards, no error.
+    `assets/research/peptide.webp` and `shop-categories/peptide.webp` stay on
+    disk, unused; restoring the line is the union entry, two imports and the
+    entry itself.
+  - **`categoryCopy.lead` counts the lines** ("Four ways into the catalogue"),
+    so it has to be edited whenever one is added or removed. The tiles
+    themselves are rendered from the array and need no edit.
+  - **`cellular` moved with `peptide`** — two tiles could not both read
+    Longevity when the glow card briefly took that name, and the client's own
+    replacement photograph for it is named "nad cellular", which is also the
+    label it carried before the 10-21 re-cut.
+  - `ProductRange`'s `slice(0, 4)` is now a guard against a fifth area rather
+    than a cut — there are exactly four.
+  - **The grid and the tile ratio moved with the count** (requested: shorter
+    cards, wider cards, four placed properly). `.cats__grid` is **4 tracks**
+    and `.cats__media` is **`7 / 6`**, not the portrait `4 / 5` it was — four
+    tracks instead of five already widened each tile (234 → 293px at 1440), and
+    at 4/5 that would have made them *taller* (293 → 392), so the ratio had to
+    come down with it. **293x251 at 1440**: ~25% wider, ~14% shorter.
+    - **Changing that ratio means re-cropping the three client tiles**, which
+      are cut to match (`crop=1050:900` out of their 1600x900 drops) — otherwise
+      `cover` starts cutting the figure instead of the frame.
+    - **The 2-up step moved 1199 → 991.** Four tracks still measure ~244px at
+      1199, so the single row holds across every laptop width; below 992 it is
+      2×2. **3-up is gone** — with four tiles it strands one on row two.
+    - Verified at 1920 / 1440 / 1199 / 991 / 767 / 375 / 320: 4 → 4 → 4 → 2 → 2
+      → 1 → 1 tracks, 0 horizontal overflow and no clipped label at any width.
+  - No `productIds` list changed in any of this, so every tile's count is still
+    a real figure.
+  - **The three new tiles are 4:5 crops of 1600x900 client drops**
+    (`latest-images/{recovery,nad cellular,skin and hair}.png`, untouched as
+    the source of truth). A 16:9 source in a 4:5 tile crops **on x only**, so
+    each is `crop=720:900:<x>:0` at a measured offset (730 / 568 / 760) — the
+    same note `.drift__float` carries. The four generated tiles they supersede
+    stay on disk, unused.
+- **⚠ COMPLIANCE, open and client-directed — two of the new tiles break rules
+  this set previously held**, and the outcome-shaped labels now number three:
+  - **`recovery` pictures a man gripping his knee on a gym bench** — an injury
+    being nursed, directly under the Recovery label. "No bandage, brace,
+    strapping, bruising, injury or massage — nothing that reads as being
+    treated" is exactly what the earlier set was generated to avoid.
+  - **`skin and hair` is a beauty frame with the face centred**, where this
+    set's standing mitigation has been that faces stay out of frame and nobody
+    is posed as a result.
+  - `nad cellular` is fine — a figure from behind at a window, the set's own
+    language.
+  - **"Skin & Hair"** is now the only outcome-shaped line name left — removing
+    the Longevity card closed the other two. Its description is strictly
+    contents and format, but the label carries the implication, which is why
+    every other line here is a compound class. To close it: rename that `name`
+    field plus its two `*titleLines` pairs, and re-shoot the two frames above.
+- **"Bestsellers" rests on the client's word, not on data.** There is no sales
+  figure in this project; the client named one lot. The rail opens on it.
+- **`aboutCopy.paragraph` is shared with the `#/about` page** — this edit
+  changed both surfaces, which is the point of a content pass, but check both.
+- `.trustbar__list` is a **4-up grid now, not a flex rail**. The old scroll-rail
+  rule existed because six nowrap credentials would not fit a laptop line; four
+  wrapping sentences step down 4 → 2 → 1 instead, and a horizontal rail of
+  sentences is unreadable.
+- **The footer's `#bench` link needs `BenchProgramme` mounted** — it carries
+  that id. Every other link in the three columns is a route or an existing
+  anchor, and all four policy routes stayed (the reference splits them between
+  a column and a legal bar; ours are one `policyList` and dropping any would
+  strand a legal page).
+
+**Three things in the reference could not ship as drawn**, all for the same
+reason — fabricated commercial data on a live storefront:
+- **star ratings and review counts** (it prints `4.9 · 412 reviews` on its PDP
+  and five stars on every card). There is no review data in this project.
+- **`NEW` and `LIMITED` badges.** There is no date or stock field. The client
+  named **one** bestseller, so exactly one card carries a flag —
+  `bestsellerIds` in `data/site.ts`.
+- **"10% off your first order"** on the newsletter. The client confirmed the
+  offer but the promo code has not landed — see `newsletterCopy.offer`.
+
+The previous mount list, for the record: `Hero`, `TrustBar`, `ShopCategories`,
+`AboutBand`, `ProductRange`, `AboutProduct`, `ScienceBand`, `DriftBand`,
+`LineStory`, `WhyChoose`, `Testimonials`, `ProductFeature`, `FAQ`, `FinalCta`,
+`Contact`, `Footer`.
 (**`DocBand` was added 2026-10-20**, between `DriftBand` and `LineStory`, **and unmounted on request the same day**.) (`ConfidenceBand` and `LotOffer` were unmounted the same day. A swap
 putting `AboutProduct` under the hero and `AboutBand` under the range was tried and **reverted on
 request**.) Verified in the DOM, in that order, with every home anchor
@@ -799,6 +1169,9 @@ its import. Consequences worth knowing:
   link pointing at them has nothing to scroll to. The `#/about` *route* is unaffected.
   The footer's **`Why Us`** entry (`site.navLinks` in `data/site.ts`) was the live example,
   and it **resolves again as of 2026-10-17**: the new `WhyChoose` band carries `id="why-us"`.
+  **The same list's `About` entry had the identical bug and was missed until 2026-10-21** —
+  it pointed at `#about` and silently kept you on the home page. It is `#/about` now. If a
+  band is ever unmounted again, grep `site.navLinks` for its anchor before moving on.
 - `aboutCopy` and `proofCopy` are **still exported and still read** — by the About page and the
   Science page respectively. Don't delete them as "unused".
 - The home view's GSAP console warnings dropped from ~190 to ~28 with `LabProof` unmounted; its
@@ -1778,8 +2151,80 @@ a shop; the compliance layer is untouched. What changed, and the line that was h
   Blends; PDP breadcrumb "Catalogue · Metabolic" with `safetyProtocol` still printed; card
   shelf lines "Pre-filled pen · 20 mg total".
 
+**Partner modal** (`PartnerModal.tsx`, `partnerModal` in `data/site.ts`, `.partner__*`
+at the end of `portfolio.css`) — **added 2026-10-21**, the reference's entry overlay.
+
+- **⚠ IT STATES A COMMERCIAL RELATIONSHIP, AND THAT IS CLIENT-CONFIRMED.**
+  "Authorised reseller of ALLUVI research kits" was put to the client explicitly before
+  this shipped and reaffirmed. It is the **only** place on the site that claims partner
+  status — everywhere else the position is the softer "packaging shown by licensing
+  arrangement". If the relationship changes, `partnerModal` is the one block to edit.
+- Everything else in it is already published: Janoshik is the lab on every
+  `labAnalysis`, and the sealed/cold-packed line is `promoCopy`'s. Both CTAs resolve.
+- **Shown once per visitor** (`liora.partner.v1`, the `liora.*` prefix as always), and
+  **gated on `ready`** — the rAF-driven `Preloader` owns the screen until it completes,
+  and an overlay opened behind it is dismissed before it is ever seen.
+- **`open` is derived during render, never set from an effect** — the project lints
+  `react-hooks/set-state-in-effect`. The storage check is a lazy `useState` initialiser:
+  re-reading it each render would flip the modal shut the instant the key is written, and
+  reading a ref during render is the *other* thing the lint forbids. That cost two passes.
+- **`body { overflow: hidden }` is not enough to hold the page.** Lenis drives the scroll
+  itself and keeps running, so the overlay floats away from the page under it.
+  `lenis.stop()` on open and `.start()` on cleanup is what actually holds it; the class is
+  kept for the pre-Lenis case.
+- ≤767px **the pack image is height-capped, not width-capped**. The render is 900x1130 on
+  a transparent canvas, so a width cap still resolves to a ~280px-tall image and the panel
+  grows to it — which pushed both CTAs below the fold. An `aspect-ratio` on the panel does
+  not help either: the content is taller than the box and wins.
+
+**Bench Programme** (`BenchProgramme.tsx`, `benchCopy` in `data/site.ts`, `.bench__*`
+at the end of `portfolio.css`) — **added 2026-10-21**, the reference's subscription band.
+
+- **⚠ THE TERMS ARE REAL AND CLIENT-CONFIRMED: 15% off, three monthly deliveries.** This
+  band exists *only* because of that. The reference's own version prints a saving beside a
+  struck-through price with nothing behind it, which is precisely the fabricated commercial
+  data that cut the same device out of `ProductOffer` and `OfferBanner`. Here the
+  struck-through figure is the lot's **actual catalogue price** and the discounted figure
+  and the saving are **computed from it** — verified live at $350.00 → $297.50, save
+  $52.50, and the same maths on every `.range__bench` chip ($329 → $49.35, $629 → $94.35).
+  Nothing is typed.
+- **How it bills, also client-confirmed:** the checkout takes one-off payments only, so
+  delivery 1 is charged through it and deliveries 2–3 are invoiced by the team. The band
+  prints those terms rather than leaving them to the headline.
+- **⚠ ENROLMENT IS NOT WIRED, DELIBERATELY.** Applying the discount needs a `plan` on the
+  cart line, the discount in the cart subtotal and the flag carried into the order payload
+  — and `lib/api.ts`'s payload shape is a contract with the external order service, out of
+  scope for a home-page pass. The CTA goes to `#/shop`; the plan chooser belongs on the
+  **product page**, which is where the reference puts it. **Do not add a button that takes
+  money until that lands.**
+- **The accent line, the benefit numbers and the saving chip are `--brand-sand`, not
+  `--brand-rose`.** On the burgundy field the rose sits two steps off the ground and the
+  second headline line read as a washed-out shadow of the first.
+
+**Newsletter band** (`NewsletterBand.tsx`, `newsletterCopy` in `data/site.ts`,
+`.newsband__*` at the end of `portfolio.css`) — **added 2026-10-21**, above the footer.
+
+- **⚠ `offer` IS NULL AND THE OFFER LINE DOES NOT RENDER.** The reference promises "10% off
+  your first order when you join"; the client confirmed the discount but **has not sent the
+  promo code**, and the checkout can only honour a code that exists server-side. Set
+  `newsletterCopy.offer` to `{ percent, code }` the day it lands — the component renders
+  the line from it. **Don't type the percentage into the copy instead.**
+- It posts through the existing `subscribeNewsletter` endpoint with the same honeypot
+  contract the footer's form uses, so this is a second surface, not a second integration.
+
 **Announcement bar** (`AnnouncementBar.tsx`, `announcementCopy` in `data/site.ts`,
 `.announce__*` in `portfolio.css`) — **added 2026-10-20**, fixed above the header.
+
+**⚠ REMOUNTED AND REBUILT AS A MARQUEE, 2026-10-21** — the reference opens with a scrolling
+claims strip. `--announce-h` went back to **2.5rem** with it; **the two always move
+together**, or the page sits under the bar / leaves a blank strip where it used to be.
+The list is rendered **twice** and the track travels `-50%`, which is what makes the loop
+seamless — change one and you must change the other. The second copy is `aria-hidden`, so a
+screen reader hears four claims rather than eight, and the strip pauses on hover and under
+`prefers-reduced-motion`. **Every claim is one the site already evidences**; the reference's
+own `NEW — RETATRUTIDE 40 MG NOW VERIFIED` is not reproduced, because there is no date or
+stock field to decide what is new. The static `message` / `messageShort` pair is still in
+the data and still correct if this is reverted.
 
 - **It carries no offer, and that is deliberate.** There is no promotions system, no
   discount pricing, no shipping-threshold rule and no guarantee anywhere in this project
@@ -2146,6 +2591,16 @@ with the 10-19 rebuild: `.lotfan__badges` / `__badge` / `__disc` / `__arrow` / `
   line in the band itself. The pack import in `LotFan.tsx` is one line — pointing it at a
   stocked lot is a one-line change if this is ever challenged.
 
+**⚠ Pack stack + reasons list redesigned 2026-10-20 (requested).** The stack is a **fan** — three
+overlapping cartons tilted with the individual `rotate`/`translate` properties (they compose with
+GSAP's entrance transform), each with a drop shadow, opening wider on hover; it stays a vertical
+fan on phones. `.whychoose__pack` **must keep `overflow: hidden`** — without it the tile grows to
+the render's tall canvas and the fan falls apart. The list rows are a number badge + sentence-case
+title + note (`.whychoose__row-text`), hairlines between rows, tint + filled badge on hover. **The rows
+no longer use `.whychoose__line`**: that is the heading's line class, and sharing it let the heading's
+rise tween and the old row grid rule land on each other. `.whychoose__rule` is gone. The label's
+scrubbed grey-to-ink fill is unchanged.
+
 **Why choose us** (`WhyChoose.tsx`, `whyChooseCopy` in `site.ts`, `.whychoose__*` at the end
 of `portfolio.css`) — **added 2026-10-17**, mounted between `ScienceBand` and `Testimonials`.
 Built to a client reference: a two-line headline top left, an enormous pale ghost **WHY** with
@@ -2155,9 +2610,29 @@ packs, and a numbered list of four reasons.
 - **It carries `id="why-us"`.** The footer's `Why Us` link has been a dead anchor since the
   old `WhyUs` band was unmounted on 2026-10-16; it resolves again. (That band is still
   unmounted and still in the tree — this is a different component, not a remount.)
-- **The four rows are `whyUs`, read in the component, not restated** — same numbers and
-  titles — so the list and any future `WhyUs` remount cannot drift. The reference numbers its
-  rows 001–004 beside generic benefits; ours prints the real `number` and `title`.
+- **The four rows are `whyUs`, read in the component, not restated** — so the list and any
+  future `WhyUs` remount cannot drift. The reference numbers its rows 001–004 beside generic
+  benefits; ours prints the real `number` and `title`.
+- **The rows gained a supporting line on 2026-10-20** (requested: better content). They had
+  been number · hairline · title and nothing else — the band showed four bare labels while
+  each entry's `description` sat in the data unrendered.
+  - **It renders `note`, not `description`, and that distinction is the point.** The list
+    column is ~318px; `description` runs to five lines there and buries the band. `note` is
+    the one-fact short form for this layout, `description` stays the long form for the
+    card layout in the unmounted `WhyUs`. Both are in `whyUs`, so they cannot drift apart.
+  - `.whychoose__row` is now a two-line block: `.whychoose__line` carries the old
+    number/rule/label grid, the note sits under it. The scrub still owns `opacity` on
+    `.whychoose__label` — a child of the row the entrance animates — so the disjoint rule
+    is unchanged.
+  - **All four titles must fit one line in that column** or the hairline rules stop reading
+    as a set. "Sealed, cold-packed, tracked" wrapped and became "Cold-packed and tracked"
+    (23 characters, same as row 02), with "sealed" moved into its note rather than dropped.
+    Verified: identical label heights at 1440 / 991 / 375, and at 320 all four wrap to two
+    lines together.
+- **The headline is no longer `services[0].title` verbatim.** It read "Tested before it
+  ships." — a *product* promise heading four rows about the *shopping* experience, and
+  exactly the convergence the `services` note warns about. It is "Know what you're
+  ordering." now, which is what the rows actually say.
 - **The reference's headline is *"ENERGY THAT KEEPS / YOU MOVING"***, a consumer benefit claim.
   Ours is one of the shop promises in `services`, which the published reports evidence. The
   ghost words are kept verbatim — they claim nothing.
@@ -2693,13 +3168,74 @@ Built to a client reference and moved to **directly under the hero** (the slot `
 that band is **unmounted and kept**, its tiles now live here). Still carries `id="work"`. Cream band
 (`--range-cream: #fbf6f1`): eyebrow pill + title + lead, three trust marks opposite
 (`rangeCopy.trust`); a **3-up carousel** (2-up ≤991, one + peek ≤640) of rounded white cards with
-round arrows outside the rail and **page dots** measured off the rail; then **four category tiles**
-(`researchAreas` minus "All peptides", linking `#/shop?research=<id>`). Reference slots that could
+round arrows outside the rail and **page dots** measured off the rail; then the `Shop all` link and
+the research-use-only line. Reference slots that could
 not ship and what fills them: star rating → the lot's **batch number · lab**; *Bestseller / Trending /
-New* badges → the **published purity** (or nothing); wishlist heart → the **add to cart** button;
-outcome-claim tile labels → the areas' own `shopTitleLines`. The blush → coral media gradient is
-kept; packshots sit at `scale(0.88)` so the carton does not run edge to edge. Arrows/dots verified
+New* badges → the **published purity** (or nothing); wishlist heart → the **add to cart** button.
+Packshots sit at `scale(0.88)` so the carton does not run edge to edge. Arrows/dots verified
 stepping 0 → 1 and disabling at each end.
+
+**⚠ THE CARD WAS RESTYLED TO A NEW CLIENT REFERENCE, 2026-10-26** — a supplement storefront
+whose cards are **sand on sand with a full-width burgundy button**. The products themselves
+were explicitly left alone; only the card's colour and structure changed.
+
+**⚠ FOUR GROUNDS SHIPPED IN THAT ONE DAY — read this before changing it a fifth time.** In
+order: a blush → coral gradient off a 2026-10-19 client swatch (`#f1e5e4 → #e9aea5`, an
+orange-leaning pink belonging to no token here); sand with a burgundy wash, to get it onto the
+palette; a **flat `--brand-primary`** field, picked because the product is a white carton and a
+pale ground gives it no edge; and finally the reference's own layering.
+
+- **Three sand steps, measured off the capture, not eyeballed** — band `#f3ede7`, card
+  `#eee6dc`, tile `#e4dace`, each a little deeper than what it sits on. They are **local
+  `--range-*` custom properties, not new global tokens**: nothing else on the site runs this
+  beige and promoting it would start a second neutral ramp. If the band is restyled again they
+  move together, and **`--range-tile` must stay deeper than `--range-card`** — that step is
+  what now solves the white-carton problem the burgundy field was solving with colour.
+- **⚠ THE BAND'S OWN GROUND WAS THEN REMOVED (requested, same day).** `.range` carries no
+  `background` at all and sits on the page's white. The other two steps are untouched and
+  still work, because the layering was only ever relative — card on white still reads as a
+  panel, tile on card still gives the carton its edge. `--range-cream` is **kept, unused**, so
+  putting the band colour back is one `background` line.
+- **The card is flat at rest.** The reference's cards carry no shadow; the hover lift is kept
+  so the card still has an affordance.
+- **⚠ `.range__add` IS A FULL-WIDTH PILL IN THE CARD BODY NOW**, not a round icon button in the
+  tile's corner — that corner is where the reference puts a wishlist heart, which this project
+  does not have, so the one real action had taken it. It must stay **inside `.range__body`**:
+  the tile is a link to the product page and a button inside a link is the nesting trap
+  `.report__row` carries a note about. It carries **no `aria-label`** — the visible text is the
+  accessible name, and "Add Retatrutide 20mg to cart" would fail label-in-name.
+  - Rest `--brand-primary-deep`, hover **lighter** to `--brand-primary` (the resting state is
+    already the deep shade, so that is the only move left that reads as a change), added
+    `--brand-rose`.
+- **Both tile pills are outlined now** (`1px var(--brand-primary)` on a 72% white fill): on the
+  pale sand tile an unbordered white pill has almost no edge.
+- **⚠ `.range__flag` has moved three times in a day and its narrow-width rules are load-bearing.**
+  Top-right at rest; **bottom-right ≤640** (at 375 the card is 228px and the purity badge alone
+  runs 130, so the two top pills overlapped); **hidden ≤374** (at 320 the card is 182px and the
+  bottom row needs 205 — the flag is a client-named label while the chip and badge are facts
+  from `specs` / `labAnalysis`, so the flag is the one that goes).
+  - **Its ≤640 block sits immediately after the base rule, NOT in the band's own
+    `@media (max-width: 640px)` ~7000 lines earlier.** From there, at equal specificity, the
+    base `top: 0.85rem` won and the pill rendered with both `top` and `bottom` applied —
+    stretched the full height of the tile. Cost a pass.
+- Verified at 1440 / 375 / 320: grounds `rgb(243,237,231)` / `rgb(238,230,220)` /
+  `rgb(228,218,206)`, all five packshots loading, no pill overlapping another at any width, the
+  button not wrapping, add-to-cart still writing `p1` to `liora.cart.v1` and opening the
+  drawer, 0 overflow, 0 console errors.
+  - **Blank media tiles in a Playwright element screenshot are the harness, not a bug** — the
+    images measure `complete`, `naturalWidth: 900`, `opacity: 1` at the same moment. Re-take
+    the shot.
+- Nothing else consumes `.range__media` at present (the About page's shop grid, which reused
+  `.range__*`, is no longer in that page's markup).
+
+**⚠ THE CATEGORY TILES ARE GONE FROM THIS BAND (2026-10-26, requested).** It closed on a row
+of four tiles — it had absorbed `ShopCategories` when that band was unmounted — but
+**`ShopCategories` was remounted on 10-21 directly above it**, so the page rendered the same
+four `researchAreas` twice, from the same `shopImage` / `shopTitleLines` fields. The row, the
+`researchAreas` import and the `CATEGORIES` constant are removed from `ProductRange.tsx`; the
+`.range__cat*` CSS and `rangeCopy.categoriesLabel` are **kept but unused**, so restoring the
+row is that block plus the import. Verified: 0 `.range__cat` in the DOM, 4 `.cats__item` still
+above it, 5 product cards, `id="work"` still resolving, 0 overflow at 1440.
 
 **Product range** (`ProductRange.tsx`, `rangeCopy` in `site.ts`, `.range__*` at the end of
 `portfolio.css`) — added 2026-10-15, **rebuilt 2026-10-16 to a best-sellers reference**: a
@@ -3461,7 +3997,24 @@ is left half-built.
 
 Pending items, none of them started:
 
-- **→ CURRENT TASK: add TESAMORELIN 20mg as a catalogue product.** Requested 2026-10-15 to
+- **→ CURRENT TASK: finish the `peptiva-labs` workflow pass.** The home page is rebuilt
+  to it (2026-10-21, see the mount list above). **Three items are blocked on the client
+  and must not be guessed:**
+  1. **The newsletter's promo code.** The 10% first-order discount is confirmed; the code
+     is not. `newsletterCopy.offer` stays `null` until it arrives.
+  2. **Bench Programme enrolment.** The terms are confirmed and the band is live, but
+     taking the discount needs a `plan` on the cart line, the discount in the cart
+     subtotal and the flag in the order payload. `lib/api.ts` is a contract with the
+     external order service — that belongs with the **product page + checkout pass**,
+     which is also where the reference puts its plan chooser.
+  3. **Badges.** One bestseller is named. `NEW` / `LIMITED` need the client to say which
+     lots, or they stay off.
+  Then the remaining pages, in the reference's order: **shop listing** (its line /
+  format / price / testing filter rail), **product page** (Janoshik interstitial, plan
+  chooser, details accordions, "Pairs with"), and its `/delivery`, `/returns`,
+  `/track-order`, `/faq` pages — several of which already exist here as policy routes.
+
+- **Add TESAMORELIN 20mg as a catalogue product.** Requested 2026-10-15 to
   replace BPC-157 & TB-500 in the home grid. **Blocked on two facts the client is sending**, and
   neither may be invented:
   1. **Price.** `projects` has no entry for it, and `.range__price` renders `formatUsd(p.price)`
@@ -3481,10 +4034,10 @@ Pending items, none of them started:
   and declined, because deleting the entry strands the id in any saved `liora.cart.v1` cart.
 
 - `About` has a page but no dropdown panel — offered, not requested
-- **Science hero is still the warm/gold stock photo** and now clashes with About's cool palette.
-  A cool replacement was prompted but blocked by the Higgsfield daily cap — regenerate it (prompt
-  #4: abstract molecular visualisation, indigo/teal/cyan/magenta, wide, space on the left) once
-  the cap resets.
+- ~~**Science hero is still the warm/gold stock photo**~~ — **closed 2026-10-21.** The whole
+  Science set was re-shot with the storefront pass (`science/hero-pack.webp` + two more, the
+  carton composited in). The cool-palette replacement this line asked for is moot: the site's
+  imagery direction moved to warm lifestyle photography with the burgundy redesign.
 - `site.phone` (`+1 000 000 0000`) and `site.whatsapp` (`wa.me/10000000000`) are placeholders.
   The About page shows email + socials only, but the Footer/Contact section may expose them.
 - `src/assets/nav/{shop,learn,support}.webp` are now **unreferenced** (dropdowns use product and
@@ -3670,8 +4223,8 @@ When the instruction is "continue", "resume", or "continue from where I stopped"
 | Product data, price, copy | `data/site.ts` |
 | Research areas | `data/research.ts`, `components/ResearchAreas.tsx` |
 | Product finder | `components/ProductFinder.tsx`, `data/finder.ts`, `portfolio.css` (`.finder__*`, end of file) |
-| Science page | `components/SciencePage.tsx`, `data/science.ts`, `portfolio.css` (`.science__*`, end of file) |
-| About page | `components/AboutPage.tsx`, `data/about.ts`, `portfolio.css` (`.about-page__*`, end of file) |
+| Science page | `components/SciencePage.tsx`, `data/science.ts`, `portfolio.css` (`.science__*` / `.report__*`, end of file), `assets/science/` |
+| About page | `components/AboutPage.tsx`, `data/about.ts`, `portfolio.css` (`.about-page__*`, end of file), `assets/about/` |
 | Reviews / testimonials (`#reviews`) | `components/Testimonials.tsx`, `portfolio.css` (`.testimonials*` / `.marquee` / `.testimonial*` ~1743) |
 | FAQ (`#faq`) | `components/FAQ.tsx`, `faqCopy` + `faqItems` in `data/site.ts`, `portfolio.css` (`.faq__*` ~2736), `assets/faq/` |
 | Lab proof home section | `components/LabProof.tsx`, `proofCopy` in `data/science.ts`, `portfolio.css` (`.proof__*`, end of file) |
@@ -3695,6 +4248,9 @@ When the instruction is "continue", "resume", or "continue from where I stopped"
 | A home section | the matching `components/<Section>.tsx` + its block in `portfolio.css` |
 | Shop listing / filter / sort / search | `components/ShopPage.tsx`, `researchAreas` in `data/research.ts`, `portfolio.css` (`.shop-page__*`) |
 | Announcement bar | `components/AnnouncementBar.tsx`, `announcementCopy` in `data/site.ts`, `--announce-h` in `index.css`, `portfolio.css` (`.announce__*`) |
+| Entry modal (partner claim) | `components/PartnerModal.tsx`, `partnerModal` in `data/site.ts`, `portfolio.css` (`.partner__*`, end of file) |
+| Bench Programme (subscription) | `components/BenchProgramme.tsx`, `benchCopy` in `data/site.ts`, `portfolio.css` (`.bench__*`, end of file) |
+| Newsletter band | `components/NewsletterBand.tsx`, `newsletterCopy` in `data/site.ts`, `portfolio.css` (`.newsband__*`, end of file) |
 | Shop by category (home) | `components/ShopCategories.tsx`, `categoryCopy` in `data/site.ts`, `researchAreas` in `data/research.ts`, `portfolio.css` (`.cats__*`) |
 | Final CTA | `components/FinalCta.tsx`, `finalCtaCopy` in `data/site.ts`, `portfolio.css` (`.finalcta__*`) |
 | Routes | `hooks/useRouter.tsx` + `App.tsx` |

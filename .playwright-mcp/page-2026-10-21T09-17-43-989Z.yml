@@ -1,0 +1,200 @@
+- generic [ref=f1e2]:
+  - banner [ref=f1e11]:
+    - generic [ref=f1e12]:
+      - link "Lyfe Health" [ref=f1e13] [cursor=pointer]:
+        - /url: "#home"
+        - generic [ref=f1e22]: Lyfe
+        - generic [ref=f1e24]: Health
+      - navigation "Primary" [ref=f1e26]:
+        - list [ref=f1e27]:
+          - listitem [ref=f1e28]:
+            - button "Shop" [ref=f1e29] [cursor=pointer]
+          - listitem [ref=f1e31]:
+            - button "Learn" [ref=f1e32] [cursor=pointer]
+          - listitem [ref=f1e34]:
+            - button "Support" [ref=f1e35] [cursor=pointer]
+      - generic [ref=f1e38]:
+        - button "Sign in" [ref=f1e40] [cursor=pointer]
+        - button "Open cart, 0 items" [ref=f1e44] [cursor=pointer]
+  - text: · ·
+  - main [ref=f1e213]:
+    - generic [ref=f1e470]:
+      - generic [ref=f1e474]:
+        - generic [ref=f1e475]: About
+        - heading "Advancing modern research with smarter formulations." [level=1] [ref=f1e476]
+        - paragraph [ref=f1e477]: We're committed to advancing high-quality peptide research through clean, reliable, and precisely characterised reference materials. Every product is sourced from verified suppliers and carefully packed to preserve consistency, purity, and integrity — from our facility to your bench.
+      - generic [ref=f1e478]:
+        - generic [ref=f1e479]:
+          - generic [ref=f1e480]:
+            - term [ref=f1e481]:
+              - text: "99"
+              - generic [ref=f1e482]: "%+"
+            - definition [ref=f1e483]: Verified purity
+          - generic [ref=f1e484]:
+            - term [ref=f1e485]:
+              - text: "1000"
+              - generic [ref=f1e486]: +
+            - definition [ref=f1e487]: Customers served
+          - generic [ref=f1e488]:
+            - term [ref=f1e489]:
+              - text: "24"
+              - generic [ref=f1e490]: h
+            - definition [ref=f1e491]: WhatsApp reply
+        - list [ref=f1e492]:
+          - listitem [ref=f1e493]:
+            - generic [ref=f1e494]: Range
+            - generic [ref=f1e495]: Pre-filled peptide lots
+          - listitem [ref=f1e496]:
+            - generic [ref=f1e497]: Testing
+            - generic [ref=f1e498]: Independent, published
+          - listitem [ref=f1e499]:
+            - generic [ref=f1e500]: Support
+            - generic [ref=f1e501]: Real people on WhatsApp
+      - generic [ref=f1e503]:
+        - figure [ref=f1e504]:
+          - 'img "Quality-control station: sealed vials in a tamper-evident tray beside a clipboard and calipers." [ref=f1e505]'
+        - generic [ref=f1e506]:
+          - heading "A supply chain built for people who have to show their working." [level=2] [ref=f1e507]
+          - paragraph [ref=f1e508]: "Laboratories do not buy on a brand promise — they buy on documentation. So the operation is built backwards from that: verified suppliers, controlled handling, a retained sample from every lot, and an independent analysis published against the material it belongs to."
+          - paragraph [ref=f1e509]: That is also why the catalogue is deliberately small. Every item we list is one we can stand behind with a batch-specific certificate.
+          - link "See how we verify purity" [ref=f1e510] [cursor=pointer]:
+            - /url: "#/science?s=purity"
+      - list [ref=f1e514]:
+        - listitem [ref=f1e515]:
+          - blockquote [ref=f1e516]: “WhatsApp reply within the hour. That alone changed how we plan ordering for our team.”
+          - generic [ref=f1e518]:
+            - generic [ref=f1e519]: Rohan Natarajan
+            - generic [ref=f1e520]: Co-founder, Ember Research
+        - listitem [ref=f1e521]:
+          - blockquote [ref=f1e522]: “Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.”
+          - generic [ref=f1e524]:
+            - generic [ref=f1e525]: Marco Ruiz
+            - generic [ref=f1e526]: Procurement Lead, Vela Biotech
+      - generic [ref=f1e528]:
+        - figure [ref=f1e529]:
+          - img "Sealed unlabelled research vials in a protective insert inside an open transport case." [ref=f1e530]
+        - generic [ref=f1e531]:
+          - heading "Research use only" [level=2] [ref=f1e532]
+          - list [ref=f1e533]:
+            - listitem [ref=f1e534]: Produced for laboratory research only. Not for human or veterinary consumption.
+            - listitem [ref=f1e535]: These products are not intended to diagnose, treat, cure, or prevent any disease.
+            - listitem [ref=f1e536]: Supplied in sealed, fixed-volume formats intended for laboratory analysis.
+      - generic [ref=f1e538]:
+        - generic [ref=f1e539]:
+          - heading "Talk to us" [level=2] [ref=f1e540]
+          - paragraph [ref=f1e541]: Questions on handling, documentation or a specific lot — we answer them ourselves.
+        - generic [ref=f1e542]:
+          - link "hello@lyfehealth.com" [ref=f1e543] [cursor=pointer]:
+            - /url: mailto:hello@lyfehealth.com
+          - list [ref=f1e544]:
+            - listitem [ref=f1e545]:
+              - link "WhatsApp" [ref=f1e546] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f1e547]:
+              - link "Instagram" [ref=f1e548] [cursor=pointer]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f1e549]:
+              - link "Email" [ref=f1e550] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+          - button "Browse the catalogue" [ref=f1e551] [cursor=pointer]
+  - contentinfo [ref=f1e143]:
+    - generic [ref=f1e144]:
+      - generic [ref=f1e145]:
+        - generic [ref=f1e146]:
+          - generic [ref=f1e147]:
+            - generic [ref=f1e148]: Lyfe
+            - generic [ref=f1e149]: Health
+          - paragraph [ref=f1e150]: Research-grade peptide supply
+          - generic [ref=f1e151]:
+            - heading "Stay updated" [level=4] [ref=f1e152]
+            - generic [ref=f1e153]:
+              - textbox "Email address" [ref=f1e154]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f1e155] [cursor=pointer]
+            - paragraph [ref=f1e156]: Research updates and restock alerts. No spam.
+        - generic [ref=f1e157]:
+          - heading "Quick Links" [level=4] [ref=f1e158]
+          - list [ref=f1e159]:
+            - listitem [ref=f1e160]:
+              - link "Shop" [ref=f1e161] [cursor=pointer]:
+                - /url: "#/shop"
+            - listitem [ref=f1e162]:
+              - link "Home" [ref=f1e163] [cursor=pointer]:
+                - /url: "#home"
+            - listitem [ref=f1e164]:
+              - link "About" [ref=f1e165] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=f1e166]:
+              - link "Products" [ref=f1e167] [cursor=pointer]:
+                - /url: "#work"
+            - listitem [ref=f1e168]:
+              - link "Why Us" [ref=f1e169] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=f1e170]:
+              - link "FAQ" [ref=f1e171] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f1e172]:
+              - link "Contact" [ref=f1e173] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f1e174]:
+              - link "Track order" [ref=f1e175] [cursor=pointer]:
+                - /url: "#/track"
+        - generic [ref=f1e176]:
+          - heading "Contact" [level=4] [ref=f1e177]
+          - list [ref=f1e178]:
+            - listitem [ref=f1e179]:
+              - link "hello@lyfehealth.com" [ref=f1e180] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=f1e181]:
+              - link "+1 000 000 0000" [ref=f1e182] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f1e183]:
+              - generic [ref=f1e184]: Global research supply
+        - generic [ref=f1e185]:
+          - heading "Policies" [level=4] [ref=f1e186]
+          - list [ref=f1e187]:
+            - listitem [ref=f1e188]:
+              - link "Press Release" [ref=f1e189] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f1e190]:
+              - link "Refund Policy" [ref=f1e191] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f1e192]:
+              - link "Shipping Policy" [ref=f1e193] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f1e194]:
+              - link "Privacy Policy" [ref=f1e195] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f1e196]:
+              - link "Terms Of Service" [ref=f1e197] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f1e198]:
+          - heading "Follow" [level=4] [ref=f1e199]
+          - list [ref=f1e200]:
+            - listitem [ref=f1e201]:
+              - link "WhatsApp" [ref=f1e202] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f1e203]:
+              - link "Instagram" [ref=f1e204] [cursor=pointer]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f1e205]:
+              - link "Email" [ref=f1e206] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f1e208]:
+        - generic [ref=f1e209]: © 2026 Lyfe Health
+        - generic [ref=f1e210]: Global research supply
+      - paragraph [ref=f1e211]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f1e212]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 0 items
+        - button: ×
+      - generic:
+        - generic [aria-hidden]: ◌
+        - paragraph: Your cart is empty.
+        - button: Browse catalogue

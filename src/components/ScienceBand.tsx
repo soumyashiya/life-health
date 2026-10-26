@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { sciBandCopy } from "../data/site";
-import { purityMethod } from "../data/science";
+import { standards } from "../data/science";
 import { useParallax } from "../hooks/useParallax";
 import backdrop from "../assets/sciband/background.webp";
 
@@ -32,11 +32,17 @@ export function ScienceBand() {
      usual rule. */
   useParallax<HTMLElement>("[data-parallax]", root);
 
-  /* The cards are **what every published report carries**, read from
-     `purityMethod.documentation` rather than written as copy — so the band and
-     the Science page cannot say different things. Four seats; the list holds
-     five. */
-  const chips = purityMethod.documentation.slice(0, 4);
+  /* ⚠ The cards are **the four controls a lot goes through**, read from
+     `standards` — 2026-10-21, with the pass that took the home page's content
+     to the client reference. That reference heads this band *"How each pen is
+     prepared"* over Source / Verify / Seal, which is what `standards` already
+     describes; using it keeps the band and the Science page's section 01 from
+     saying different things, and a fifth control would appear here by itself.
+     It used to read `purityMethod.documentation` — what every *report*
+     carries — which is the Science page's section 02 and a different subject.
+     The reference shows three; the fourth is ours (retained samples) and it
+     also keeps the 2×2 grid even. */
+  const chips = standards;
 
   useEffect(() => {
     const el = root.current;
@@ -114,19 +120,15 @@ export function ScienceBand() {
           <p className="sciband__chips-label">{sciBandCopy.chipsLabel}</p>
           <ul className="sciband__chips">
             {chips.map((chip, i) => (
-              <li className="sciband__chip" key={chip}>
+              <li className="sciband__chip" key={chip.number}>
                 <span className="sciband__icon" aria-hidden>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     {ICONS[i]}
                   </svg>
                 </span>
                 <span className="sciband__chip-text">
-                  <span className="sciband__chip-title">{chip}</span>
-                  {sciBandCopy.chipNotes[chip] && (
-                    <span className="sciband__chip-note">
-                      {sciBandCopy.chipNotes[chip]}
-                    </span>
-                  )}
+                  <span className="sciband__chip-title">{chip.title}</span>
+                  <span className="sciband__chip-note">{chip.body}</span>
                 </span>
               </li>
             ))}

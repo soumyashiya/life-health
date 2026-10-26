@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import clsx from "clsx";
-import { projects, rangeCopy } from "../data/site";
-import { researchAreas, researchAreaHref } from "../data/research";
+import {
+  benchCopy,
+  bestsellerIds,
+  projects,
+  rangeCopy,
+  shelfLines,
+} from "../data/site";
 import { useCart } from "../hooks/useCart";
 import { useReveal } from "../hooks/useReveal";
 
@@ -12,16 +17,18 @@ const formatUsd = (n: number) =>
     maximumFractionDigits: 0,
   }).format(n);
 
+/* The card price is a round catalogue figure and reads better without cents;
+   a **saving** is not — 15% of $350 is $52.50, and rounding it to $53 would
+   overstate by half a dollar on a live storefront. Exact, always. */
+const formatUsdExact = (n: number) =>
+  n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
 /* Hidden from this band on request (2026-10-15). `p3` is BPC-157 & TB-500.
    It is only hidden **here** — still in `projects`, still routable at
    `#/product/p3`, still on `#/shop` and still referenced by three
    `researchAreas.productIds`. Deleting the entry would strand the id in any
    saved cart in `liora.cart.v1`. */
 const HIDDEN_IDS = new Set(["p3"]);
-
-/* Four category tiles, as the reference has. "All peptides" is the one left
-   out: it is the whole catalogue, which "Shop all products" already covers. */
-const CATEGORIES = researchAreas.filter((a) => a.id !== "peptide").slice(0, 4);
 
 const ICONS: Record<string, ReactNode> = {
   lab: <path d="M9.5 3h5M10.5 3v5.5L5.2 18.4A1.8 1.8 0 0 0 6.8 21h10.4a1.8 1.8 0 0 0 1.6-2.6L13.5 8.5V3M8 15h8" />,
@@ -32,11 +39,16 @@ const ICONS: Record<string, ReactNode> = {
 const spec = (p: (typeof projects)[number], label: string) =>
   p.specs.find((s) => s.label === label)?.value;
 
-/* The home shop band — products and categories in one section, rebuilt
-   2026-10-20 to a client reference: an eyebrow pill, title and lead with
-   three trust marks opposite, a 3-up carousel of rounded product cards with
-   arrows either side and page dots under it, then a row of four category
-   tiles. It absorbed the separate `ShopCategories` band (unmounted, kept).
+/* The home shop band, rebuilt 2026-10-20 to a client reference: an eyebrow
+   pill, title and lead with three trust marks opposite, a 3-up carousel of
+   rounded product cards with arrows either side, page dots under it, then the
+   shop-all link and the research-use-only line.
+
+   ⚠ **It is products only as of 2026-10-26.** It used to close on a row of
+   four category tiles — it had absorbed the `ShopCategories` band when that
+   was unmounted — but `ShopCategories` was remounted on 10-21 directly above
+   this band, so the same four `researchAreas` were being rendered twice from
+   the same fields. The row was removed on request; see the note where it sat.
 
    What the reference does that this catalogue cannot, and what took its place:
    - **star ratings and review counts** — there is no review data here. The
@@ -45,8 +57,6 @@ const spec = (p: (typeof projects)[number], label: string) =>
      behind them. The badge is the lot's real published purity, or nothing.
    - **a wishlist heart** — there is no wishlist. That corner is the add to
      cart button, which is a real action.
-   - its category tiles read "Manage weight naturally", "Restore hormonal
-     balance" — outcome claims. Ours are the research areas' own labels.
 
    Carries `id="work"`, which the Products nav anchor points at. */
 export function ProductRange() {
@@ -59,7 +69,18 @@ export function ProductRange() {
   const railRef = useRef<HTMLDivElement | null>(null);
   const revealRef = useReveal<HTMLElement>();
 
-  const items = projects.filter((p) => !HIDDEN_IDS.has(p.id));
+  /* Bestsellers first (2026-10-21). The band is headed "Bestsellers" after the
+     reference, and the client named one lot — so the rail opens on it rather
+     than on catalogue order. Everything else keeps its order; this is a stable
+     partition, not a ranking. */
+  const items = projects
+    .filter((p) => !HIDDEN_IDS.has(p.id))
+    .slice()
+    .sort(
+      (a, b) =>
+        Number(bestsellerIds.includes(b.id)) -
+        Number(bestsellerIds.includes(a.id)),
+    );
 
   /* Dots and arrows are measured off the rail, so they follow the 3 / 2 / 1-up
      breakpoints by themselves. ResizeObserver fires on observe, so the first
@@ -185,6 +206,15 @@ export function ProductRange() {
                       <img src={p.image} alt="" loading="lazy" decoding="async" />
                     </a>
 
+                    {/* ⚠ The bestseller flag is **client-supplied**, not
+                        derived — there is no sales data in this project. One
+                        lot carries it; see `bestsellerIds` in `data/site.ts`.
+                        It sits opposite the purity badge so the two never
+                        stack. */}
+                    {bestsellerIds.includes(p.id) && (
+                      <span className="range__flag mono">Bestseller</span>
+                    )}
+
                     {lab && (
                       <span className="range__badge">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
@@ -193,28 +223,6 @@ export function ProductRange() {
                         {lab.purity} verified
                       </span>
                     )}
-
-                    {/* The reference's wishlist heart. There is no wishlist, so
-                        the corner carries the one real action instead. */}
-                    <button
-                      type="button"
-                      className={clsx("range__add", added && "is-added")}
-                      onClick={() => add(p.id)}
-                      aria-label={`Add ${p.title} to cart`}
-                      title={added ? "Added" : "Add to cart"}
-                      data-cursor
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
-                        {added ? (
-                          <path d="M5 12.5 10 17.5 19 7.5" />
-                        ) : (
-                          <>
-                            <path d="M6 8h12l-1 11H7L6 8Z" />
-                            <path d="M9 8V6a3 3 0 0 1 6 0v2" />
-                          </>
-                        )}
-                      </svg>
-                    </button>
 
                     {content && (
                       <span className="range__chip">
@@ -228,13 +236,55 @@ export function ProductRange() {
                     <a className="range__name" href={`#/product/${p.id}`} data-cursor>
                       {p.title}
                     </a>
-                    <p className="range__desc">{spec(p, "Form")}</p>
+                    {/* The reference's shelf line — compound class and format
+                        ("Triple agonist · 20 mg pen"), read from `shelfLines`.
+                        A lot with no entry falls back to its `Form` spec. */}
+                    <p className="range__desc">
+                      {shelfLines[p.id] ?? spec(p, "Form")}
+                    </p>
                     <div className="range__foot-row">
                       <span className="range__batch">
                         {lab ? `Batch ${lab.batchNumber} · ${lab.lab}` : "Research use only"}
                       </span>
                       <span className="range__price">{formatUsd(p.price)}</span>
                     </div>
+                    {/* The Bench saving, computed from this lot's own price at
+                        the client-confirmed rate — never typed. The reference
+                        prints the same chip on every card. */}
+                    <span className="range__bench mono">
+                      Save {formatUsdExact(p.price * benchCopy.discount)} with
+                      the Bench Programme
+                    </span>
+
+                    {/* ⚠ The full-width pill the 2026-10-26 reference closes
+                        its cards with. It used to be a round icon button in
+                        the media tile's corner, where that reference puts a
+                        wishlist heart — there is no wishlist here, so the one
+                        real action took the corner. Now it is where the
+                        reference actually puts it.
+
+                        **No `aria-label`**: the button carries visible text,
+                        and an accessible name that does not contain it
+                        ("Add Retatrutide 20mg to cart") fails label-in-name.
+                        The product it belongs to is its own `<article>`. */}
+                    <button
+                      type="button"
+                      className={clsx("range__add", added && "is-added")}
+                      onClick={() => add(p.id)}
+                      data-cursor
+                    >
+                      {added ? "Added" : "Add to cart"}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+                        {added ? (
+                          <path d="M5 12.5 10 17.5 19 7.5" />
+                        ) : (
+                          <>
+                            <path d="M6 8h12l-1 11H7L6 8Z" />
+                            <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+                          </>
+                        )}
+                      </svg>
+                    </button>
                   </div>
                 </article>
               );
@@ -270,34 +320,13 @@ export function ProductRange() {
           </div>
         )}
 
-        <h3 className="range__cats-label sr-only">{rangeCopy.categoriesLabel}</h3>
-        <ul className="range__cats">
-          {CATEGORIES.map((area, i) => (
-            <li key={area.id} data-anim="up" data-anim-delay={(i * 0.08).toFixed(2)}>
-              <a className="range__cat" href={researchAreaHref(area)} data-cursor>
-                <img
-                  src={area.shopImage}
-                  alt=""
-                  width={900}
-                  height={1125}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="range__cat-title">
-                  {area.shopTitleLines[0]}
-                  <br />
-                  {area.shopTitleLines[1]}
-                </span>
-                <span className="range__cat-arrow" aria-hidden>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M5 12h13M12 6l6 6-6 6" />
-                  </svg>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
+        {/* ⚠ The row of four category tiles that sat here was removed on
+            request, 2026-10-26. It was a straight duplicate: `ShopCategories`
+            is mounted directly above this band and renders the same four
+            `researchAreas` from the same `shopImage` / `shopTitleLines`
+            fields, so the page carried the categories twice. The `.range__cat*`
+            CSS and `rangeCopy.categoriesLabel` are kept — restoring the row is
+            this block plus the `researchAreas` import. */}
         <div className="range__foot">
           <a className="range__all" href={rangeCopy.shopAll.href} data-cursor>
             {rangeCopy.shopAll.label}

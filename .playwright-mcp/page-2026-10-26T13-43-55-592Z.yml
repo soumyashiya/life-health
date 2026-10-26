@@ -1,0 +1,261 @@
+- generic [ref=f2e2]:
+  - banner [ref=f2e11]:
+    - generic [ref=f2e12]:
+      - link "Lyfe Health" [ref=f2e13] [cursor=pointer]:
+        - /url: "#home"
+        - generic [ref=f2e22]: Lyfe
+        - generic [ref=f2e24]: Health
+      - navigation "Primary" [ref=f2e26]:
+        - list [ref=f2e27]:
+          - listitem [ref=f2e28]:
+            - button "Shop" [ref=f2e29] [cursor=pointer]
+          - listitem [ref=f2e31]:
+            - button "Learn" [ref=f2e32] [cursor=pointer]
+          - listitem [ref=f2e34]:
+            - button "Support" [ref=f2e35] [cursor=pointer]
+      - generic [ref=f2e38]:
+        - button "Sign in" [ref=f2e40] [cursor=pointer]
+        - button "Open cart, 1 item" [ref=f2e44] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f2e49]: "1"
+  - text: · ·
+  - main [ref=f2e788]:
+    - generic [ref=f2e790]:
+      - generic [ref=f2e791]:
+        - generic [ref=f2e792]: Shop
+        - heading "Shop all products." [level=1] [ref=f2e793]
+        - paragraph [ref=f2e794]: Every lot is third-party tested, sealed and cold-packed — with its full purity report on the product page before you buy.
+      - generic [ref=f2e795]:
+        - navigation "Filter by category" [ref=f2e796]:
+          - link "All products" [ref=f2e797] [cursor=pointer]:
+            - /url: "#/shop"
+          - link "Metabolic" [ref=f2e798] [cursor=pointer]:
+            - /url: "#/shop?research=metabolic"
+          - link "Recovery" [ref=f2e799] [cursor=pointer]:
+            - /url: "#/shop?research=recovery"
+          - link "Cellular" [ref=f2e800] [cursor=pointer]:
+            - /url: "#/shop?research=cellular"
+          - link "Skin & Hair" [ref=f2e801] [cursor=pointer]:
+            - /url: "#/shop?research=formulation"
+        - generic [ref=f2e802]:
+          - generic [ref=f2e803]:
+            - generic [ref=f2e807] [cursor=pointer]: Search products
+            - searchbox "Search products" [ref=f2e808]
+          - generic [ref=f2e809]:
+            - generic [ref=f2e810] [cursor=pointer]: Sort products
+            - combobox "Sort products" [ref=f2e811] [cursor=pointer]:
+              - option "Featured" [selected]
+              - 'option "Price: low to high"'
+              - 'option "Price: high to low"'
+              - option "Highest verified purity"
+              - 'option "Name: A–Z"'
+      - paragraph [ref=f2e813]: 6 products
+      - generic [ref=f2e814]:
+        - article [ref=f2e815]:
+          - link "Retatrutide 20mg Lab verified" [ref=f2e816] [cursor=pointer]:
+            - /url: "#/product/p1"
+            - img "Retatrutide 20mg" [ref=f2e817]
+            - generic [ref=f2e818]: Lab verified
+          - generic [ref=f2e819]:
+            - generic [ref=f2e820]: Metabolic
+            - link "Retatrutide 20mg" [ref=f2e821] [cursor=pointer]:
+              - /url: "#/product/p1"
+            - paragraph [ref=f2e822]: Triple-agonist of GLP-1, GIP and glucagon receptors. One pre-filled pen, 20 mg total, sealed and cold-packed.
+            - generic [ref=f2e823]:
+              - generic [ref=f2e824]: $350
+              - button "Add Retatrutide 20mg to cart" [ref=f2e825] [cursor=pointer]: Add to cart
+        - article [ref=f2e826]:
+          - link "Glow 70mg Lab verified" [ref=f2e827] [cursor=pointer]:
+            - /url: "#/product/p2"
+            - img "Glow 70mg" [ref=f2e828]
+            - generic [ref=f2e829]: Lab verified
+          - generic [ref=f2e830]:
+            - generic [ref=f2e831]: Cellular
+            - link "Glow 70mg" [ref=f2e832] [cursor=pointer]:
+              - /url: "#/product/p2"
+            - paragraph [ref=f2e833]: GHK-Cu paired with BPC-157 and TB-500 in one blend. Two pre-filled pens, 35 mg each.
+            - generic [ref=f2e834]:
+              - generic [ref=f2e835]: $329
+              - button "Add Glow 70mg to cart" [ref=f2e836] [cursor=pointer]: Add to cart
+        - article [ref=f2e837]:
+          - link "Retatrutide 40mg Lab verified" [ref=f2e838] [cursor=pointer]:
+            - /url: "#/product/p6"
+            - img "Retatrutide 40mg" [ref=f2e839]
+            - generic [ref=f2e840]: Lab verified
+          - generic [ref=f2e841]:
+            - generic [ref=f2e842]: Metabolic
+            - link "Retatrutide 40mg" [ref=f2e843] [cursor=pointer]:
+              - /url: "#/product/p6"
+            - paragraph [ref=f2e844]: Higher-content triple-agonist of GLP-1, GIP and glucagon receptors. One pre-filled pen, 40 mg total.
+            - generic [ref=f2e845]:
+              - generic [ref=f2e846]: $629
+              - button "Add Retatrutide 40mg to cart" [ref=f2e847] [cursor=pointer]: Add to cart
+        - article [ref=f2e848]:
+          - link "Tirzepatide 40mg Lab verified" [ref=f2e849] [cursor=pointer]:
+            - /url: "#/product/p4"
+            - img "Tirzepatide 40mg" [ref=f2e850]
+            - generic [ref=f2e851]: Lab verified
+          - generic [ref=f2e852]:
+            - generic [ref=f2e853]: Metabolic
+            - link "Tirzepatide 40mg" [ref=f2e854] [cursor=pointer]:
+              - /url: "#/product/p4"
+            - paragraph [ref=f2e855]: Dual agonist of GLP-1 and GIP receptors. One pre-filled pen, 40 mg total, sealed and cold-packed.
+            - generic [ref=f2e856]:
+              - generic [ref=f2e857]: $399
+              - button "Add Tirzepatide 40mg to cart" [ref=f2e858] [cursor=pointer]: Add to cart
+        - article [ref=f2e859]:
+          - link "BPC-157 & TB-500 40mg Lab verified" [ref=f2e860] [cursor=pointer]:
+            - /url: "#/product/p3"
+            - img "BPC-157 & TB-500 40mg" [ref=f2e861]
+            - generic [ref=f2e862]: Lab verified
+          - generic [ref=f2e863]:
+            - generic [ref=f2e864]: Recovery
+            - link "BPC-157 & TB-500 40mg" [ref=f2e865] [cursor=pointer]:
+              - /url: "#/product/p3"
+            - paragraph [ref=f2e866]: BPC-157 and TB-500 paired in one pre-filled pen — 20 mg of each, 40 mg total.
+            - generic [ref=f2e867]:
+              - generic [ref=f2e868]: $269
+              - button "Add BPC-157 & TB-500 40mg to cart" [ref=f2e869] [cursor=pointer]: Add to cart
+        - article [ref=f2e870]:
+          - link [ref=f2e871] [cursor=pointer]:
+            - /url: "#/product/p5"
+            - img "NAD+ 1000mg" [ref=f2e872]
+          - generic [ref=f2e873]:
+            - generic [ref=f2e874]: Cellular
+            - link "NAD+ 1000mg" [ref=f2e875] [cursor=pointer]:
+              - /url: "#/product/p5"
+            - paragraph [ref=f2e876]: NAD+ (nicotinamide adenine dinucleotide). Two pre-filled pens, 500 mg each, 1,000 mg total.
+            - generic [ref=f2e877]:
+              - generic [ref=f2e878]: $249
+              - button "Add NAD+ 1000mg to cart" [ref=f2e879] [cursor=pointer]: Add to cart
+      - paragraph [ref=f2e880]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+  - contentinfo [ref=f2e711]:
+    - generic [ref=f2e712]:
+      - generic [ref=f2e713]:
+        - generic [ref=f2e714]:
+          - generic [ref=f2e715]:
+            - generic [ref=f2e716]: Lyfe
+            - generic [ref=f2e717]: Health
+          - paragraph [ref=f2e718]: Reference-grade research peptides. Verified sourcing, third-party purity testing, and a real person on WhatsApp when you need one.
+          - list [ref=f2e719]:
+            - listitem [ref=f2e720]:
+              - link "hello@lyfehealth.com" [ref=f2e721] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=f2e722]:
+              - link "WhatsApp" [ref=f2e723] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+          - generic [ref=f2e724]:
+            - heading "Stay updated" [level=4] [ref=f2e725]
+            - generic [ref=f2e726]:
+              - textbox "Email address" [ref=f2e727]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f2e728] [cursor=pointer]
+            - paragraph [ref=f2e729]: Research updates and restock alerts. No spam.
+        - generic [ref=f2e730]:
+          - heading "Shop" [level=4] [ref=f2e731]
+          - list [ref=f2e732]:
+            - listitem [ref=f2e733]:
+              - link "Metabolic" [ref=f2e734] [cursor=pointer]:
+                - /url: "#/shop?research=metabolic"
+            - listitem [ref=f2e735]:
+              - link "Recovery" [ref=f2e736] [cursor=pointer]:
+                - /url: "#/shop?research=recovery"
+            - listitem [ref=f2e737]:
+              - link "Cellular" [ref=f2e738] [cursor=pointer]:
+                - /url: "#/shop?research=cellular"
+            - listitem [ref=f2e739]:
+              - link "Skin & Hair" [ref=f2e740] [cursor=pointer]:
+                - /url: "#/shop?research=formulation"
+            - listitem [ref=f2e741]:
+              - link "All products" [ref=f2e742] [cursor=pointer]:
+                - /url: "#/shop"
+        - generic [ref=f2e743]:
+          - heading "Laboratory" [level=4] [ref=f2e744]
+          - list [ref=f2e745]:
+            - listitem [ref=f2e746]:
+              - link "Bench Programme" [ref=f2e747] [cursor=pointer]:
+                - /url: "#bench"
+            - listitem [ref=f2e748]:
+              - link "Our story" [ref=f2e749] [cursor=pointer]:
+                - /url: "#/about"
+            - listitem [ref=f2e750]:
+              - link "Lab reports" [ref=f2e751] [cursor=pointer]:
+                - /url: "#/science?s=reports"
+            - listitem [ref=f2e752]:
+              - link "Contact" [ref=f2e753] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f2e754]:
+              - link "Account" [ref=f2e755] [cursor=pointer]:
+                - /url: "#/account"
+        - generic [ref=f2e756]:
+          - heading "Client care" [level=4] [ref=f2e757]
+          - list [ref=f2e758]:
+            - listitem [ref=f2e759]:
+              - link "Track order" [ref=f2e760] [cursor=pointer]:
+                - /url: "#/track"
+            - listitem [ref=f2e761]:
+              - link "FAQ" [ref=f2e762] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f2e763]:
+              - link "Press Release" [ref=f2e764] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f2e765]:
+              - link "Refund Policy" [ref=f2e766] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f2e767]:
+              - link "Shipping Policy" [ref=f2e768] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f2e769]:
+              - link "Privacy Policy" [ref=f2e770] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f2e771]:
+              - link "Terms Of Service" [ref=f2e772] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f2e773]:
+          - heading "Follow" [level=4] [ref=f2e774]
+          - list [ref=f2e775]:
+            - listitem [ref=f2e776]:
+              - link "WhatsApp" [ref=f2e777] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f2e778]:
+              - link "Instagram" [ref=f2e779] [cursor=pointer]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f2e780]:
+              - link "Email" [ref=f2e781] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f2e783]:
+        - generic [ref=f2e784]: © 2026 Lyfe Health
+        - generic [ref=f2e785]: Global research supply
+      - paragraph [ref=f2e786]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f2e787]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 1 item
+        - button: ×
+      - list:
+        - listitem:
+          - link:
+            - /url: "#/product/p2"
+          - generic:
+            - link:
+              - /url: "#/product/p2"
+              - text: Glow 70mg
+            - generic: Cellular
+            - generic:
+              - group:
+                - button: −
+                - generic: "1"
+                - button: +
+              - generic: $329
+          - button: ×
+      - contentinfo:
+        - generic:
+          - generic: Subtotal
+          - generic: $329
+        - paragraph: Taxes and any handling fees are calculated at checkout
+        - button: Proceed to checkout
+        - button: View cart

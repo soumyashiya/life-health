@@ -156,9 +156,12 @@
      disagree about it. `AnnouncementBar` writes `0px` here on dismissal.
      **Fixed, not auto**: the strip is one line at every width (its text
      truncates below ~420px) so nothing below it reflows. */
-  /* 0 while the announcement bar is unmounted (2026-10-20). Set back to
-     2.5rem if it is remounted — the header and `body` both offset by it. */
-  --announce-h: 0px;
+  /* ⚠ Back to 2.5rem on 2026-10-21: the bar was **remounted** with the home
+     page's rebuild to the client reference, which opens with a scrolling
+     claims strip. It was 0 while the bar was unmounted (2026-10-20) — the two
+     always move together, or the page sits under the bar / leaves a blank
+     strip where it used to be. */
+  --announce-h: 2.5rem;
 
   /* The hero's campaign green and its lime CTA are gone with the burgundy
      redesign (2026-10-15). `.hero__panel` now takes `--brand-primary` flat,

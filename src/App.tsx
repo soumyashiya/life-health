@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Preloader } from "./components/Preloader";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
+import { AnnouncementBar } from "./components/AnnouncementBar";
+import { PartnerModal } from "./components/PartnerModal";
+import { ShopCategories } from "./components/ShopCategories";
 import { ProductRange } from "./components/ProductRange";
-import { ProductFeature } from "./components/ProductFeature";
+import { BenchProgramme } from "./components/BenchProgramme";
+import { NewsletterBand } from "./components/NewsletterBand";
 import { ScienceBand } from "./components/ScienceBand";
-import { DriftBand } from "./components/DriftBand";
-import { LineStory } from "./components/LineStory";
-import { AboutProduct } from "./components/AboutProduct";
 import { TrustBar } from "./components/TrustBar";
 import { FinalCta } from "./components/FinalCta";
 import { AboutBand } from "./components/AboutBand";
@@ -95,11 +96,19 @@ function AppShell() {
       {!ready && <Preloader onComplete={() => setReady(true)} />}
       <CustomCursor />
       <ScrollProgress />
-      {/* `AnnouncementBar` — the strip above the header — hidden on request
-          (2026-10-20). Component, `announcementCopy` and `.announce*` are kept;
-          remounting it also needs `--announce-h` in index.css set back to
-          2.5rem, or the page will not clear it. */}
+      {/* ⚠ REMOUNTED 2026-10-21 and rebuilt as a **marquee**, with the home
+          page's rebuild to the client reference — that site opens with a
+          scrolling claims strip above its header. It was hidden on request on
+          2026-10-20; `--announce-h` in `index.css` went back to 2.5rem with
+          it, and both have to move together or the page will not clear the
+          bar. Every claim in it is one the site already evidences. */}
+      <AnnouncementBar />
       <Navbar />
+      {/* The entry overlay — the reference's opening modal. It states the
+          ALLUVI partnership, which is a **client-confirmed commercial claim**;
+          see `partnerModal` in `data/site.ts`. Gated on `ready` so it is not
+          opened behind the preloader, and shown once per visitor. */}
+      <PartnerModal ready={ready} />
       {/* **No scroll-velocity drag on type** (removed on request, 2026-10-20):
           the reference runs it on `h1`/`p`/`ul`, and headings lurching against
           the scroll read as jumpy here. `useScrollShift` is still in the tree
@@ -109,12 +118,25 @@ function AppShell() {
         <Hero ready={ready} />
         {/* Quiet credential strip spanning the hero's two cards */}
         <TrustBar />
-        {/* The home shop band — products and categories combined (2026-10-20,
-            built to a client reference). It took the slot `ShopCategories`
-            held, directly under the hero; that band is unmounted and kept, its
-            tiles now live at the foot of this one. Carries `id="work"`, so
-            the Products nav anchor still resolves. */}
+        {/* ⚠ `ShopCategories` REMOUNTED 2026-10-21. The reference runs a
+            "shop by line" band between its trust strip and its bestsellers,
+            which is exactly this band's job; `ProductRange` keeps its own
+            four category tiles at its foot, so the two overlap by design —
+            this one is the browsable row, those are the shortcut. */}
+        <ShopCategories />
+        {/* The home shop band — the reference's **Bestsellers** slot. Products
+            and categories combined (2026-10-20, built to a client reference).
+            Carries `id="work"`, so the Products nav anchor still resolves.
+            One lot carries the client-supplied `Bestseller` flag and every
+            card prints its Bench saving, computed from its own price. */}
         <ProductRange />
+        {/* The Bench Programme — recurring supply, the reference's own
+            subscription band (2026-10-21, requested). **Its terms are
+            client-confirmed and every figure is computed from the lot's real
+            price**; enrolment is deliberately not wired yet, because charging
+            the discount needs the cart, the checkout and `lib/api.ts`'s order
+            payload. See `benchCopy` in `data/site.ts`. */}
+        <BenchProgramme />
         {/* About band, built to two client references — the layout of one and
             the scroll word-reveal of the other. Its paragraph is read from
             `aboutCopy`, not restated, so this band and the `#/about` page
@@ -123,13 +145,11 @@ function AppShell() {
             `Hero` because `TrustBar` is the strip spanning the hero's two
             cards, not a section of its own. */}
         <AboutBand />
-        {/* About-product band, built to a client screenshot and mounted
-            directly under the products grid on request (2026-10-19). Its own
-            cards, labels and chips were benefit and formulation claims and
-            could not ship, so every slot is filled from real data in the
-            component — the four `services` promises and
-            `purityMethod.documentation`. See `aboutProductCopy`. */}
-        <AboutProduct />
+        {/* `AboutProduct` — the oval-stage band — **unmounted 2026-10-21**
+            with the rebuild to the client reference's workflow, which has no
+            equivalent slot. Component, `aboutProductCopy`, `.aboutprod__*` and
+            `assets/aboutprod/` are kept, so remounting it is one line here
+            plus its import. */}
         {/* The carton annotated with facts drawn from its own `projects`
             entry. Moved below the range on 2026-10-16 (requested order: hero,
             products, then this) — it had sat directly under the trust strip,
@@ -171,22 +191,25 @@ function AppShell() {
             cartons in the photograph are not stocked, so the copy describes
             the catalogue and never them — see `sciBandCopy`. */}
         <ScienceBand />
-        {/* The drift band (2026-10-19): a centred statement with photo tiles
-            flying out around it, built to a client reference. **It is also
-            section 2 of `nymphaicosmetics.com`** — the same scatter-collage
-            device — which is why the pass that built the two bands below it
-            did not build a third. */}
-        <DriftBand />
+        {/* `DriftBand` — the scatter-collage statement — **unmounted
+            2026-10-21** with the rebuild to the client reference's workflow.
+            Its device (a centred statement ringed by tilted photo tiles) is
+            what that reference uses for its *Ready to order?* band, so
+            `FinalCta` now holds this slot instead; the drift band's component,
+            `driftCopy`, `.drift__*` and `assets/drift/` are all kept. */}
         {/* `DocBand` — "Every order starts with a documented lot." —
             unmounted on request (2026-10-20). Component, `docBandCopy` and its
             CSS and assets are kept, so remounting it is one line here plus its
             import. */}
-        {/* Section 3 of `nymphaicosmetics.com`: a saturated band carrying one
-            centred statement with an inline pill that opens mid-sentence, a
-            two-paragraph block whose words fill on scroll, and an enormous
-            ghost word closing it. Its own statement is a skin-outcome claim
-            and could not ship — see `lineStoryCopy`. */}
-        <LineStory />
+        {/* `LineStory` — section 3 of `nymphaicosmetics.com`, the statement
+            band with the inline image that opens mid-sentence — **unmounted
+            2026-10-21** with the rebuild to the client reference's workflow.
+            Component, `lineStoryCopy`, `.linestory__*` and
+            `assets/linestory/` are kept. */}
+        {/* The reference's *Ready to order? / Browse the catalogue.* band sits
+            here, between the story and the reviews — so `FinalCta` moved up
+            from below the FAQ (2026-10-21) and took that copy. */}
+        <FinalCta />
         {/* `Billboard` — the lot's name set enormous behind a cut-out figure,
             with a spec card row below — **unmounted on request (2026-10-19)**.
             Component, `billboardCopy`, `.billboard__*` and
@@ -214,8 +237,11 @@ function AppShell() {
             drift; see `whyChooseCopy` for the reference's benefit headline
             and why it could not ship. **It carries `id="why-us"`**, so the
             footer's `Why Us` link — a dead anchor since the old `WhyUs` band
-            was unmounted on 2026-10-16 — resolves again. */}
-        <WhyChoose />
+            was unmounted on 2026-10-16 — resolves again. **It moved below the
+            reviews on 2026-10-21**, with the rebuild to the client reference's
+            workflow: that page closes on reviews, and the two bands this site
+            keeps beyond it (`WhyChoose`, `FAQ`) sit after them so their
+            anchors stay alive. */}
         {/* `About`, `Services`, `PromoBanner` and `LabProof` were unmounted
             from the home view on request (2026-10-15). All four components
             and their CSS are untouched and still in the tree — same
@@ -234,6 +260,7 @@ function AppShell() {
             `Why Us` link still points at `#why-us`, which no longer exists on
             the home view — same state `#about` / `#services` are already in. */}
         <Testimonials />
+        <WhyChoose />
         {/* **The lot band and the featured lot both sit under the reviews**
             (moved here on request, 2026-10-19). They used to run above
             `ScienceBand`, between the product range and the science band.
@@ -245,12 +272,13 @@ function AppShell() {
             `.lotoffer__*` and `assets/lotoffer/` are kept (the confidence
             film is built from `lotoffer/carton.webp`), so remounting it is one
             line here plus its import. */}
-        {/* Featured-lot split band, built to a client reference. Its benefit
-            headline and consumer-supplement chips could not ship — see
-            `featureCopy`. Everything shoppable is read from `projects`: it is
-            the only band on the home view carrying a price and a real
-            add-to-cart on a single named lot. */}
-        <ProductFeature />
+        {/* `ProductFeature` — the featured-lot split band — **unmounted
+            2026-10-21** with the rebuild to the client reference's workflow,
+            which sells from its product rail rather than from a single
+            featured lot. It was the only band carrying a price and an
+            add-to-cart on one named lot; `ProductRange`'s cards still add to
+            the cart, so nothing shoppable was lost. Component, `featureCopy`,
+            `.feature__*` and `assets/feature/` are kept. */}
         {/* `Campaign` — the full-bleed photographic band — unmounted on
             request (2026-10-17). Component, `campaignCopy`, `.campaign__*`
             and `assets/campaign/` are all kept, so remounting it is one line
@@ -263,10 +291,12 @@ function AppShell() {
             are all untouched and still in the tree, so remounting it is this
             line plus its import. */}
         <FAQ />
-        {/* The closing shopping band (2026-10-20). Burgundy rather than
-            near-black: the FAQ above is cream and `.contact` below opens dark
-            before its wipe, so a black band here would merge into it. */}
-        <FinalCta />
+        {/* The newsletter band — the reference's own, directly above its
+            footer. **It ships with no offer line**: the client confirmed a 10%
+            first-order discount but the promo code has not landed, and the
+            checkout can only honour a code that exists. See
+            `newsletterCopy.offer`. */}
+        <NewsletterBand />
         <Contact />
       </main>
       {view.name === "shop" && (

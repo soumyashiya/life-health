@@ -18,6 +18,12 @@ export function FinalCta() {
   return (
     <section className="finalcta" aria-labelledby="finalcta-title" ref={revealRef}>
       <div className="finalcta__inner">
+        {/* The reference sets a small tracked label over its closing headline
+            ("SIX VERIFIED LINES"); ours counts the lines, not the reports —
+            five of six lots carry a published one. */}
+        <p className="finalcta__eyebrow mono" data-anim="up">
+          {finalCtaCopy.eyebrow}
+        </p>
         <h2 className="finalcta__title" id="finalcta-title" data-anim="lines">
           {finalCtaCopy.lines.map((line) => (
             // The breaks are authored, so the masks are too — see `useReveal`.

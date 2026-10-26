@@ -56,15 +56,28 @@ export function AnnouncementBar() {
 
   return (
     <aside className="announce" aria-label="Announcement">
-      <p className="announce__text">
-        {/* Two lengths, one shown per breakpoint — see `messageShort`. Both are
-            in the DOM, so this costs a span rather than a resize listener. */}
-        <span className="announce__full">{announcementCopy.message}</span>
-        <span className="announce__short">{announcementCopy.messageShort}</span>{" "}
-        <a className="announce__link" href={announcementCopy.link.href} data-cursor>
-          {announcementCopy.link.label}
-        </a>
-      </p>
+      {/* ⚠ A MARQUEE AS OF 2026-10-21, built to the client reference's strip.
+          The list is rendered **twice** and the keyframe travels `-50%`, so the
+          loop is seamless — change one and you must change the other, the same
+          contract the about band's trust strip carries. The second copy is
+          `aria-hidden`: a screen reader should hear four claims, not eight.
+          The two-length `message` / `messageShort` pair the static bar used is
+          still in the data and still correct if this is ever reverted. */}
+      <div className="announce__viewport">
+        <div className="announce__track">
+          {[0, 1].map((copy) => (
+            <ul
+              className="announce__list"
+              key={copy}
+              aria-hidden={copy === 1 ? true : undefined}
+            >
+              {announcementCopy.marquee.map((claim) => (
+                <li key={claim}>{claim}</li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
       <button
         type="button"
         className="announce__close"

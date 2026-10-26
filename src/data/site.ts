@@ -49,6 +49,12 @@ export const site = {
   brandSub: "Health",
   aboutImage: aboutImg,
   role: "Research-grade peptide supply",
+  /* The footer's sentence under the wordmark (2026-10-21), the reference's own
+     shape: what we supply, how it is tested, and that a person answers. Every
+     clause is evidenced elsewhere on the site. `role` is still read by the
+     meta/SEO copy, so both stay. */
+  tagline:
+    "Reference-grade research peptides. Verified sourcing, third-party purity testing, and a real person on WhatsApp when you need one.",
   location: "Global research supply",
   email: "hello@lyfehealth.com",
   phone: "+1 000 000 0000",
@@ -60,7 +66,11 @@ export const site = {
   ],
   navLinks: [
     { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
+    /* The **route**, not the `#about` home anchor. That anchor died when the
+       `About` band was unmounted, so the footer link silently kept you on the
+       home page — the About page was never even mounted. Fixed 2026-10-21.
+       Every other entry here still resolves to a live home-section id. */
+    { label: "About", href: "#/about" },
     { label: "Products", href: "#work" },
     { label: "Why Us", href: "#why-us" },
     { label: "FAQ", href: "#faq" },
@@ -119,13 +129,18 @@ export const promoCopy = {
    stale the first time one is added. */
 export const rangeCopy = {
   index: "02",
-  /* Shop-led wording (2026-10-20, requested), in place of "The range / Every
-     lot, documented". Deliberately not "Bestsellers": there is no sales data
-     to back a ranking claim. */
-  eyebrow: "Our products",
-  title: "Shop the range",
-  lead: "Pre-filled devices — each one sealed, cold-packed and published with its own third-party report.",
-  shopAll: { label: "Shop all products", href: "#/shop" },
+  /* ⚠ The reference's own band head, 2026-10-21 (requested). It was "Our
+     products / Shop the range", and the note here used to read *"deliberately
+     not Bestsellers: there is no sales data to back a ranking claim"* — which
+     still stands as a caution. What changed is that the client **named the
+     bestseller** (see `bestsellerIds`), so the rail is ordered with it first
+     and the flag appears on that card alone. The heading is the reference's;
+     the ranking claim behind it rests on the client's word, not on data in
+     this project. Raise it if the lot list grows without a new instruction. */
+  eyebrow: "Loved by the bench",
+  title: "Bestsellers",
+  lead: "Pre-filled lots — each one sealed, cold-packed and published with its own third-party report.",
+  shopAll: { label: "Shop all", href: "#/shop" },
   note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
   /* The three marks top right (2026-10-20 rebuild). The reference's read
      "Clean Ingredients · Trusted Quality · Fast & Safe Shipping"; these are
@@ -265,11 +280,16 @@ export const featureCopy = {
    which this catalogue stocks** — same position as the hero, the showcase and
    the promo banner. So every word here describes the catalogue and never the
    cartons, and the alt names no compound. */
+/* ⚠ Headed to the client reference, 2026-10-21 (requested): *"Three deliberate
+   steps / How each pen is prepared"* over the controls a lot passes through.
+   The cards below it now read `standards` from `data/science.ts` rather than
+   `purityMethod.documentation` — see the note in `ScienceBand.tsx`. There are
+   four of them here, not the reference's three; the fourth is ours. */
 export const sciBandCopy = {
-  eyebrow: "Our science",
-  lines: ["Independently tested.", "Published in full."],
-  lead: "Analysis is carried out by an outside lab and the report goes up as received — no in-house figures, and nothing rounded on the way.",
-  chipsLabel: "Every report carries",
+  eyebrow: "Four deliberate steps",
+  lines: ["How each lot", "is prepared."],
+  lead: "Four deliberate steps between the manufacturer and the sealed pen on your bench — so nothing about the lot is left to chance.",
+  chipsLabel: "From the shelf to your order",
   /* One line under each report field (2026-10-19 rebuild). Keyed by the
      field's label in `purityMethod.documentation`; a field with no note
      renders its title alone. Each says what the field *is* — the reference's
@@ -660,28 +680,217 @@ export const announcementCopy = {
   messageShort: "Third-party tested, every lot.",
   link: { label: "See the reports", href: "#/science?s=reports" },
   dismissLabel: "Dismiss announcement",
+  /* ⚠ MARQUEE, 2026-10-21 — the bar was remounted and rebuilt to the client
+     reference's scrolling strip, which runs four claims past rather than
+     holding one sentence.
+
+     **Every claim is one the site already evidences**, and that is the whole
+     test for this strip: Janoshik is the named lab on every `labAnalysis`,
+     the packing format is what `promoCopy` claims, and the research-use-only
+     line is on every product page. **No offer, no shipping threshold and no
+     "new in" claim** — the reference runs `NEW — RETATRUTIDE 40 MG NOW
+     VERIFIED`, and there is no date or stock field in `projects` to decide
+     what is new, so inventing one would be fabricated merchandising. */
+  marquee: [
+    "Third-party tested by Janoshik Analytical",
+    "Sealed and cold-packed before dispatch",
+    "Batch number and purity published on every lot",
+    "For research use only — not for human or veterinary use",
+  ],
 };
+
+/**
+ * The entry modal (2026-10-21, requested — built to the client reference's
+ * own opening overlay).
+ *
+ * **⚠ THE PARTNER CLAIM IS CLIENT-CONFIRMED.** "Authorised reseller" is a
+ * statement about a real commercial relationship, not marketing copy: it was
+ * put to the client explicitly before this shipped and they confirmed it. If
+ * that relationship ever changes, this block is the one place to edit — the
+ * wording appears nowhere else on the site, and the existing note elsewhere
+ * (packaging shown "by licensing arrangement") stays as it is.
+ *
+ * Everything else here is already published: Janoshik is the lab on every
+ * `labAnalysis`, and the sealed/cold-packed claim is `promoCopy`'s. The two
+ * CTAs both resolve.
+ */
+export const partnerModal = {
+  eyebrow: "Official partner",
+  brand: "ALLUVI",
+  brandSub: "Healthcare",
+  title: "Authorised reseller of ALLUVI research kits.",
+  lead: "Every pen on this site is a genuine ALLUVI Healthcare kit, supplied through our authorised partnership, batch-verified by Janoshik Analytical and shipped sealed and cold.",
+  marks: ["Genuine ALLUVI batches", "Janoshik verified"],
+  ctas: [
+    { label: "Shop the range", href: "#/shop", primary: true },
+    { label: "See a lab report", href: "#/science?s=reports", primary: false },
+  ],
+  note: "For research use only — not for human or veterinary use.",
+  dismissLabel: "Close",
+  /* Shown once per visitor. Keeps the `liora.*` prefix, same decision as the
+     cart and the announcement bar. */
+  storageKey: "liora.partner.v1",
+};
+
+/**
+ * The Bench Programme — recurring supply (2026-10-21, requested).
+ *
+ * **Every figure here is real and client-confirmed**, which is the only reason
+ * this band exists at all: the reference's own version advertises a saving
+ * next to a struck-through price, which is exactly the fabricated commercial
+ * data that cut the same device out of `ProductOffer` and `OfferBanner`. The
+ * terms below were supplied by the client on 2026-10-21 — **15% off, three
+ * monthly deliveries** — and every price shown in the band is **computed from
+ * the lot's own `price`**, never typed.
+ *
+ * **How it is actually billed, also client-confirmed:** the checkout takes
+ * one-off payments only (card via Klyme/AabanPay, or manual bank transfer), so
+ * delivery 1 is placed through the existing checkout at the discounted price
+ * and flagged as a Bench order; deliveries 2 and 3 are re-billed by the team.
+ * Nothing here promises a recurring charge the provider cannot take.
+ *
+ * **⚠ ENROLMENT IS NOT WIRED YET.** Applying the discount needs a `plan` on
+ * the cart line, the discount in the cart subtotal and the flag carried into
+ * the order payload — `lib/api.ts`'s payload shape is a contract with the
+ * external order service and is out of scope for a home-page pass. So the
+ * band states the terms and sends you to the catalogue; the plan chooser goes
+ * on the product page in the checkout pass, which is where the reference puts
+ * it too. **Do not add a "subscribe" button that takes money until that
+ * lands.**
+ */
+export const benchCopy = {
+  eyebrow: "Recurring supply",
+  titleLead: "Subscribe to the",
+  titleAccent: "Bench Programme.",
+  /* Reads off the constants below so the prose cannot drift from the maths. */
+  discount: 0.15,
+  deliveries: 3,
+  /* The worked example. `p1` is the stocked lot the badge and the hero both
+     use; its price is read from `projects`, and the per-delivery figure and
+     the saving are computed in the component. */
+  productId: "p1",
+  benefits: [
+    {
+      number: "01",
+      title: "15% off every delivery",
+      text: "Enrol any lot for three monthly deliveries and save on each one.",
+    },
+    {
+      number: "02",
+      title: "Cold-chain shipping included",
+      text: "Insulated, cold-packed dispatch on every order that carries a Bench delivery.",
+    },
+    {
+      number: "03",
+      title: "Reserved from the batch",
+      text: "Your deliveries are allocated from a batch we hold, so the lot does not change mid-programme.",
+    },
+    {
+      number: "04",
+      title: "The report, on dispatch",
+      text: "The batch-specific certificate of analysis is emailed the moment your order ships.",
+    },
+  ],
+  ctas: [
+    { label: "Choose a lot", href: "#/shop", primary: true },
+    { label: "How verification works", href: "#/science?s=purity", primary: false },
+  ],
+  /* Printed in the band: the terms, in one line, so no reader has to infer
+     them from the headline. */
+  terms: "Three monthly deliveries, 15% off each. Delivery one is charged at checkout; the remaining two are invoiced monthly and you can stop at any time.",
+  note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
+};
+
+/**
+ * The newsletter band (2026-10-21, built to the reference's own).
+ *
+ * **⚠ `offer` IS DELIBERATELY NULL.** The reference promises "10% off your
+ * first order when you join". The client has confirmed a 10% first-order
+ * discount **and has not yet sent the promo code**, and the checkout can only
+ * honour a code that exists server-side — so the band ships with no offer line
+ * at all rather than promising money off that checkout would refuse. **Set
+ * `offer` to `{ percent: 10, code: "<THE CODE>" }` the day the code lands**;
+ * the component renders the line from it and nothing else needs touching.
+ */
+export const newsletterCopy = {
+  eyebrow: "The Lyfe edit",
+  title: "Batch drops, storage notes and sourcing updates.",
+  lead: "Occasional email when a new lot is verified and listed. No spam.",
+  placeholder: "you@laboratory.com",
+  submitLabel: "Join",
+  offer: null as { percent: number; code: string } | null,
+  note: "We use your address for the edit only. Unsubscribe in one click.",
+};
+
+/**
+ * ⚠ The only merchandising badge on the site, and it is **client-supplied**,
+ * 2026-10-21: there is no sales or stock data in this project to derive one
+ * from. The reference badges three lots BESTSELLER, two NEW and one LIMITED;
+ * the client confirmed **one** bestseller, so the other five carry nothing.
+ * A lot added here must be a lot the client actually names.
+ */
+export const bestsellerIds = ["p1"];
 
 /* "Shop by category" on the home view (2026-10-20).
    The five categories are the real `researchAreas`, read in the component —
    their names, descriptions, imagery and product lists all already exist, and
    each one resolves to `#/shop?research=<id>`, a route that works. No category
    is invented to balance the grid. */
+/* ⚠ The reference's own band head, 2026-10-21 (requested) — it calls its
+   categories *lines* and heads them "Every line on the bench". They are still
+   the real `researchAreas`, each a live `#/shop?research=<id>` filter.
+   **The lead counts them, so it has to track the data**: it said "Five" until
+   the Longevity line was removed on 2026-10-26. The tiles themselves are
+   rendered from the array and need no edit. */
 export const categoryCopy = {
-  eyebrow: "Shop by category",
-  title: "Shop by category.",
-  lead: "Five ways into the catalogue — every one a live filter on products you can order today.",
-  allLabel: "Shop all products",
+  eyebrow: "Shop by line",
+  title: "Every line on the bench",
+  lead: "Four ways into the catalogue — every one a live filter on lots you can order today.",
+  allLabel: "View all",
   allHref: "#/shop",
+};
+
+/**
+ * The card's shelf line — the compound class and the format, the way the
+ * reference writes them ("TRIPLE AGONIST · 20 MG PEN"). 2026-10-21, requested.
+ *
+ * **Every line is read off the lot's own data**, not written for it: the class
+ * comes from the `summary`/`description` already on the product (Retatrutide
+ * *is* a GLP-1/GIP/glucagon triple agonist, Tirzepatide a dual agonist), the
+ * compounds from `labAnalysis.compounds`, and the format and strength from
+ * `specs`. Nothing here is a claim about what a compound does.
+ *
+ * Keyed by id rather than added to `projects` so the six catalogue entries —
+ * which the shop, the PDP and the cart all read — stay untouched. A lot with
+ * no entry falls back to its `Form` spec, which is what the card showed
+ * before.
+ */
+/* ⚠ **THE IDS ARE NOT IN CATALOGUE ORDER.** `p6` is Retatrutide 40mg, `p4` is
+   Tirzepatide 40mg and `p5` is NAD+ — a numeric reading of this map put the
+   wrong line under two cards on the first pass. Check `projects` before
+   editing a line here. */
+export const shelfLines: Record<string, string> = {
+  p1: "Triple agonist · 20 mg pen",
+  p2: "GHK-Cu · BPC-157 · TB-500 blend",
+  p3: "Recovery blend · 40 mg dual pen",
+  p6: "Triple agonist · 40 mg pen",
+  p4: "Dual agonist · 40 mg pen",
+  p5: "Longevity · 2 × 500 mg pens",
 };
 
 /* The closing shopping band (2026-10-20), between the FAQ and the contact
    band. One headline, one CTA — no claim, no figure, nothing that needs
    evidence. */
 export const finalCtaCopy = {
-  lines: ["Documented material,", "ready to ship."],
+  /* Retitled 2026-10-21 to the reference's own closing band — "Ready to
+     order? / Browse the catalogue." It claims nothing new; the lead is the
+     packing fact `promoCopy` already makes. */
+  lines: ["Ready to order?", "Browse the catalogue."],
+  /* No lot count here on purpose: the reference heads its band "six verified
+     lines", and five of our six carry a published report — NAD+ does not. */
+  eyebrow: "Five lines, one standard",
   lead: "Browse the full catalogue — every lot sealed, cold-packed and published with its batch data.",
-  primary: { label: "Shop all products", href: "#/shop" },
+  primary: { label: "Start your order", href: "#/shop" },
   secondary: { label: "Read the lab reports", href: "#/science?s=reports" },
   note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
 };
@@ -805,7 +1014,12 @@ export const lotFanCopy = {
    and prints a generic benefit beside each; ours prints the real `number` and
    `title`. */
 export const whyChooseCopy = {
-  lines: ["Tested before", "it ships."],
+  /* **Not "Tested before it ships" any more** (2026-10-20). That was
+     `services[0].title` verbatim — the exact convergence the note on
+     `services` warns about, and it headed four rows that are about the
+     *shopping* experience with a *product* promise. This one heads what the
+     rows actually say: you can check the lot before you buy it. */
+  lines: ["Know what", "you're ordering."],
   ghost: "Why",
   ghostSub: "choose us",
   photoAlt: "A customer outdoors in daylight",
@@ -851,10 +1065,14 @@ export const whyChooseCopy = {
      laboratory-use-only catalogue, and the same artwork `showcase.webp` was
      dropped for on 2026-10-15 and the FAQ band still carries. Client-chosen
      each time. */
+/* ⚠ Headed to the client reference, 2026-10-21 (requested): it calls this band
+   *The <brand> standard* over a two-line "Purity, verified. / Paperwork,
+   included." and closes on an **Our story** link. The paragraph under it is
+   still `aboutCopy.paragraph`, read in the component rather than restated. */
 export const aboutBandCopy = {
-  eyebrow: "About us",
-  lines: ["Characterised in the lab.", "Packed for the bench."],
-  cta: { label: "Learn more", href: "#/about" },
+  eyebrow: "The Lyfe standard",
+  lines: ["Purity, verified.", "Paperwork, included."],
+  cta: { label: "Our story", href: "#/about" },
   /* Describe the frame, never the pack or an outcome — see the note above. */
   tallAlt: "A customer holding a sealed research carton",
   insetAlt: "A customer at home",
@@ -923,13 +1141,35 @@ export const collageCopy = {
    exists to stop. So each entry is an icon plus a fact the site already backs
    up elsewhere, and only Janoshik is named. Don't add a mark here without a
    real relationship behind it. */
+/* ⚠ REWRITTEN TO THE CLIENT REFERENCE'S STRIP, 2026-10-21 (requested: *"whole
+   content changed like reference website"*). It runs **four** claims with a
+   sentence under each, where this ran six two-word credentials.
+
+   Every one is still a fact the site evidences: Janoshik is the lab on every
+   `labAnalysis`, the packing format is `promoCopy`'s, and the WhatsApp line is
+   `whyUs[3]`'s. The reference's own wording is kept almost verbatim because it
+   describes the same supply chain — this site sells the same ALLUVI lots. */
 export const trustBar = [
-  { icon: "lab", label: "Janoshik Analytical", note: "Independent lab" },
-  { icon: "wave", label: "HPLC + mass spec", note: "Every batch" },
-  { icon: "seal", label: "Sealed & cold-packed", note: "Fixed volume" },
-  { icon: "doc", label: "Batch documented", note: "Published in full" },
-  { icon: "truck", label: "Tracked delivery", note: "Worldwide" },
-  { icon: "shield", label: "Research use only", note: "Not for human use" },
+  {
+    icon: "seal",
+    label: "Verified sourcing",
+    note: "Direct from certified manufacturers. No grey-market resellers in the chain.",
+  },
+  {
+    icon: "lab",
+    label: "Lab-tested purity",
+    note: "Every batch independently assayed by Janoshik Analytical before it is listed.",
+  },
+  {
+    icon: "doc",
+    label: "Sealed cold packaging",
+    note: "Cold-stored, tamper-sealed and labelled accurately before it leaves the shelf.",
+  },
+  {
+    icon: "truck",
+    label: "A human on WhatsApp",
+    note: "Real replies from a real person, usually the same working day.",
+  },
 ];
 
 /* The band directly under the hero — one device shown large with three claims
@@ -963,51 +1203,89 @@ export const showcaseCopy = {
   ],
 };
 
+/* Read by the `#/about` page (via `data/about.ts`), the home about band and
+   the unmounted `About` — so this is the one place the brand story is written
+   and the three cannot drift. **That sharing is why editing it to suit one of
+   them changes all three**; an ecommerce rewrite was tried here on 2026-10-20
+   and reverted for exactly that reason, then done on the About page's own copy
+   instead. */
+/* ⚠ REWRITTEN TO THE CLIENT REFERENCE, 2026-10-21 (requested). The old copy
+   ("Advancing modern research with smarter formulations…") was supplier-voice
+   and said nothing a buyer could check. The reference's is plain and about the
+   basics, and every clause of it is true here: direct sourcing, an outside lab
+   on every batch, a person who answers.
+
+   **`paragraph` is read by `AboutBand` on the home view AND re-exported for
+   the `#/about` page**, so this edit changes both — which is the point of a
+   site-wide content pass, but check both surfaces after touching it. The
+   figures in `stats` are unchanged: the reference publishes 99.4% / 5,000+ /
+   4,000+, which are *its* numbers, and ours stay ours. */
 export const aboutCopy = {
-  heading: "Advancing modern research with smarter formulations.",
+  heading: "Purity, verified. Paperwork, included.",
   paragraph:
-    "We're committed to advancing high-quality peptide research through clean, reliable, and precisely characterised reference materials. Every product is sourced from verified suppliers and carefully packed to preserve consistency, purity, and integrity — from our facility to your bench.",
+    "We started Lyfe Health because the research peptide market needed a supplier willing to be boring about the basics — transparent sourcing, third-party lab testing, and people you can actually message. Every batch is checked before it reaches our shelves, and every product is supplied strictly for laboratory research use.",
+  /* **Safe to relabel for the shop — these do not reach the home band.**
+     `AboutBand` reads `paragraph` only; `stats` and `signals` surface on the
+     `#/about` page and in the unmounted `About` / `ProductPlinth`. The figures
+     are unchanged — only the nouns moved off the lab framing (2026-10-20). */
   stats: [
-    { value: 99, suffix: "%+", label: "Formulation purity" },
+    { value: 99, suffix: "%+", label: "Verified peptide purity" },
     { value: 1000, suffix: "+", label: "Researchers served" },
-    { value: 24, suffix: " h", label: "WhatsApp response" },
+    { value: 24, suffix: " h", label: "WhatsApp reply" },
   ],
   signals: [
-    { label: "Range", value: "Peptides · Reference materials" },
-    { label: "Sourcing", value: "Verified suppliers" },
-    { label: "Support", value: "Fast WhatsApp" },
+    { label: "Range", value: "Pre-filled peptide lots" },
+    { label: "Testing", value: "Independent, published" },
+    { label: "Support", value: "Real people on WhatsApp" },
   ],
 };
 
 /* The shopping experience — ordering, delivery, reordering, support. The
    product promises live in `services`; keep the two from drifting together. */
+/* The four reasons, framed around the **shopping experience** — reorder,
+   check the numbers, delivery, support. The product *promises* live in
+   `services`; keep the two from converging, which is how the `WhyChoose`
+   headline ended up being `services[0].title` verbatim.
+
+   **`note` is the short form, added 2026-10-20.** `WhyChoose` renders the
+   rows in a ~318px column where `description` runs to five lines and buries
+   the band; `WhyUs` (unmounted) renders the long form in a card. One fact
+   each, all of them things the site already publishes — no claim here needs
+   evidence it does not have. */
 export const whyUs = [
   {
     number: "01",
     title: "Reorder with confidence",
+    note: "One spec, one fill volume, every time.",
     description:
-      "One spec, one fill volume, one format. What you order next month is what you opened last month.",
+      "One spec, one fill volume, one format — so a reorder matches the lot you opened last time, not a near-enough substitute.",
     image: whyConsistent,
   },
   {
     number: "02",
     title: "Check the numbers first",
+    note: "Purity and batch on every product page.",
     description:
-      "Purity, batch number and compound breakdown sit on the product page — read them before you add to cart.",
+      "Purity, batch number and the full compound breakdown sit on the product page. Read them before you add to cart, not after it arrives.",
     image: whyPurity,
   },
   {
     number: "03",
-    title: "Straightforward delivery",
+    /* 23 characters, same as row 02 — the four titles have to sit on one line
+       each in a 318px column or the hairline rules stop reading as a set.
+       "Sealed" moves into the note rather than being dropped. */
+    title: "Cold-packed and tracked",
+    note: "Sealed, with the batch paperwork inside.",
     description:
-      "Sealed, cold-packed and tracked from our bench to yours, with the paperwork in the box.",
+      "Every order ships sealed in an insulated mailer with a cold pack and a tracking number, and the batch paperwork travels with it.",
     image: whyService,
   },
   {
     number: "04",
-    title: "Help when you need it",
+    title: "A real person answers",
+    note: "On WhatsApp, usually the same day.",
     description:
-      "Message us on WhatsApp about an order, a batch or a document and a real person answers — usually same day.",
+      "Message us about an order, a batch or a document and a person replies — usually the same day. No ticket queue, no bot.",
     image: whySupport,
   },
 ];

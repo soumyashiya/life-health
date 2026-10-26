@@ -1,0 +1,305 @@
+- generic [ref=f8e2]:
+  - banner [ref=f8e11]:
+    - generic [ref=f8e12]:
+      - link "Lyfe Health" [ref=f8e13] [cursor=pointer]:
+        - /url: "#home"
+        - generic [ref=f8e22]: Lyfe
+        - generic [ref=f8e24]: Health
+      - navigation "Primary" [ref=f8e26]:
+        - list [ref=f8e27]:
+          - listitem [ref=f8e28]:
+            - button "Shop" [ref=f8e29] [cursor=pointer]
+          - listitem [ref=f8e31]:
+            - button "Learn" [ref=f8e32] [cursor=pointer]
+          - listitem [ref=f8e34]:
+            - button "Support" [ref=f8e35] [cursor=pointer]
+      - generic [ref=f8e38]:
+        - button "Sign in" [ref=f8e40] [cursor=pointer]
+        - button "Open cart, 1 item" [ref=f8e44] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f8e49]: "1"
+  - text: · ·
+  - main [ref=f8e762]:
+    - generic [ref=f8e763]:
+      - generic [ref=f8e767]:
+        - generic [ref=f8e768]: About
+        - heading "Know exactly what you're buying." [level=1] [ref=f8e769]
+        - paragraph [ref=f8e770]: Every lot we sell is tested by an independent lab and listed with its own report — purity, batch number and the full breakdown, on the product page before you add it to the cart. Orders ship sealed and cold-packed with the paperwork inside, and a real person answers when you ask about one.
+        - generic [ref=f8e771]:
+          - link "Shop all products" [ref=f8e772] [cursor=pointer]:
+            - /url: "#/shop"
+          - link "See a lab report" [ref=f8e773] [cursor=pointer]:
+            - /url: "#/science?s=reports"
+        - list [ref=f8e774]:
+          - listitem [ref=f8e775]: Independent lab report on every lot
+          - listitem [ref=f8e778]: Sealed and cold-packed
+          - listitem [ref=f8e781]: Tracked delivery worldwide
+      - region "What you get with every order" [ref=f8e784]:
+        - list [ref=f8e785]:
+          - listitem [ref=f8e786]:
+            - generic [ref=f8e790]:
+              - generic [ref=f8e791]: Reorder with confidence
+              - generic [ref=f8e792]: One spec, one fill volume, every time.
+          - listitem [ref=f8e793]:
+            - generic [ref=f8e797]:
+              - generic [ref=f8e798]: Check the numbers first
+              - generic [ref=f8e799]: Purity and batch on every product page.
+          - listitem [ref=f8e800]:
+            - generic [ref=f8e804]:
+              - generic [ref=f8e805]: Cold-packed and tracked
+              - generic [ref=f8e806]: Sealed, with the batch paperwork inside.
+          - listitem [ref=f8e807]:
+            - generic [ref=f8e811]:
+              - generic [ref=f8e812]: A real person answers
+              - generic [ref=f8e813]: On WhatsApp, usually the same day.
+      - generic [ref=f8e814]:
+        - generic [ref=f8e815]:
+          - generic [ref=f8e816]:
+            - term [ref=f8e817]:
+              - text: "99"
+              - generic [ref=f8e818]: "%+"
+            - definition [ref=f8e819]: Verified peptide purity
+          - generic [ref=f8e820]:
+            - term [ref=f8e821]:
+              - text: "1000"
+              - generic [ref=f8e822]: +
+            - definition [ref=f8e823]: Researchers served
+          - generic [ref=f8e824]:
+            - term [ref=f8e825]:
+              - text: "24"
+              - generic [ref=f8e826]: h
+            - definition [ref=f8e827]: WhatsApp reply
+        - list [ref=f8e828]:
+          - listitem [ref=f8e829]:
+            - generic [ref=f8e830]: Range
+            - generic [ref=f8e831]: Pre-filled peptide lots
+          - listitem [ref=f8e832]:
+            - generic [ref=f8e833]: Testing
+            - generic [ref=f8e834]: Independent, published
+          - listitem [ref=f8e835]:
+            - generic [ref=f8e836]: Support
+            - generic [ref=f8e837]: Real people on WhatsApp
+      - generic [ref=f8e839]:
+        - figure [ref=f8e840]:
+          - img "A Retatrutide 20mg carton being packed into a shipping box." [ref=f8e841]
+        - generic [ref=f8e842]:
+          - heading "A short catalogue, and a report behind every line of it." [level=2] [ref=f8e843]
+          - paragraph [ref=f8e844]: "We keep the range small on purpose: every lot is bought from a verified supplier, handled in controlled conditions, sampled, and sent to an independent lab before it goes on sale. The report comes back against that exact batch and we publish it as received — not a summary of it."
+          - paragraph [ref=f8e845]: So there is nothing on the site we cannot show you the paperwork for. If a lot has no report yet, it does not get listed.
+          - link "See how purity is verified" [ref=f8e846] [cursor=pointer]:
+            - /url: "#/science?s=purity"
+      - region [ref=f8e849]:
+        - generic [ref=f8e850]:
+          - generic [ref=f8e851]:
+            - generic [ref=f8e852]: How ordering works
+            - heading "Four steps, and you can check our working at every one." [level=2] [ref=f8e853]
+            - list [ref=f8e854]:
+              - listitem [ref=f8e855]:
+                - generic [ref=f8e856]: "01"
+                - generic [ref=f8e857]:
+                  - generic [ref=f8e858]: Browse the range
+                  - generic [ref=f8e859]: A short catalogue of pre-filled lots, each listed with its form, total content and price before you open it.
+              - listitem [ref=f8e860]:
+                - generic [ref=f8e861]: "02"
+                - generic [ref=f8e862]:
+                  - generic [ref=f8e863]: Read the report
+                  - generic [ref=f8e864]: Purity, batch number and the full compound breakdown sit on the product page. Read them before you add to cart.
+              - listitem [ref=f8e865]:
+                - generic [ref=f8e866]: "03"
+                - generic [ref=f8e867]:
+                  - generic [ref=f8e868]: Check out
+                  - generic [ref=f8e869]: Card or bank transfer, a confirmation email with your order number, and an account page you can reorder from.
+              - listitem [ref=f8e870]:
+                - generic [ref=f8e871]: "04"
+                - generic [ref=f8e872]:
+                  - generic [ref=f8e873]: Sealed, cold-packed, tracked
+                  - generic [ref=f8e874]: Your order ships in an insulated mailer with a cold pack and the batch paperwork inside, with a tracking number.
+            - list [ref=f8e875]:
+              - listitem [ref=f8e876]:
+                - link "Shipping policy" [ref=f8e877] [cursor=pointer]:
+                  - /url: "#/policies/shipping-policy"
+              - listitem [ref=f8e880]:
+                - link "Refund policy" [ref=f8e881] [cursor=pointer]:
+                  - /url: "#/policies/refund-policy"
+              - listitem [ref=f8e884]:
+                - link "Track an order" [ref=f8e885] [cursor=pointer]:
+                  - /url: "#/track"
+          - figure [ref=f8e888]:
+            - img "A Retatrutide 20mg carton on a sunlit counter as an order is packed." [ref=f8e889]
+      - list [ref=f8e891]:
+        - listitem [ref=f8e892]:
+          - blockquote [ref=f8e893]: “WhatsApp reply within the hour. That alone changed how we plan ordering for our team.”
+          - generic [ref=f8e895]:
+            - generic [ref=f8e896]: Rohan Natarajan
+            - generic [ref=f8e897]: Co-founder, Ember Research
+        - listitem [ref=f8e898]:
+          - blockquote [ref=f8e899]: “Support actually answered questions about handling and storage. Most suppliers send a generic FAQ link and disappear.”
+          - generic [ref=f8e901]:
+            - generic [ref=f8e902]: Marco Ruiz
+            - generic [ref=f8e903]: Procurement Lead, Vela Biotech
+      - generic [ref=f8e905]:
+        - figure [ref=f8e906]:
+          - img "A Retatrutide 20mg carton in front of sealed parcels ready for dispatch." [ref=f8e907]
+        - generic [ref=f8e908]:
+          - heading "Research use only" [level=2] [ref=f8e909]
+          - list [ref=f8e910]:
+            - listitem [ref=f8e911]: Produced for laboratory research only. Not for human or veterinary consumption.
+            - listitem [ref=f8e912]: These products are not intended to diagnose, treat, cure, or prevent any disease.
+            - listitem [ref=f8e913]: Supplied in sealed, fixed-volume formats intended for laboratory analysis.
+      - generic [ref=f8e915]:
+        - generic [ref=f8e916]:
+          - heading "Talk to us before you order" [level=2] [ref=f8e917]
+          - paragraph [ref=f8e918]: Questions about a lot, its report, or how an order ships — message us and a real person answers, usually the same day.
+        - generic [ref=f8e919]:
+          - link "hello@lyfehealth.com" [ref=f8e920] [cursor=pointer]:
+            - /url: mailto:hello@lyfehealth.com
+          - list [ref=f8e921]:
+            - listitem [ref=f8e922]:
+              - link "WhatsApp" [ref=f8e923] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f8e924]:
+              - link "Instagram" [ref=f8e925] [cursor=pointer]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f8e926]:
+              - link "Email" [ref=f8e927] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f8e929]:
+        - img "A Retatrutide 20mg carton resting on a delivered parcel at a sunlit doorstep." [ref=f8e930]
+        - generic [ref=f8e931]:
+          - heading "Ready to order?" [level=2] [ref=f8e932]
+          - paragraph [ref=f8e933]: Pick a lot, read its report, and it ships sealed and cold-packed with the paperwork inside.
+          - generic [ref=f8e934]:
+            - link "Shop all products" [ref=f8e935] [cursor=pointer]:
+              - /url: "#/shop"
+            - link "Track an order" [ref=f8e936] [cursor=pointer]:
+              - /url: "#/track"
+  - contentinfo [ref=f8e685]:
+    - generic [ref=f8e686]:
+      - generic [ref=f8e687]:
+        - generic [ref=f8e688]:
+          - generic [ref=f8e689]:
+            - generic [ref=f8e690]: Lyfe
+            - generic [ref=f8e691]: Health
+          - paragraph [ref=f8e692]: Reference-grade research peptides. Verified sourcing, third-party purity testing, and a real person on WhatsApp when you need one.
+          - list [ref=f8e693]:
+            - listitem [ref=f8e694]:
+              - link "hello@lyfehealth.com" [ref=f8e695] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+            - listitem [ref=f8e696]:
+              - link "WhatsApp" [ref=f8e697] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+          - generic [ref=f8e698]:
+            - heading "Stay updated" [level=4] [ref=f8e699]
+            - generic [ref=f8e700]:
+              - textbox "Email address" [ref=f8e701]:
+                - /placeholder: you@lab.com
+              - textbox [aria-hidden]
+              - button "Subscribe" [ref=f8e702] [cursor=pointer]
+            - paragraph [ref=f8e703]: Research updates and restock alerts. No spam.
+        - generic [ref=f8e704]:
+          - heading "Shop" [level=4] [ref=f8e705]
+          - list [ref=f8e706]:
+            - listitem [ref=f8e707]:
+              - link "Metabolic" [ref=f8e708] [cursor=pointer]:
+                - /url: "#/shop?research=metabolic"
+            - listitem [ref=f8e709]:
+              - link "Recovery" [ref=f8e710] [cursor=pointer]:
+                - /url: "#/shop?research=recovery"
+            - listitem [ref=f8e711]:
+              - link "Cellular" [ref=f8e712] [cursor=pointer]:
+                - /url: "#/shop?research=cellular"
+            - listitem [ref=f8e713]:
+              - link "Skin & Hair" [ref=f8e714] [cursor=pointer]:
+                - /url: "#/shop?research=formulation"
+            - listitem [ref=f8e715]:
+              - link "All products" [ref=f8e716] [cursor=pointer]:
+                - /url: "#/shop"
+        - generic [ref=f8e717]:
+          - heading "Laboratory" [level=4] [ref=f8e718]
+          - list [ref=f8e719]:
+            - listitem [ref=f8e720]:
+              - link "Bench Programme" [ref=f8e721] [cursor=pointer]:
+                - /url: "#bench"
+            - listitem [ref=f8e722]:
+              - link "Our story" [ref=f8e723] [cursor=pointer]:
+                - /url: "#/about"
+            - listitem [ref=f8e724]:
+              - link "Lab reports" [ref=f8e725] [cursor=pointer]:
+                - /url: "#/science?s=reports"
+            - listitem [ref=f8e726]:
+              - link "Contact" [ref=f8e727] [cursor=pointer]:
+                - /url: "#contact"
+            - listitem [ref=f8e728]:
+              - link "Account" [ref=f8e729] [cursor=pointer]:
+                - /url: "#/account"
+        - generic [ref=f8e730]:
+          - heading "Client care" [level=4] [ref=f8e731]
+          - list [ref=f8e732]:
+            - listitem [ref=f8e733]:
+              - link "Track order" [ref=f8e734] [cursor=pointer]:
+                - /url: "#/track"
+            - listitem [ref=f8e735]:
+              - link "FAQ" [ref=f8e736] [cursor=pointer]:
+                - /url: "#faq"
+            - listitem [ref=f8e737]:
+              - link "Press Release" [ref=f8e738] [cursor=pointer]:
+                - /url: "#/policies/press-release"
+            - listitem [ref=f8e739]:
+              - link "Refund Policy" [ref=f8e740] [cursor=pointer]:
+                - /url: "#/policies/refund-policy"
+            - listitem [ref=f8e741]:
+              - link "Shipping Policy" [ref=f8e742] [cursor=pointer]:
+                - /url: "#/policies/shipping-policy"
+            - listitem [ref=f8e743]:
+              - link "Privacy Policy" [ref=f8e744] [cursor=pointer]:
+                - /url: "#/policies/privacy-policy"
+            - listitem [ref=f8e745]:
+              - link "Terms Of Service" [ref=f8e746] [cursor=pointer]:
+                - /url: "#/policies/terms-of-service"
+        - generic [ref=f8e747]:
+          - heading "Follow" [level=4] [ref=f8e748]
+          - list [ref=f8e749]:
+            - listitem [ref=f8e750]:
+              - link "WhatsApp" [ref=f8e751] [cursor=pointer]:
+                - /url: https://wa.me/10000000000
+            - listitem [ref=f8e752]:
+              - link "Instagram" [ref=f8e753] [cursor=pointer]:
+                - /url: https://instagram.com/lyfehealth
+            - listitem [ref=f8e754]:
+              - link "Email" [ref=f8e755] [cursor=pointer]:
+                - /url: mailto:hello@lyfehealth.com
+      - generic [ref=f8e757]:
+        - generic [ref=f8e758]: © 2026 Lyfe Health
+        - generic [ref=f8e759]: Global research supply
+      - paragraph [ref=f8e760]: All products are supplied strictly for laboratory research and educational use. Not intended for human or veterinary consumption. Buyer is responsible for ensuring compliance with all applicable local laws and regulations.
+      - generic [aria-hidden] [ref=f8e761]: Lyfe Health
+  - generic [aria-hidden]:
+    - button
+    - dialog:
+      - banner:
+        - generic:
+          - text: Your cart
+          - heading [level=2]: 1 item
+        - button: ×
+      - list:
+        - listitem:
+          - link:
+            - /url: "#/product/p2"
+          - generic:
+            - link:
+              - /url: "#/product/p2"
+              - text: Glow 70mg
+            - generic: Cellular
+            - generic:
+              - group:
+                - button: −
+                - generic: "1"
+                - button: +
+              - generic: $329
+          - button: ×
+      - contentinfo:
+        - generic:
+          - generic: Subtotal
+          - generic: $329
+        - paragraph: Taxes and any handling fees are calculated at checkout
+        - button: Proceed to checkout
+        - button: View cart

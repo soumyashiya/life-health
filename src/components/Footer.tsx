@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "../data/site";
+import { researchAreaHref, researchAreas } from "../data/research";
 import { policyList } from "../data/policies";
 import { parse, useRouter } from "../hooks/useRouter";
 import { ApiError, subscribeNewsletter } from "../lib/api";
@@ -110,7 +111,23 @@ export function Footer() {
               <span className="footer__brand-primary">{site.brandMark}</span>
               <span className="footer__brand-accent">{site.brandSub}</span>
             </div>
-            <p className="footer__tagline">{site.role}</p>
+            {/* The reference sets a sentence under its wordmark rather than a
+                role label, with the contact addresses beneath it — the two
+                moved here from the old "Contact" column, which the 2026-10-21
+                content pass turned into "Laboratory". */}
+            <p className="footer__tagline">{site.tagline}</p>
+            <ul className="footer__contacts">
+              <li>
+                <a href={`mailto:${site.email}`} data-cursor>
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a href={site.whatsapp} target="_blank" rel="noreferrer" data-cursor>
+                  WhatsApp
+                </a>
+              </li>
+            </ul>
 
             <form className="footer__subscribe" onSubmit={handleSubscribe} noValidate>
               <h4 className="footer__col-title mono">Stay updated</h4>
@@ -161,9 +178,28 @@ export function Footer() {
             </form>
           </div>
 
+          {/* ⚠ The three link columns are the client reference's — SHOP /
+              LABORATORY / CLIENT CARE — as of 2026-10-21. They were Quick
+              Links / Contact / Policies. **Every href still resolves**: the
+              shop column is the real `researchAreas` filters, and the only new
+              anchor is `#bench`, which `BenchProgramme` carries. */}
           <div className="footer__col">
-            <h4 className="footer__col-title mono">Quick Links</h4>
+            <h4 className="footer__col-title mono">Shop</h4>
             <ul className="footer__links">
+              {researchAreas.map((area) => (
+                <li key={area.id}>
+                  <a
+                    href={researchAreaHref(area)}
+                    data-cursor
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate({ name: "shop", research: area.id });
+                    }}
+                  >
+                    {area.name}
+                  </a>
+                </li>
+              ))}
               <li>
                 <a
                   href="#/shop"
@@ -173,23 +209,81 @@ export function Footer() {
                     navigate({ name: "shop" });
                   }}
                 >
-                  Shop
+                  All products
                 </a>
               </li>
-              {site.navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    data-cursor
-                    onClick={(e) => {
-                      e.preventDefault();
-                      goToSection(link.href);
-                    }}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+            </ul>
+          </div>
+
+          <div className="footer__col">
+            <h4 className="footer__col-title mono">Laboratory</h4>
+            <ul className="footer__links">
+              <li>
+                <a
+                  href="#bench"
+                  data-cursor
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToSection("#bench");
+                  }}
+                >
+                  Bench Programme
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#/about"
+                  data-cursor
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate({ name: "about" });
+                  }}
+                >
+                  Our story
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#/science?s=reports"
+                  data-cursor
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate({ name: "science", section: "reports" });
+                  }}
+                >
+                  Lab reports
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  data-cursor
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToSection("#contact");
+                  }}
+                >
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#/account"
+                  data-cursor
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate({ name: "account" });
+                  }}
+                >
+                  Account
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="footer__col">
+            <h4 className="footer__col-title mono">Client care</h4>
+            <ul className="footer__links">
               <li>
                 <a
                   href="#/track"
@@ -202,36 +296,22 @@ export function Footer() {
                   Track order
                 </a>
               </li>
-            </ul>
-          </div>
-
-          <div className="footer__col">
-            <h4 className="footer__col-title mono">Contact</h4>
-            <ul className="footer__links">
-              <li>
-                <a href={`mailto:${site.email}`} data-cursor>
-                  {site.email}
-                </a>
-              </li>
               <li>
                 <a
-                  href={site.whatsapp}
-                  target="_blank"
-                  rel="noreferrer"
+                  href="#faq"
                   data-cursor
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToSection("#faq");
+                  }}
                 >
-                  {site.phone}
+                  FAQ
                 </a>
               </li>
-              <li>
-                <span>{site.location}</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="footer__col">
-            <h4 className="footer__col-title mono">Policies</h4>
-            <ul className="footer__links">
+              {/* The policy routes stay in this column: the reference keeps
+                  Delivery and Returns here and puts Privacy/Terms in its legal
+                  bar, but ours are all one `policyList` and dropping any of
+                  them would strand a legal page. */}
               {policyList.map((policy) => (
                 <li key={policy.slug}>
                   <a
