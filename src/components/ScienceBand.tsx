@@ -4,7 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { sciBandCopy } from "../data/site";
 import { standards } from "../data/science";
 import { useParallax } from "../hooks/useParallax";
-import backdrop from "../assets/sciband/background.webp";
+/* Client drop, 2026-10-27 — a straight webp conversion of
+   `latest-images/how-prepared-img.png`, which stays untouched as the source of
+   truth. It pictures a **stocked** Retatrutide 40mg carton (`p6`), so unlike
+   `background.webp` (a TESAMORELIN pen the catalogue does not carry) there is
+   no off-catalogue pack here. The old file stays on disk, unused. */
+import backdrop from "../assets/sciband/prepared.webp";
 
 /* Line icons for the four report-field cards, by position in
    `purityMethod.documentation`: lot number, HPLC purity, mass-spec, fill
@@ -154,8 +159,8 @@ export function ScienceBand() {
             className="sciband__photo"
             src={backdrop}
             alt={sciBandCopy.photoAlt}
-            width={1672}
-            height={941}
+            width={1400}
+            height={1120}
             loading="lazy"
             decoding="async"
             data-parallax="far"

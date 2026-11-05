@@ -307,10 +307,12 @@ export const sciBandCopy = {
      the manufacturer's name set in site voice, which the spotlight notes
      already rule out, so it is not reproduced. */
   tags: ["Transparency", "Testing", "Traceability"],
-  /* The backdrop (latest-images/science-new.png) shows an ALLUVI TESAMORELIN
-     pen, which this catalogue does not stock — so the alt names no compound
-     and no line here describes the device. */
-  photoAlt: "A person holding up a pre-filled pen device",
+  /* ⚠ The backdrop was replaced on 2026-10-27 (client drop
+     `latest-images/how-prepared-img.png`) and that **closes this band's open
+     compliance item**: it pictures Retatrutide 40mg, a stocked lot (`p6`),
+     where `science-new.png` was an ALLUVI TESAMORELIN pen the catalogue does
+     not carry. The alt may name the pack again; it still names no outcome. */
+  photoAlt: "A customer holding a sealed Retatrutide 40mg carton",
 };
 
 /* The collage band (2026-10-16), mounted under the bento. Built to the
@@ -1022,7 +1024,11 @@ export const whyChooseCopy = {
   lines: ["Know what", "you're ordering."],
   ghost: "Why",
   ghostSub: "choose us",
-  photoAlt: "A customer outdoors in daylight",
+  /* ⚠ Photograph replaced 2026-10-27 (client drop `latest-images/whyus-new.png`).
+     The pen it pictures is **Glow 70mg (`p2`), a stocked lot**, so the alt may
+     name it; it still names no outcome, which matters doubly here because the
+     rows beside it are promises about ordering. */
+  photoAlt: "A customer holding a sealed Glow 70mg pre-filled pen",
   stackAlt: "Three sealed research cartons stacked",
 };
 
@@ -1046,25 +1052,24 @@ export const whyChooseCopy = {
    in the component, so the home band and the `#/about` page cannot drift —
    editing that one field changes both, deliberately.
 
-   **COMPLIANCE — the two client photographs (2026-10-17) each carry a
-   problem, and the copy is written around both.** Nothing in this band
-   describes either picture; the alts name no compound and no outcome.
-   - `about1-latest.png` (the tall tile) shows an **ALLUVI TESAMORELIN carton,
-     which this catalogue does not stock** — not in `projects`, no price, no
-     Janoshik report — and its **benefit strapline is legible** at this size
-     (TARGETED BODY FAT · IMPROVE DEFINITION · PRESERVE LEAN MASS), as is
-     "For subcutaneous injection only". So no line here may quote the pack,
-     and nothing in the band may imply that lot is for sale.
-     The drops went `about1.png` -> `about1-new.png` -> `about1-latest.png`
-     on 2026-10-17, all the same framing. The first was a **MOTS-C**
-     carton whose **printed copy the image model had garbled** ("BOHSI DVOIOI
-     /lHPPOVE", "ALLUVI REACTHCARE", "A0mg"). The new drop's pack text is
-     clean and correct, which closes that one.
-   - `about2.jpeg` (the inset) is the **health-outcome orb chain** — energy,
-     waistline, brain, joint, immunity, skin. Consumer benefit imagery on a
-     laboratory-use-only catalogue, and the same artwork `showcase.webp` was
-     dropped for on 2026-10-15 and the FAQ band still carries. Client-chosen
-     each time. */
+   **COMPLIANCE — both open items CLOSED by the 2026-10-27 client drops.**
+   `about11-new.png` (tall, the client's replacement for `about11.png` the
+   same day) and `about22.png` (inset) picture **Glow 70mg and Retatrutide
+   20mg**, which are `p2` and `p1` in `projects` — stocked lots with real
+   prices and Janoshik reports — so the alts may name the pack for the first
+   time in this band, and the printed copy is the real artwork rather than a
+   model's attempt at it. What they replace, and why the notes below mattered:
+   - `about1-latest.png` (the tall tile) was an **ALLUVI TESAMORELIN carton,
+     which this catalogue does not stock**, with its **benefit strapline
+     legible** (TARGETED BODY FAT · IMPROVE DEFINITION · PRESERVE LEAN MASS).
+     Before it, `about1.png` was a **MOTS-C** carton whose **printed copy the
+     image model had garbled** ("BOHSI DVOIOI /lHPPOVE", "ALLUVI REACTHCARE").
+   - `about2.jpeg` (the inset) was the **health-outcome orb chain** — energy,
+     waistline, brain, joint, immunity, skin — i.e. consumer benefit imagery
+     on a laboratory-use-only catalogue.
+   Both old files stay on disk, unused. **If these are ever swapped back for a
+   drop picturing a not-stocked carton, the old rule returns**: nothing in the
+   copy may describe the pack and no alt may name a compound. */
 /* ⚠ Headed to the client reference, 2026-10-21 (requested): it calls this band
    *The <brand> standard* over a two-line "Purity, verified. / Paperwork,
    included." and closes on an **Our story** link. The paragraph under it is
@@ -1073,9 +1078,9 @@ export const aboutBandCopy = {
   eyebrow: "The Lyfe standard",
   lines: ["Purity, verified.", "Paperwork, included."],
   cta: { label: "Our story", href: "#/about" },
-  /* Describe the frame, never the pack or an outcome — see the note above. */
-  tallAlt: "A customer holding a sealed research carton",
-  insetAlt: "A customer at home",
+  /* Both packs are stocked lots, so these may name them — never an outcome. */
+  tallAlt: "A customer holding a sealed Glow 70mg carton",
+  insetAlt: "A sealed Retatrutide 20mg carton on a table beside a customer",
 };
 
 /* The campaign band (2026-10-17), built to a client reference: a very large
@@ -1646,12 +1651,12 @@ export const faqCopy = {
   initialCount: 4,
   viewMore: "View more",
   viewLess: "View less",
-  /* **Names no compound, deliberately.** The portrait (2026-10-19 rebuild) is
-     the client's own cut-out (`latest-images/faq-img.png`) set on a burgundy
-     studio ground; the carton she holds is ALLUVI TESAMORELIN, which this
-     catalogue does not stock, and its strapline is a benefit claim — the same
-     position as the hero. Nothing in `faqItems` refers to the pack. */
-  figureAlt: "A woman holding a sealed research carton beside her face",
+  /* ⚠ Portrait replaced 2026-10-27 (client drop `latest-images/faq.png`), and
+     that **closes this band's compliance item**: the pen she holds is
+     BPC-157 & TB-500, a stocked lot (`p3`), where every previous drop here
+     pictured an ALLUVI TESAMORELIN pack the catalogue does not carry. The alt
+     may name it now; nothing in `faqItems` describes the pack either way. */
+  figureAlt: "A customer holding a sealed BPC-157 & TB-500 pre-filled pen",
 };
 
 export const faqItems = [

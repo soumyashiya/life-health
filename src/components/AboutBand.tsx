@@ -2,12 +2,15 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { aboutBandCopy, aboutCopy } from "../data/site";
-/* Client drops, 2026-10-17 — straight webp conversions of
-   `latest-images/about1-latest.png` and `about2.jpeg`, which stay untouched as
-   the source of truth, same convention as `new/` → `products/`. Both carry
-   compliance notes: see `aboutBandCopy` and `CLAUDE.md`. */
-import tallPhoto from "../assets/aboutband/portrait.webp";
-import insetPhoto from "../assets/aboutband/inset.webp";
+/* Client drops, 2026-10-27 — straight webp conversions of
+   `latest-images/about11-new.png` (the client's replacement for `about11.png`
+   the same day) and `about22.png`, which stay untouched as the source of
+   truth, same convention as `new/` → `products/`. Both picture a **stocked**
+   lot — Glow 70mg and Retatrutide 20mg — so unlike the drops they replace
+   there is no off-catalogue pack here and the alts may name it.
+   `portrait.webp` / `inset.webp` stay on disk, unused. */
+import tallPhoto from "../assets/aboutband/portrait-latest.webp";
+import insetPhoto from "../assets/aboutband/inset-latest.webp";
 
 /**
  * The about band under the hero, built to two client references: the layout
@@ -129,8 +132,8 @@ export function AboutBand() {
           <img
             src={tallPhoto}
             alt={aboutBandCopy.tallAlt}
-            width={1126}
-            height={1398}
+            width={1400}
+            height={1096}
             loading="lazy"
             decoding="async"
           />
@@ -154,8 +157,8 @@ export function AboutBand() {
               <img
                 src={insetPhoto}
                 alt={aboutBandCopy.insetAlt}
-                width={1024}
-                height={682}
+                width={1400}
+                height={1120}
                 loading="lazy"
                 decoding="async"
               />

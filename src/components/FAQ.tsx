@@ -3,13 +3,14 @@ import clsx from "clsx";
 import { faqCopy, faqItems } from "../data/site";
 import { useReveal } from "../hooks/useReveal";
 import { useParallax } from "../hooks/useParallax";
-/* The client's own cut-out (`latest-images/faq-img.png`, via
-   `faq/figure.webp`) set on a burgundy studio ground with ffmpeg, so the band
-   gets the reference's "portrait on one saturated colour" look in the brand
-   colour. Nothing about the figure or the carton is re-drawn. The earlier
-   `faq/documents.webp`, `photo.webp`, `figure.webp` and `portrait.webp` are
-   kept on disk. */
-import portrait from "../assets/faq/portrait-burgundy.webp";
+/* Client drop, 2026-10-27 — a straight webp conversion of
+   `latest-images/faq.png`, which stays untouched as the source of truth. The
+   pen in it is **BPC-157 & TB-500 (`p3`), a stocked lot**, which closes this
+   band's long-standing compliance item: every drop before it pictured a
+   TESAMORELIN pack the catalogue does not carry. `portrait-burgundy.webp`,
+   `documents.webp`, `photo.webp`, `figure.webp` and `portrait.webp` are all
+   kept on disk, unused. */
+import portrait from "../assets/faq/portrait-latest.webp";
 
 /**
  * Rebuilt 2026-10-19 to a client reference: a large serif heading with one
@@ -50,8 +51,8 @@ export function FAQ() {
               src={portrait}
               data-parallax="far"
               alt={faqCopy.figureAlt}
-              width={1000}
-              height={1250}
+              width={1397}
+              height={1126}
               loading="lazy"
               decoding="async"
             />

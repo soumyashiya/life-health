@@ -15638,8 +15638,13 @@ textarea {
   clip-path: inset(0% 0% 0% 0% round 1.75rem 0 0 1.75rem);
 }
 
-/* The card is near square and the file is 16:9, so `cover` drops the empty
-   wall on the left and keeps the figure and the pen. */
+/* The card is near square and the file is 5:4, so `cover` keeps about 72% of
+   its width. **The bias is to the LEFT** (2026-10-27, with the new client
+   drop): the pack sits at 8–42% of that frame and the figure at 47–72%, so
+   the old right-anchored `100%` — correct for the 16:9 shot before it, where
+   the empty wall was on the left — cut the carton in half at the card edge.
+   18% seats both, with a little room off the right. **Re-measure if the
+   photograph changes.** */
 /* Overhangs its card top and bottom so the scroll drift never drags the
    card's own burgundy ground in at an edge — `.aboutband__media img`'s
    measurement, reused. */
@@ -15651,7 +15656,7 @@ textarea {
   height: 114%;
   max-width: none;
   object-fit: cover;
-  object-position: 100% center;
+  object-position: 18% center;
   will-change: transform;
 }
 
@@ -15933,13 +15938,21 @@ textarea {
   padding-inline: calc(var(--hero-inset) + var(--gutter) + var(--nav-pad-x));
 }
 
+/* ⚠ The two columns were 0.78fr / 1.22fr — a *portrait* photograph beside a
+   wide panel, the first reference's layout — until the 2026-10-27 client drop,
+   which is landscape 5:4. **0.9fr, trimmed from 1.04fr on request the same
+   day** ("reduce card width") — at 1.04 the photograph was 612px against the
+   panel's 565 and took more than half the band. It is 530x364 now, the copy
+   647 wide, and the ~46px the card is shorter than the panel is split above
+   and below it.
+   **`align-items` must stay `center`, not `stretch`**: the media carries an
+   `aspect-ratio`, so a stretched row height resolves back into *width* and the
+   tile overflows its own column — measured 609px in a 459px track. */
 .aboutband__grid {
   display: grid;
-  /* Measured off the reference: the tall photograph takes a little over a
-     third, the panel the rest. */
-  grid-template-columns: 0.78fr 1.22fr;
+  grid-template-columns: 0.9fr 1.1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
-  align-items: stretch;
+  align-items: center;
 }
 
 .aboutband__media {
@@ -15968,25 +15981,31 @@ textarea {
   will-change: transform;
 }
 
-/* The reference's left tile is portrait; both photographs here are not, so
-   the ratio is set on the frame and the image crops into it. */
-/* 4/5, not the reference's 3/4: the right-hand column's content is shorter
-   than its paragraph, and at 3/4 the photograph left ~80px of dead panel
-   under the CTA. */
-/* Trimmed 4/5 → 4/4.4 on request (2026-10-19) — about 12% shorter. */
+/* ⚠ **1.456 is the drop's own ratio with the parallax bleed taken out, and
+   that is what stops it being cropped** (2026-10-27, requested: "make correct
+   fit, it's cropped"). The image is 114% of its frame's height so the drift
+   has somewhere to travel, so `cover` only ever shows `ratio / 1.14` of the
+   source's width — at the old portrait 4/4.4 that was 64%, which cut a third
+   of the carton off at the card's edge. 1.277 × 1.14 = 1.456 shows all of it.
+   **Re-derive this if the photograph's ratio changes**: it is
+   `source width / source height × 1.14`, not a design value.
+   History: 3/4 (the reference's) → 4/5 → 4/4.4, all portrait tiles for a
+   portrait photograph. */
 .aboutband__media--tall {
-  aspect-ratio: 4 / 4.4;
+  aspect-ratio: 1.456;
 }
 
 .aboutband__media--tall img {
   object-position: center 40%;
 }
 
-/* Taller than the 4/3 it was (requested, 2026-10-19). The row is
-   `align-items: center`, so the extra height grows symmetrically about the
-   paragraph beside it rather than dragging the copy down. */
+/* Same derivation as the tall tile above — the drop's 1.25 ratio times the
+   1.14 parallax bleed — so the carton is not clipped at the card's edge
+   either. It was 4/3.4 (itself up from 4/3 on 2026-10-19), which cropped the
+   last ~9% of the frame. The row is `align-items: center`, so the height
+   change grows about the paragraph rather than dragging the copy down. */
 .aboutband__media--inset {
-  aspect-ratio: 4 / 3.4;
+  aspect-ratio: 1.425;
 }
 
 .aboutband__panel {
@@ -16035,9 +16054,12 @@ textarea {
   display: block;
 }
 
+/* 0.46fr, up from 0.4fr with the landscape drop (2026-10-27): at the old
+   share the inset photograph stood only ~150px tall beside a five-line
+   paragraph and read as a thumbnail. */
 .aboutband__row {
   display: grid;
-  grid-template-columns: 0.4fr 0.6fr;
+  grid-template-columns: 0.46fr 0.54fr;
   gap: clamp(1rem, 2.5vw, 2rem);
   align-items: center;
 }
@@ -16117,8 +16139,11 @@ textarea {
   .aboutband__grid {
     grid-template-columns: 1fr;
   }
+  /* The desktop ratio, not a 16/9 banner: 16/9 is wider than the drop's own
+     ratio plus the bleed, so it would crop the photograph vertically instead
+     — her head and the carton. Same derivation as the rule above. */
   .aboutband__media--tall {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 1.456;
   }
   .aboutband__title {
     max-width: none;
@@ -16129,8 +16154,10 @@ textarea {
   .aboutband__row {
     grid-template-columns: 1fr;
   }
+  /* The drop's ratio with the bleed, as above — a 16/10 band is wider than
+     that and crops the base of the carton off instead. */
   .aboutband__media--inset {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1.425;
   }
 }
 
@@ -16273,11 +16300,16 @@ textarea {
   clip-path: inset(0% 0% 0% 0%);
 }
 
+/* The near-square tile keeps ~76% of the 5:4 drop's width, and the bias is to
+   the RIGHT (2026-10-27, with the new client photograph): the pen runs from
+   the middle of that frame to 97% of it, so a centred crop clipped its cap at
+   the tile edge. 75% seats the whole device and still holds her face whole.
+   **Re-measure if the photograph changes.** */
 .whychoose__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: 75% 30%;
   display: block;
 }
 

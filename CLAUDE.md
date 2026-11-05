@@ -1686,32 +1686,40 @@ it a small photograph beside a paragraph and a pill CTA — and the *text effect
     strength.
   - It owns `opacity` on the words alone; the photographs' entrance owns `clipPath`/`scale`.
     Disjoint properties, the usual rule.
-- `.aboutband__media--tall` is **4/4.4** (trimmed from 4/5 on request, 2026-10-19), **not the reference's 3/4**: the right column's content is
-  shorter than the photograph, and at 3/4 it left ~80px of dead panel under the CTA.
-- `.aboutband__media--inset` (the `about2` photograph) went **4/3 → 4/3.4 on request**
-  (2026-10-19) — 206px → 233px tall at 1440. `.aboutband__row` is `align-items: center`, so
-  the extra height grows symmetrically about the paragraph beside it, and the band's own
-  height is unchanged (617px) because the tall photograph still sets it. The ≤560px rule
-  (16/10, stacked) is deliberately left alone.
+- **⚠ BOTH TILES ARE LANDSCAPE NOW (2026-10-27), and their ratios are derived, not
+  designed.** The client's new drops are 5:4; the old tiles were portrait (`--tall`
+  3/4 → 4/5 → 4/4.4, `--inset` 4/3 → 4/3.4), which cropped **36% of the tall one's
+  width** — a third of the carton, cut off at the card edge — and ~9% of the inset's.
+  They are **1.456** and **1.425**, which is `source width / source height × 1.14`:
+  the images are 114% of their frame's height so the drift has room, so `cover` only
+  ever shows `frame ratio / 1.14` of the source's width. **Re-derive both if a drop's
+  ratio changes.** The ≤991 rule takes the same 1.456 (16/9 is wider than that and
+  would crop vertically instead) and the ≤560 inset takes 1.425 (was 16/10).
+- **The grid moved with them:** `0.78fr / 1.22fr` → **`0.9fr / 1.1fr`** (it was
+  briefly 1.04fr, which made the photo 612px — wider than the copy — and was trimmed
+  on request), `.aboutband__row` `0.4fr` → **`0.46fr`**, and **`align-items` is
+  `center`, not `stretch`**. That last one is load-bearing: the media carries an
+  `aspect-ratio`, so a stretched row height resolves back into *width* and the tile
+  overflows its own column — measured 609px in a 459px track. At 1440 the photo is
+  530x364 against a 647x410 panel.
 - Both `.aboutband__media` frames need a resting `clip-path: inset(0 0 0 0)` — the entrance
   wipes from an inset and GSAP cannot interpolate one towards `none`. Same note as
   `.feature__media`.
-- **Imagery is the client's own as of 2026-10-17** — `assets/aboutband/portrait.webp` and
-  `inset.webp`, straight webp conversions of `latest-images/about1.png` and `about2.jpeg`.
-  They replaced `categories/recovery.webp` and `standards/consistency.webp`, which had no
-  compliance issue at all; these two have one each, and `aboutBandCopy` records both:
-  - **The tall tile is an ALLUVI TESAMORELIN carton, which this catalogue does not stock** —
-    not in `projects`, no price, no report — and its **benefit strapline is legible** at this
-    size, as is *For subcutaneous injection only*. Nothing in the band quotes the pack and the
-    alt names no compound.
-    **The drop was replaced twice on 2026-10-17** — `about1.png` -> `about1-new.png` ->
-    `about1-latest.png`, same framing each time. The first was a **MOTS-C** carton whose
-    printed copy the image model had **garbled** (*“BOHSI DVOIOI /lHPPOVE”*, *“ALLUVI
-    REACTHCARE”*, *“A0mg”*); the current drop's pack text is clean, which closes that.
-  - **The inset is the health-outcome orb chain** (energy, waistline, brain, joint, immunity,
-    skin) — the same artwork `showcase.webp` was dropped for on 2026-10-15 and the FAQ band
-    still carries. Consumer benefit imagery on a laboratory-use-only catalogue. Client-chosen
-    each time.
+- **⚠ IMAGERY REPLACED 2026-10-27 (client drops), AND BOTH COMPLIANCE ITEMS ARE CLOSED
+  WITH IT** — `assets/aboutband/portrait-latest.webp` and `inset-latest.webp`, straight
+  webp conversions of `latest-images/about11-new.png` and `about22.png` (the first drop,
+  `about11.png`, was replaced by the client the same day). They picture **Glow 70mg
+  (`p2`) and Retatrutide 20mg (`p1`) — both stocked**, with real prices and Janoshik
+  reports, so the alts **name the pack** for the first time in this band and the printed
+  copy is the real artwork. `portrait.webp` / `inset.webp` stay on disk, unused.
+  What they replace, and the rule that comes back if a not-stocked pack is ever dropped
+  in again (nothing in the copy may describe it, no alt may name a compound):
+  - the tall tile was an **ALLUVI TESAMORELIN carton the catalogue does not stock**,
+    with its **benefit strapline legible**. Before it, `about1.png` was a **MOTS-C**
+    carton whose printed copy the image model had **garbled** (*“BOHSI DVOIOI
+    /lHPPOVE”*, *“ALLUVI REACTHCARE”*, *“A0mg”*).
+  - the inset was the **health-outcome orb chain** (energy, waistline, brain, joint,
+    immunity, skin) — consumer benefit imagery on a laboratory-use-only catalogue.
 - **The paragraph is sentence case as of 2026-10-19** (requested). It was set in capitals from
   2026-10-17, as the text-effect reference sets its own. The extra tracking (`0.02em`) and the
   loose line (`1.75`) existed *for* the caps — a block of capitals needs both at this measure —
@@ -2669,6 +2677,14 @@ packs, and a numbered list of four reasons.
     item's min-content: the list's longest label sized the whole row to **301px inside a 265px
     element** at 320, and the labels clipped mid-word. Same family as the `grid-auto-columns`
     note on the catalogue and range rails.
+- **⚠ The photograph is this band's own asset as of 2026-10-27** —
+  `assets/whychoose/photo.webp` (client drop `latest-images/whyus-new.png`), a figure
+  holding a **Glow 70mg** pre-filled pen, a stocked lot (`p2`), so `photoAlt` names it.
+  It replaced `categories/cellular.webp`, which is **shared with the contact band's
+  photo circles** — hence a new file rather than an overwrite; that rule holds for any
+  `categories/*` asset. **`object-position` is `75% 30%`, measured**: the near-square
+  tile keeps ~76% of the 5:4 drop's width and the pen runs to 97% of that frame, so a
+  centred crop clipped its cap at the tile edge. Re-measure if the photo changes.
 - The pack tiles crop the renders' tall transparent canvas (`aspect-ratio: 900 / 430`,
   `object-fit: cover`) — fitting the whole canvas would stack three cartons with two
   canvas-heights of air between them. Same canvas problem `.range__media` documents.
@@ -2825,17 +2841,22 @@ the product group photograph bleeding off the card's right edge.
   lead, four outlined **icon cards** with a title and a one-line note, a burgundy pill CTA
   with a shadow, and a `Transparency · Testing · Traceability` tagline); the photograph is a
   **card rounded on its left corners only, bleeding off the viewport's right edge**. (Its
-  corner molecule line art was removed on request the same day.) The photo is `assets/sciband/background.webp`
-  (from `latest-images/science-new.png`, a model holding an ALLUVI **TESAMORELIN** pen on
-  a burgundy wall) at `object-position: 100% center` so her face stays in the near-square
-  crop. Card notes are `sciBandCopy.chipNotes`, keyed by the field label — mass-spec's is
+  corner molecule line art was removed on request the same day.)
+  **⚠ The photo is `assets/sciband/prepared.webp` as of 2026-10-27** (client drop
+  `latest-images/how-prepared-img.png`) — a figure against a red wall holding a
+  **Retatrutide 40mg** carton, a **stocked** lot (`p6`), which **closes this band's
+  compliance item**: `background.webp` was an ALLUVI TESAMORELIN pen the catalogue
+  does not carry. `photoAlt` names the pack now. **`object-position` went
+  `100% center` → `18% center` with it** — the near-square card keeps ~72% of the 5:4
+  drop's width, the pack sits at 8–42% of that frame, and right-anchored (correct for
+  the 16:9 shot before it, whose empty wall was on the left) cut the carton in half.
+  The old file stays on disk, unused. Card notes are `sciBandCopy.chipNotes`, keyed by the field label — mass-spec's is
   *"Confirms the compound's identity"*, not the reference's "accurate composition
   analysis", which overstated it. **The reference's *ALLUVI — Research · Quality · Trust*
   lockup on the photo was deliberately not reproduced** (manufacturer name in site voice).
   The media's resting `clip-path` carries the `round` radii — it is what shapes the card
   during the entrance wipe. ≤1199 the cards go one column, ≤991 the photo stacks on top as a
-  fully rounded card, ≤640 the headline lines may wrap. **Compliance: TESAMORELIN is not
-  stocked** — `photoAlt` names no compound and nothing in the copy describes the pen.
+  fully rounded card, ≤640 the headline lines may wrap.
 
 - **The reference's chips read *Clean Ingredients · No Artificial Colors · Plant-Friendly*
   beside *Third-Party Tested*.** Three of those four describe a consumer supplement's
@@ -3645,13 +3666,16 @@ back, `aria-expanded`), and the questions in a hairline list beside the portrait
 - Grid: `minmax(0, 26rem) minmax(0, 1fr)` with areas `title . / figure list / more list`;
   `.faq__intro` is `display: contents` so its three children take areas. ≤991px it stacks
   title → figure → list → View more.
-- **Image:** `assets/faq/portrait-burgundy.webp` (1000x1250) — the client's cut-out
-  (`faq/figure.webp`, from `latest-images/faq-img.png`) composited with ffmpeg onto a burgundy
-  studio ground with a soft cast shadow, to match a second client reference (portrait on one
-  saturated colour). Higgsfield and Magnific were both unavailable, so nothing was generated.
-  **Compliance:** she holds an ALLUVI TESAMORELIN carton (not stocked, benefit strapline legible);
-  `figureAlt` names no compound. `documents.webp`, `photo.webp`, `figure.webp`, `portrait.webp`
-  remain on disk, unused (`figure.webp` is the source for the composite).
+- **⚠ Image: `assets/faq/portrait-latest.webp` as of 2026-10-27** — a straight webp
+  conversion of the client drop `latest-images/faq.png`, a figure at a table holding a
+  **BPC-157 & TB-500** pre-filled pen. That lot is **stocked** (`p3`), which **closes this
+  band's compliance item**: every drop before it pictured an ALLUVI TESAMORELIN pack the
+  catalogue does not carry (benefit strapline legible), and `figureAlt` names the pack now.
+  - The 4/5 frame keeps only ~56% of the 5:4 drop's width — **deliberately left alone**: it
+    lands as a tight portrait with the pen's label complete, and widening the frame would
+    move the question list beside it. Check it if the drop is ever swapped.
+  - `portrait-burgundy.webp` (the cut-out composited onto a burgundy ground), `documents.webp`,
+    `photo.webp`, `figure.webp` and `portrait.webp` all remain on disk, unused.
 - `faqCopy.title` is now `{ lead, accent, tail }`, not an array.
 
 **FAQ** (`FAQ.tsx`, `faqCopy` + `faqItems` in `site.ts`, `.faq__*` in `portfolio.css`,
@@ -4045,6 +4069,16 @@ Pending items, none of them started:
 - `src/styles/portfolio.css.bak` awaiting deletion
 - `src/assets/about/hero.webp` is now **unreferenced** (superseded by `hero-lattice.webp`);
   kept rather than deleted so the old banner can be restored, but safe to remove on request
+- **Latest pass, 2026-10-27 (requested): five client photographs swapped in.** New
+  assets `aboutband/{portrait,inset}-latest.webp`, `sciband/prepared.webp`,
+  `whychoose/photo.webp` (new folder) and `faq/portrait-latest.webp`, all straight webp
+  conversions of `latest-images/{about11-new,about22,how-prepared-img,whyus-new,faq}.png`;
+  `AboutBand.tsx`, `ScienceBand.tsx`, `WhyChoose.tsx`, `FAQ.tsx` (imports + intrinsic
+  sizes), `data/site.ts` (four alts + their compliance notes) and `portfolio.css` (the
+  about band's ratios and grid, the sciband and whychoose `object-position`). **Every
+  pack pictured is a stocked lot**, which closes the open compliance item on all four
+  bands. Verified at 1440 / 991 / 375: `tsc -b` clean, `npm run build` passes, ESLint
+  still exactly **9**, 0 console errors, 0 horizontal overflow, nothing clipped.
 - **Nothing in the working tree is committed yet.** Still on `main`, last commit
   `f636414 ui changes`. The **2026-10-19** pass rebuilt the **lot band** to a new client
   reference (see its KEY COMPONENTS entry) and touched four files:

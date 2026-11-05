@@ -2,7 +2,12 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { whyChooseCopy, whyUs } from "../data/site";
-import photo from "../assets/categories/cellular.webp";
+/* Client drop, 2026-10-27 — a straight webp conversion of
+   `latest-images/whyus-new.png`, which stays untouched as the source of truth.
+   It replaced `categories/cellular.webp`, a lifestyle still that band never
+   owned: that file is shared with the contact band's photo circles, so this
+   band got its own asset rather than overwriting it. */
+import photo from "../assets/whychoose/photo.webp";
 import packA from "../assets/products/retatrutide-20mg.webp";
 import packB from "../assets/products/glow-70mg.webp";
 import packC from "../assets/products/tirzepatide-40mg.webp";
@@ -142,8 +147,8 @@ export function WhyChoose() {
             <img
               src={photo}
               alt={whyChooseCopy.photoAlt}
-              width={1024}
-              height={676}
+              width={1400}
+              height={1120}
               loading="lazy"
               decoding="async"
             />
