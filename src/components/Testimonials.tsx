@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { testimonials } from "../data/site";
+import { site, testimonials } from "../data/site";
 import stretchClip from "../assets/reviews/stretch.mp4";
 import stretchPoster from "../assets/reviews/stretch.webp";
 import calisthenicsClip from "../assets/reviews/calisthenics.mp4";
@@ -161,8 +161,8 @@ export function Testimonials() {
   return (
     <section id="reviews" className="testimonials stories" ref={root}>
       <div className="container stories__head">
-        <span className="eyebrow stories__eyebrow">Reviews</span>
-        <h2 className="stories__title">Stories from our customers</h2>
+        <span className="eyebrow stories__eyebrow">{site.name} reviews</span>
+        <h2 className="stories__title">Real customers. Real {site.name} orders.</h2>
         {/* The reference's own line under this heading, 2026-10-21. It says
             what the clips actually show — what arrived, how it was packed, how
             fast someone replied — and names the hover gesture, which is

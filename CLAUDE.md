@@ -486,10 +486,22 @@ hugs the corner rather than the page's inner margin. The asymmetry is deliberate
 **Header typography is set to a second reference capture** (2026-10-15) — ratios measured off it
 with a pixel analysis, not eyeballed (brand cap-height 7.5px vs link 5px → 1.5×; words ~1.4em
 apart):
-- `.nav__brand-lead` is **`--font-serif` (Playfair Display 500)**, caps, `0.12em` tracked, at
-  `1.25rem` — a measured 1.54× the links. `--font-serif` was added for this and **nothing else
-  on the site uses it**; `@fontsource/playfair-display` 400/500 are imported in `index.css`.
-  Anton is a condensed grotesque and Plex is low-contrast, so neither could do it.
+- `.nav__brand-lead` is **`--font-serif` (Playfair Display 500)**, caps, `0.12em` tracked. **Sizes as of 2026-11-05 (raised on request):** 1.875rem at rest, 1.625rem scrolled, 1.35rem ≤991, 0.95rem ≤374; `.nav__brand-accent` 0.85rem (0.75rem ≤991). Checked: clear of the nav words at 1440 and of the controls at 375.
+  `--font-serif` was added for this and **nothing else on the site uses it**;
+  `@fontsource/playfair-display` 400/500 are imported in `index.css`. Anton is a condensed
+  grotesque and Plex is low-contrast, so neither could do it.
+  - **⚠ THE LOCKUP WAS SCALED UP ~30% ON 2026-11-05 (requested).** It moved as one piece,
+    so the reference's internal ratios are intact and only its ratio to the nav links
+    changed — the brand leads the bar now rather than matching it. **Five values, and they
+    must stay in step:** lead `1.25 → 1.625rem`, scrolled `1.125 → 1.4375rem`,
+    `.nav__brand-accent` `0.5625 → 0.75rem`, `.nav__logo` `1.5 → 1.875rem` (plus a new
+    `.nav.is-scrolled .nav__logo` at `1.625rem` — there was none before, so the glyph used
+    to be the one thing that did not shrink on scroll).
+  - **Mobile moved with it but is capped lower, deliberately**: `1.2rem` ≤991 (the glyph
+    stays at `1.5rem` there — at the desktop size it out-measured the word) and `0.95rem`
+    ≤374. That last block exists so the cart and menu keep their 44px targets at 320; the
+    wordmark is the only thing in the row that can give. Measured after the change: 54px
+    clear at 320, 42px at 375, 0 page overflow at 320 / 375 / 1440.
 - `.nav__brand-accent` takes the same serif so the lockup reads as one mark, but stays small and
   widely tracked. The reference wordmark is a single word; ours carries a sub-word.
 - `.nav__link` is `0.8125rem` / weight `400` (down from `0.875rem` / `450`), and `.nav__links`
@@ -2159,6 +2171,33 @@ a shop; the compliance layer is untouched. What changed, and the line that was h
   Blends; PDP breadcrumb "Catalogue · Metabolic" with `safetyProtocol` still printed; card
   shelf lines "Pre-filled pen · 20 mg total".
 
+**Brand name in the home copy** (2026-11-05, requested: "mention brand name in content").
+Every home band after the hero names the brand **in its own text** — a lead, eyebrow or
+heading — rather than with a badge (a `BrandTag` pill was built first and **rejected**;
+it is deleted, don't rebuild it). All of it interpolates **`site.name`** (or
+`site.brandMark` for the WhyChoose ghost, "Why choose Lyfe"), so a rename is still the one
+edit in `site`. Touched: `categoryCopy.lead`, `rangeCopy.lead`, `benchCopy.eyebrow`,
+`aboutBandCopy.eyebrow`, `sciBandCopy.lead`, `finalCtaCopy.lead`, `newsletterCopy.eyebrow`,
+`whyChooseCopy.ghostSub`, the first and sixth `faqItems` answers, and the hard-coded
+headings in `Testimonials.tsx` and `Contact.tsx`.
+**Third pass, modelled on `peptiq-ecommerce-new-e8kx.vercel.app`** (the client's
+reference): that site names its brand in **either the eyebrow pill or the heading of
+every section** — "PEPTIQ BESTSELLERS", "Every Peptiq line on the bench.", "Why
+Researchers Choose Peptiq.", "The Peptiq process". Ours now follows that split: eyebrows
+`Lyfe Health lines` / `Lyfe Health bestsellers` / `Inside Lyfe Health` / `The Lyfe Health
+process` / `One Lyfe Health standard` / `Lyfe Health reviews`; headings "Every Lyfe Health
+line on the bench.", "Why customers choose Lyfe Health.", "Real customers. Real Lyfe
+Health orders.". The about band's heading and "Bestsellers" went back to their own words
+since their eyebrow carries the name; the WhyChoose ghost is "choose us" again. Its
+"2,400+ verified reviews" eyebrow was **not** copied — no review data exists here.
+**Second pass the same day put it in every section `h2`** (`rangeCopy.title`,
+`categoryCopy.title`, `benchCopy.titleLead`, `aboutBandCopy.lines` — brand is now its
+first of three lines —, `sciBandCopy.lines`, `finalCtaCopy.lines`, `whyChooseCopy.lines`,
+`newsletterCopy.title`, and `faqCopy.title.brand`, a new first line rendered in
+`FAQ.tsx`). Several of these lines are `nowrap`: the FAQ version that appended the brand
+to "Questions" ran 175px into the question list, hence its own line. Measured: every
+heading inside its column at 1440 / 991 / 375, 0 overflow.
+
 **Partner modal** (`PartnerModal.tsx`, `partnerModal` in `data/site.ts`, `.partner__*`
 at the end of `portfolio.css`) — **added 2026-10-21**, the reference's entry overlay.
 
@@ -3424,7 +3463,24 @@ template’s contact/footer block**, replacing the 2026-10-12 enquiry-form versi
   **sine arc** computed in the component (ends low, middle high) — deterministic, no randomness.
   Its font-size is capped so it clears the photo columns; widen it and it runs under them.
   A `.sr-only` copy carries the address for assistive tech, the arc spans are `aria-hidden`.
-- Eight round photos either side, reusing `assets/standards/*` and `assets/categories/*`.
+- **⚠ The eight round photos are the client's own product frames as of 2026-11-05**
+  (requested) — `assets/contact/*.webp`, square crops of eight `latest-images/` drops.
+  They replaced the `assets/standards/*` / `assets/categories/*` stills, which carried no
+  packaging at all; those files are untouched and still used by their own bands.
+  - **Every pack pictured is a stocked lot** — BPC-157 & TB-500 carton and pen (`p3`),
+    Glow GHK-Cu (`p2`), Retatrutide 20mg (`p1`), Retatrutide 40mg ×2 (`p6`), Tirzepatide
+    40mg ×2 (`p4`/`p5`) — so this band has **no open compliance item**. Three of the
+    `latest-images/gallery*` frames were left out for exactly that reason (MOTS-C,
+    TESAMORELIN, CJC-1295 are not in `projects`); if one is ever swapped in, the usual
+    rule returns — nothing in the band may describe the pack.
+  - **Crops are square and centred on the pack, not on the frame.** The circles render at
+    100 / 150 / 200px and are `alt=""` decoration, so a pack that reads only at full size
+    is wasted: `bpc-pen.webp` is a tighter 850² window out of `faq.png` because at the
+    full-height crop the pen was a few pixels wide in a 100px disc. Landscape 5:4 sources
+    crop on **x only** and portrait 4:5 on **y only** — the square takes the short side.
+  - Sources stay untouched in `latest-images/`, the usual convention. Five of the eight are
+    also read by other bands (AboutBand, ScienceBand, FAQ); the discs are small and
+    decorative, so the repeat is deliberate rather than a drift risk.
   Hidden ≤991px — two 200px columns do not fit beside the type.
 - **Photo entrance** (`once: true`, one timeline per circle, staggered 0.09s): an aperture
   `clip-path: circle(0% → 50%)` on the frame, the frame drifting in from *its own* side

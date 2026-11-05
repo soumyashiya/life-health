@@ -2,14 +2,19 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "../data/site";
-import standardPurity from "../assets/standards/purity.webp";
-import standardConsistency from "../assets/standards/consistency.webp";
-import standardPackaging from "../assets/standards/packaging.webp";
-import standardSupport from "../assets/standards/support.webp";
-import catMetabolic from "../assets/categories/metabolic.webp";
-import catCellular from "../assets/categories/cellular.webp";
-import catRecovery from "../assets/categories/recovery.webp";
-import catFormulation from "../assets/categories/formulation.webp";
+/* Square crops of the client's own drops, one per circle. Every pack pictured
+   is a lot this catalogue actually stocks (BPC-157 & TB-500, Glow 70mg,
+   Retatrutide 20/40mg, Tirzepatide 40mg), so none of them carries the
+   "describe the catalogue, never the carton" constraint the off-catalogue
+   imagery elsewhere does. Sources stay untouched in `latest-images/`. */
+import photoBpcCarton from "../assets/contact/bpc-carton.webp";
+import photoGlowCarton from "../assets/contact/glow-carton.webp";
+import photoTirzStudio from "../assets/contact/tirz-40-studio.webp";
+import photoBpcPen from "../assets/contact/bpc-pen.webp";
+import photoReta40 from "../assets/contact/reta-40.webp";
+import photoTirz40 from "../assets/contact/tirz-40.webp";
+import photoReta20 from "../assets/contact/reta-20.webp";
+import photoRetaStudio from "../assets/contact/reta-40-studio.webp";
 
 /**
  * `site.phone` / `site.whatsapp` are still placeholders (a run of zeros).
@@ -21,17 +26,17 @@ const isPlaceholderNumber = (value: string) =>
 
 /* size classes mirror the reference's small / large / medium / small rhythm */
 const LEFT_PHOTOS = [
-  { src: catMetabolic, size: "sm" },
-  { src: standardPurity, size: "lg" },
-  { src: catCellular, size: "md" },
-  { src: standardConsistency, size: "sm" },
+  { src: photoBpcCarton, size: "sm" },
+  { src: photoGlowCarton, size: "lg" },
+  { src: photoTirzStudio, size: "md" },
+  { src: photoBpcPen, size: "sm" },
 ];
 
 const RIGHT_PHOTOS = [
-  { src: standardSupport, size: "lg" },
-  { src: catRecovery, size: "sm" },
-  { src: standardPackaging, size: "md" },
-  { src: catFormulation, size: "sm" },
+  { src: photoReta40, size: "lg" },
+  { src: photoTirz40, size: "sm" },
+  { src: photoReta20, size: "md" },
+  { src: photoRetaStudio, size: "sm" },
 ];
 
 export function Contact() {
@@ -159,7 +164,14 @@ export function Contact() {
               className={`contact__photo contact__photo--${photo.size}`}
               key={`l-${i}`}
             >
-              <img src={photo.src} alt="" loading="lazy" decoding="async" />
+              <img
+                src={photo.src}
+                alt=""
+                width={720}
+                height={720}
+                loading="lazy"
+                decoding="async"
+              />
             </span>
           ))}
         </div>
@@ -167,7 +179,7 @@ export function Contact() {
         <div className="contact__main">
           <span className="contact__eyebrow">Contact us</span>
           <h2 className="contact__title">
-            Orders, batches and paperwork — ask us anything.
+            Orders, batches and paperwork — ask {site.name} anything.
           </h2>
 
           <a className="contact__email" href={`mailto:${site.email}`}>
@@ -208,7 +220,14 @@ export function Contact() {
               className={`contact__photo contact__photo--${photo.size}`}
               key={`r-${i}`}
             >
-              <img src={photo.src} alt="" loading="lazy" decoding="async" />
+              <img
+                src={photo.src}
+                alt=""
+                width={720}
+                height={720}
+                loading="lazy"
+                decoding="async"
+              />
             </span>
           ))}
         </div>

@@ -592,8 +592,10 @@
 
 .nav__logo {
   display: inline-flex;
-  width: 1.5rem;
-  height: 1.5rem;
+  /* Tracks the wordmark's size — the glyph and the word are one lockup, so a
+     larger word beside the old 1.5rem mark read as a shrunken logo. */
+  width: 1.875rem;
+  height: 1.875rem;
   color: var(--brand-purple);
   transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out),
     color 0.4s var(--ease-out);
@@ -608,12 +610,18 @@
    in caps, lightly tracked, at ~1.5x the nav links — that ratio was measured
    off the reference, not guessed (cap heights 7.5px vs 5px). The old treatment
    was a semibold sans at 0.3em, which read as a logotype rather than a
-   masthead. */
+   masthead.
+
+   **Scaled up ~30% on 2026-11-05 (requested).** The reference's measured
+   ratios are kept — the lockup moved together, lead 1.25 → 1.625rem, the
+   sub-word 0.5625 → 0.75rem and the glyph 1.5 → 1.875rem — so the mark is
+   bigger without becoming a different lockup. Only the ratio to the nav
+   links changed, which is the point: the brand now leads the bar. */
 .nav__brand-lead {
   display: inline-flex;
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.875rem; /* 1.625 → 1.875, 2026-11-05 (requested) */
   letter-spacing: 0.12em;
   /* The tracking is applied to the right of each glyph, including the last —
      this pulls the word back onto its centre. */
@@ -630,7 +638,7 @@
   display: inline-flex;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 0.5625rem;
+  font-size: 0.85rem;
   letter-spacing: 0.34em;
   text-indent: 0.34em;
   text-transform: uppercase;
@@ -639,7 +647,12 @@
 }
 
 .nav.is-scrolled .nav__brand-lead {
-  font-size: 1.125rem;
+  font-size: 1.625rem;
+}
+
+.nav.is-scrolled .nav__logo {
+  width: 1.625rem;
+  height: 1.625rem;
 }
 
 /* ---- nav items and controls ----
@@ -1293,13 +1306,21 @@
    links, which the three words already reach. */
 
 @media (max-width: 991px) {
+  /* Scaled with the desktop lockup (2026-11-05) — 0.95 → 1.2rem. The glyph
+     stays at its old 1.5rem here: the drawer width is the constraint, and at
+     the desktop 1.875rem it out-measured the word rather than leading it. */
   .nav__brand-lead {
-    font-size: 0.95rem;
+    font-size: 1.35rem;
     letter-spacing: 0.2em;
   }
 
+  .nav__logo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
   .nav__brand-accent {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -1577,8 +1598,12 @@
     gap: 0.4rem;
   }
 
+  /* Raised with the rest of the lockup, but kept behind the ≤991 size — this
+     block exists so the cart and menu buttons keep their 44px targets at 320,
+     and the wordmark is the one thing that can give. Measured at 320: 55px
+     still clear between the mark and the controls. */
   .nav__brand-lead {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     letter-spacing: 0.12em;
   }
 

@@ -37,6 +37,9 @@ export function FAQ() {
               would flatten the italic accent out of line one. */}
           <h2 className="faq__title" data-anim="lines">
             <span className="faq__line anim__line">
+              <span className="anim__line-inner">{faqCopy.title.brand}</span>
+            </span>
+            <span className="faq__line anim__line">
               <span className="anim__line-inner">
                 {faqCopy.title.lead} <em>{faqCopy.title.accent}</em>
               </span>

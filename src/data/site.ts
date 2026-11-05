@@ -137,9 +137,9 @@ export const rangeCopy = {
      and the flag appears on that card alone. The heading is the reference's;
      the ranking claim behind it rests on the client's word, not on data in
      this project. Raise it if the lot list grows without a new instruction. */
-  eyebrow: "Loved by the bench",
+  eyebrow: `${site.name} bestsellers`,
   title: "Bestsellers",
-  lead: "Pre-filled lots — each one sealed, cold-packed and published with its own third-party report.",
+  lead: `The ${site.name} lots customers come back for — each one pre-filled, sealed, cold-packed and published with its own third-party report.`,
   shopAll: { label: "Shop all", href: "#/shop" },
   note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
   /* The three marks top right (2026-10-20 rebuild). The reference's read
@@ -286,9 +286,9 @@ export const featureCopy = {
    `purityMethod.documentation` — see the note in `ScienceBand.tsx`. There are
    four of them here, not the reference's three; the fourth is ours. */
 export const sciBandCopy = {
-  eyebrow: "Four deliberate steps",
-  lines: ["How each lot", "is prepared."],
-  lead: "Four deliberate steps between the manufacturer and the sealed pen on your bench — so nothing about the lot is left to chance.",
+  eyebrow: `The ${site.name} process`,
+  lines: [`How each ${site.name}`, "lot is prepared."],
+  lead: `Four deliberate steps ${site.name} takes between the manufacturer and the sealed pen on your bench — so nothing about the lot is left to chance.`,
   chipsLabel: "From the shelf to your order",
   /* One line under each report field (2026-10-19 rebuild). Keyed by the
      field's label in `purityMethod.documentation`; a field with no note
@@ -761,8 +761,8 @@ export const partnerModal = {
  * lands.**
  */
 export const benchCopy = {
-  eyebrow: "Recurring supply",
-  titleLead: "Subscribe to the",
+  eyebrow: `Recurring supply from ${site.name}`,
+  titleLead: `Subscribe to the ${site.name}`,
   titleAccent: "Bench Programme.",
   /* Reads off the constants below so the prose cannot drift from the maths. */
   discount: 0.15,
@@ -815,8 +815,8 @@ export const benchCopy = {
  * the component renders the line from it and nothing else needs touching.
  */
 export const newsletterCopy = {
-  eyebrow: "The Lyfe edit",
-  title: "Batch drops, storage notes and sourcing updates.",
+  eyebrow: `The ${site.name} edit`,
+  title: `${site.name} batch drops, storage notes and sourcing updates.`,
   lead: "Occasional email when a new lot is verified and listed. No spam.",
   placeholder: "you@laboratory.com",
   submitLabel: "Join",
@@ -845,9 +845,9 @@ export const bestsellerIds = ["p1"];
    the Longevity line was removed on 2026-10-26. The tiles themselves are
    rendered from the array and need no edit. */
 export const categoryCopy = {
-  eyebrow: "Shop by line",
-  title: "Every line on the bench",
-  lead: "Four ways into the catalogue — every one a live filter on lots you can order today.",
+  eyebrow: `${site.name} lines`,
+  title: `Every ${site.name} line on the bench.`,
+  lead: `Four ways into the ${site.name} catalogue — every one a live filter on lots you can order today.`,
   allLabel: "View all",
   allHref: "#/shop",
 };
@@ -887,11 +887,11 @@ export const finalCtaCopy = {
   /* Retitled 2026-10-21 to the reference's own closing band — "Ready to
      order? / Browse the catalogue." It claims nothing new; the lead is the
      packing fact `promoCopy` already makes. */
-  lines: ["Ready to order?", "Browse the catalogue."],
+  lines: ["Ready to order?", `Browse ${site.name}.`],
   /* No lot count here on purpose: the reference heads its band "six verified
      lines", and five of our six carry a published report — NAD+ does not. */
-  eyebrow: "Five lines, one standard",
-  lead: "Browse the full catalogue — every lot sealed, cold-packed and published with its batch data.",
+  eyebrow: `One ${site.name} standard`,
+  lead: `Browse the full ${site.name} catalogue — every lot sealed, cold-packed and published with its batch data.`,
   primary: { label: "Start your order", href: "#/shop" },
   secondary: { label: "Read the lab reports", href: "#/science?s=reports" },
   note: "Supplied strictly for laboratory research. Not for human or veterinary use.",
@@ -1021,7 +1021,7 @@ export const whyChooseCopy = {
      `services` warns about, and it headed four rows that are about the
      *shopping* experience with a *product* promise. This one heads what the
      rows actually say: you can check the lot before you buy it. */
-  lines: ["Know what", "you're ordering."],
+  lines: ["Why customers", `choose ${site.name}.`],
   ghost: "Why",
   ghostSub: "choose us",
   /* ⚠ Photograph replaced 2026-10-27 (client drop `latest-images/whyus-new.png`).
@@ -1075,7 +1075,7 @@ export const whyChooseCopy = {
    included." and closes on an **Our story** link. The paragraph under it is
    still `aboutCopy.paragraph`, read in the component rather than restated. */
 export const aboutBandCopy = {
-  eyebrow: "The Lyfe standard",
+  eyebrow: `Inside ${site.name}`,
   lines: ["Purity, verified.", "Paperwork, included."],
   cta: { label: "Our story", href: "#/about" },
   /* Both packs are stocked lots, so these may name them — never an outcome. */
@@ -1646,7 +1646,9 @@ export const faqCopy = {
   },
   /* Two lines, the reference's way: "Frequently *Asked*" / "Questions", the
      middle word set in italic. Kept as parts so the markup can style it. */
-  title: { lead: "Frequently", accent: "Asked", tail: "Questions" },
+  /* `brand` is its own first line (2026-11-05): appended to "Questions" it ran
+     the nowrap heading 175px into the question list. */
+  title: { brand: site.name, lead: "Frequently", accent: "Asked", tail: "Questions" },
   /* How many rows show before "View more" — the reference shows four. */
   initialCount: 4,
   viewMore: "View more",
@@ -1663,7 +1665,7 @@ export const faqItems = [
   {
     question: "What documentation comes with each order?",
     answer:
-      "Every research kit is paired with a batch-specific certificate of analysis listing lot number, HPLC purity, and mass-spec confirmation. Storage and handling notes are included on the packing slip.",
+      `Every ${site.name} research kit is paired with a batch-specific certificate of analysis listing lot number, HPLC purity, and mass-spec confirmation. Storage and handling notes are included on the packing slip.`,
   },
   {
     question: "How is purity verified?",
@@ -1688,7 +1690,7 @@ export const faqItems = [
   {
     question: "Who are these materials for?",
     answer:
-      "We supply laboratories and qualified researchers. Everything in the catalogue is a research-grade reference material, intended for laboratory research only — not for human or veterinary use, and not for diagnostic or therapeutic purposes.",
+      `${site.name} supplies laboratories and qualified researchers. Everything in the catalogue is a research-grade reference material, intended for laboratory research only — not for human or veterinary use, and not for diagnostic or therapeutic purposes.`,
   },
   {
     question: "How should a kit be stored once it arrives?",
